@@ -27,7 +27,7 @@ window.SITE_DATA = {
     // 文章：順序 = 列表顯示順序。id 請保持不重複（用於網址 #/forum/id）
     posts: [
       {
-        id: "1", date: "test10", title: "test11",
+        id: "1", title: "test11",
         author: "test77",          // 匿名帳號代碼
         content: "test12",
         comments: [
@@ -36,7 +36,7 @@ window.SITE_DATA = {
         ]
       },
       {
-        id: "2", date: "test17", title: "test18",
+        id: "2", title: "test18",
         author: "test78",          // 匿名帳號代碼
         content: "test19",
         comments: [
@@ -44,7 +44,7 @@ window.SITE_DATA = {
         ]
       },
       {
-        id: "3", date: "test22", title: "test23",
+        id: "3", title: "test23",
         author: "test79",          // 匿名帳號代碼
         content: "test24",
         comments: [
@@ -54,13 +54,13 @@ window.SITE_DATA = {
         ]
       },
       {
-        id: "4", date: "test31", title: "test32",
+        id: "4", title: "test32",
         author: "test80",          // 匿名帳號代碼
         content: "test33",
         comments: []
       },
       {
-        id: "5", date: "test34", title: "test35",
+        id: "5", title: "test35",
         author: "test81",          // 匿名帳號代碼
         content: "test36",
         comments: [
@@ -68,7 +68,7 @@ window.SITE_DATA = {
         ]
       },
       {
-        id: "6", date: "test39", title: "test40",
+        id: "6", title: "test40",
         author: "test82",          // 匿名帳號代碼
         content: "test41",
         comments: [
