@@ -137,7 +137,8 @@
   var ICON = {
     plus: '<svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none"/></svg>',
     chevron: '<svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-    threads: '<svg viewBox="0 0 24 24"><path d="M16.5 11.2c-.6-2.6-2.4-3.8-4.7-3.8-2.6 0-4.1 1.8-4.1 1.8M15.9 11.5c-2.6-.4-6 0-6 2.5 0 2.7 5.4 3.1 6-1 .5-3.5-.4-6-1-7M19.5 9C18.4 4.9 15.8 3 12 3 7 3 4 6.6 4 12s3 9 8 9c4.1 0 7.4-2.4 7.4-5.6 0-2.4-1.6-3.6-3.5-4.1" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>',
+    check: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#3b6ef5"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    back: '<svg viewBox="0 0 24 24"><path d="M15 4l-8 8 8 8" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     menu: '<svg viewBox="0 0 24 24"><path d="M3 5h18M3 12h18M3 19h18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
     play: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path d="M10 8l6 4-6 4z" fill="currentColor"/></svg>',
     grid: '<svg viewBox="0 0 24 24"><g fill="currentColor"><rect x="2" y="2" width="5.5" height="5.5" rx="1.3"/><rect x="9.25" y="2" width="5.5" height="5.5" rx="1.3"/><rect x="16.5" y="2" width="5.5" height="5.5" rx="1.3"/><rect x="2" y="9.25" width="5.5" height="5.5" rx="1.3"/><rect x="9.25" y="9.25" width="5.5" height="5.5" rx="1.3"/><rect x="16.5" y="9.25" width="5.5" height="5.5" rx="1.3"/><rect x="2" y="16.5" width="5.5" height="5.5" rx="1.3"/><rect x="9.25" y="16.5" width="5.5" height="5.5" rx="1.3"/><rect x="16.5" y="16.5" width="5.5" height="5.5" rx="1.3"/></g></svg>',
@@ -155,10 +156,9 @@
 
     $('#ig-scroll').innerHTML =
       '<div class="ig-top">' +
-        '<span class="ig-ico">' + ICON.plus + '</span>' +
-        '<span class="ig-user"><u>' + esc(g.username) + '</u>' + ICON.chevron + '</span>' +
+        '<span></span>' +
+        '<button class="ig-user" data-sheet>' + esc(g.username) + ICON.chevron + '</button>' +
         '<span class="ig-top-r">' +
-          '<button class="ig-ico"' + na + '>' + ICON.threads + '</button>' +
           '<button class="ig-ico"' + na + '>' + ICON.menu + '</button>' +
         '</span>' +
       '</div>' +
@@ -166,7 +166,6 @@
       '<div class="ig-profile">' +
         '<button class="ig-avatar' + (g.hasStory ? ' has-story' : '') + '"' + na + '>' +
           '<img src="' + esc(g.avatar) + '" alt="">' +
-          '<span class="ig-add">+</span>' +
         '</button>' +
         (g.note ? '<div class="ig-note">' + esc(g.note) + '</div>' : '') +
         '<div class="ig-right">' +
@@ -204,10 +203,56 @@
       '<div class="ig-grid">' + g.posts.map(function (src) {
         return '<button' + na + '><img src="' + esc(src) + '" alt=""></button>';
       }).join('') + '</div>';
+
+    // 切換帳號清單（從下方滑出）
+    $('#ig-overlay').innerHTML =
+      '<div class="ig-sheet-wrap" id="ig-sheet">' +
+        '<div class="ig-sheet-bg" data-close-sheet></div>' +
+        '<div class="ig-sheet">' +
+          '<div class="ig-sheet-handle" data-close-sheet></div>' +
+          '<div class="ig-acc-list">' +
+            '<button class="ig-acc" data-close-sheet>' +
+              '<img src="' + esc(g.avatar) + '" alt="">' +
+              '<span class="ig-acc-name">' + esc(g.username) + '</span>' +
+              '<span class="ig-acc-check">' + ICON.check + '</span>' +
+            '</button>' +
+            '<a class="ig-acc" href="#/ig/login">' +
+              '<span class="ig-acc-plus">' + ICON.plus + '</span>' +
+              '<span class="ig-acc-name">' + esc(g.addAccountLabel) + '</span>' +
+            '</a>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
   }
 
-  $('#ig-scroll').addEventListener('click', function (e) {
-    if (e.target.closest('[data-na]')) toast();
+  // 登入畫面：純裝飾，表單不會送出、不會儲存任何輸入
+  function renderIGLogin() {
+    var l = D.instagram.login;
+    $('#ig-overlay').innerHTML = '';
+    $('#ig-scroll').innerHTML =
+      '<div class="ig-login">' +
+        '<div class="ig-login-top">' +
+          '<a class="ig-login-back" href="#/ig">' + ICON.back + '</a>' +
+          '<img class="ig-login-logo" src="' + esc(l.logo) + '" alt="">' +
+        '</div>' +
+        '<form class="ig-login-form" autocomplete="off">' +
+          '<input type="text" placeholder="' + esc(l.usernamePlaceholder) + '" autocomplete="off">' +
+          '<input type="password" placeholder="' + esc(l.passwordPlaceholder) + '" autocomplete="off">' +
+          '<button type="submit" class="ig-login-btn">' + esc(l.loginLabel) + '</button>' +
+          '<button type="button" class="ig-login-forgot" data-na>' + esc(l.forgotLabel) + '</button>' +
+        '</form>' +
+      '</div>';
+  }
+
+  $('#app-ig').addEventListener('click', function (e) {
+    if (e.target.closest('[data-sheet]')) $('#ig-sheet').classList.add('show');
+    else if (e.target.closest('[data-close-sheet]')) $('#ig-sheet').classList.remove('show');
+    else if (e.target.closest('[data-na]')) toast();
+  });
+  $('#ig-scroll').addEventListener('submit', function (e) {
+    e.preventDefault();
+    e.target.reset();
+    toast();
   });
 
   /* ---------------- 路由（網址 #/home、#/forum、#/forum/文章id、#/ig） ---------------- */
@@ -241,6 +286,8 @@
       $('#forum-scroll').scrollTop = 0;
     } else if (parts[0] === 'ig') {
       openApp('ig');
+      if (parts[1] === 'login') renderIGLogin(); else renderIG();
+      $('#ig-scroll').scrollTop = 0;
     } else {
       showHome();
     }
@@ -282,7 +329,6 @@
 
   /* ---------------- 啟動 ---------------- */
   renderHome();
-  renderIG();
   if (!location.hash) history.replaceState(null, '', '#/forum');  // 一進網頁先開論壇
   window.addEventListener('hashchange', route);
   route();

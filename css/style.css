@@ -196,24 +196,19 @@ img { display: block; max-width: 100%; }
  * ========================================================= */
 .ig .app-scroll { background: #fff; color: #000; font-size: 14px; }
 .ig-top {
-  display: flex; align-items: center; justify-content: space-between;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
   height: 50px; padding: 0 12px;
 }
 .ig-ico { width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; }
-.ig-ico svg, .ig-user svg { width: 26px; height: 26px; }
+.ig-ico svg { width: 26px; height: 26px; }
 .ig-user { display: inline-flex; align-items: center; gap: 2px; font-size: 21px; font-weight: 700; }
 .ig-user svg { width: 18px; height: 18px; }
-.ig-user u { text-decoration-thickness: 2px; text-underline-offset: 3px; }
-.ig-top-r { display: inline-flex; gap: 14px; }
+.ig-top-r { display: inline-flex; justify-content: flex-end; }
 
 .ig-profile { position: relative; display: flex; align-items: center; gap: 18px; padding: 34px 16px 0; }
 .ig-avatar { position: relative; flex: none; width: 90px; height: 90px; border-radius: 50%; padding: 4px; border: 2px solid #dbdbdb; }
 .ig-avatar.has-story { border: 0; padding: 4px; background: conic-gradient(#feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5, #feda75); }
 .ig-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 3px solid #fff; }
-.ig-add {
-  position: absolute; right: -2px; bottom: -2px; width: 26px; height: 26px; border-radius: 50%;
-  background: #000; color: #fff; border: 3px solid #fff; font-size: 18px; line-height: 19px; text-align: center; font-weight: 600;
-}
 .ig-note {
   position: absolute; left: 10px; top: 2px; z-index: 2;
   max-width: 110px; background: #fff; border-radius: 16px; padding: 6px 10px;
@@ -252,3 +247,43 @@ img { display: block; max-width: 100%; }
 .ig-grid button { aspect-ratio: 3 / 4; overflow: hidden; background: #eee; }
 .ig-grid img { width: 100%; height: 100%; object-fit: cover; }
 .ig-grid button:active, .ig-hl-item:active, .ig-stats button:active { opacity: .6; }
+
+/* ---------- 切換帳號清單 ---------- */
+.ig-sheet-wrap { position: absolute; inset: 0; z-index: 20; pointer-events: none; }
+.ig-sheet-bg { position: absolute; inset: 0; background: rgba(0,0,0,.45); opacity: 0; transition: opacity .25s; }
+.ig-sheet {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  background: #fff; border-radius: 22px 22px 0 0; padding: 10px 16px 46px;
+  transform: translateY(100%); transition: transform .3s cubic-bezier(.2,.8,.2,1);
+}
+.ig-sheet-wrap.show { pointer-events: auto; }
+.ig-sheet-wrap.show .ig-sheet-bg { opacity: 1; }
+.ig-sheet-wrap.show .ig-sheet { transform: none; }
+.ig-sheet-handle { width: 40px; height: 4px; border-radius: 2px; background: #c7c7c7; margin: 0 auto 14px; cursor: pointer; }
+.ig-acc-list { border: 1px solid #e3e3e3; border-radius: 16px; overflow: hidden; }
+.ig-acc { display: flex; align-items: center; gap: 14px; width: 100%; padding: 12px 14px; text-align: left; font-size: 16px; }
+.ig-acc + .ig-acc { border-top: 1px solid #e3e3e3; }
+.ig-acc img, .ig-acc-plus { flex: none; width: 52px; height: 52px; border-radius: 50%; object-fit: cover; }
+.ig-acc-plus { display: flex; align-items: center; justify-content: center; background: #f2f3f5; }
+.ig-acc-plus svg { width: 24px; height: 24px; }
+.ig-acc-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ig-acc-check svg { width: 26px; height: 26px; display: block; }
+
+/* ---------- 新增帳號（登入畫面） ---------- */
+.ig-login {
+  min-height: 100%; display: flex; flex-direction: column; justify-content: center;
+  padding: 0 16px 60px; position: relative;
+}
+.ig-login-top { position: relative; display: flex; justify-content: center; align-items: center; margin-bottom: 28px; min-height: 40px; }
+.ig-login-back { position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 32px; height: 32px; display: flex; align-items: center; }
+.ig-login-back svg { width: 26px; height: 26px; }
+.ig-login-logo { height: 30px; width: auto; }
+.ig-login-form { display: flex; flex-direction: column; gap: 12px; }
+.ig-login-form input {
+  height: 56px; border: 1px solid #dcdcdc; border-radius: 16px; padding: 0 18px;
+  font: inherit; font-size: 16px; outline: none; background: #fff;
+}
+.ig-login-form input:focus { border-color: #9aa4b2; }
+.ig-login-btn { height: 48px; border-radius: 24px; background: #0064e0; color: #fff; font-size: 16px; font-weight: 600; }
+.ig-login-btn:active { background: #0052b8; }
+.ig-login-forgot { margin-top: 10px; font-weight: 600; font-size: 15px; }

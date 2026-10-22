@@ -22,3 +22,13 @@
 - 在畫面最下方的橫條往上滑（手機用手指，電腦用滑鼠拖曳）→ 回到手機首頁
 - 論壇廣告：`data.js` 的 `ads[].link` 填外部網址就會另開分頁；留空則顯示「尚未更新」
 - 新增文章：複製 `posts` 裡的一整個 `{ ... }` 區塊，改一個新的 id 即可
+
+## 用 GitHub Pages 發布
+1. 到 GitHub 的 repo → **Settings** → 左側 **Pages**
+2. Source 選 **Deploy from a branch**，Branch 選 **master**、資料夾選 **/(root)**，按 Save
+3. 等 1～2 分鐘，網址會是 `https://1ndng.github.io/sosho/`
+4. 之後每次把修改 push 到 master，網站就會自動更新
+
+## IG 切換帳號／登入畫面
+- 點 IG 最上方的帳號名稱 → 從下方滑出帳號清單（目前帳號 + 新增帳號）
+- 按新增帳號 → `#/ig/login` 登入畫面；這只是裝飾畫面，輸入的內容不會被送出或儲存，按登入只會顯示「尚未更新」

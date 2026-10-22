@@ -130,6 +130,18 @@ window.SITE_DATA = {
       "images/ig_post_1.png", "images/ig_post_2.png", "images/ig_post_3.png",
       "images/ig_post_4.png", "images/ig_post_5.png", "images/ig_post_6.png",
       "images/ig_post_7.png", "images/ig_post_8.png", "images/ig_post_9.png"
-    ]
+    ],
+
+    // 點最上方帳號名稱 → 切換帳號清單
+    addAccountLabel: "test72",   // 清單最下面「新增帳號」
+
+    // 按「新增帳號」後的登入畫面（只是畫面，輸入的內容不會被送出或儲存）
+    login: {
+      logo: "images/login_logo.png",
+      usernamePlaceholder: "test73",
+      passwordPlaceholder: "test74",
+      loginLabel: "test75",
+      forgotLabel: "test76"
+    }
   }
 };
