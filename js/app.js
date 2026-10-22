@@ -92,10 +92,6 @@
     if (!p) { renderForumList(); return; }
     markRead(p.id);
 
-    var photos = (p.photos || []).map(function (src) {
-      return '<img class="pd-photo" src="' + esc(src) + '" alt="">';
-    }).join('');
-
     var comments = p.comments.map(function (c) {
       return '<div class="pd-comment"><b>' + esc(c.name) + '</b><span class="pd-colon">:</span>' +
         '<span class="pd-ctext">' + multiline(c.text) + '</span></div>';
@@ -105,20 +101,10 @@
       '<div class="pd">' +
         '<a class="pd-back" href="#/forum">‹ ' + esc(f.backLabel) + '</a>' +
         '<div class="pd-head"><span class="p-date">' + esc(p.date) + '</span> ' + esc(p.title) + '</div>' +
-        '<div class="pd-main">' +
-          '<div class="pd-avatar"><img src="' + esc(p.avatar) + '" alt=""></div>' +
-          '<div class="pd-text">' +
-            (p.mood ? '<div class="pd-mood"><img src="' + esc(p.mood) + '" alt=""></div>' : '') +
-            '<div class="pd-content">' + multiline(p.content) + '</div>' +
-          '</div>' +
-        '</div>' +
-        photos +
+        '<div class="pd-author">' + esc(p.author) + '</div>' +
+        '<div class="pd-content">' + multiline(p.content) + '</div>' +
         '<div class="pd-sep"></div>' +
-        '<div class="pd-cbar">' +
-          '<span>' + esc(f.commentLabel) + ' (' + p.comments.length + ')' +
-            (p.comments.length ? ' <i class="pd-new">' + esc(f.newBadge) + '</i>' : '') + '</span>' +
-          '<span>' + esc(f.writeCommentLabel) + '</span>' +
-        '</div>' +
+        '<div class="pd-cbar">' + esc(f.commentLabel) + ' (' + p.comments.length + ')</div>' +
         comments +
       '</div>' + forumFooter();
   }

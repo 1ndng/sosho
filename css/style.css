@@ -151,28 +151,15 @@ img { display: block; max-width: 100%; }
 }
 .pd-back { display: inline-block; color: #3b6db8; font-size: 12px; margin-bottom: 6px; }
 .pd-head { font-weight: 700; color: #333; padding-bottom: 8px; margin-bottom: 10px; border-bottom: 1px solid #eee; }
-.pd-main { display: flex; gap: 12px; align-items: flex-start; }
-.pd-avatar { flex: none; width: 100px; padding: 5px; background: #8a8a8a; border: 2px solid #c8c8c8; box-shadow: inset 0 0 0 2px #fff; }
-.pd-avatar img { width: 100%; height: auto; background: #fff; }
-.pd-text { flex: 1; min-width: 0; }
-.pd-mood { display: inline-block; border: 1px solid #aaa; border-radius: 6px; padding: 2px 8px; margin-bottom: 4px; }
-.pd-mood img { width: 16px; height: 16px; }
-.pd-content { word-break: break-all; }
-.pd-photo { width: 100%; height: auto; margin-top: 12px; border: 1px solid #ddd; }
+.pd-author { font-weight: 700; color: #3b6db8; margin-bottom: 6px; }
+.pd-content { word-break: break-all; text-align: left; }
 .pd-sep { border-top: 2px dotted #bbb; margin: 18px 0 10px; }
-.pd-cbar { display: flex; justify-content: space-between; font-size: 11px; color: #555; border-bottom: 2px solid #e8e8e8; padding-bottom: 4px; margin-bottom: 12px; }
-.pd-new { font-style: normal; background: #f39422; color: #fff; font-size: 9px; padding: 0 3px; border-radius: 2px; vertical-align: 1px; }
+.pd-cbar { font-size: 11px; color: #555; border-bottom: 2px solid #e8e8e8; padding-bottom: 4px; margin-bottom: 12px; }
 .pd-comment {
   display: flex; gap: 6px; align-items: flex-start;
   background: #f4f4f4; border: 2px solid #555; border-radius: 16px;
   padding: 10px 14px; margin-bottom: 12px; position: relative;
 }
-/* 對話框右下角的小尾巴 */
-.pd-comment::before, .pd-comment::after {
-  content: ""; position: absolute; width: 0; height: 0; border-style: solid;
-}
-.pd-comment::before { right: 18px; bottom: -14px; border-width: 14px 0 0 18px; border-color: #555 transparent transparent transparent; }
-.pd-comment::after  { right: 21px; bottom: -9px;  border-width: 9px 0 0 12px;  border-color: #f4f4f4 transparent transparent transparent; }
 .pd-comment b { flex: none; }
 .pd-colon { flex: none; font-weight: 700; }
 .pd-ctext { flex: 1; min-width: 0; font-weight: 700; word-break: break-all; }

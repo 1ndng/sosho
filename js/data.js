@@ -23,16 +23,13 @@ window.SITE_DATA = {
     listTitle: "test4",          // 文章列表框的標題
     backLabel: "test6",          // 文章內頁「返回」
     commentLabel: "test7",       // 「留言」
-    writeCommentLabel: "test8",  // 「寫留言」（目前不可點）
-    newBadge: "test9",           // 留言數旁的 NEW 小標
 
     // 文章：順序 = 列表顯示順序。id 請保持不重複（用於網址 #/forum/id）
     posts: [
       {
         id: "1", date: "test10", title: "test11",
-        avatar: "images/avatar_1.png", mood: "images/mood.png",
+        author: "test77",          // 匿名帳號代碼
         content: "test12",
-        photos: [],              // 內文下方要附的圖，例如 ["images/post_photo_1.png"]
         comments: [
           { name: "test13", text: "test14" },
           { name: "test15", text: "test16" }
@@ -40,18 +37,16 @@ window.SITE_DATA = {
       },
       {
         id: "2", date: "test17", title: "test18",
-        avatar: "images/avatar_2.png", mood: "images/mood.png",
+        author: "test78",          // 匿名帳號代碼
         content: "test19",
-        photos: ["images/post_photo_2.png"],
         comments: [
           { name: "test20", text: "test21" }
         ]
       },
       {
         id: "3", date: "test22", title: "test23",
-        avatar: "images/avatar_3.png", mood: "images/mood.png",
+        author: "test79",          // 匿名帳號代碼
         content: "test24",
-        photos: [],
         comments: [
           { name: "test25", text: "test26" },
           { name: "test27", text: "test28" },
@@ -60,25 +55,22 @@ window.SITE_DATA = {
       },
       {
         id: "4", date: "test31", title: "test32",
-        avatar: "images/avatar_4.png", mood: "images/mood.png",
+        author: "test80",          // 匿名帳號代碼
         content: "test33",
-        photos: [],
         comments: []
       },
       {
         id: "5", date: "test34", title: "test35",
-        avatar: "images/avatar_5.png", mood: "images/mood.png",
+        author: "test81",          // 匿名帳號代碼
         content: "test36",
-        photos: [],
         comments: [
           { name: "test37", text: "test38" }
         ]
       },
       {
         id: "6", date: "test39", title: "test40",
-        avatar: "images/avatar_6.png", mood: "images/mood.png",
+        author: "test82",          // 匿名帳號代碼
         content: "test41",
-        photos: [],
         comments: [
           { name: "test42", text: "test43" },
           { name: "test44", text: "test45" }
