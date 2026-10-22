@@ -20,10 +20,7 @@ window.SITE_DATA = {
 
   /* ---------- 匿名論壇 ---------- */
   forum: {
-    logo: "images/forum_logo.png",
-    siteTitle: "test3",
     listTitle: "test4",          // 文章列表框的標題
-    adTitle: "test5",            // 廣告欄標題
     backLabel: "test6",          // 文章內頁「返回」
     commentLabel: "test7",       // 「留言」
     writeCommentLabel: "test8",  // 「寫留言」（目前不可點）
@@ -98,18 +95,15 @@ window.SITE_DATA = {
     ],
 
     // 最下方淺色文字
-    footerLinks: ["test46", "test47", "test48", "test49", "test50"],
     copyright: "test51"
   },
 
   /* ---------- Instagram ---------- */
   instagram: {
     username: "test52",
-    note: "test53",               // 頭像上方的便利貼泡泡
     avatar: "images/ig_avatar.png",
     hasStory: true,              // true = 頭像外圈顯示限時動態框
     name: "test54",
-    nameSuffix: "test55",         // 名字後面的灰色小字
     postsCount: "test56",
     followersCount: "test57",
     followingCount: "test58",

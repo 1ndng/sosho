@@ -46,31 +46,27 @@
   }
 
   /* ---------------- 論壇 ---------------- */
-  function forumHeader() {
-    var f = D.forum;
-    return '<header class="f-header">' +
-      '<a class="f-logo" href="#/forum"><img src="' + esc(f.logo) + '" alt=""></a>' +
-      '<div class="f-title">' + esc(f.siteTitle) + '</div>' +
-      '</header>';
+  // 已讀文章（存在瀏覽器裡，下次打開仍記得）
+  var READ_KEY = 'sosho-read-posts';
+  var readPosts = {};
+  try { readPosts = JSON.parse(localStorage.getItem(READ_KEY)) || {}; } catch (e) {}
+  function markRead(id) {
+    readPosts[id] = 1;
+    try { localStorage.setItem(READ_KEY, JSON.stringify(readPosts)); } catch (e) {}
   }
 
   function forumFooter() {
     var f = D.forum;
-    return '<footer class="f-footer">' +
-      '<div class="f-footer-links">' + f.footerLinks.map(esc).join('<i>|</i>') + '</div>' +
-      '<div class="f-copy">' + esc(f.copyright) + '</div>' +
-      '</footer>';
+    return '<footer class="f-footer">' + esc(f.copyright) + '</footer>';
   }
 
   function renderForumList() {
     var f = D.forum;
     var list = f.posts.map(function (p) {
+      // 未讀 ❗️、已讀 ❕
       return '<li><a href="#/forum/' + encodeURIComponent(p.id) + '">' +
-        '<span class="heart">♥</span>' +
-        '<span class="p-date">' + esc(p.date) + '</span>' +
-        '<span class="p-title">' + esc(p.title) +
-        (p.comments.length ? ' <em>[' + p.comments.length + ']</em>' : '') +
-        '</span></a></li>';
+        '<span class="mark">' + (readPosts[p.id] ? '❕' : '❗️') + '</span>' +
+        '<span class="p-title">' + esc(p.title) + '</span></a></li>';
     }).join('');
 
     var ads = f.ads.map(function (a, i) {
@@ -79,14 +75,13 @@
         '<img src="' + esc(a.image) + '" alt=""></a>';
     }).join('');
 
-    $('#forum-scroll').innerHTML = forumHeader() +
+    $('#forum-scroll').innerHTML =
       '<div class="f-body">' +
         '<main class="f-main"><div class="f-box">' +
           '<div class="f-box-title">' + esc(f.listTitle) + '</div>' +
           '<ul class="f-list">' + list + '</ul>' +
         '</div></main>' +
-        '<aside class="f-ads">' +
-          '<div class="f-ads-title">' + esc(f.adTitle) + '</div>' + ads +
+        '<aside class="f-ads">' + ads +
         '</aside>' +
       '</div>' + forumFooter();
   }
@@ -95,6 +90,7 @@
     var f = D.forum;
     var p = f.posts.filter(function (x) { return String(x.id) === String(id); })[0];
     if (!p) { renderForumList(); return; }
+    markRead(p.id);
 
     var photos = (p.photos || []).map(function (src) {
       return '<img class="pd-photo" src="' + esc(src) + '" alt="">';
@@ -105,7 +101,7 @@
         '<span class="pd-ctext">' + multiline(c.text) + '</span></div>';
     }).join('');
 
-    $('#forum-scroll').innerHTML = forumHeader() +
+    $('#forum-scroll').innerHTML =
       '<div class="pd">' +
         '<a class="pd-back" href="#/forum">‹ ' + esc(f.backLabel) + '</a>' +
         '<div class="pd-head"><span class="p-date">' + esc(p.date) + '</span> ' + esc(p.title) + '</div>' +
@@ -167,9 +163,8 @@
         '<button class="ig-avatar' + (g.hasStory ? ' has-story' : '') + '"' + na + '>' +
           '<img src="' + esc(g.avatar) + '" alt="">' +
         '</button>' +
-        (g.note ? '<div class="ig-note">' + esc(g.note) + '</div>' : '') +
         '<div class="ig-right">' +
-          '<div class="ig-name">' + esc(g.name) + ' <span>' + esc(g.nameSuffix) + '</span></div>' +
+          '<div class="ig-name">' + esc(g.name) + '</div>' +
           '<div class="ig-stats">' +
             '<div><b>' + esc(g.postsCount) + '</b>' + esc(g.postsLabel) + '</div>' +
             '<button' + na + '><b>' + esc(g.followersCount) + '</b>' + esc(g.followersLabel) + '</button>' +
