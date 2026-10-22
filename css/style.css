@@ -107,10 +107,11 @@ img { display: block; max-width: 100%; }
  * 匿名論壇（2000 年代日系官網風）
  * ========================================================= */
 .forum .app-scroll {
+  display: flex; flex-direction: column;
   background: #e9f1fa repeating-linear-gradient(90deg, rgba(255,255,255,.55) 0 2px, transparent 2px 4px);
   font-size: 12px; line-height: 1.55;
 }
-.f-body { display: flex; gap: 6px; padding: 8px 6px 4px; align-items: flex-start; }
+.f-body { flex: none; display: flex; gap: 6px; padding: 8px 6px 4px; align-items: flex-start; }
 .f-main { flex: 2; min-width: 0; }
 .f-ads { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
 
@@ -140,10 +141,12 @@ img { display: block; max-width: 100%; }
 .ad img { width: 100%; height: auto; }
 .ad:active { filter: brightness(.9); }
 
-.f-footer { padding: 14px 10px 18px; text-align: center; color: #b3c0d1; font-size: 10px; }
+.f-footer { flex: none; padding: 14px 10px 18px; text-align: center; color: #b3c0d1; font-size: 10px; }
 
 /* ---------- 論壇文章內頁（Cyworld 風） ---------- */
+/* 文章內頁白框：固定撐滿畫面，下方只留一行淺色文字 */
 .pd {
+  flex: 1 0 auto;
   margin: 8px 6px 0; background: #fff; border: 1px solid #c9d5e6; border-radius: 6px;
   padding: 12px 12px 16px;
   font-family: "Gulim", "Dotum", "Apple SD Gothic Neo", "PingFang TC", sans-serif;
