@@ -99,10 +99,12 @@
 
     $('#forum-scroll').innerHTML =
       '<div class="pd">' +
+        '<div class="pd-top">' +
         '<a class="pd-back" href="#/forum">‹ ' + esc(f.backLabel) + '</a>' +
         '<div class="pd-head">' + esc(p.title) + '</div>' +
         '<div class="pd-author">' + esc(p.author) + '</div>' +
         '<div class="pd-content">' + multiline(p.content) + '</div>' +
+        '</div>' +
         '<div class="pd-sep"></div>' +
         '<div class="pd-cbar">' + esc(f.commentLabel) + ' (' + p.comments.length + ')</div>' +
         comments +

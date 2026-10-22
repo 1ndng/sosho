@@ -107,6 +107,7 @@ img { display: block; max-width: 100%; }
  * 匿名論壇（2000 年代日系官網風）
  * ========================================================= */
 .forum .app-scroll {
+  container-type: size;
   display: flex; flex-direction: column;
   background: #e9f1fa repeating-linear-gradient(90deg, rgba(255,255,255,.55) 0 2px, transparent 2px 4px);
   font-size: 12px; line-height: 1.55;
@@ -153,9 +154,11 @@ img { display: block; max-width: 100%; }
 }
 .pd-back { display: inline-block; color: #3b6db8; font-size: 12px; margin-bottom: 6px; }
 .pd-head { font-weight: 700; color: #333; padding-bottom: 8px; margin-bottom: 10px; border-bottom: 1px solid #eee; }
+/* 標題＋內文區：至少佔到畫面一半，留言固定從一半以下開始（內文較長時會自動往下推） */
+.pd-top { min-height: 40vh; min-height: calc(50cqh - 26px); }
 .pd-author { font-weight: 700; color: #3b6db8; margin-bottom: 6px; }
-.pd-content { word-break: break-all; text-align: left; }
-.pd-sep { border-top: 2px dotted #bbb; margin: 18px 0 10px; }
+.pd-content { word-break: break-all; text-align: left; padding-bottom: 18px; }
+.pd-sep { border-top: 2px dotted #bbb; margin: 0 0 10px; }
 .pd-cbar { font-size: 11px; color: #555; border-bottom: 2px solid #e8e8e8; padding-bottom: 4px; margin-bottom: 12px; }
 .pd-comment {
   display: flex; gap: 6px; align-items: flex-start;
