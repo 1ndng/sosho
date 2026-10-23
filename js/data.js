@@ -69,7 +69,7 @@ window.SITE_DATA = {
           { name: "452_.rq", text: "各位，這是我之前幸運看到了Shotaro發布又秒刪除的限時動態。雖然不知道對面是誰，但秒刪實在很欲蓋彌彰。",
             video: "images/forum_1_c3.mp4" },
           // replyTo = 回覆哪個帳號代碼（往右縮排、顯示 @代碼）
-          { name: "sho_pabo", replyTo: "452_.rq", text: "拜託對面就一看就是小孩啊，而且看taro哥哥這個髮色應該不是近期的吧？別造謠他跟他來路不明的侄子了好吧不如造謠我跟他。" },
+          { name: "sho_pabo", replyTo: "452_.rq", text: "拜託對面就一看就是小孩啊，你會叫你對象あにき？而且看taro哥哥這個髮色應該不是近期的吧？別造謠他跟他來路不明的侄子了好吧不如造謠我跟他。" },
           { name: "452_.rq", replyTo: "sho_pabo", text: "⋯⋯哦哦好的👌🏻" }
         ]
       },
