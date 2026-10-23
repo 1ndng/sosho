@@ -131,7 +131,6 @@ window.SITE_MEDIA = [
 "images/3_story_20261021.jpg",
 "images/3_story_20261022.jpg",
 "images/ad_1.png",
-"images/ad_2.png",
 "images/ad_3.png",
 "images/anton.jpg",
 "images/default_avatar.png",

@@ -178,7 +178,7 @@
     grid: '<svg viewBox="0 0 24 24"><g fill="currentColor"><rect x="2" y="2" width="5.5" height="5.5" rx="1.3"/><rect x="9.25" y="2" width="5.5" height="5.5" rx="1.3"/><rect x="16.5" y="2" width="5.5" height="5.5" rx="1.3"/><rect x="2" y="9.25" width="5.5" height="5.5" rx="1.3"/><rect x="9.25" y="9.25" width="5.5" height="5.5" rx="1.3"/><rect x="16.5" y="9.25" width="5.5" height="5.5" rx="1.3"/><rect x="2" y="16.5" width="5.5" height="5.5" rx="1.3"/><rect x="9.25" y="16.5" width="5.5" height="5.5" rx="1.3"/><rect x="16.5" y="16.5" width="5.5" height="5.5" rx="1.3"/></g></svg>',
     repost: '<svg viewBox="0 0 24 24"><path d="M19 9.5V8a3 3 0 0 0-3-3H5m0 0 3-3M5 5l3 3M5 14.5V16a3 3 0 0 0 3 3h11m0 0-3-3m3 3-3 3" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     heart: '<svg viewBox="0 0 24 24"><path d="M12 20.5s-8-4.9-8-11A4.6 4.6 0 0 1 12 6.6a4.6 4.6 0 0 1 8 2.9c0 6.1-8 11-8 11z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>',
-    comment: '<svg viewBox="0 0 24 24"><path d="M20.5 12a8.5 8.5 0 1 1-3.9-7.1A8.5 8.5 0 0 1 20.5 12l.9 6.6-5.2-1.6" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>',
+    comment: '<svg viewBox="0 0 24 24"><path d="M20.66 17A10 10 0 1 0 17 20.62L22 22z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>',
     send: '<svg viewBox="0 0 24 24"><path d="M21.5 3 2.5 9.5l7.2 3.1L13 21.5zM9.7 12.6 21.5 3" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>',
     bookmark: '<svg viewBox="0 0 24 24"><path d="M5.5 3h13v18L12 14.8 5.5 21z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>',
     saved: '<svg viewBox="0 0 24 24"><path d="M5.5 3h13v18L12 14.8 5.5 21z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>',
@@ -188,7 +188,7 @@
     star: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path d="m12 6.8 1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7-3.2 1.7.6-3.6-2.6-2.5 3.6-.5z" fill="currentColor"/></svg>',
     right: '<svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     close: '<svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
-    more: '<svg viewBox="0 0 24 24"><path d="M3 8h18M3 16h12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
+    more: '<svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="19" cy="12" r="1.6" fill="currentColor"/></svg>',
     search: '<svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="7" stroke="currentColor" stroke-width="2.2" fill="none"/><path d="m16 16 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
     home: '<svg viewBox="0 0 24 24"><path d="M3.5 10.5 12 3l8.5 7.5V21h-5.5v-6h-6v6H3.5z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>',
     add: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 7.5v9M7.5 12h9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
@@ -616,12 +616,6 @@
   /* ---- 貼文頁 ---- */
   var curPost = null;   // { owner, idx, p, key }
 
-  function likeCount(base, liked) {
-    if (base == null || base === '') return liked ? '1' : '';
-    var n = String(base).replace(/,/g, '');
-    if (/^\d+$/.test(n)) return (+n + (liked ? 1 : 0)).toLocaleString('en-US');
-    return String(base);   // 像 "1.2萬" 這種文字就照原樣顯示
-  }
   function allComments(cp) {
     var added = store.comments[cp.key] || [];
     return cp.p.comments.concat(added.map(function (c) { return { user: c.user, text: c.text, time: T().justNow, mine: true }; }));
@@ -634,10 +628,8 @@
   function postActionsHTML() {
     var cp = curPost, L = D.instagram, t = T();
     var liked = !!store.likes[actKey(cp.key)], saved = !!store.saves[actKey(cp.key)], reposted = !!store.reposts[actKey(cp.key)];
-    var nC = allComments(cp).length, likes = likeCount(cp.p.likes, liked);
     return '<div class="ig-actions">' +
         '<button data-act="like" class="' + (liked ? 'on-like' : '') + '">' + (liked ? ICON.heartFill : ICON.heart) + '</button>' +
-        (likes ? '<span class="ig-count">' + esc(likes) + '</span>' : '') +
         '<button data-act="comments">' + ICON.comment + '</button>' +
 
 

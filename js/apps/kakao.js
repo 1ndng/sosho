@@ -7,7 +7,6 @@
 
   var ICON = {
     search: '<svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.9" fill="none"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
-    addFriend: '<svg viewBox="0 0 24 24"><circle cx="10" cy="8" r="4" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M3 20c.7-3.7 3.4-5.8 7-5.8 1.6 0 3 .4 4.2 1.2M18 13v7M14.5 16.5h7" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>',
     music: '<svg viewBox="0 0 24 24"><path d="M9 18V5.5l11-2v12" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/><circle cx="6.5" cy="18" r="2.5" stroke="currentColor" stroke-width="1.8" fill="none"/><circle cx="17.5" cy="15.5" r="2.5" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>',
     gear: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
     chatAdd: '<svg viewBox="0 0 24 24"><path d="M12 4C7 4 3 7.1 3 11c0 2.4 1.5 4.5 3.8 5.8L6 20l3.8-2.2c.7.1 1.4.2 2.2.2 5 0 9-3.1 9-7s-4-7-9-7z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/><path d="M12 8v6M9 11h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
@@ -94,7 +93,7 @@
     var k = K(), me = k.me || {}, list = k.friends || [], t = TX();
     S().$('#kakao-scroll').innerHTML =
       '<div class="kk-head"><h1>' + esc(t.friendsTitle) + '</h1>' +
-        '<span class="kk-head-icons"><button data-na>' + ICON.addFriend + '</button></span></div>' +
+        '</div>' +
       '<a class="kk-me" href="#/kakao/me">' +
         '<img src="' + esc(me.avatar) + '" alt="">' +
         '<span><b>' + esc(me.name) + '</b><small>' + esc(me.status) + '</small></span>' +
@@ -113,7 +112,7 @@
     var list = [selfRoom()].concat(groups(), K().friends || []).filter(function (f) { return messagesOf(f).some(function (m) { return m.text || m.image; }); });
     S().$('#kakao-scroll').innerHTML =
       '<div class="kk-head"><h1>' + esc(TX().chatsTitle) + '</h1>' +
-        '<span class="kk-head-icons"><button data-na>' + ICON.addFriend + '</button></span></div>' +
+        '</div>' +
       list.map(function (f) {
         var msgs = messagesOf(f).filter(function (m) { return m.text || m.image; }), last = msgs[msgs.length - 1], n = unreadOf(f);
         return '<a class="kk-chatrow" href="#/kakao/chat/' + encodeURIComponent(f.id) + '">' +

@@ -72,7 +72,6 @@ window.SITE_DATA = {
     // 右側廣告：link 填外部網址；留空 "" 則點擊時顯示「尚未更新」
     ads: [
       { image: "images/ad_1.png", link: "https://www.asianfanfics.com/story/view/1770006/story-61" },
-      { image: "images/ad_2.png", link: "" },
       // ending: true = 結局廣告：登入過小帳 fauiogl94 才點得開（還沒登入時點了沒反應），打開是感謝／劇情解說頁
       { image: "images/ad_3.png", link: "", ending: true }
     ],
@@ -98,7 +97,7 @@ window.SITE_DATA = {
     followersLabel: "位粉絲",
     followingLabel: "追蹤中",
     bio: [],                       // 每一項 = 一行；@開頭的字會自動變藍色
-    music: { title: "歌名", artist: "歌手" },   // 個人頁的音樂列（音檔 audio/3_music.mp3）
+    music: { title: "Nostalgic", artist: "No Guindce" },   // 個人頁的音樂列（音檔 audio/3_music.mp3）
     editProfileLabel: "編輯個人檔案",
     shareProfileLabel: "分享個人檔案",
     // 精選動態：image = 圓圈封面，stories = 點進去看到的內容
@@ -341,70 +340,60 @@ window.SITE_DATA = {
         posts: [
       {
         images: ["images/1_post1.jpg", "images/1_post1-2.jpg", "images/1_post1-3.jpg",],
-        likes: "test115",
         likedBy: { avatar: "images/sungchan.jpg", name: "song_sungchan" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
         caption: "test117",
         time: "test118"
       },
       {
         images: ["images/1_post2.jpg",],
-        likes: "test115",
         likedBy: { avatar: "images/2_avatar.jpg", name: "252525252_" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
         caption: "test117",
         time: "test118"
       },
       {
         images: ["images/1_post3.jpg", "images/1_post3-2.jpg",],
-        likes: "test115",
         likedBy: { avatar: "images/sungchan.jpg", name: "song_sungchan" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
         caption: "test117",
         time: "test118"
       },
       {
         images: ["images/1_post4.jpg", "images/1_post4-2.jpg", "images/1_post4-3.jpg",],
-        likes: "test115",
         likedBy: { avatar: "images/2_avatar.jpg", name: "252525252_" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
         caption: "test117",
         time: "test118"
       },
       {
         images: ["images/1_post5.jpg", "images/1_post5-2.jpg", "images/1_post5-3.jpg", "images/1_post5-4.jpg"],
-        likes: "test115",
         likedBy: { avatar: "images/wonbin.jpg", name: "bin032" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
         caption: "test117",
         time: "test118"
       },
       {
         images: ["images/1_post6.jpg", "images/1_post6-2.jpg"],
-        likes: "test212",
         likedBy: { avatar: "images/sungchan.jpg", name: "song_sungchan" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
         caption: "test214",
         time: "test215"
       },
       {
         images: ["images/1_post_20260122.jpg", "images/1_post_20260122-2.jpg", "images/1_post_20260122-3.jpg"],
-        likes: "test300",
         likedBy: { avatar: "images/anton.jpg", name: "antonnie" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
         caption: "test302",
         time: "1月22日"
       },
       {
         images: ["images/1_post_20251212.jpg", "images/1_post_20251212-2.jpg"],
-        likes: "test269",
         likedBy: { avatar: "images/2_avatar.jpg", name: "252525252_" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
         caption: "test271",
         time: "2025年12月12日"
       },
       {
         images: ["images/1_post_20251128.jpg", "images/1_post_20251128-2.jpg"],
-        likes: "test272",
         likedBy: { avatar: "images/wonbin.jpg", name: "bin032" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
         caption: "test274",
         time: "2025年11月28日"
       },
       {
         images: ["images/1_post_20250915.jpg", "images/1_post_20250915-2.jpg"],
-        likes: "test275",
         likedBy: { avatar: "images/eunseok.jpg", name: "seokkkk" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
         caption: "test277",
         time: "2025年9月15日"
@@ -479,21 +468,18 @@ window.SITE_DATA = {
           posts: [
             {
               images: ["images/2_savedpost_20260924.jpg"],
-              likes: "test281",
               likedBy: { avatar: "images/anton.jpg", name: "antonnie" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
               caption: "test283",
               time: "9月24日"
             },
             {
               images: ["images/2_savedpost_20251210.jpg"],
-              likes: "test284",
               likedBy: { avatar: "images/eunseok.jpg", name: "seokkkk" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
               caption: "test286",
               time: "2025年12月10日"
             },
             {
               images: ["images/2_saved_20251204.jpg", "images/2_saved_20251204-2.jpg"],
-              likes: "test287",
               likedBy: { avatar: "images/sungchan.jpg", name: "song_sungchan" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
               caption: "test289",
               time: "2025年12月4日"
@@ -503,28 +489,24 @@ window.SITE_DATA = {
         posts: [
       {
         images: ["images/2_post1.jpg", "images/2_post1-2.jpg"],
-        likes: "test201",
         likedBy: { avatar: "images/anton.jpg", name: "antonnie" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
         caption: "test203",
         time: "test204"
       },
       {
         images: ["images/2_post2.jpg", "images/2_post2-2.jpg", "images/2_post2-3.jpg"],
-        likes: "test205",
         likedBy: { avatar: "images/eunseok.jpg", name: "seokkkk" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
         caption: "test207",
         time: "7月7日"
       },
       {
         images: ["images/2_post_20260129.jpg"],
-        likes: "test303",
         likedBy: { avatar: "images/sungchan.jpg", name: "song_sungchan" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
         caption: "test305",
         time: "1月29日"
       },
       {
         images: ["images/2_post_20251219.jpg"],
-        likes: "test278",
         likedBy: { avatar: "images/eunseok.jpg", name: "seokkkk" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
         caption: "test280",
         time: "2025年12月19日"
