@@ -86,7 +86,9 @@
 
   function forumFooter() {
     var f = D.forum;
-    return '<footer class="f-footer">' + esc(f.copyright) + '</footer>';
+    return '<footer class="f-footer">' + esc(f.copyright) +
+      (f.restartLabel ? '<button class="f-restart" type="button" data-restart>' + esc(f.restartLabel) + '</button>' : '') +
+      '</footer>';
   }
 
   // 廣告可以是圖片或影片：影片會靜音、自動循環播放。
@@ -161,6 +163,15 @@
 
   // 廣告沒有連結時 → 顯示尚未更新
   $('#forum-scroll').addEventListener('click', function (e) {
+    // 重新開始：清除所有進度與紀錄（追蹤、典藏、登入、聊天…），回到手機密碼鎖
+    if (e.target.closest('[data-restart]')) {
+      if (!confirm(D.forum.restartConfirm || '要清除所有進度、從頭開始嗎？')) return;
+      try {
+        Object.keys(localStorage).forEach(function (k) { if (k.indexOf('sosho-') === 0) localStorage.removeItem(k); });
+      } catch (err) {}
+      location.href = location.pathname;
+      return;
+    }
     var im = e.target.closest('[data-fimg]');
     if (im) {
       // 點留言圖片 → 全螢幕，點一下關閉
@@ -1242,9 +1253,9 @@
       var who = profileByName(decodeURIComponent(location.hash.split('/')[3] || ''));
       if (who) {
         var fk = followKey(who);
-        // 只能追蹤、不能取消（避免把非公開帳號退追後再也看不到）
-        if (isFollowing(currentAccount(), who) || store.follows[fk] === 'req') return;
-        store.follows[fk] = isPrivate(who) ? 'req' : 1;   // 非公開帳號只會變「已要求」
+        // 追蹤中／已要求 → 再按一次就退追／取消要求；沒追蹤 → 追蹤（非公開帳號只會變「已要求」）
+        if (isFollowing(currentAccount(), who) || store.follows[fk] === 'req') store.follows[fk] = 0;
+        else store.follows[fk] = isPrivate(who) ? 'req' : 1;
         saveStore();
         var top = $('#ig-scroll').scrollTop;
         renderIG(who, '#/ig/u/' + encodeURIComponent(who.username));

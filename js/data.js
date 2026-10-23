@@ -77,7 +77,9 @@ window.SITE_DATA = {
     ],
 
     // 最下方淺色文字
-    copyright: "@dng"
+    copyright: "@dng",
+    restartLabel: "重新開始",                          // 論壇最下面的按鈕：清除所有進度、回到密碼鎖
+    restartConfirm: "要清除所有進度、從頭開始嗎？"
   },
 
   /* ---------- Instagram ---------- */
