@@ -20,16 +20,16 @@ window.SITE_DATA = {
 
   /* ---------- 匿名論壇 ---------- */
   forum: {
-    listTitle: "test4",          // 文章列表框的標題
-    backLabel: "test6",          // 文章內頁「返回」
-    commentLabel: "test7",       // 「留言」
+    listTitle: "文章",          // 文章列表框的標題
+    backLabel: "返回",          // 文章內頁「返回」
+    commentLabel: "留言",       // 「留言」
 
     // 文章：順序 = 列表顯示順序。id 請保持不重複（用於網址 #/forum/id）
     posts: [
       {
-        id: "1", title: "test11",
-        author: "test77",          // 匿名帳號代碼
-        content: "test12",
+        id: "1", title: "求推薦裝潢好看食物又好吃的咖啡廳啊啊啊",
+        author: "f00d1smylife_",          // 匿名帳號代碼
+        content: "如題。",
         comments: [
           { name: "test13", text: "test14" },
           { name: "test15", text: "test16" }
@@ -87,30 +87,30 @@ window.SITE_DATA = {
     ],
 
     // 最下方淺色文字
-    copyright: "test51"
+    copyright: "@dng"
   },
 
   /* ---------- Instagram ---------- */
   instagram: {
-    username: "test52",
+    username: "fauiogl94",
     avatar: "images/ig_avatar.png",
     hasStory: true,              // true = 頭像外圈顯示限時動態框
-    name: "test54",
-    postsCount: "test56",
-    followersCount: "test57",
-    followingCount: "test58",
-    postsLabel: "test59",
-    followersLabel: "test60",
-    followingLabel: "test61",
-    bio: ["test62", "test63"],     // 每一項 = 一行；@開頭的字會自動變藍色
-    music: { title: "test64", artist: "test65" },
-    editProfileLabel: "test66",
-    shareProfileLabel: "test67",
+    name: "fauiogl94",
+    postsCount: "2",
+    followersCount: "0",
+    followingCount: "1",
+    postsLabel: "貼文數",
+    followersLabel: "粉絲數",
+    followingLabel: "追蹤數",
+    //bio: ["test62", "test63"],     // 每一項 = 一行；@開頭的字會自動變藍色
+    music: { title: "Nostalgic", artist: "No Guindce" },
+    editProfileLabel: "編輯個人檔案",
+    shareProfileLabel: "分享個人檔案",
     highlights: [
-      { image: "images/ig_highlight_1.png", label: "test68" },
-      { image: "images/ig_highlight_2.png", label: "test69" },
-      { image: "images/ig_highlight_3.png", label: "test70" },
-      { image: "images/ig_highlight_4.png", label: "test71" }
+      { image: "images/ig_highlight_1.png", label: "mood" },
+      { image: "images/ig_highlight_2.png", label: "🕺" },
+      { image: "images/ig_highlight_3.png", label: "ㅇㄱ" },
+      { image: "images/ig_highlight_4.png", label: "しゅう" }
     ],
     posts: [
       "images/ig_post_1.png", "images/ig_post_2.png", "images/ig_post_3.png",
@@ -119,15 +119,15 @@ window.SITE_DATA = {
     ],
 
     // 點最上方帳號名稱 → 切換帳號清單
-    addAccountLabel: "test72",   // 清單最下面「新增帳號」
+    addAccountLabel: "新增帳號",   // 清單最下面「新增帳號」
 
     // 按「新增帳號」後的登入畫面（只是畫面，輸入的內容不會被送出或儲存）
     login: {
       logo: "images/login_logo.png",
-      usernamePlaceholder: "test73",
-      passwordPlaceholder: "test74",
-      loginLabel: "test75",
-      forgotLabel: "test76"
+      usernamePlaceholder: "帳號",
+      passwordPlaceholder: "密碼",
+      loginLabel: "登入",
+      //forgotLabel: "test76"
     }
   }
 };
