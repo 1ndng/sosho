@@ -40,39 +40,39 @@ window.SITE_DATA = {
     posts: [
       {
         id: "1", title: "Shotaro是不是談戀愛了？",
-        author: "test77",          // 匿名帳號代碼
-        content: "test12",
+        author: "taromilkteaaaa",          // 匿名帳號代碼
+        content: "尚未更新",
         comments: [
-          { name: "test13", text: "test14" },
-          { name: "test15", text: "test16" }
+          { name: "sho_pabo", text: "尚未更新" },
+          { name: "dngrumm", text: "尚未更新" },
+          { name: "452_.rq", text: "尚未更新" }
         ]
       },
       {
         id: "2", title: "秘境餐廳推薦！",
         author: "f00d1smylife_",          // 匿名帳號代碼
-        content: "如題。",
+        content: "尚未更新",
         comments: [
-          { name: "test20", text: "test21" }
+          { name: "f00d1smylife_", text: "★店家資訊★\n電話：046-882-3916\n地址：神奈川県三浦市三崎町小網代2718-3" },
+          { name: "aburasoba", text: "謝謝推薦。" }
         ]
       },
       {
         id: "3", title: "判斷一個人是不是在戀愛的妙招。",
-        author: "test79",          // 匿名帳號代碼
-        content: "test24",
-        comments: [
-          { name: "test25", text: "test26" },
-          { name: "test27", text: "test28" },
-          { name: "test29", text: "test30" }
-        ]
+        author: "yolo._520",          // 匿名帳號代碼
+        content: "尚未更新",
+        commentsDisabled: true,        // 原PO已限制留言（不顯示任何留言）
+        comments: []
       }
     ],
+    commentsDisabledText: "原PO已限制留言。",
 
     // 右側廣告：link 填外部網址；留空 "" 則點擊時顯示「尚未更新」
     ads: [
-      { image: "images/ad_1.png", link: "" },
+      { image: "images/ad_1.png", link: "https://www.asianfanfics.com/story/view/1770006/story-61" },
       { image: "images/ad_2.png", link: "" },
-      { image: "images/ad_3.png", link: "" },
-      { image: "images/ad_4.png", link: "" }
+      // ending: true = 結局廣告：線索還沒全部解開時點了顯示「待解鎖」，解開後進入感謝／劇情解說頁
+      { image: "images/ad_3.png", link: "", ending: true }
     ],
 
     // 最下方淺色文字
@@ -93,20 +93,20 @@ window.SITE_DATA = {
       { image: "images/ig_story_1.png", time: "test101" },
       { image: "images/ig_story_2.png", time: "test102" }
     ],
-    name: "fauiogl94",
+    name: "",                      // 沒有名字 → 顯示帳號 id
     // 貼文數、粉絲數、追蹤數會自動計算（貼文 = posts 的數量；粉絲／追蹤 = following 名單）
     // 想顯示固定數字（例如 "145k"）時，再加上 postsCount / followersCount / followingCount 就會蓋過自動計算
+    closeFriendsList: [],          // 小帳沒有摯友
     following: ["shotaroo0"],    // 這個帳號追蹤中的帳號（寫帳號 id）
     postsLabel: "貼文",
     followersLabel: "位粉絲",
     followingLabel: "追蹤中",
-    bio: ["test62", "test63"],     // 每一項 = 一行；@開頭的字會自動變藍色
-    music: { title: "Nostalgic", artist: "No Guindce" },
+    bio: [],                       // 每一項 = 一行；@開頭的字會自動變藍色
     editProfileLabel: "編輯個人檔案",
     shareProfileLabel: "分享個人檔案",
     // 精選動態：image = 圓圈封面，stories = 點進去看到的內容
     highlights: [
-      { image: "images/3_story_20250904.jpg", label: "mood",
+      { image: "images/3_story_20250904.jpg", label: "🧡",
         stories: [
           { image: "images/3_story_20250904.jpg", time: "2025年9月4日" },
           { image: "images/3_story_20251130.jpg", time: "2025年11月30日" },
@@ -256,11 +256,18 @@ window.SITE_DATA = {
     // 只能被搜尋到、不能登入的帳號（格式和 otherAccounts 一樣，不用寫 password）
     searchOnlyAccounts: [
       {
-        username: "test226",                 // 粉絲帳號（會出現在 shotaroo0 的粉絲名單裡）
-        name: "test227",
+        username: "mlkt_tr5",                 // 粉絲帳號（會出現在 shotaroo0 的粉絲名單裡）
+        name: "",
         avatar: "images/fan_avatar.png",
         following: ["shotaroo0"],
-        bio: ["test228"],
+        bio: [],
+        followersList: [],               // 粉絲 0
+        // 追蹤了 shotaroo0（可以點）、wonbin、anton（路人，點不進去）
+        followingList: [
+          "shotaroo0",
+          { username: "bin032", name: "wonbin", avatar: "images/wonbin.jpg" },
+          { username: "antonnie", name: "anton", avatar: "images/anton.jpg" }
+        ],
         posts: []
       }
     ],
@@ -305,16 +312,16 @@ window.SITE_DATA = {
         password: "0000",
         avatar: "images/1_avatar.jpg",
         hasStory: false,
-        name: "Shotaro",
-        following: ["252525252"],
+        name: "Shotaro(쇼타로/ショウタロウ)",
+        following: ["252525252_"],
         followersCount: "145k",          // 手動數字（蓋過自動計算）
         followingCount: "651",
         // 粉絲／追蹤中名單：寫帳號 id 的會用那個帳號的資料、可以點進去；
         // { username, name, avatar } 是路人（點不進去；沒寫 avatar 就是灰色預設頭貼）。名單只顯示一頁、不能滑動
         followersList: [
           "fauiogl94",
-          "252525252",
-          "test226",
+          "252525252_",
+          "mlkt_tr5",
           { username: "seokkkk", name: "eunseok", avatar: "images/eunseok.jpg" },
           { username: "song_sungchan", name: "sungchan", avatar: "images/sungchan.jpg" },
           { username: "bin032", name: "wonbin", avatar: "images/wonbin.jpg" },
@@ -324,7 +331,7 @@ window.SITE_DATA = {
           { username: "test241", name: "test242" }
         ],
         followingList: [
-          "252525252",
+          "252525252_",
           { username: "seokkkk", name: "eunseok", avatar: "images/eunseok.jpg" },
           { username: "song_sungchan", name: "sungchan", avatar: "images/sungchan.jpg" },
           { username: "bin032", name: "wonbin", avatar: "images/wonbin.jpg" },
@@ -335,15 +342,15 @@ window.SITE_DATA = {
           { username: "test257", name: "test258" }
         ],
         // 摯友名單：寫在這裡的帳號才看得到 closeFriends: true 的限時動態
-        closeFriendsList: ["252525252"],
+        closeFriendsList: ["seokkkk", "song_sungchan", "bin032", "252525252_", "antonnie"],
         // 已儲存：預先放好的已儲存貼文（"帳號/貼文編號"，編號從 0 開始）
         saved: [],
         // 典藏：stories = 過期的限時動態；posts = 下架的貼文（格式和 posts 一樣）
         archive: { stories: [], posts: [] },
-        bio: ["test87"],
-        music: { title: "test88", artist: "keshi" },
+        bio: ["🦦/🍦/🕺"],
+        music: { title: "Ride", artist: "HYBS" },
         highlights: [
-          { image: "images/1_story_20250709.jpg", label: "test90",
+          { image: "images/1_story_20250709.jpg", label: "😚",
             // 依日期排序；story2 是摯友限時（closeFriends: true，只有摯友名單裡的人看得到）
             stories: [
               { image: "images/1_story_20250709.jpg", time: "2025年7月9日" },
@@ -438,12 +445,12 @@ window.SITE_DATA = {
         ]
       },
       {
-        username: "252525252",           // 登入用的帳號，也是頁面上方顯示的帳號名稱
+        username: "252525252_",           // 登入用的帳號，也是頁面上方顯示的帳號名稱
         password: "031121",
         private: true,                 // 非公開帳號
         avatar: "images/2_avatar.jpg",
         hasStory: false,
-        name: "SOHEE",
+        name: "이소희",
         following: ["shotaroo0"],
         followersCount: "1121",          // 手動數字（蓋過自動計算）
         followingCount: "137",
@@ -472,10 +479,12 @@ window.SITE_DATA = {
           { username: "test339", name: "test340" },
           { username: "test341", name: "test342" }
         ],
-        bio: ["test96"],
-        music: { title: "test97", artist: "test98" },
+        bio: ["Jimmy Lee", "@brunomars"],
+        // 簡介裡 @帳號 點了要開的外部網址（沒寫的話：遊戲裡有的帳號會進去它的頁面，其他顯示「尚未更新」）
+        bioLinks: { "@brunomars": "https://www.instagram.com/brunomars/" },
+        music: { title: "Kagerou", artist: "ONE OK ROCK" },
         highlights: [
-          { image: "images/2_story_20260709.jpg", label: "test99",
+          { image: "images/2_story_20260709.jpg", label: "go",
             // 依日期排序；.mp4 影片會自動播放，播完才換下一則
             stories: [
               { image: "images/2_story_20250722.jpg", time: "2025年7月22日" },
@@ -503,7 +512,7 @@ window.SITE_DATA = {
             ] }
         ],
         // 摯友名單：寫在這裡的帳號才看得到 closeFriends: true（story2）的限時動態
-        closeFriendsList: ["shotaroo0"],
+        closeFriendsList: ["shotaroo0", "seokkkk", "song_sungchan", "bin032", "antonnie"],
         // 典藏（登入這個帳號後：設定 → 典藏）
         archive: {
           stories: [
@@ -574,12 +583,12 @@ window.SITE_DATA = {
     filterAll: "全部",
     filterMissed: "未接來電",
     todayLabel: "今天",          // 玩家撥出的電話會加在這個日期底下
-    tabs: ["通話記錄", "聯絡人", "數字鍵盤"],
+    tabs: ["通話記錄", "數字鍵盤"],
     // 數字鍵盤可以撥出的號碼（之後再補）：撥這些號碼時，撥號畫面會顯示 name
     // 例：{ number: "0912345678", name: "某某某" }；不在清單裡的號碼一樣能撥，但只會顯示號碼、無人接聽
     dialable: [
       {
-        number: "0267-48-3615",          // 秘境咖啡廳（日本長野・輕井澤一帶的市話）；玩家輸入 0267483615 就能撥
+        number: "046-882-3916",          // 秘境咖啡廳（神奈川縣三浦市的市話，論壇第 2 篇有寫）；玩家輸入 0468823916 就能撥
         // 沒寫 name → 撥號畫面和通話記錄只顯示號碼（不在聯絡人裡）
         // 接通後的對話：nodes 裡每一段有 lines（逐句字幕）和 choices（選項）
         //   lines：who = "them" 對方 / "me" 玩家；text = 字幕；sub = 字幕下面的小字（例如日文的中文翻譯）
@@ -667,7 +676,7 @@ window.SITE_DATA = {
     friends: [
       {
         id: "f1",                       // 不要重複（用於網址）
-        name: "이소희",                   // 252525252
+        name: "이소희",                   // 252525252_
         status: "test166",                  // 狀態訊息
         avatar: "images/2_avatar.jpg",
         unread: 2,       // 一開始在聊天列表顯示的未讀數
@@ -811,5 +820,31 @@ window.SITE_DATA = {
       photoLabel: "사진",
       meTag: "나"                   // 나와의 채팅 名字旁的小標            // 聊天列表裡最後一則是照片時顯示的字
     }
+  },
+
+  /* ---------- 結局：感謝／劇情解說頁 ---------- */
+  ending: {
+    // 需要完成的進度（全部完成後，論壇的結局廣告才會解鎖）
+    //   cafe_call       = 打給咖啡廳、問到細節
+    //   chat_me         = 打開過 Kakao 的「나와의 채팅」（chat_好友id 也可以，例如 chat_f1）
+    //   login_fauiogl94 = 登入過小帳（login_帳號id）
+    //   也可以在限時動態加 flag: "名稱"，看到那則就算完成，再把名稱加進這裡
+    require: ["cafe_call", "chat_me", "login_fauiogl94"],
+    lockedLabel: "待解鎖",          // 結局廣告上的標籤
+    lockedText: "待解鎖",           // 還沒解鎖時點廣告跳出的提示
+    backLabel: "返回",
+    title: "test343",
+    image: "",                      // 最上面的圖（可留空）
+    // 內文：每一項是一段；也可以寫 { heading: "小標", text: "內容", image: "images/xxx.jpg" }
+    body: [
+      "test344",
+      "test345"
+    ],
+    // 連結按鈕（例如同人文）
+    links: [
+      { label: "test346", url: "https://www.asianfanfics.com/story/view/1770006/story-61" }
+    ],
+    replayLabel: "重新開始",
+    replayConfirm: "要清除所有進度、從頭開始嗎？"
   }
 };

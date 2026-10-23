@@ -30,6 +30,20 @@
     toastTimer = setTimeout(function () { t.classList.remove('show'); }, 1600);
   }
 
+  /* ---------------- 進度（結局解鎖用） ---------------- */
+  var PROGRESS_KEY = 'sosho-progress';
+  function progress() { try { return JSON.parse(localStorage.getItem(PROGRESS_KEY)) || {}; } catch (e) { return {}; } }
+  function markFlag(f) {
+    if (!f) return;
+    var pr = progress(); pr[f] = 1;
+    try { localStorage.setItem(PROGRESS_KEY, JSON.stringify(pr)); } catch (e) {}
+  }
+  // data.js 的 ending.require 全部完成 = 解鎖結局
+  function endingUnlocked() {
+    var req = (D.ending && D.ending.require) || [], pr = progress();
+    return req.every(function (f) { return pr[f]; });
+  }
+
   /* ---------------- 首頁 ---------------- */
   function renderHome() {
     var h = D.home;
@@ -70,6 +84,12 @@
     }).join('');
 
     var ads = (f.ads || []).map(function (a, i) {
+      if (a.ending) {
+        var open = endingUnlocked();
+        return '<a class="ad' + (open ? '' : ' ad-locked') + '" href="' + (open ? '#/ending' : '#') + '" data-ad="' + i + '">' +
+          '<img src="' + esc(a.image) + '" alt="">' +
+          (open ? '' : '<span class="ad-lock">' + esc((D.ending && D.ending.lockedLabel) || '待解鎖') + '</span>') + '</a>';
+      }
       return '<a class="ad" href="' + (a.link ? esc(a.link) : '#') + '" data-ad="' + i + '"' +
         (a.link ? ' target="_blank" rel="noopener"' : '') + '>' +
         '<img src="' + esc(a.image) + '" alt=""></a>';
@@ -111,7 +131,9 @@
         '<div class="pd-content">' + multiline(p.content) + '</div>' +
         '</div>' +
         '<div class="pd-sep"></div>' +
-        '<div class="pd-cbar">' + esc(f.commentLabel) + ' (' + cs.length + ')</div>' +
+        (p.commentsDisabled
+          ? '<div class="pd-cbar pd-closed">' + esc(f.commentsDisabledText || '原PO已限制留言。') + '</div>'
+          : '<div class="pd-cbar">' + esc(f.commentLabel) + ' (' + cs.length + ')</div>') +
         comments +
       '</div>' + forumFooter();
   }
@@ -129,7 +151,10 @@
       return;
     }
     var ad = e.target.closest('.ad');
-    if (ad && !(D.forum.ads || [])[ad.dataset.ad].link) { e.preventDefault(); toast(); }
+    var adData = ad && (D.forum.ads || [])[ad.dataset.ad];
+    if (adData && adData.ending) {
+      if (!endingUnlocked()) { e.preventDefault(); toast((D.ending && D.ending.lockedText) || '待解鎖'); }
+    } else if (adData && !adData.link) { e.preventDefault(); toast(); }
   });
 
   /* ---------------- Instagram ---------------- */
@@ -169,8 +194,15 @@
     tagged: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" fill="none"/><path d="M6.5 20.5c1-3 3-4.3 5.5-4.3s4.5 1.3 5.5 4.3" stroke="currentColor" stroke-width="2" fill="none"/></svg>'
   };
 
-  function bioLine(s) {
-    return esc(s).replace(/(@[\w.]+)/g, '<span class="ig-mention" data-na>$1</span>');
+  // 簡介裡的 @帳號：bioLinks 有寫 → 開外部網址；遊戲裡有這個帳號 → 進它的頁面；其他 → 尚未更新
+  function bioLine(s, g) {
+    var links = (g && g.bioLinks) || {};
+    return esc(s).replace(/(@[\w.]+)/g, function (m) {
+      if (links[m]) return '<a class="ig-mention" href="' + esc(links[m]) + '" target="_blank" rel="noopener">' + m + '</a>';
+      var acc = profileByName(m.slice(1));
+      if (acc) return '<a class="ig-mention" href="' + (acc === currentAccount() ? '#/ig' : '#/ig/u/' + encodeURIComponent(acc.username)) + '">' + m + '</a>';
+      return '<span class="ig-mention" data-na>' + m + '</span>';
+    });
   }
 
   /* ---- 帳號：主帳號 + 用帳密登入的其他帳號（登入狀態存在瀏覽器裡） ---- */
@@ -241,8 +273,8 @@
   function counts(g) {
     return {
       posts: g.postsCount != null ? g.postsCount : (g.posts || []).length,
-      followers: g.followersCount != null ? g.followersCount : followersOf(g).length,
-      following: g.followingCount != null ? g.followingCount : followingOf(g).length
+      followers: g.followersCount != null ? g.followersCount : g.followersList ? g.followersList.length : followersOf(g).length,
+      following: g.followingCount != null ? g.followingCount : g.followingList ? g.followingList.length : followingOf(g).length
     };
   }
 
@@ -310,7 +342,7 @@
           '<img src="' + esc(g.avatar) + '" alt="">' +
         (vis.length ? '</a>' : '</button>') +
         '<div class="ig-right">' +
-          '<div class="ig-name">' + esc(g.name) + '</div>' +
+          '<div class="ig-name">' + esc(g.name || g.username) + '</div>' +
           '<div class="ig-stats">' +
             '<div><b>' + esc(c.posts) + '</b>' + esc(L.postsLabel) + '</div>' +
             (locked
@@ -322,7 +354,7 @@
         '</div>' +
       '</div>' +
 
-      (bio.length ? '<div class="ig-bio">' + bio.map(function (l) { return '<div>' + bioLine(l) + '</div>'; }).join('') + '</div>' : '') +
+      (bio.length ? '<div class="ig-bio">' + bio.map(function (l) { return '<div>' + bioLine(l, g) + '</div>'; }).join('') + '</div>' : '') +
 
       (g.music && g.music.title ?
         '<button class="ig-music"' + na + '>' + ICON.play +
@@ -586,7 +618,7 @@
         '<button data-act="like" class="' + (liked ? 'on-like' : '') + '">' + (liked ? ICON.heartFill : ICON.heart) + '</button>' +
         (likes ? '<span class="ig-count">' + esc(likes) + '</span>' : '') +
         '<button data-act="comments">' + ICON.comment + '</button>' +
-        (nC ? '<span class="ig-count">' + nC + '</span>' : '') +
+
         '<button data-act="repost" class="' + (reposted ? 'on-repost' : '') + '">' + ICON.repost + '</button>' +
         '<button data-act="share">' + ICON.send + '</button>' +
         '<button data-act="save" class="ig-act-save">' + (saved ? ICON.bookmarkFill : ICON.bookmark) + '</button>' +
@@ -594,7 +626,7 @@
       (cp.p.likedBy && cp.p.likedBy.name ?
         '<div class="ig-likedby"><img src="' + esc(cp.p.likedBy.avatar || avatarOf(cp.p.likedBy.name)) + '" alt=""><b>' + esc(cp.p.likedBy.name) + '</b>' + esc(L.likedBySuffix) + '</div>' : '') +
       (cp.p.caption ? '<div class="ig-caption"><b>' + esc(cp.owner.username) + '</b> ' + multiline(cp.p.caption) + '</div>' : '') +
-      (nC ? '<button class="ig-viewall" data-act="comments">' + esc(fill(t.viewAllComments, { n: nC })) + '</button>' : '') +
+
       (cp.p.time ? '<div class="ig-time">' + esc(cp.p.time) + '</div>' : '');
   }
   function refreshPostActions() {
@@ -824,6 +856,7 @@
       paintSound(isVideo);
       $('.ig-story-time').textContent = items[i].time || '';
       $('#ig-story-cf').style.display = items[i].closeFriends ? '' : 'none';
+      markFlag(items[i].flag);   // 限時動態寫了 flag → 看到時記錄進度
       bars.forEach(function (b, j) {
         b.className = j < i ? 'done' : '';
         b.firstChild.style.animation = 'none';
@@ -1132,6 +1165,7 @@
       return;
     }
     if (accState.loggedIn.indexOf(acc.username) < 0) accState.loggedIn.push(acc.username);
+    markFlag('login_' + acc.username);   // 進度：登入過這個帳號
     accState.current = acc.username;
     saveAcc();
     form.reset();
@@ -1174,7 +1208,11 @@
   function doRoute() {
     var parts = location.hash.replace(/^#\/?/, '').split('/');
     stopStory();
-    if (APPS[parts[0]]) {
+    if (parts[0] === 'ending') {
+      if (!endingUnlocked()) { location.replace('#/forum'); return; }
+      openApp('ending');
+      renderEnding();
+    } else if (APPS[parts[0]]) {
       openApp(parts[0]);
       APPS[parts[0]](parts.slice(1).map(decodeURIComponent));
     } else if (parts[0] === 'forum') {
@@ -1255,7 +1293,7 @@
   /* ---------------- 啟動 ---------------- */
   // 給 js/apps/*.js 用的共用工具
   window.SOSHO = {
-    data: D, $: $, esc: esc, multiline: multiline, toast: toast,
+    data: D, $: $, esc: esc, multiline: multiline, toast: toast, markFlag: markFlag,
     setDarkStatus: function (on) { $('#phone').classList.toggle('dark-status', !!on); },
     load: function (key, def) {
       try { var v = JSON.parse(localStorage.getItem(key)); return v == null ? def : v; } catch (e) { return def; }
@@ -1264,6 +1302,33 @@
       try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {}
     }
   };
+
+  /* ---------------- 感謝／劇情解說頁 ---------------- */
+  function renderEnding() {
+    var E = D.ending || {};
+    $('#ending-scroll').innerHTML =
+      '<div class="end">' +
+        '<a class="end-back" href="#/forum">‹ ' + esc(E.backLabel || '返回') + '</a>' +
+        (E.image ? '<img class="end-img" src="' + esc(E.image) + '" alt="">' : '') +
+        '<h1>' + esc(E.title) + '</h1>' +
+        (E.body || []).map(function (para) {
+          return typeof para === 'string'
+            ? '<p>' + multiline(para) + '</p>'
+            : (para.image ? '<img class="end-img" src="' + esc(para.image) + '" alt="">' : '') + (para.heading ? '<h2>' + esc(para.heading) + '</h2>' : '') + (para.text ? '<p>' + multiline(para.text) + '</p>' : '');
+        }).join('') +
+        ((E.links || []).length ? '<div class="end-links">' + E.links.map(function (l) {
+          return '<a href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.label) + '</a>';
+        }).join('') + '</div>' : '') +
+        '<button class="end-replay" id="end-replay">' + esc(E.replayLabel || '重新開始') + '</button>' +
+      '</div>';
+    $('#end-replay').onclick = function () {
+      if (!confirm(E.replayConfirm || '要清除所有進度、從頭開始嗎？')) return;
+      try {
+        Object.keys(localStorage).forEach(function (k) { if (k.indexOf('sosho-') === 0) localStorage.removeItem(k); });
+      } catch (e) {}
+      location.href = location.pathname;   // 重新整理 → 回到手機密碼鎖
+    };
+  }
 
   /* ---------------- 手機密碼鎖 ---------------- */
   function renderLock() {

@@ -109,8 +109,8 @@
   // 下方標籤：通話記錄、聯絡人（尚未更新）、數字鍵盤
   function renderTabs(active) {
     var p = P(), esc = S().esc, names = p.tabs || [];
-    var icons = [ICON.clock, ICON.person, ICON.keypad];
-    var hrefs = ['#/phone', null, '#/phone/keypad'];
+    var icons = [ICON.clock, ICON.keypad];
+    var hrefs = ['#/phone', '#/phone/keypad'];
     var bar = document.createElement('nav');
     bar.className = 'ph-tabs';
     bar.innerHTML = names.map(function (t, i) {
@@ -131,7 +131,7 @@
     S().$('#phone-overlay').innerHTML = '';
     S().$('#phone-scroll').innerHTML =
       '<div class="ph-kp">' +
-        '<div class="ph-kp-top"><button class="ph-kp-add" data-na>' + ICON.addContact + '</button></div>' +
+        '<div class="ph-kp-top"></div>' +
         '<div class="ph-kp-num" id="ph-kp-num"></div>' +
         '<div class="ph-kp-keys">' + KEYS.map(function (k) {
           return '<button class="ph-key" data-key="' + esc(k[0]) + '"><b>' + esc(k[0]) + '</b>' +
@@ -144,7 +144,7 @@
         '</div>' +
       '</div>';
     paintNumber();
-    renderTabs(2);
+    renderTabs(1);
   }
   function paintNumber() {
     var n = document.getElementById('ph-kp-num');
@@ -272,10 +272,7 @@
     setTimeout(function () { endCall(name); }, 900);
   }
   // 進度紀錄（之後「全部線索解開」會用到）
-  function markFlag(f) {
-    var pr = S().load('sosho-progress', {});
-    pr[f] = 1; S().save('sosho-progress', pr);
-  }
+  function markFlag(f) { S().markFlag(f); }
 
   function endCall(name) {
     clearTimeout(callTimer);
