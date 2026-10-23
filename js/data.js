@@ -116,33 +116,33 @@ window.SITE_DATA = {
     shareProfileLabel: "分享個人檔案",
     // 精選動態：image = 圓圈封面，stories = 點進去看到的內容
     highlights: [
-      { image: "images/story3_20261010.jpg", label: "mood",
+      { image: "images/3_story_20261010.jpg", label: "mood",
         stories: [
-          { image: "images/story3_20261010.jpg", time: "10月10日" },
-          { image: "images/story3_20261011.jpg", time: "10月11日" },
-          { image: "images/story3_20261021.jpg", time: "10月21日" },
-          { image: "images/story3_20261022.jpg", time: "10月22日" }
+          { image: "images/3_story_20261010.jpg", time: "10月10日" },
+          { image: "images/3_story_20261011.jpg", time: "10月11日" },
+          { image: "images/3_story_20261021.jpg", time: "10月21日" },
+          { image: "images/3_story_20261022.jpg", time: "10月22日" }
         ] }
     ],
     // 貼文：images 可放多張（左右滑動）；格子上顯示第一張
     // 需要時可以加：comments: [{ user: "帳號", text: "留言", time: "1天" }]、tagged: ["被標註的帳號"]
     posts: [
       {
-        images: ["images/post3_1.jpg"],
+        images: ["images/3_post1.jpg"],
         likes: "test111",
         likedBy: { avatar: "images/ig_liker.png", name: "test112" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test113",
         time: "test114"
       },
       {
-        images: ["images/post3_2.jpg"],
+        images: ["images/3_post2.jpg"],
         likes: "test115",
         likedBy: { avatar: "images/ig_liker.png", name: "test116" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test117",
         time: "test118"
       },
       {
-        images: ["images/post3_3.jpg", "images/post3_3-2.jpg"],
+        images: ["images/3_post3.jpg", "images/3_post3-2.jpg"],
         likes: "test208",
         likedBy: { avatar: "images/ig_liker.png", name: "test209" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test210",
@@ -241,64 +241,57 @@ window.SITE_DATA = {
       {
         username: "shotaroo0",           // 登入用的帳號，也是頁面上方顯示的帳號名稱
         password: "0000",
-        avatar: "images/1-0.jpg",
+        avatar: "images/1_avatar.jpg",
         hasStory: false,
         name: "Shotaro",
         following: [],
         bio: ["test87"],
         music: { title: "test88", artist: "keshi" },
         highlights: [
-          { image: "images/story1_1007.jpg", label: "test90",
+          { image: "images/1_story_20261007.jpg", label: "test90",
             stories: [
-              { image: "images/story1_1007.jpg", time: "10月7日" },
-              { image: "images/story1_1012.jpg", time: "10月12日" }
+              { image: "images/1_story_20261007.jpg", time: "10月7日" },
+              { image: "images/1_story_20261012.jpg", time: "10月12日" }
             ] }
         ],
         posts: [
       {
-        images: ["images/2-0.jpg", "images/2-1.jpg", "images/2-2.jpg",],
+        images: ["images/1_post1.jpg", "images/1_post1-2.jpg", "images/1_post1-3.jpg",],
         likes: "test115",
         likedBy: { avatar: "images/ig_liker.png", name: "test116" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test117",
         time: "test118"
       },
       {
-        images: ["images/1-1.jpg",],
+        images: ["images/1_post2.jpg",],
         likes: "test115",
         likedBy: { avatar: "images/ig_liker.png", name: "test116" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test117",
         time: "test118"
       },
       {
-        images: ["images/post1.jpg", "images/post1-2.jpg",],
+        images: ["images/1_post3.jpg", "images/1_post3-2.jpg",],
         likes: "test115",
         likedBy: { avatar: "images/ig_liker.png", name: "test116" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test117",
         time: "test118"
       },
       {
-        images: ["images/post2.jpg",],
+        images: ["images/1_post4.jpg", "images/1_post4-2.jpg", "images/1_post4-3.jpg",],
         likes: "test115",
         likedBy: { avatar: "images/ig_liker.png", name: "test116" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test117",
         time: "test118"
       },
       {
-        images: ["images/post3.jpg", "images/post3-2.jpg", "images/post3-3.jpg",],
+        images: ["images/1_post5.jpg", "images/1_post5-2.jpg", "images/1_post5-3.jpg", "images/1_post5-4.jpg"],
         likes: "test115",
         likedBy: { avatar: "images/ig_liker.png", name: "test116" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test117",
         time: "test118"
       },
       {
-        images: ["images/post4.jpg", "images/post4-2.jpg", "images/post4-4.jpg", "images/post4-5.jpg"],
-        likes: "test115",
-        likedBy: { avatar: "images/ig_liker.png", name: "test116" },   // 「xxx 說讚」；不要的話整行刪掉
-        caption: "test117",
-        time: "test118"
-      },
-      {
-        images: ["images/post5.jpg", "images/post5-2.jpg"],
+        images: ["images/1_post6.jpg", "images/1_post6-2.jpg"],
         likes: "test212",
         likedBy: { avatar: "images/ig_liker.png", name: "test213" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test214",
@@ -309,36 +302,36 @@ window.SITE_DATA = {
       {
         username: "252525252",           // 登入用的帳號，也是頁面上方顯示的帳號名稱
         password: "031121",
-        avatar: "images/1-00.jpg",
+        avatar: "images/2_avatar.jpg",
         hasStory: false,
         name: "SOHEE",
         following: [],
         bio: ["test96"],
         music: { title: "test97", artist: "test98" },
         highlights: [
-          { image: "images/story0709.jpg", label: "test99",
+          { image: "images/2_story_20260709.jpg", label: "test99",
             // 依日期排序；.MP4 影片會自動播放，播完才換下一則
             stories: [
-              { image: "images/story2_0117.jpg", time: "1月17日" },
-              { image: "images/story0606.MP4", time: "6月6日" },
-              { image: "images/story2_0609.jpg", time: "6月9日" },
-              { image: "images/story2_0609-2.jpg", time: "6月9日" },
-              { image: "images/story0709.jpg", time: "7月9日" },
-              { image: "images/story2_250722.jpg", time: "2025年7月22日" },
-              { image: "images/story1001.jpg", time: "10月1日" },
-              { image: "images/story2_1004.jpg", time: "10月4日" }
+              { image: "images/2_story_20250722.jpg", time: "2025年7月22日" },
+              { image: "images/2_story_20260117.jpg", time: "1月17日" },
+              { image: "images/2_story_20260606.mp4", time: "6月6日" },
+              { image: "images/2_story_20260609.jpg", time: "6月9日" },
+              { image: "images/2_story_20260609-2.jpg", time: "6月9日" },
+              { image: "images/2_story_20260709.jpg", time: "7月9日" },
+              { image: "images/2_story_20261001.jpg", time: "10月1日" },
+              { image: "images/2_story_20261004.jpg", time: "10月4日" }
             ] }
         ],
         posts: [
       {
-        images: ["images/post11.jpg", "images/post11-2.jpg"],
+        images: ["images/2_post1.jpg", "images/2_post1-2.jpg"],
         likes: "test201",
         likedBy: { avatar: "images/ig_liker.png", name: "test202" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test203",
         time: "test204"
       },
       {
-        images: ["images/post12(0707).jpg", "images/post12-2.jpg", "images/post12-3.jpg"],
+        images: ["images/2_post2.jpg", "images/2_post2-2.jpg", "images/2_post2-3.jpg"],
         likes: "test205",
         likedBy: { avatar: "images/ig_liker.png", name: "test206" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test207",
@@ -377,18 +370,18 @@ window.SITE_DATA = {
 
   /* ---------- KakaoTalk ---------- */
   kakao: {
-    me: {
-      name: "test163",
+    me: {                         // 手機使用者 = shotaroo0
+      name: "Shotaro",
       status: "test164",
-      avatar: "images/kakao_me.png",
+      avatar: "images/1_avatar.jpg",
       background: "images/kakao_me_bg.png"   // 點自己的資料時的全螢幕背景
     },
     friends: [
       {
         id: "f1",                       // 不要重複（用於網址）
-        name: "test165",
+        name: "SOHEE",                    // 252525252
         status: "test166",                  // 狀態訊息
-        avatar: "images/kakao_f1.png",
+        avatar: "images/2_avatar.jpg",
         unread: 2,       // 一開始在聊天列表顯示的未讀數
         messages: [
           { date: "test167" },
@@ -397,20 +390,20 @@ window.SITE_DATA = {
           { from: "them", text: "test172", time: "test173" },
           // 照片訊息：image 換成圖片路徑（不用寫 text）；me = 手機使用者，them = 對方
           { date: "2025년 6월 19일 목요일" },
-          { from: "me", image: "images/msg1_20250619.jpg", time: "test216" },
-          { date: "2025년 7월 12일 토요일" },
-          { from: "me", image: "images/msg1_0712.jpg", time: "test217" },
-          { date: "2025년 8월 26일 화요일" },
-          { from: "me", image: "images/msg1_0826.jpg", time: "test218" },
-          { date: "2025년 9월 30일 화요일" },
-          { from: "them", image: "images/msg2_0930.jpg", time: "test219" },
-          { from: "them", image: "images/msg2_0930-2.jpg", time: "test220" },
-          { from: "them", image: "images/msg2_0930-3.jpg", time: "test221" },
-          { date: "2025년 10월 3일 금요일" },
-          { from: "them", image: "images/msg2_1003.jpg", time: "test222" },
-          { date: "2025년 10월 4일 토요일" },
-          { from: "them", image: "images/msg2_1004.jpg", time: "test223" },
-          { from: "me", image: "images/msg1.jpg", time: "test224" }   // msg1.jpg 檔名沒有日期，先放最後
+          { from: "me", image: "images/1_msg_20250619.jpg", time: "test216" },
+          { date: "2026년 7월 12일 일요일" },
+          { from: "me", image: "images/1_msg_20260712.jpg", time: "test217" },
+          { date: "2026년 8월 26일 수요일" },
+          { from: "me", image: "images/1_msg_20260826.jpg", time: "test218" },
+          { date: "2026년 9월 30일 수요일" },
+          { from: "them", image: "images/2_msg_20260930.jpg", time: "test219" },
+          { from: "them", image: "images/2_msg_20260930-2.jpg", time: "test220" },
+          { from: "them", image: "images/2_msg_20260930-3.jpg", time: "test221" },
+          { date: "2026년 10월 3일 토요일" },
+          { from: "them", image: "images/2_msg_20261003.jpg", time: "test222" },
+          { date: "2026년 10월 4일 일요일" },
+          { from: "them", image: "images/2_msg_20261004.jpg", time: "test223" },
+          { from: "me", image: "images/1_msg.jpg", time: "test224" }   // 1_msg.jpg 檔名沒有日期，先放最後
         ],
         // 關鍵字自動回覆：玩家傳的訊息「包含」任一個 keywords 就回 reply（可多句，依序送出）
         replies: [

@@ -504,6 +504,14 @@
       '<div id="ig-post-actions">' + postActionsHTML() + '</div>';
 
     var car = $('#ig-car');
+    // 和 IG 一樣：整篇貼文的框照第一張照片的比例（最高 3:4、最寬 1.91:1），其他張填滿同一個框
+    var firstImg = car.querySelector('img');
+    function fitRatio() {
+      if (!firstImg.naturalWidth) return;
+      var r = Math.min(1.91, Math.max(0.75, firstImg.naturalWidth / firstImg.naturalHeight));
+      car.style.setProperty('--ar', r);
+    }
+    if (firstImg.complete) fitRatio(); else firstImg.addEventListener('load', fitRatio);
     if (n > 1) car.addEventListener('scroll', function () {
       var i = Math.round(car.scrollLeft / car.clientWidth);
       $('#ig-car-count').textContent = (i + 1) + '/' + n;
