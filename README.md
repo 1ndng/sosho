@@ -55,3 +55,9 @@
 - 貼文數 = `posts` 的數量；粉絲、追蹤中 = 依各帳號的 `following` 名單（加上玩家按的追蹤／取消）自動算
 - 想顯示固定數字（例如 "145k"）就在帳號裡加 `postsCount` / `followersCount` / `followingCount`，會蓋過自動計算
 - 點粉絲或追蹤中 → `#/ig/follows/followers`、`#/ig/follows/following`（別人的是 `#/ig/u/帳號/follows/...`）
+
+## IG 互動
+- 貼文：愛心（也可以點兩下圖片）、留言（玩家可新增，會記住）、轉發（出現在個人頁轉發分頁）、分享（選帳號傳送／複製連結）、收藏（設定 → 已儲存）
+- 讚數：`likes` 填數字會自動 +1；填文字（像 "1.2萬"）就照原樣顯示
+- 貼文的 `comments`、`tagged`，帳號的 `reposts`，以及 `instagram.text` 的提示文字都在 data.js
+- 限時動態：愛心可按、可輸入訊息送出（輸入時會暫停）

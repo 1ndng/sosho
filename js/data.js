@@ -141,7 +141,13 @@ window.SITE_DATA = {
         likes: "test111",
         likedBy: { avatar: "images/ig_liker.png", name: "test112" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test113",
-        time: "test114"
+        time: "test114",
+        // 留言：user 寫帳號 id（有這個帳號會自動用它的頭像，沒有就用 avatar）
+        comments: [
+          { user: "shotaroo0", text: "test135", time: "test136" },
+          { user: "test137", avatar: "images/ig_liker.png", text: "test138", time: "test139" }
+        ],
+        tagged: ["shotaroo0"]   // 被標註的帳號 → 會出現在對方個人頁的「被標註」分頁
       },
       {
         images: ["images/ig_post_2.png"],
@@ -151,6 +157,33 @@ window.SITE_DATA = {
         time: "test118"
       }
     ],
+
+    // 這個帳號轉發的貼文（"帳號/貼文編號"，編號從 0 開始）；玩家按的轉發會自動加在前面
+    reposts: [],
+
+    // IG 按讚、留言、分享、轉發、收藏時出現的文字（{user}、{n} 會自動換成帳號、數量）
+    text: {
+      commentsTitle: "留言",
+      commentPlaceholder: "為 {user} 新增留言……",
+      postButton: "發佈",
+      reply: "回覆",
+      viewAllComments: "查看全部 {n} 則留言",
+      noComments: "還沒有留言",
+      justNow: "剛剛",
+      shareTitle: "分享",
+      sendButton: "傳送",
+      sent: "已傳送",
+      copyLink: "複製連結",
+      linkCopied: "已複製連結",
+      addToStory: "新增到限時動態",
+      reposted: "已轉發到你的個人檔案",
+      unreposted: "已取消轉發",
+      savedTitle: "已儲存",
+      noSaved: "還沒有儲存任何貼文",
+      noReposts: "還沒有轉發任何貼文",
+      noTagged: "還沒有被標註的相片",
+      storyMessageSent: "訊息已傳送"
+    },
 
     // 貼文頁、限時動態的固定文字
     postTitle: "test119",             // 貼文頁上方標題「貼文」
