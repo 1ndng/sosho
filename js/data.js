@@ -317,11 +317,30 @@ window.SITE_DATA = {
         bio: ["test96"],
         music: { title: "test97", artist: "test98" },
         highlights: [
-          { image: "images/ig3_highlight_1.png", label: "test99" },
+          { image: "images/story0709.jpg", label: "test99",
+            // 依日期排序；.MP4 影片會自動播放，播完才換下一則
+            stories: [
+              { image: "images/story0606.MP4", time: "6月6日" },
+              { image: "images/story0709.jpg", time: "7月9日" },
+              { image: "images/story1001.jpg", time: "10月1日" }
+            ] },
           { image: "images/ig3_highlight_2.png", label: "test100" }
         ],
         posts: [
-          "images/ig3_post_1.png", "images/ig3_post_2.png", "images/ig3_post_3.png"
+      {
+        images: ["images/post11.jpg", "images/post11-2.jpg"],
+        likes: "test201",
+        likedBy: { avatar: "images/ig_liker.png", name: "test202" },   // 「xxx 說讚」；不要的話整行刪掉
+        caption: "test203",
+        time: "test204"
+      },
+      {
+        images: ["images/post12(0707).jpg", "images/post12-2.jpg", "images/post12-3.jpg"],
+        likes: "test205",
+        likedBy: { avatar: "images/ig_liker.png", name: "test206" },   // 「xxx 說讚」；不要的話整行刪掉
+        caption: "test207",
+        time: "7月7日"
+      }
         ]
       }
     ]

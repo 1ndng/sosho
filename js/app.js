@@ -623,7 +623,7 @@
           '<button class="ig-ico" data-na>' + ICON.more + '</button>' +
           '<a class="ig-ico" href="' + base + '">' + ICON.close + '</a>' +
         '</div>' +
-        '<div class="ig-story-img"><img alt=""></div>' +
+        '<div class="ig-story-img" id="ig-story-media"></div>' +
         '<div class="ig-story-tap"><span data-prev></span><span data-next></span></div>' +
         '<form class="ig-story-foot" id="ig-story-form" autocomplete="off">' +
           '<input class="ig-story-msg" name="m" placeholder="' + esc(L.storyMessagePlaceholder) + '" autocomplete="off">' +
@@ -640,15 +640,18 @@
       btn.innerHTML = on ? ICON.heartFill : ICON.heart;
       btn.classList.toggle('on-like', on);
     }
+    function video() { return document.querySelector('#ig-story-media video'); }
     function pause() {
       clearTimeout(storyTimer);
       remaining = Math.max(300, remaining - (Date.now() - startedAt));
       bars[i].firstChild.style.animationPlayState = 'paused';
+      if (video()) video().pause();
     }
     function resume() {
       if (!document.body.contains(form)) return;   // 已經離開限時動態
       startedAt = Date.now();
       bars[i].firstChild.style.animationPlayState = 'running';
+      if (video()) video().play().catch(function () {});
       clearTimeout(storyTimer);
       storyTimer = setTimeout(function () { show(i + 1); }, remaining);
     }
@@ -656,7 +659,11 @@
       if (k < 0) k = 0;
       if (k >= items.length) { location.hash = base; return; }
       i = k;
-      $('.ig-story-img img').src = items[i].image;
+      // 影片（.mp4 / .mov / .webm）播完才換下一則；圖片 5 秒
+      var src = items[i].image || '', isVideo = /\.(mp4|mov|webm)$/i.test(src);
+      $('#ig-story-media').innerHTML = isVideo
+        ? '<video src="' + esc(src) + '" muted playsinline autoplay preload="auto"></video>'
+        : '<img src="' + esc(src) + '" alt="">';
       $('.ig-story-time').textContent = items[i].time || '';
       bars.forEach(function (b, j) {
         b.className = j < i ? 'done' : '';
@@ -665,9 +672,32 @@
       void bars[i].offsetWidth;                 // 重新開始進度條動畫
       bars[i].firstChild.style.animation = '';
       bars[i].className = 'run';
-      remaining = 5000; startedAt = Date.now();
+      var dur = 5000;
+      remaining = dur; startedAt = Date.now();
+      bars[i].firstChild.style.animationDuration = '';
       clearTimeout(storyTimer);
-      storyTimer = setTimeout(function () { show(i + 1); }, 5000);
+      storyTimer = setTimeout(function () { show(i + 1); }, dur);
+      if (isVideo) {
+        var v = video(), shown = i;
+        clearTimeout(storyTimer);                // 等影片長度出來再計時
+        bars[i].firstChild.style.animationPlayState = 'paused';
+        v.addEventListener('loadedmetadata', function () {
+          if (shown !== i) return;
+          dur = (isFinite(v.duration) && v.duration > 0 ? v.duration : 15) * 1000;
+          remaining = dur; startedAt = Date.now();
+          bars[i].firstChild.style.animationDuration = dur + 'ms';
+          bars[i].firstChild.style.animationPlayState = 'running';
+          storyTimer = setTimeout(function () { show(i + 1); }, dur);
+        });
+        // 播不出來（格式不支援）就當作圖片，5 秒後換下一則
+        v.addEventListener('error', function () {
+          if (shown !== i) return;
+          remaining = 5000; startedAt = Date.now();
+          bars[i].firstChild.style.animationPlayState = 'running';
+          storyTimer = setTimeout(function () { show(i + 1); }, 5000);
+        });
+        v.play().catch(function () {});
+      }
       paintLike();
     }
     // 輸入訊息時暫停；送出後顯示「訊息已傳送」
