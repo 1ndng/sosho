@@ -294,19 +294,19 @@ window.SITE_DATA = {
           "252525252_",
           "mlkt_tr5",
           { username: "seokkkk", name: "eunseok", avatar: "images/eunseok.jpg" },
-          { username: "song_sungchan", name: "sungchan", avatar: "images/sungchan.jpg" },
+          { username: "sungchan913", name: "sungchan", avatar: "images/sungchan.jpg" },
           { username: "bin032", name: "wonbin", avatar: "images/wonbin.jpg" },
           { username: "antonnie", name: "anton", avatar: "images/anton.jpg" }
         ],
         followingList: [
           "252525252_",
           { username: "seokkkk", name: "eunseok", avatar: "images/eunseok.jpg" },
-          { username: "song_sungchan", name: "sungchan", avatar: "images/sungchan.jpg" },
+          { username: "sungchan913", name: "sungchan", avatar: "images/sungchan.jpg" },
           { username: "bin032", name: "wonbin", avatar: "images/wonbin.jpg" },
           { username: "antonnie", name: "anton", avatar: "images/anton.jpg" }
         ],
         // 摯友名單：寫在這裡的帳號才看得到 closeFriends: true 的限時動態
-        closeFriendsList: ["seokkkk", "song_sungchan", "bin032", "252525252_", "antonnie"],
+        closeFriendsList: ["seokkkk", "sungchan913", "bin032", "252525252_", "antonnie"],
         // 已儲存：預先放好的已儲存貼文（"帳號/貼文編號"，編號從 0 開始）
         saved: [],
         // 典藏：stories = 過期的限時動態；posts = 下架的貼文（格式和 posts 一樣）
@@ -338,7 +338,7 @@ window.SITE_DATA = {
         posts: [
       {
         images: ["images/1_post1.jpg", "images/1_post1-2.jpg", "images/1_post1-3.jpg",],
-        likedBy: { avatar: "images/sungchan.jpg", name: "song_sungchan" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
+        likedBy: { avatar: "images/sungchan.jpg", name: "sungchan913" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
         caption: "test117",
         time: "test118"
       },
@@ -350,7 +350,7 @@ window.SITE_DATA = {
       },
       {
         images: ["images/1_post3.jpg", "images/1_post3-2.jpg",],
-        likedBy: { avatar: "images/sungchan.jpg", name: "song_sungchan" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
+        likedBy: { avatar: "images/sungchan.jpg", name: "sungchan913" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
         caption: "test117",
         time: "test118"
       },
@@ -368,7 +368,7 @@ window.SITE_DATA = {
       },
       {
         images: ["images/1_post6.jpg", "images/1_post6-2.jpg"],
-        likedBy: { avatar: "images/sungchan.jpg", name: "song_sungchan" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
+        likedBy: { avatar: "images/sungchan.jpg", name: "sungchan913" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
         caption: "test214",
         time: "test215"
       },
@@ -412,14 +412,14 @@ window.SITE_DATA = {
         followersList: [
           "shotaroo0",
           { username: "seokkkk", name: "eunseok", avatar: "images/eunseok.jpg" },
-          { username: "song_sungchan", name: "sungchan", avatar: "images/sungchan.jpg" },
+          { username: "sungchan913", name: "sungchan", avatar: "images/sungchan.jpg" },
           { username: "bin032", name: "wonbin", avatar: "images/wonbin.jpg" },
           { username: "antonnie", name: "anton", avatar: "images/anton.jpg" }
         ],
         followingList: [
           "shotaroo0",
           { username: "seokkkk", name: "eunseok", avatar: "images/eunseok.jpg" },
-          { username: "song_sungchan", name: "sungchan", avatar: "images/sungchan.jpg" },
+          { username: "sungchan913", name: "sungchan", avatar: "images/sungchan.jpg" },
           { username: "bin032", name: "wonbin", avatar: "images/wonbin.jpg" },
           { username: "antonnie", name: "anton", avatar: "images/anton.jpg" }
         ],
@@ -456,7 +456,7 @@ window.SITE_DATA = {
             ] }
         ],
         // 摯友名單：寫在這裡的帳號才看得到 closeFriends: true（story2）的限時動態
-        closeFriendsList: ["shotaroo0", "seokkkk", "song_sungchan", "bin032", "antonnie"],
+        closeFriendsList: ["shotaroo0", "seokkkk", "sungchan913", "bin032", "antonnie"],
         // 典藏（登入這個帳號後：設定 → 典藏）
         archive: {
           stories: [
@@ -478,7 +478,7 @@ window.SITE_DATA = {
             },
             {
               images: ["images/2_saved_20251204.jpg", "images/2_saved_20251204-2.jpg"],
-              likedBy: { avatar: "images/sungchan.jpg", name: "song_sungchan" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
+              likedBy: { avatar: "images/sungchan.jpg", name: "sungchan913" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
               caption: "test289",
               time: "2025年12月4日"
             }
@@ -499,7 +499,7 @@ window.SITE_DATA = {
       },
       {
         images: ["images/2_post_20260129.jpg"],
-        likedBy: { avatar: "images/sungchan.jpg", name: "song_sungchan" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
+        likedBy: { avatar: "images/sungchan.jpg", name: "sungchan913" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
         caption: "test305",
         time: "1月29日"
       },
