@@ -80,3 +80,8 @@
 - `X_avatar.jpg` 大頭貼；`X_post編號[-第幾張].jpg` 貼文（編號＝個人頁顯示順序）
 - `X_story_年月日[-n].jpg` 限時動態；`X_msg_年月日[-n].jpg` KakaoTalk 照片訊息
 - 沒標年份的一律當作 2026 年
+
+## IG 預設帳號
+- `instagram.defaultAccount`：打開 IG 時已登入的帳號（目前是 shotaroo0）
+- 其他帳號有寫 `password` 才能從「新增帳號」登入；小帳 fauiogl94 的密碼在 `instagram.password`
+- 限時動態：往下滑可以關閉

@@ -157,7 +157,7 @@
   }
 
   /* ---- 帳號：主帳號 + 用帳密登入的其他帳號（登入狀態存在瀏覽器裡） ---- */
-  var ACC_KEY = 'sosho-ig-accounts';
+  var ACC_KEY = 'sosho-ig-accounts-v2';   // 換了預設帳號，用新的 key 讓舊的登入狀態重來
   var accState = { current: null, loggedIn: [] };
   try { accState = JSON.parse(localStorage.getItem(ACC_KEY)) || accState; } catch (e) {}
   function saveAcc() {
@@ -165,16 +165,26 @@
   }
   function otherAccounts() { return D.instagram.otherAccounts || []; }
   function findAccount(username) {
-    if (!username || username === D.instagram.username) return D.instagram;
+    if (!username) return null;
+    if (username === D.instagram.username) return D.instagram;
     return otherAccounts().filter(function (a) { return a.username === username; })[0] || null;
   }
-  // 目前帳號；data.js 改過帳號名稱導致找不到時，回到主帳號
-  function currentAccount() { return findAccount(accState.current) || D.instagram; }
-  // 帳號清單：主帳號 + 已登入過的帳號
+  // 打開 IG 時已經登入的帳號（data.js 的 defaultAccount）
+  function startAccount() { return findAccount(D.instagram.defaultAccount) || D.instagram; }
+  // 目前帳號；data.js 改過帳號名稱導致找不到時，回到預設帳號
+  function currentAccount() { return findAccount(accState.current) || startAccount(); }
+  // 帳號清單：預設帳號 + 已登入過的帳號
   function listedAccounts() {
-    return [D.instagram].concat(accState.loggedIn.map(findAccount).filter(function (a) {
-      return a && a !== D.instagram;
+    var first = startAccount();
+    return [first].concat(accState.loggedIn.map(findAccount).filter(function (a) {
+      return a && a !== first;
     }));
+  }
+  // 可以用帳密登入的帳號：有寫 password、而且不是預設帳號
+  function loginAccounts() {
+    return [D.instagram].concat(otherAccounts()).filter(function (a) {
+      return a.password != null && a !== startAccount();
+    });
   }
 
   // 看過的限時動態、追蹤狀態（存在瀏覽器裡）
@@ -724,7 +734,38 @@
       if (store.storyLikes[k]) delete store.storyLikes[k]; else store.storyLikes[k] = 1;
       saveStore(); paintLike();
     };
+    // 往下滑關閉；只是點一下才換上一則／下一則
+    var storyEl = $('.ig-story'), dragY = null, dragDy = 0, dragged = false;
+    storyEl.addEventListener('pointerdown', function (e) {
+      if (e.target.closest('form, .ig-story-head')) return;
+      dragY = e.clientY; dragDy = 0; dragged = false;
+    });
+    storyEl.addEventListener('pointermove', function (e) {
+      if (dragY === null) return;
+      dragDy = Math.max(0, e.clientY - dragY);
+      if (dragDy > 8 && !dragged) { dragged = true; pause(); storyEl.style.transition = 'none'; }
+      if (dragged) {
+        storyEl.style.transform = 'translateY(' + dragDy + 'px) scale(' + Math.max(.85, 1 - dragDy / 2000) + ')';
+        storyEl.style.borderRadius = Math.min(24, dragDy / 4) + 'px';
+      }
+    });
+    function dragEnd() {
+      if (dragY === null) return;
+      dragY = null;
+      if (!dragged) return;
+      storyEl.style.transition = '';
+      if (dragDy > 110) {
+        storyEl.style.transform = 'translateY(100%)';
+        setTimeout(function () { location.hash = base; }, 180);
+      } else {
+        storyEl.style.transform = ''; storyEl.style.borderRadius = '';
+        resume();
+      }
+    }
+    storyEl.addEventListener('pointerup', dragEnd);
+    storyEl.addEventListener('pointercancel', dragEnd);
     $('.ig-story-tap').onclick = function (e) {
+      if (dragged) return;
       if (e.target.hasAttribute('data-prev')) show(i - 1); else show(i + 1);
     };
     show(0);
@@ -925,7 +966,7 @@
     e.preventDefault();
     var form = e.target;
     var u = form.u.value.trim(), pw = form.p.value;
-    var acc = otherAccounts().filter(function (a) {
+    var acc = loginAccounts().filter(function (a) {
       return a.username === u && String(a.password) === pw;
     })[0];
     if (!acc) {

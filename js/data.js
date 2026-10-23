@@ -95,7 +95,9 @@ window.SITE_DATA = {
 
   /* ---------- Instagram ---------- */
   instagram: {
-    username: "fauiogl94",
+    defaultAccount: "shotaroo0",   // 打開 IG 時已經登入的帳號
+    username: "fauiogl94",         // ↓ 這一段是小帳 fauiogl94（同時放全部帳號共用的文字設定）
+    password: "test225",           // 小帳的密碼：從「新增帳號」輸入對了才登得進去
     avatar: "images/ig_avatar.png",
     hasStory: true,              // true = 頭像外圈顯示限時動態框
     // 點頭像看到的限時動態（可放多張，會自動輪播）
