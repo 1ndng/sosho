@@ -194,3 +194,10 @@
 .ph-choice { width: 100%; padding: 12px 16px; border-radius: 14px; background: rgba(255,255,255,.16); color: #fff; font-size: 15px; text-align: left; line-height: 1.35; animation: capin .3s ease-out; }
 .ph-choice:active { background: rgba(255,255,255,.3); }
 .ph-choice small { display: block; font-size: 12px; color: rgba(255,255,255,.6); margin-top: 2px; }
+
+/* 群組聊天室 */
+.kk-count { font-style: normal; font-weight: 400; color: #a0a0a0; font-size: .9em; margin-left: 5px; }
+.kk-gav { display: grid !important; grid-template-columns: 1fr 1fr; gap: 2px; padding: 3px; background: #f1f1f1; overflow: hidden; }
+.kk-gav img { width: 100% !important; height: 100% !important; border-radius: 9px !important; object-fit: cover; }
+.kk-chatrow-av { width: 48px; height: 48px; border-radius: 19px; object-fit: cover; flex: none; }
+.kk-gav img:only-child { grid-column: span 2; }

@@ -106,3 +106,10 @@
 
 ## KakaoTalk 好友
 - 李炤熙（f1）、朴元彬（f2）、李燦榮（f3）、鄭成燦（f4）、宋恩奭（f5）
+
+## KakaoTalk 群組聊天室
+- `kakao.groups`：members 寫好友 id，訊息 from 寫好友 id 或 "me"；自己的訊息旁顯示還沒回話的人數
+- 目前有鄭成燦、宋恩奭的群組（g1）
+
+## 圖檔命名（新增）
+- `X_story2_日期` 摯友限時；`X_saved...` 典藏（`savedpost` 貼文、`savedstory` 限時）

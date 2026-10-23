@@ -41,9 +41,30 @@
     var me = K().me || {};
     return { id: 'me', name: me.name, avatar: me.avatar, messages: me.messages || [], self: true, replies: [], defaultReply: [] };
   }
+  function findFriend(id) {
+    return (K().friends || []).filter(function (f) { return String(f.id) === String(id); })[0];
+  }
+  // 群組聊天室：members 寫好友 id；訊息的 from 寫好友 id（或 "me"）
+  function groupRoom(g) {
+    var members = (g.members || []).map(findFriend).filter(Boolean);
+    return {
+      id: g.id, group: true, members: members,
+      name: g.name || members.map(function (m) { return m.name; }).join(', '),
+      avatar: (members[0] || {}).avatar,
+      messages: g.messages || [], replies: g.replies || [], defaultReply: g.defaultReply || [], unread: g.unread || 0
+    };
+  }
+  function groups() { return (K().groups || []).map(groupRoom); }
   function friend(id) {
     if (String(id) === 'me') return selfRoom();
-    return (K().friends || []).filter(function (f) { return String(f.id) === String(id); })[0];
+    return findFriend(id) || groups().filter(function (g) { return String(g.id) === String(id); })[0];
+  }
+  // 聊天列表的頭像：群組用成員頭像拼起來
+  function roomAvatar(f, cls) {
+    if (!f.group) return '<img class="' + cls + '" src="' + esc(f.avatar) + '" alt="">';
+    return '<span class="' + cls + ' kk-gav">' + f.members.slice(0, 4).map(function (m) {
+      return '<img src="' + esc(m.avatar) + '" alt="">';
+    }).join('') + '</span>';
   }
   function messagesOf(f) { return (f.messages || []).concat(state().msgs[f.id] || []); }
   function unreadOf(f) {
@@ -61,7 +82,7 @@
     // 下方只留 친구、채팅 兩個
     var icons = [ICON.tabFriends, ICON.tabChats];
     var hrefs = ['#/kakao', '#/kakao/chats'];
-    var totalUnread = (K().friends || []).reduce(function (n, f) { return n + unreadOf(f); }, 0);
+    var totalUnread = (K().friends || []).concat(groups()).reduce(function (n, f) { return n + unreadOf(f); }, 0);
     return '<nav class="kk-tabs">' + icons.map(function (ic, i) {
       var label = '<span>' + esc(names[i] || '') + '</span>';
       var badge = i === 1 && totalUnread ? '<i class="kk-badge">' + totalUnread + '</i>' : '';
@@ -89,15 +110,15 @@
   }
 
   function renderChats() {
-    var list = [selfRoom()].concat(K().friends || []).filter(function (f) { return messagesOf(f).some(function (m) { return m.text || m.image; }); });
+    var list = [selfRoom()].concat(groups(), K().friends || []).filter(function (f) { return messagesOf(f).some(function (m) { return m.text || m.image; }); });
     S().$('#kakao-scroll').innerHTML =
       '<div class="kk-head"><h1>' + esc(TX().chatsTitle) + '</h1>' +
         '<span class="kk-head-icons"><button data-na>' + ICON.addFriend + '</button></span></div>' +
       list.map(function (f) {
         var msgs = messagesOf(f).filter(function (m) { return m.text || m.image; }), last = msgs[msgs.length - 1], n = unreadOf(f);
         return '<a class="kk-chatrow" href="#/kakao/chat/' + encodeURIComponent(f.id) + '">' +
-          '<img src="' + esc(f.avatar) + '" alt="">' +
-          '<span class="kk-chatrow-mid"><b>' + esc(f.name) + (f.self ? '<i class="kk-me-tag">' + esc(TX().meTag || '나') + '</i>' : '') + '</b><small>' + esc(last.text || TX().photoLabel || '사진') + '</small></span>' +
+          roomAvatar(f, 'kk-chatrow-av') +
+          '<span class="kk-chatrow-mid"><b>' + esc(f.name) + (f.group ? '<em class="kk-count">' + (f.members.length + 1) + '</em>' : '') + (f.self ? '<i class="kk-me-tag">' + esc(TX().meTag || '나') + '</i>' : '') + '</b><small>' + esc(last.text || TX().photoLabel || '사진') + '</small></span>' +
           '<span class="kk-chatrow-r"><small>' + esc(last.time || '') + '</small>' + (n ? '<i class="kk-badge">' + n + '</i>' : '') + '</span>' +
         '</a>';
       }).join('');
@@ -144,17 +165,23 @@
       // 同一個人、同一分鐘的連續訊息，只有最後一則顯示時間
       var showTime = !next || next.date || next.from !== m.from || next.time !== m.time;
       if (m.from === 'me') {
-        // 對方還沒回 → 顯示未讀「1」
-        var unread = !f.self && m.read !== true && !msgs.slice(i + 1).some(function (x) { return x.from === 'them'; });
+        // 對方還沒回 → 顯示未讀數（1:1 是「1」，群組是還沒回話的人數）
+        var later = msgs.slice(i + 1), unread = 0;
+        if (!f.self && m.read !== true) {
+          unread = f.group
+            ? f.members.filter(function (mem) { return !later.some(function (x) { return x.from === mem.id; }); }).length
+            : (later.some(function (x) { return x.from === 'them'; }) ? 0 : 1);
+        }
         out += '<div class="kk-msg me">' +
-          '<span class="kk-meta">' + (unread ? '<i>1</i>' : '') + (showTime ? '<small>' + esc(m.time || '') + '</small>' : '') + '</span>' +
+          '<span class="kk-meta">' + (unread ? '<i>' + unread + '</i>' : '') + (showTime ? '<small>' + esc(m.time || '') + '</small>' : '') + '</span>' +
           contentHTML(m, first) +
         '</div>';
       } else {
+        var who = f.group ? (findFriend(m.from) || { name: m.from, avatar: '' }) : f;   // 群組：照 from 找是誰說的
         out += '<div class="kk-msg them' + (first ? ' first' : '') + '">' +
-          (first ? '<img class="kk-av" src="' + esc(f.avatar) + '" alt="">' : '<span class="kk-av"></span>') +
+          (first ? '<img class="kk-av" src="' + esc(who.avatar) + '" alt="">' : '<span class="kk-av"></span>') +
           '<div class="kk-them-col">' +
-            (first ? '<div class="kk-name">' + esc(f.name) + '</div>' : '') +
+            (first ? '<div class="kk-name">' + esc(who.name) + '</div>' : '') +
             '<div class="kk-row">' + contentHTML(m, first) +
             (showTime ? '<small class="kk-meta">' + esc(m.time || '') + '</small>' : '') + '</div>' +
           '</div>' +
@@ -181,7 +208,7 @@
       '<div class="kk-chat">' +
         '<div class="kk-chat-head">' +
           '<a href="#/kakao" data-kback>' + ICON.back + '</a>' +
-          '<b>' + esc(f.name) + (f.self ? '<i class="kk-me-tag">' + esc(TX().meTag || '나') + '</i>' : '') + '</b>' +
+          '<b>' + esc(f.name) + (f.group ? '<em class="kk-count">' + (f.members.length + 1) + '</em>' : '') + (f.self ? '<i class="kk-me-tag">' + esc(TX().meTag || '나') + '</i>' : '') + '</b>' +
           '<span><button data-na>' + ICON.search + '</button><button data-na>' + ICON.menu + '</button></span>' +
         '</div>' +
         '<div class="kk-msgs" id="kk-msgs"></div>' +
@@ -224,7 +251,11 @@
     if (!lines) lines = [].concat(f.defaultReply || []);
     lines.forEach(function (line, i) {
       setTimeout(function () {
-        push(f.id, { from: 'them', text: line, time: nowTime() });
+        // 回覆可以寫字串，或 { from: "好友id", text: "..." }（群組用來指定誰回）
+        var from = f.group ? ((line && line.from) || (f.members[0] || {}).id) : 'them';
+        var msg = { from: from, time: nowTime() };
+        if (line && typeof line === 'object') { if (line.image) msg.image = line.image; msg.text = line.text; } else msg.text = line;
+        push(f.id, msg);
         if (openChatId === f.id && location.hash.indexOf('#/kakao/chat/') === 0) paintChat();
         else {
           var st = state(); st.unread[f.id] = unreadOf(f) + 1; S().save(KEY, st);

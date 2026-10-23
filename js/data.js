@@ -105,8 +105,15 @@ window.SITE_DATA = {
     shareProfileLabel: "分享個人檔案",
     // 精選動態：image = 圓圈封面，stories = 點進去看到的內容
     highlights: [
-      { image: "images/3_story_20261010.jpg", label: "mood",
+      { image: "images/3_story_20250904.jpg", label: "mood",
         stories: [
+          { image: "images/3_story_20250904.jpg", time: "2025年9月4日" },
+          { image: "images/3_story_20251130.jpg", time: "2025年11月30日" },
+          { image: "images/3_story_20251207.jpg", time: "2025年12月7日" },
+          { image: "images/3_story_20251207-2.jpg", time: "2025年12月7日" },
+          { image: "images/3_story_20260127.jpg", time: "1月27日" },
+          { image: "images/3_story_20260128.jpg", time: "1月28日" },
+          { image: "images/3_story_20260129.jpg", time: "1月29日" },
           { image: "images/3_story_20261010.jpg", time: "10月10日" },
           { image: "images/3_story_20261011.jpg", time: "10月11日" },
           { image: "images/3_story_20261021.jpg", time: "10月21日" },
@@ -136,6 +143,13 @@ window.SITE_DATA = {
         likedBy: { avatar: "images/ig_liker.png", name: "test209" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test210",
         time: "test211"
+      },
+      {
+        images: ["images/3_post_20260120.jpg"],
+        likes: "test290",
+        likedBy: { avatar: "images/ig_liker.png", name: "test291" },   // 「xxx 說讚」；不要的話整行刪掉
+        caption: "test292",
+        time: "1月20日"
       }
     ],
 
@@ -278,7 +292,7 @@ window.SITE_DATA = {
           { username: "test257", name: "test258" }
         ],
         // 摯友名單：寫在這裡的帳號才看得到 closeFriends: true 的限時動態
-        closeFriendsList: [],
+        closeFriendsList: ["252525252"],
         // 已儲存：預先放好的已儲存貼文（"帳號/貼文編號"，編號從 0 開始）
         saved: [],
         // 典藏：stories = 過期的限時動態；posts = 下架的貼文（格式和 posts 一樣）
@@ -286,8 +300,17 @@ window.SITE_DATA = {
         bio: ["test87"],
         music: { title: "test88", artist: "keshi" },
         highlights: [
-          { image: "images/1_story_20261007.jpg", label: "test90",
+          { image: "images/1_story_20250709.jpg", label: "test90",
+            // 依日期排序；story2 是摯友限時（closeFriends: true，只有摯友名單裡的人看得到）
             stories: [
+              { image: "images/1_story_20250709.jpg", time: "2025年7月9日" },
+              { image: "images/1_story_20250904.jpg", time: "2025年9月4日" },
+              { image: "images/1_story_20251030.jpg", time: "2025年10月30日" },
+              { image: "images/1_story_20251206.jpg", time: "2025年12月6日" },
+              { image: "images/1_story_20251219.jpg", time: "2025年12月19日" },
+              { image: "images/1_story_20260123.jpg", time: "1月23日" },
+              { image: "images/1_story2_20260128.jpg", time: "1月28日", closeFriends: true },
+              { image: "images/1_story2_260426.jpg", time: "4月26日", closeFriends: true },
               { image: "images/1_story_20261007.jpg", time: "10月7日" },
               { image: "images/1_story_20261012.jpg", time: "10月12日" }
             ] }
@@ -334,6 +357,27 @@ window.SITE_DATA = {
         likedBy: { avatar: "images/ig_liker.png", name: "test213" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test214",
         time: "test215"
+      },
+      {
+        images: ["images/1_post_20251212.jpg", "images/1_post_20251212-2.jpg"],
+        likes: "test269",
+        likedBy: { avatar: "images/ig_liker.png", name: "test270" },   // 「xxx 說讚」；不要的話整行刪掉
+        caption: "test271",
+        time: "2025年12月12日"
+      },
+      {
+        images: ["images/1_post_20251128.jpg", "images/1_post_20251128-2.jpg"],
+        likes: "test272",
+        likedBy: { avatar: "images/ig_liker.png", name: "test273" },   // 「xxx 說讚」；不要的話整行刪掉
+        caption: "test274",
+        time: "2025年11月28日"
+      },
+      {
+        images: ["images/1_post_20250915.jpg", "images/1_post_20250915-2.jpg"],
+        likes: "test275",
+        likedBy: { avatar: "images/ig_liker.png", name: "test276" },   // 「xxx 說讚」；不要的話整行刪掉
+        caption: "test277",
+        time: "2025年9月15日"
       }
         ]
       },
@@ -348,10 +392,14 @@ window.SITE_DATA = {
         music: { title: "test97", artist: "test98" },
         highlights: [
           { image: "images/2_story_20260709.jpg", label: "test99",
-            // 依日期排序；.MP4 影片會自動播放，播完才換下一則
+            // 依日期排序；.mp4 影片會自動播放，播完才換下一則
             stories: [
               { image: "images/2_story_20250722.jpg", time: "2025年7月22日" },
+              { image: "images/2_story_20250904.jpg", time: "2025年9月4日" },
+              { image: "images/2_story_20251121.jpg", time: "2025年11月21日" },
+              { image: "images/2_story_20251207.jpg", time: "2025年12月7日" },
               { image: "images/2_story_20260117.jpg", time: "1月17日" },
+              { image: "images/2_story_20260128.jpg", time: "1月28日" },
               { image: "images/2_story_20260606.mp4", time: "6月6日" },
               { image: "images/2_story_20260609.jpg", time: "6月9日" },
               { image: "images/2_story_20260609-2.jpg", time: "6月9日" },
@@ -360,6 +408,35 @@ window.SITE_DATA = {
               { image: "images/2_story_20261004.jpg", time: "10月4日" }
             ] }
         ],
+        // 典藏（登入這個帳號後：設定 → 典藏）
+        archive: {
+          stories: [
+            { image: "images/2_savedstory_20260125.jpg", time: "1月25日" }
+          ],
+          posts: [
+            {
+              images: ["images/2_savedpost_20260924.jpg"],
+              likes: "test281",
+              likedBy: { avatar: "images/ig_liker.png", name: "test282" },   // 「xxx 說讚」；不要的話整行刪掉
+              caption: "test283",
+              time: "9月24日"
+            },
+            {
+              images: ["images/2_savedpost_20251210.jpg"],
+              likes: "test284",
+              likedBy: { avatar: "images/ig_liker.png", name: "test285" },   // 「xxx 說讚」；不要的話整行刪掉
+              caption: "test286",
+              time: "2025年12月10日"
+            },
+            {
+              images: ["images/2_saved_20251204.jpg", "images/2_saved_20251204-2.jpg"],
+              likes: "test287",
+              likedBy: { avatar: "images/ig_liker.png", name: "test288" },   // 「xxx 說讚」；不要的話整行刪掉
+              caption: "test289",
+              time: "2025年12月4日"
+            }
+          ]
+        },
         posts: [
       {
         images: ["images/2_post1.jpg", "images/2_post1-2.jpg"],
@@ -374,6 +451,13 @@ window.SITE_DATA = {
         likedBy: { avatar: "images/ig_liker.png", name: "test206" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test207",
         time: "7月7日"
+      },
+      {
+        images: ["images/2_post_20251219.jpg"],
+        likes: "test278",
+        likedBy: { avatar: "images/ig_liker.png", name: "test279" },   // 「xxx 說讚」；不要的話整行刪掉
+        caption: "test280",
+        time: "2025年12月19日"
       }
         ]
       }
@@ -491,6 +575,20 @@ window.SITE_DATA = {
           // 照片訊息：image 換成圖片路徑（不用寫 text）；me = 手機使用者，them = 對方
           { date: "2025년 6월 19일 목요일" },
           { from: "me", image: "images/1_msg_20250619.jpg", time: "test216" },
+          { date: "2025년 7월 9일 수요일" },
+          { from: "me", image: "images/1_msg_20250709.jpg", time: "test293" },
+          { date: "2025년 10월 18일 토요일" },
+          { from: "me", image: "images/1_msg_20251018.jpg", time: "test294" },
+          { date: "2025년 11월 7일 금요일" },
+          { from: "them", image: "images/2_msg_20251107.jpg", time: "test295" },
+          { date: "2025년 12월 4일 목요일" },
+          { from: "them", image: "images/2_msg_20251204.jpg", time: "test296" },
+          { date: "2025년 12월 12일 금요일" },
+          { from: "them", image: "images/2_msg_20251212.jpg", time: "test297" },
+          { date: "2025년 12월 18일 목요일" },
+          { from: "me", image: "images/1_msg_20251218.jpg", time: "test298" },
+          { date: "2026년 1월 16일 금요일" },
+          { from: "me", image: "images/1_msg_20260116.jpg", time: "test299" },
           { date: "2026년 7월 12일 일요일" },
           { from: "me", image: "images/1_msg_20260712.jpg", time: "test217" },
           { date: "2026년 8월 26일 수요일" },
@@ -564,6 +662,25 @@ window.SITE_DATA = {
         avatar: "images/kakao_f5.png",
         unread: 0,
         messages: [],
+        replies: [],
+        defaultReply: []
+      }
+    ],
+    // 群組聊天室：members 寫好友 id；訊息的 from 寫好友 id（"f4"、"f5"）或 "me"
+    // name 留空 = 自動用成員名字（和 KakaoTalk 一樣）；自己的訊息旁顯示還沒回話的人數
+    // replies 的 reply 可以寫 { from: "f5", text: "..." } 指定誰回，只寫字串就是第一位成員回
+    groups: [
+      {
+        id: "g1",
+        name: "",
+        members: ["f4", "f5"],          // 鄭成燦、宋恩奭（留學時認識的朋友）
+        unread: 0,
+        messages: [
+          { date: "test262" },
+          { from: "f4", text: "test263", time: "test264" },
+          { from: "f5", text: "test265", time: "test266" },
+          { from: "me", text: "test267", time: "test268" }
+        ],
         replies: [],
         defaultReply: []
       }
