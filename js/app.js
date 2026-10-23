@@ -62,14 +62,14 @@
 
   function renderForumList() {
     var f = D.forum;
-    var list = f.posts.map(function (p) {
+    var list = (f.posts || []).map(function (p) {
       // 未讀 ❗️、已讀 ❕
       return '<li><a href="#/forum/' + encodeURIComponent(p.id) + '">' +
         '<span class="mark">' + (readPosts[p.id] ? '❕' : '❗️') + '</span>' +
         '<span class="p-title">' + esc(p.title) + '</span></a></li>';
     }).join('');
 
-    var ads = f.ads.map(function (a, i) {
+    var ads = (f.ads || []).map(function (a, i) {
       return '<a class="ad" href="' + (a.link ? esc(a.link) : '#') + '" data-ad="' + i + '"' +
         (a.link ? ' target="_blank" rel="noopener"' : '') + '>' +
         '<img src="' + esc(a.image) + '" alt=""></a>';
@@ -92,7 +92,8 @@
     if (!p) { renderForumList(); return; }
     markRead(p.id);
 
-    var comments = p.comments.map(function (c) {
+    var cs = p.comments || [];
+    var comments = cs.map(function (c) {
       return '<div class="pd-comment"><b>' + esc(c.name) + '</b><span class="pd-colon">:</span>' +
         '<span class="pd-ctext">' + multiline(c.text) + '</span></div>';
     }).join('');
@@ -106,7 +107,7 @@
         '<div class="pd-content">' + multiline(p.content) + '</div>' +
         '</div>' +
         '<div class="pd-sep"></div>' +
-        '<div class="pd-cbar">' + esc(f.commentLabel) + ' (' + p.comments.length + ')</div>' +
+        '<div class="pd-cbar">' + esc(f.commentLabel) + ' (' + cs.length + ')</div>' +
         comments +
       '</div>' + forumFooter();
   }
@@ -114,7 +115,7 @@
   // 廣告沒有連結時 → 顯示尚未更新
   $('#forum-scroll').addEventListener('click', function (e) {
     var ad = e.target.closest('.ad');
-    if (ad && !D.forum.ads[ad.dataset.ad].link) { e.preventDefault(); toast(); }
+    if (ad && !(D.forum.ads || [])[ad.dataset.ad].link) { e.preventDefault(); toast(); }
   });
 
   /* ---------------- Instagram ---------------- */
@@ -136,6 +137,8 @@
 
   function renderIG() {
     var g = D.instagram;
+    // 欄位被刪掉或註解掉時也不會整頁空白
+    var bio = g.bio || [], highlights = g.highlights || [], posts = g.posts || [];
     var na = ' data-na';   // 標記：點擊後跳出「尚未更新」
 
     $('#ig-scroll').innerHTML =
@@ -161,7 +164,7 @@
         '</div>' +
       '</div>' +
 
-      '<div class="ig-bio">' + g.bio.map(function (l) { return '<div>' + bioLine(l) + '</div>'; }).join('') + '</div>' +
+      (bio.length ? '<div class="ig-bio">' + bio.map(function (l) { return '<div>' + bioLine(l) + '</div>'; }).join('') + '</div>' : '') +
 
       (g.music && g.music.title ?
         '<button class="ig-music"' + na + '>' + ICON.play +
@@ -172,10 +175,10 @@
         '<button>' + esc(g.shareProfileLabel) + '</button>' +
       '</div>' +
 
-      '<div class="ig-hl">' + g.highlights.map(function (h) {
+      (highlights.length ? '<div class="ig-hl">' + highlights.map(function (h) {
         return '<button class="ig-hl-item"' + na + '><span class="ig-hl-img"><img src="' + esc(h.image) + '" alt=""></span>' +
           '<span class="ig-hl-label">' + esc(h.label) + '</span></button>';
-      }).join('') + '</div>' +
+      }).join('') + '</div>' : '') +
 
       '<div class="ig-tabs">' +
         '<button class="active">' + ICON.grid + '</button>' +
@@ -183,7 +186,7 @@
         '<button' + na + '>' + ICON.tagged + '</button>' +
       '</div>' +
 
-      '<div class="ig-grid">' + g.posts.map(function (src) {
+      '<div class="ig-grid">' + posts.map(function (src) {
         return '<button' + na + '><img src="' + esc(src) + '" alt=""></button>';
       }).join('') + '</div>';
 
@@ -262,6 +265,12 @@
   }
 
   function route() {
+    try { doRoute(); } catch (err) {
+      console.error(err);
+      toast('data.js 有欄位填錯：' + err.message);
+    }
+  }
+  function doRoute() {
     var parts = location.hash.replace(/^#\/?/, '').split('/');
     if (parts[0] === 'forum') {
       openApp('forum');

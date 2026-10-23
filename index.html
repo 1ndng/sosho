@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#000000">
   <title>sosho</title>
-  <link rel="stylesheet" href="css/style.css?v=7">
+  <link rel="stylesheet" href="css/style.css?v=8">
 </head>
 <body>
   <div class="phone" id="phone">
@@ -45,7 +45,8 @@
     </div>
   </div>
 
-  <script src="js/data.js?v=7"></script>
-  <script src="js/app.js?v=7"></script>
+  <!-- data.js 每次都重新下載，改完內容不會被手機快取卡住 -->
+  <script>document.write('<script src="js/data.js?t=' + Date.now() + '"><\/script>');</script>
+  <script src="js/app.js?v=8"></script>
 </body>
 </html>
