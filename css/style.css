@@ -160,6 +160,11 @@ img { display: block; max-width: 100%; }
 /* 廣告：沒有框、沒有圓角 */
 .ad { display: block; }
 .ad img, .ad video { width: 100%; height: auto; display: block; pointer-events: none; }
+/* 不顯示 iPhone 影片上的播放／暫停鍵 */
+.ad video::-webkit-media-controls,
+.ad video::-webkit-media-controls-panel,
+.ad video::-webkit-media-controls-overlay-play-button,
+.ad video::-webkit-media-controls-start-playback-button { display: none !important; -webkit-appearance: none; opacity: 0; }
 a.ad:active { filter: brightness(.9); }
 
 .f-restart { display: block; margin: 6px auto 0; color: #8fa3bd; font-size: 13px; text-decoration: underline; text-underline-offset: 2px; }

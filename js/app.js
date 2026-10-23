@@ -106,10 +106,20 @@
     var base = String(src || '').replace(/\.\w+$/, '');
     var vid = /\.(mp4|mov|webm)$/i.test(src || '') ? src
       : (window.SITE_MEDIA || []).filter(function (m) { return m === base + '.mp4'; })[0];
+    var poster = vid && (window.SITE_MEDIA || []).filter(function (m) { return m === vid.replace(/\.\w+$/, '') + '_poster.jpg'; })[0];
     return vid
-      ? '<video src="' + esc(vid) + '" autoplay muted loop playsinline preload="auto" disablepictureinpicture></video>'
+      ? '<video src="' + esc(vid) + '"' + (poster ? ' poster="' + esc(poster) + '"' : '') +
+        ' autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback></video>'
       : '<img src="' + esc(src) + '" alt="">';
   }
+  // iPhone 有時不會自己開始播（例如省電模式）：打開論壇時、第一次點畫面時再叫它播一次
+  function playAds() {
+    document.querySelectorAll('#forum-scroll .ad video').forEach(function (v) {
+      v.muted = true;
+      if (v.paused) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
+    });
+  }
+  document.addEventListener('touchstart', playAds, { passive: true });
 
   function renderForumList() {
     var f = D.forum;
@@ -136,6 +146,7 @@
         '<aside class="f-ads">' + ads +
         '</aside>' +
       '</div>' + forumFooter();
+    playAds();
   }
 
   function renderPost(id) {

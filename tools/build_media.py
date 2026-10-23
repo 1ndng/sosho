@@ -189,10 +189,28 @@ def write_manifest():
         log('已更新 js/media.js（%d 個檔案）' % len(files))
 
 
+def make_posters():
+    # 廣告影片的第一格存成 ad_X_poster.jpg：影片還沒開始播（或手機省電模式不自動播）時先顯示這張
+    d = os.path.join(ROOT, IMG_DIR)
+    if not FFMPEG or not os.path.isdir(d):
+        return
+    for name in sorted(os.listdir(d)):
+        if not re.match(r'ad_.*\.mp4$', name):
+            continue
+        video = os.path.join(d, name)
+        poster = os.path.join(d, name[:-4] + '_poster.jpg')
+        old = open(poster, 'rb').read() if os.path.exists(poster) else None
+        subprocess.run([FFMPEG, '-y', '-loglevel', 'error', '-i', video, '-frames:v', '1', '-q:v', '4',
+                        '-fflags', '+bitexact', '-flags:v', '+bitexact', poster], check=False)
+        if os.path.exists(poster) and open(poster, 'rb').read() != old:
+            log('產生封面 %s' % rel(poster))
+
+
 if __name__ == '__main__':
     os.chdir(ROOT)
     move_strays()
     compress_all()
+    make_posters()
     update_data_paths()
     write_manifest()
     sys.exit(0)
