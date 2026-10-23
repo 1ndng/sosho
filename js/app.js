@@ -109,10 +109,11 @@
         '<span class="p-title">' + esc(p.title) + '</span></a></li>';
     }).join('');
 
-    var ads = (f.ads || []).map(function (a, i) {
+    var ads = (f.ads || []).map(function (a) {
       var media = adMedia(a.image);
-      return '<a class="ad" href="' + (a.link ? esc(a.link) : '#') + '" data-ad="' + i + '"' +
-        (a.link ? ' target="_blank" rel="noopener"' : '') + '>' + media + '</a>';
+      // 沒有 link：只顯示，點了沒有任何反應
+      if (!a.link) return '<div class="ad">' + media + '</div>';
+      return '<a class="ad" href="' + esc(a.link) + '" target="_blank" rel="noopener">' + media + '</a>';
     }).join('');
 
     $('#forum-scroll').innerHTML =
@@ -170,9 +171,6 @@
       $('#app-forum').appendChild(v);
       return;
     }
-    var ad = e.target.closest('.ad');
-    var adData = ad && (D.forum.ads || [])[ad.dataset.ad];
-    if (adData && !adData.link) { e.preventDefault(); toast(); }
   });
 
   /* ---------------- Instagram ---------------- */
@@ -1383,10 +1381,7 @@
   function doRoute() {
     var parts = location.hash.replace(/^#\/?/, '').split('/');
     stopStory();
-    if (parts[0] === 'ending') {
-      openApp('ending');
-      renderEnding();
-    } else if (APPS[parts[0]]) {
+    if (APPS[parts[0]]) {
       openApp(parts[0]);
       APPS[parts[0]](parts.slice(1).map(decodeURIComponent));
     } else if (parts[0] === 'forum') {
@@ -1475,33 +1470,6 @@
       try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {}
     }
   };
-
-  /* ---------------- 感謝／劇情解說頁 ---------------- */
-  function renderEnding() {
-    var E = D.ending || {};
-    $('#ending-scroll').innerHTML =
-      '<div class="end">' +
-        '<a class="end-back" href="#/forum">‹ ' + esc(E.backLabel || '返回') + '</a>' +
-        (E.image ? '<img class="end-img" src="' + esc(E.image) + '" alt="">' : '') +
-        '<h1>' + esc(E.title) + '</h1>' +
-        (E.body || []).map(function (para) {
-          return typeof para === 'string'
-            ? '<p>' + multiline(para) + '</p>'
-            : (para.image ? '<img class="end-img" src="' + esc(para.image) + '" alt="">' : '') + (para.heading ? '<h2>' + esc(para.heading) + '</h2>' : '') + (para.text ? '<p>' + multiline(para.text) + '</p>' : '');
-        }).join('') +
-        ((E.links || []).length ? '<div class="end-links">' + E.links.map(function (l) {
-          return '<a href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.label) + '</a>';
-        }).join('') + '</div>' : '') +
-        '<button class="end-replay" id="end-replay">' + esc(E.replayLabel || '重新開始') + '</button>' +
-      '</div>';
-    $('#end-replay').onclick = function () {
-      if (!confirm(E.replayConfirm || '要清除所有進度、從頭開始嗎？')) return;
-      try {
-        Object.keys(localStorage).forEach(function (k) { if (k.indexOf('sosho-') === 0) localStorage.removeItem(k); });
-      } catch (e) {}
-      location.href = location.pathname;   // 重新整理 → 回到手機密碼鎖
-    };
-  }
 
   /* ---------------- 手機密碼鎖 ---------------- */
   function renderLock() {

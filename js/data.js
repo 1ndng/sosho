@@ -69,10 +69,11 @@ window.SITE_DATA = {
     ],
     commentsDisabledText: "原PO已限制留言。",
 
-    // 底部廣告（橫條，佔滿寬度）：link 填外部網址；留空 "" 則點擊時顯示「尚未更新」
-    // 可以放影片（.mp4，靜音、自動循環播放）：直接上傳 ad_1.mp4 就會取代 ad_1.png，或把 image 改成影片路徑
+    // 底部廣告（橫條，佔滿寬度，由上往下排）：link 填外部網址；不寫 link 就只顯示、點了沒反應
+    // 可以放影片（.mp4，靜音、自動循環播放）
     ads: [
-      { image: "images/ad_1.mp4", link: "https://www.asianfanfics.com/story/view/1770006/story-61" }
+      { image: "images/ad_1.mp4", link: "https://www.asianfanfics.com/story/view/1770006/story-61" },
+      { image: "images/ad_2.mp4" }
     ],
 
     // 最下方淺色文字
@@ -755,23 +756,5 @@ window.SITE_DATA = {
       photoLabel: "사진",
       meTag: "나"                   // 나와의 채팅 名字旁的小標            // 聊天列表裡最後一則是照片時顯示的字
     }
-  },
-
-  /* ---------- 結局：感謝／劇情解說頁 ---------- */
-  ending: {
-    backLabel: "返回",
-    title: "test343",
-    image: "",                      // 最上面的圖（可留空）
-    // 內文：每一項是一段；也可以寫 { heading: "小標", text: "內容", image: "images/xxx.jpg" }
-    body: [
-      "test344",
-      "test345"
-    ],
-    // 連結按鈕（例如同人文）
-    links: [
-      { label: "test346", url: "https://www.asianfanfics.com/story/view/1770006/story-61" }
-    ],
-    replayLabel: "重新開始",
-    replayConfirm: "要清除所有進度、從頭開始嗎？"
   }
 };
