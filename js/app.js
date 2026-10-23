@@ -220,11 +220,15 @@
 
     var cs = p.comments || [];
     // 留言者 = 文章作者 → 名字旁顯示「樓主」；留言可以附圖片
+    // 留言可以附 image（圖片）或 video（影片，點了播放）；replyTo 寫帳號代碼 = 回覆那個人（縮排、文字前面顯示 @代碼）
     var comments = cs.map(function (c) {
       var op = c.name === p.author ? '<i class="pd-op">' + esc(f.opLabel || '樓主') + '</i>' : '';
-      return '<div class="pd-comment"><b>' + esc(c.name) + op + '</b><span class="pd-colon">:</span>' +
-        '<span class="pd-ctext">' + (c.text ? multiline(c.text) : '') + '</span>' +
+      var poster = c.video && (window.SITE_MEDIA || []).filter(function (m) { return m === c.video.replace(/\.\w+$/, '') + '_poster.jpg'; })[0];
+      return '<div class="pd-comment' + (c.replyTo ? ' pd-reply' : '') + '"><b>' + esc(c.name) + op + '</b><span class="pd-colon">:</span>' +
+        '<span class="pd-ctext">' + (c.replyTo ? '<span class="pd-at">@' + esc(c.replyTo) + '</span> ' : '') + (c.text ? multiline(c.text) : '') + '</span>' +
         (c.image ? '<img class="pd-cimg" src="' + esc(c.image) + '" alt="" data-fimg>' : '') +
+        (c.video ? '<div class="pd-cvid-row"><video class="pd-cvid" src="' + esc(c.video) + '"' + (poster ? ' poster="' + esc(poster) + '"' : '') +
+          ' controls playsinline webkit-playsinline preload="metadata" disablepictureinpicture></video></div>' : '') +
         '</div>';
     }).join('');
 
