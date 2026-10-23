@@ -140,7 +140,6 @@ window.SITE_MEDIA = [
 "images/icon_insta.png",
 "images/icon_kakao.png",
 "images/icon_phone.png",
-"images/kakao_me_bg.png",
 "images/sungchan.jpg",
 "images/wallpaper.jpg",
 "images/wonbin.jpg",
