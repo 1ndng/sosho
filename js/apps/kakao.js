@@ -49,15 +49,14 @@
 
   function tabbar(active) {
     var names = TX().tabs || [];
-    var icons = [ICON.tabFriends, ICON.tabChats, ICON.tabOpen, ICON.tabShop, ICON.tabMore];
+    // 下方只留 친구、채팅 兩個
+    var icons = [ICON.tabFriends, ICON.tabChats];
     var hrefs = ['#/kakao', '#/kakao/chats'];
     var totalUnread = (K().friends || []).reduce(function (n, f) { return n + unreadOf(f); }, 0);
     return '<nav class="kk-tabs">' + icons.map(function (ic, i) {
       var label = '<span>' + esc(names[i] || '') + '</span>';
       var badge = i === 1 && totalUnread ? '<i class="kk-badge">' + totalUnread + '</i>' : '';
-      return hrefs[i]
-        ? '<a href="' + hrefs[i] + '"' + (active === i ? ' class="on"' : '') + '>' + ic + badge + label + '</a>'
-        : '<button data-na>' + ic + label + '</button>';
+      return '<a href="' + hrefs[i] + '"' + (active === i ? ' class="on"' : '') + '>' + ic + badge + label + '</a>';
     }).join('') + '</nav>';
   }
 
@@ -65,10 +64,7 @@
     var k = K(), me = k.me || {}, list = k.friends || [], t = TX();
     S().$('#kakao-scroll').innerHTML =
       '<div class="kk-head"><h1>' + esc(t.friendsTitle) + '</h1>' +
-        '<span class="kk-head-icons">' +
-          '<button data-na>' + ICON.search + '</button><button data-na>' + ICON.addFriend + '</button>' +
-          '<button data-na>' + ICON.music + '</button><button data-na>' + ICON.gear + '</button>' +
-        '</span></div>' +
+        '<span class="kk-head-icons"><button data-na>' + ICON.addFriend + '</button></span></div>' +
       '<a class="kk-me" href="#/kakao/me">' +
         '<img src="' + esc(me.avatar) + '" alt="">' +
         '<span><b>' + esc(me.name) + '</b><small>' + esc(me.status) + '</small></span>' +
@@ -87,8 +83,7 @@
     var list = (K().friends || []).filter(function (f) { return messagesOf(f).some(function (m) { return m.text || m.image; }); });
     S().$('#kakao-scroll').innerHTML =
       '<div class="kk-head"><h1>' + esc(TX().chatsTitle) + '</h1>' +
-        '<span class="kk-head-icons"><button data-na>' + ICON.search + '</button><button data-na>' + ICON.chatAdd + '</button>' +
-        '<button data-na>' + ICON.gear + '</button></span></div>' +
+        '<span class="kk-head-icons"><button data-na>' + ICON.addFriend + '</button></span></div>' +
       list.map(function (f) {
         var msgs = messagesOf(f).filter(function (m) { return m.text || m.image; }), last = msgs[msgs.length - 1], n = unreadOf(f);
         return '<a class="kk-chatrow" href="#/kakao/chat/' + encodeURIComponent(f.id) + '">' +

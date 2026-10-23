@@ -453,7 +453,7 @@ window.SITE_DATA = {
       friendsTitle: "친구",
       chatsTitle: "채팅",
       friendsCount: "친구 {n}",
-      tabs: ["친구", "채팅", "오픈채팅", "쇼핑", "더보기"],
+      tabs: ["친구", "채팅"],
       inputPlaceholder: "메시지 입력",
       profileActions: ["나와의 채팅", "프로필 편집", "카카오스토리"],
       ampm: ["오전", "오후"],
