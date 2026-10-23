@@ -216,26 +216,39 @@ window.SITE_DATA = {
       {
         username: "shotaroo0",           // 登入用的帳號，也是頁面上方顯示的帳號名稱
         password: "0000",
-        avatar: "images/ig2_avatar.png",
+        avatar: "1-0.jpg",
         hasStory: false,
-        name: "test83",
-        postsCount: "test84",
-        followersCount: "test85",
-        followingCount: "test86",
+        name: "Shotaro",
+        postsCount: "7",
+        followersCount: "145k",
+        followingCount: "651",
         bio: ["test87"],
-        music: { title: "test88", artist: "test89" },
+        music: { title: "test88", artist: "keshi" },
         highlights: [
           { image: "images/ig2_highlight_1.png", label: "test90" },
           { image: "images/ig2_highlight_2.png", label: "test91" }
         ],
         posts: [
-          "images/ig2_post_1.png", "images/ig2_post_2.png", "images/ig2_post_3.png"
+      {
+        images: ["2-0.jpg", "2-1.jpg", "2-2.jpg",],
+        likes: "test115",
+        likedBy: { avatar: "images/ig_liker.png", name: "test116" },   // 「xxx 說讚」；不要的話整行刪掉
+        caption: "test117",
+        time: "test118"
+      }
+          {
+        images: ["1-1.jpg",],
+        likes: "test115",
+        likedBy: { avatar: "images/ig_liker.png", name: "test116" },   // 「xxx 說讚」；不要的話整行刪掉
+        caption: "test117",
+        time: "test118"
+      }
         ]
       },
       {
         username: "252525252",           // 登入用的帳號，也是頁面上方顯示的帳號名稱
         password: "031121",
-        avatar: "images/ig3_avatar.png",
+        avatar: "1-00.jpg",
         hasStory: false,
         name: "test92",
         postsCount: "test93",
