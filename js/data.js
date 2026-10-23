@@ -11,7 +11,7 @@ window.SITE_DATA = {
 
   /* ---------- 手機首頁 ---------- */
   home: {
-    wallpaper: "images/wallpaper.png",
+    wallpaper: "images/wallpaper.jpg",
     apps: [
       { id: "forum", label: "ANNMS Talk", icon: "images/icon_forum.png" },
       { id: "ig",    label: "Instagram", icon: "images/icon_insta.png" }
