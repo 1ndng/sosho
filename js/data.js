@@ -291,8 +291,6 @@ window.SITE_DATA = {
         caption: "test117",
         time: "test118"
       },
-        ]
-      },
       {
         images: ["images/post3.jpg", "images/post3-2.jpg", "images/post3-3.jpg",],
         likes: "test115",
@@ -307,6 +305,8 @@ window.SITE_DATA = {
         caption: "test117",
         time: "test118"
       }
+        ]
+      },
       {
         username: "252525252",           // 登入用的帳號，也是頁面上方顯示的帳號名稱
         password: "031121",
