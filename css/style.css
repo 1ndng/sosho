@@ -54,7 +54,6 @@ img { display: block; max-width: 100%; }
 }
 .phone { --sb-bg: 255, 255, 255; }
 .phone[data-open="forum"] { --sb-bg: 233, 241, 250; }
-.phone[data-open="kakao"].kk-locked { --sb-bg: 254, 229, 0; }
 .phone.dark-status { --sb-bg: 0, 0, 0; }
 .phone[data-open] .statusbar::before { opacity: 1; }
 .phone.on-home .statusbar::before, .phone.locked .statusbar::before { opacity: 0; }
@@ -133,13 +132,11 @@ img { display: block; max-width: 100%; }
   display: flex; flex-direction: column;
   background: #e9f1fa repeating-linear-gradient(90deg, rgba(255,255,255,.55) 0 2px, transparent 2px 4px);
   font-size: 14px; line-height: 1.55;
+  padding-bottom: 16px;   /* 廣告、重新開始、@dng 靠近底部（底部橫條的範圍點不到，按鈕留在它上面） */
 }
 /* 文章列表佔滿寬度在上方；廣告兩個左右並排在底部；淺色小字在最下面 */
 .f-body { flex: 1 0 auto; display: flex; flex-direction: column; gap: 10px; padding: 8px 6px 0; }
 .f-main { min-width: 0; display: flex; flex-direction: column; gap: 10px; }
-/* 公告框：和文章框同樣式，換成橘色 */
-.f-notice { border-color: #e8913a; box-shadow: 0 2px 0 #f0cfa7; }
-.f-notice .f-box-title { background: linear-gradient(#f5b066, #e0812c); border-bottom-color: #c56d22; }
 /* 廣告：佔滿寬度的橫條，照圖片／影片原本的比例顯示（不裁切） */
 .f-ads { margin-top: auto; display: flex; flex-direction: column; gap: 3px; }
 .f-ads .ad { width: 100%; }
@@ -172,7 +169,7 @@ img { display: block; max-width: 100%; }
 a.ad:active { filter: brightness(.9); }
 
 .f-restart { display: block; margin: 0 auto 6px; color: #8fa3bd; font-size: 13px; text-decoration: underline; text-underline-offset: 2px; }
-.f-footer { flex: none; padding: 10px 10px 8px; text-align: center; color: #b3c0d1; font-size: 12px; }
+.f-footer { flex: none; padding: 8px 10px 0; text-align: center; color: #b3c0d1; font-size: 12px; }
 
 /* ---------- 論壇文章內頁（Cyworld 風） ---------- */
 /* 文章內頁白框：固定撐滿畫面，下方只留一行淺色文字 */

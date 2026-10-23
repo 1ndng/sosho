@@ -7,6 +7,7 @@
 
   var ICON = {
     back: '<svg viewBox="0 0 24 24"><path d="M15 4l-8 8 8 8" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    del: '<svg viewBox="0 0 32 22"><path d="M10 1.5h19a1.5 1.5 0 0 1 1.5 1.5v16a1.5 1.5 0 0 1-1.5 1.5H10L1.5 11z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/><path d="M15.5 7l7 8M22.5 7l-7 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
     send: '<svg viewBox="0 0 24 24"><path d="M12 19V6M6.5 11.5 12 6l5.5 5.5" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'
   };
 
@@ -205,7 +206,7 @@
         '<div class="kk-lock-keys">' + keys.map(function (k) {
           if (!k) return '<span></span>';
           return k === 'del'
-            ? '<button type="button" class="kk-lock-del" data-kpin="del">' + esc(t.lockDelete || '刪除') + '</button>'
+            ? '<button type="button" class="kk-lock-del" data-kpin="del" aria-label="' + esc(t.lockDelete || '刪除') + '">' + ICON.del + '</button>'
             : '<button type="button" class="kk-lock-key" data-kpin="' + k + '">' + k + '</button>';
         }).join('') + '</div>' +
       '</div>';
@@ -236,9 +237,7 @@
   function route(parts) {
     current = parts;
     openChatId = null;
-    var lockOn = locked();
-    document.getElementById('phone').classList.toggle('kk-locked', lockOn);   // 狀態列漸層改成黃色
-    if (lockOn) renderLock();
+    if (locked()) renderLock();
     else if (parts[0] === 'chat' && parts[1]) renderChat(parts[1]);
     else renderChats();
   }

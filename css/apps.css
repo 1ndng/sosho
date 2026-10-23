@@ -126,15 +126,18 @@
 .kk-chatrow-av { width: 48px; height: 48px; border-radius: 19px; object-fit: cover; flex: none; }
 .kk-gav img:only-child { grid-column: span 2; }
 
-/* KakaoTalk 密碼畫面：Kakao 黃底 */
-.kk-lock { position: absolute; inset: 0; z-index: 4; background: #fee500; color: #191919; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-bottom: 70px; }
-.kk-lock-title { font-size: 19px; font-weight: 600; margin-bottom: 8px; }
-.kk-lock-hint { font-size: 13px; color: #5c5000; margin-bottom: 4px; }
-.kk-lock-dots { display: flex; gap: 18px; margin: 18px 0 48px; }
-.kk-lock-dots i { width: 14px; height: 14px; border-radius: 50%; background: rgba(0,0,0,.15); }
-.kk-lock-dots i.on { background: #3c1e1e; }
+/* KakaoTalk 密碼畫面（照 Kakao 的「My 비밀번호 입력」排版）：白底、標題在上方、黃色圓點、數字鍵盤在下方 */
+.kk-lock { position: absolute; inset: 0; z-index: 4; background: #fff; color: #191919; display: flex; flex-direction: column; align-items: center; padding: 0 0 44px; }
+.kk-lock::before { content: ""; flex: 0 0 22%; }   /* 標題放在畫面約 1/4 高的位置 */
+.kk-lock-title { font-size: 25px; font-weight: 700; letter-spacing: -.3px; }
+.kk-lock-hint { margin-top: 10px; font-size: 15px; color: #8a8a8a; }
+.kk-lock-dots { display: flex; gap: 34px; margin-top: 34px; height: 20px; align-items: center; }
+/* 還沒輸入：灰色短橫線；輸入後：黃色圓點 */
+.kk-lock-dots i { width: 18px; height: 3px; border-radius: 2px; background: #a8a8a8; transition: all .12s; }
+.kk-lock-dots i.on { width: 19px; height: 19px; border-radius: 50%; background: #f7df3f; }
 .kk-lock-dots.shake { animation: lockshake .4s; }
-.kk-lock-keys { display: grid; grid-template-columns: repeat(3, 76px); gap: 12px 28px; justify-items: center; align-items: center; }
-.kk-lock-key { width: 70px; height: 70px; border-radius: 50%; font-size: 30px; font-weight: 400; color: #191919; }
-.kk-lock-key:active { background: rgba(0,0,0,.08); }
-.kk-lock-del { font-size: 15px; color: #3c1e1e; }
+.kk-lock-keys { margin-top: auto; width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); row-gap: 6px; padding: 0 18px; }
+.kk-lock-key { height: 74px; font-size: 32px; font-weight: 300; color: #191919; }
+.kk-lock-key:active { color: #999; }
+.kk-lock-del { height: 74px; display: flex; align-items: center; justify-content: center; color: #8a8a8a; }
+.kk-lock-del svg { width: 32px; height: 22px; }

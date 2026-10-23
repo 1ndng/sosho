@@ -23,10 +23,10 @@ window.SITE_DATA = {
     wallpaper: "images/wallpaper.jpg",
     // 這些 App 放在桌布下方的 Dock（和 iPhone 一樣最多 4 個、不顯示名稱）
     apps: [
-      { id: "forum", label: "ANNMS Talk", icon: "images/icon_forum.png" },
-      { id: "ig",    label: "Instagram", icon: "images/icon_insta.png" },
-      { id: "phone", label: "電話", icon: "images/icon_phone.png" },
-      { id: "kakao", label: "KakaoTalk", icon: "images/icon_kakao.png" }
+      { id: "forum", label: "ANNMS Talk", icon: "images/icon_forum.png?v=2" },
+      { id: "ig",    label: "Instagram", icon: "images/icon_insta.png?v=2" },
+      { id: "phone", label: "電話", icon: "images/icon_phone.png?v=2" },
+      { id: "kakao", label: "KakaoTalk", icon: "images/icon_kakao.png?v=2" }
     ]
   },
 
@@ -806,8 +806,8 @@ window.SITE_DATA = {
     // 介面文字（繁體中文）
     text: {
       lockTitle: "輸入密碼",        // KakaoTalk 密碼畫面
-      lockHint: "",                 // 標題下的小字（可留空）
-      lockDelete: "刪除",
+      lockHint: "請輸入密碼。",       // 標題下的小字（可留空）
+      lockDelete: "刪除",           // 刪除鍵的說明文字（畫面上顯示圖示）
       chatsTitle: "聊天",
       inputPlaceholder: "輸入訊息",
       ampm: ["上午", "下午"],
