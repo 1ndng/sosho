@@ -4,6 +4,7 @@
 
   var KEY = 'sosho-phone';
   var filter = 'all';        // all | missed
+  var dialed = '';           // 數字鍵盤目前輸入的號碼
   var callTimer = null;
 
   var ICON = {
@@ -18,6 +19,8 @@
     call: '<svg viewBox="0 0 24 24"><path d="M6.5 3.5c.8-.3 1.6 0 2 .7l1.6 3c.4.7.2 1.6-.4 2.1l-1.4 1.1c.9 2 2.5 3.6 4.5 4.5l1.1-1.4c.5-.6 1.4-.8 2.1-.4l3 1.6c.7.4 1 1.2.7 2l-.7 1.6c-.5 1.1-1.6 1.7-2.8 1.6C9.5 19 4.9 14.5 4.1 7.8 4 6.6 4.6 5.5 5.7 5z" fill="currentColor"/></svg>',
     video: '<svg viewBox="0 0 24 24"><rect x="2.5" y="6" width="13" height="12" rx="3" fill="currentColor"/><path d="M16.5 10.5 21.5 7v10l-5-3.5z" fill="currentColor"/></svg>',
     mail: '<svg viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5" fill="currentColor"/><path d="m4 7 8 6 8-6" stroke="#fff" stroke-width="1.6" fill="none"/></svg>',
+    addContact: '<svg viewBox="0 0 24 24"><circle cx="14" cy="10" r="8" stroke="currentColor" stroke-width="1.8" fill="none"/><circle cx="14" cy="8.3" r="2.8" fill="currentColor"/><path d="M9.4 15.6c1-1.7 2.7-2.6 4.6-2.6s3.6.9 4.6 2.6" stroke="currentColor" stroke-width="1.8" fill="none"/><circle cx="6" cy="17" r="4.6" fill="#fff"/><circle cx="6" cy="17" r="4" fill="currentColor"/><path d="M6 15v4M4 17h4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>',
+    del: '<svg viewBox="0 0 34 24"><path d="M10 2h20a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H10L1 12z" fill="#e5e5ea"/><path d="M15 8l8 8M23 8l-8 8" stroke="#000" stroke-width="2.2" stroke-linecap="round"/></svg>',
     end: '<svg viewBox="0 0 24 24"><path d="M3 14.5c4.9-4.4 13.1-4.4 18 0l-1.9 2.4c-.4.5-1.2.6-1.8.3l-2.4-1.4c-.5-.3-.8-.9-.7-1.5l.2-1.4c-2.1-.7-4.7-.7-6.8 0l.2 1.4c.1.6-.2 1.2-.7 1.5l-2.4 1.4c-.6.3-1.4.2-1.8-.3z" fill="currentColor"/></svg>'
   };
 
@@ -49,7 +52,7 @@
     S().$('#phone-overlay').innerHTML = '';
     S().$('#phone-scroll').innerHTML =
       '<div class="ph-top">' +
-        '<button class="ph-link" data-na>' + esc(p.editLabel) + '</button>' +
+        '<span></span>' +
         '<div class="ph-seg">' +
           '<button data-filter="all"' + (filter === 'all' ? ' class="on"' : '') + '>' + esc(p.filterAll) + '</button>' +
           '<button data-filter="missed"' + (filter === 'missed' ? ' class="on"' : '') + '>' + esc(p.filterMissed) + '</button>' +
@@ -74,7 +77,7 @@
           }).join('') + '</div>' +
         '</div>';
       }).join('');
-    renderTabs();
+    renderTabs(0);
   }
 
   function renderInfo(name) {
@@ -100,18 +103,60 @@
           '<span class="' + (c.missed ? 'missed' : '') + '">' + esc(c.type || '') + (c.count > 1 ? ' (' + c.count + ')' : '') + '</span>' +
         '</div>';
       }).join('') + '</div>';
-    renderTabs();
+    renderTabs(0);
   }
 
-  function renderTabs() {
+  // 下方標籤：通話記錄、聯絡人（尚未更新）、數字鍵盤
+  function renderTabs(active) {
     var p = P(), esc = S().esc, names = p.tabs || [];
-    var icons = [ICON.star, ICON.clock, ICON.person, ICON.keypad];
+    var icons = [ICON.clock, ICON.person, ICON.keypad];
+    var hrefs = ['#/phone', null, '#/phone/keypad'];
     var bar = document.createElement('nav');
     bar.className = 'ph-tabs';
     bar.innerHTML = names.map(function (t, i) {
-      return '<button' + (i === 1 ? ' class="on"' : ' data-na') + '>' + icons[i] + '<span>' + esc(t) + '</span></button>';
+      var inner = icons[i] + '<span>' + esc(t) + '</span>';
+      return hrefs[i]
+        ? '<a href="' + hrefs[i] + '"' + (i === active ? ' class="on"' : '') + '>' + inner + '</a>'
+        : '<button data-na>' + inner + '</button>';
     }).join('');
     S().$('#phone-overlay').appendChild(bar);
+  }
+
+  /* ---- 數字鍵盤 ---- */
+  var KEYS = [['1', ''], ['2', 'ABC'], ['3', 'DEF'], ['4', 'GHI'], ['5', 'JKL'], ['6', 'MNO'],
+              ['7', 'PQRS'], ['8', 'TUV'], ['9', 'WXYZ'], ['*', ''], ['0', '+'], ['#', '']];
+
+  function renderKeypad() {
+    var esc = S().esc;
+    S().$('#phone-overlay').innerHTML = '';
+    S().$('#phone-scroll').innerHTML =
+      '<div class="ph-kp">' +
+        '<div class="ph-kp-top"><button class="ph-kp-add" data-na>' + ICON.addContact + '</button></div>' +
+        '<div class="ph-kp-num" id="ph-kp-num"></div>' +
+        '<div class="ph-kp-keys">' + KEYS.map(function (k) {
+          return '<button class="ph-key" data-key="' + esc(k[0]) + '"><b>' + esc(k[0]) + '</b>' +
+            (k[1] ? '<small>' + esc(k[1]) + '</small>' : '') + '</button>';
+        }).join('') + '</div>' +
+        '<div class="ph-kp-bottom">' +
+          '<span></span>' +
+          '<button class="ph-kp-call" data-dial>' + ICON.call + '</button>' +
+          '<button class="ph-kp-del" id="ph-kp-del" data-del>' + ICON.del + '</button>' +
+        '</div>' +
+      '</div>';
+    paintNumber();
+    renderTabs(2);
+  }
+  function paintNumber() {
+    var n = document.getElementById('ph-kp-num');
+    if (!n) return;
+    n.textContent = dialed;
+    n.classList.toggle('long', dialed.length > 11);
+    document.getElementById('ph-kp-del').style.visibility = dialed ? 'visible' : 'hidden';
+  }
+  // 撥出的號碼在 dialable 裡 → 顯示對應的名字
+  function nameForNumber(num) {
+    var hit = (P().dialable || []).filter(function (d) { return String(d.number).replace(/\D/g, '') === num.replace(/\D/g, ''); })[0];
+    return hit && hit.name ? hit.name : num;
   }
 
   // 撥號畫面：3 秒後顯示「無人接聽」，按結束後把這通電話加進最近通話
@@ -157,6 +202,7 @@
     current = parts;
     clearTimeout(callTimer);
     if (parts[0] === 'info' && parts[1]) renderInfo(parts[1]);
+    else if (parts[0] === 'keypad') renderKeypad();
     else renderList();
     S().$('#phone-scroll').scrollTop = 0;
   }
@@ -166,6 +212,9 @@
     if (!app || !app.contains(e.target)) return;
     var el;
     if ((el = e.target.closest('[data-filter]'))) { filter = el.dataset.filter; renderList(); return; }
+    if ((el = e.target.closest('[data-key]'))) { if (dialed.length < 20) dialed += el.dataset.key; paintNumber(); return; }
+    if (e.target.closest('[data-del]')) { dialed = dialed.slice(0, -1); paintNumber(); return; }
+    if (e.target.closest('[data-dial]')) { if (dialed) startCall(nameForNumber(dialed)); return; }
     if ((el = e.target.closest('[data-end]'))) { endCall(el.dataset.end); return; }
     if ((el = e.target.closest('[data-call]'))) { startCall(el.dataset.call); return; }
     if (e.target.closest('[data-na]')) S().toast();

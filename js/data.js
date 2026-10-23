@@ -345,11 +345,13 @@ window.SITE_DATA = {
   /* ---------- 電話（最近通話） ---------- */
   phone: {
     title: "最近通話",
-    editLabel: "編輯",
     filterAll: "全部",
     filterMissed: "未接來電",
     todayLabel: "今天",          // 玩家撥出的電話會加在這個日期底下
-    tabs: ["個人收藏", "最近通話", "聯絡人", "鍵盤"],
+    tabs: ["通話記錄", "聯絡人", "數字鍵盤"],
+    // 數字鍵盤可以撥出的號碼（之後再補）：撥這些號碼時，撥號畫面會顯示 name
+    // 例：{ number: "0912345678", name: "某某某" }；不在清單裡的號碼一樣能撥，但只會顯示號碼、無人接聽
+    dialable: [],
     callingText: "正在撥號⋯",
     noAnswerText: "無人接聽",
     callButtons: ["靜音", "鍵盤", "擴音", "加入通話", "FaceTime", "聯絡人"],

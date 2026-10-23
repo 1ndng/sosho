@@ -5,7 +5,7 @@
 /* =========================================================
  * 電話（iOS 最近通話）
  * ========================================================= */
-.phone-app .app-scroll { background: #fff; color: #000; padding-bottom: 118px; }
+.phone-app .app-scroll { background: #fff; color: #000; padding-bottom: 120px; }
 .ph-top { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 44px; padding: 0 16px; }
 .ph-link { color: #007aff; font-size: 17px; justify-self: start; display: inline-flex; align-items: center; }
 .ph-back svg { width: 22px; height: 22px; margin-left: -6px; }
@@ -27,13 +27,35 @@
 .ph-info { color: #007aff; width: 26px; height: 26px; }
 .ph-info svg { width: 26px; height: 26px; }
 .ph-tabs {
-  position: absolute; left: 0; right: 0; bottom: 0; height: 84px; padding: 6px 8px 34px;
-  display: flex; justify-content: space-around; background: rgba(249,249,249,.94); border-top: .5px solid #d1d1d6;
+  position: absolute; left: 50%; bottom: 30px; transform: translateX(-50%);
+  display: flex; gap: 2px; padding: 5px; border-radius: 34px;
+  background: rgba(255,255,255,.92); box-shadow: 0 4px 24px rgba(0,0,0,.12);
   backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
 }
-.ph-tabs button { display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; color: #8e8e93; width: 70px; }
-.ph-tabs button.on { color: #007aff; }
+.ph-tabs > * { display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 11px; color: #111; width: 86px; padding: 6px 0 5px; border-radius: 28px; }
+.ph-tabs > .on { color: #007aff; background: #ececf0; }
 .ph-tabs svg { width: 26px; height: 26px; }
+
+/* 數字鍵盤 */
+/* 按鍵大小隨螢幕高度縮放（最大 80px），矮的手機也不會被下方標籤擋住 */
+.phone-app .app-scroll { container-type: size; }
+.ph-kp { --k: min(80px, calc((100cqh - 140px) / 5.6)); display: flex; flex-direction: column; align-items: center; min-height: 100%; }
+.ph-kp-top { align-self: stretch; display: flex; justify-content: flex-end; padding: 6px 16px 0; height: 44px; }
+.ph-kp-add { width: 36px; height: 36px; }
+.ph-kp-add svg { width: 32px; height: 32px; }
+.ph-kp-num { height: 70px; font-size: 40px; font-weight: 400; letter-spacing: 1px; margin-top: 6px; max-width: 92%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ph-kp-num.long { font-size: 28px; line-height: 70px; }
+.ph-kp-keys { display: grid; grid-template-columns: repeat(3, var(--k)); gap: calc(var(--k) * .2) calc(var(--k) * .32); margin-top: auto; }
+.ph-key { width: var(--k); height: var(--k); border-radius: 50%; background: #f2f2f4; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #000; box-shadow: 0 2px 10px rgba(0,0,0,.05); }
+.ph-key:active { background: #d9d9de; }
+.ph-key b { font-size: calc(var(--k) * .42); font-weight: 400; line-height: 1; }
+.ph-key small { font-size: 9.5px; font-weight: 700; letter-spacing: 2.5px; margin-top: 2px; }
+.ph-kp-bottom { display: grid; grid-template-columns: repeat(3, var(--k)); gap: 0 calc(var(--k) * .32); margin: calc(var(--k) * .2) 0 0; align-items: center; justify-items: center; }
+.ph-kp-call { width: var(--k); height: var(--k); border-radius: 50%; background: #34c759; color: #fff; display: flex; align-items: center; justify-content: center; }
+.ph-kp-call:active { background: #2aa84a; }
+.ph-kp-call svg { width: 34px; height: 34px; }
+.ph-kp-del { width: 44px; height: 32px; }
+.ph-kp-del svg { width: 40px; height: 28px; }
 .ph-card { display: flex; flex-direction: column; align-items: center; padding: 10px 16px 18px; }
 .ph-avatar { width: 96px; height: 96px; border-radius: 50%; background: linear-gradient(#a5a9b3, #868a94); color: #fff; font-size: 42px; font-weight: 500; display: flex; align-items: center; justify-content: center; }
 .ph-card-name { font-size: 28px; margin: 10px 0 16px; text-align: center; }
