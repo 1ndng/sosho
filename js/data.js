@@ -83,7 +83,7 @@ window.SITE_DATA = {
   instagram: {
     defaultAccount: "shotaroo0",   // 打開 IG 時已經登入的帳號
     username: "fauiogl94",         // ↓ 這一段是小帳 fauiogl94（同時放全部帳號共用的文字設定）
-    password: "test225",           // 小帳的密碼：從「新增帳號」輸入對了才登得進去
+    password: "1126Rasengan",      // 小帳的密碼（紀念日 11/26 ＋ 忍術）：從「新增帳號」輸入對了才登得進去
     private: true,                 // 非公開帳號：沒追蹤的人看不到貼文、限時、名單（按追蹤只會變「已要求」）
     avatar: "images/default_avatar.png",   // 和路人一樣的預設頭貼
     hasStory: true,              // true = 頭像外圈顯示限時動態框
