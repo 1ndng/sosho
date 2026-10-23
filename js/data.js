@@ -95,6 +95,11 @@ window.SITE_DATA = {
     username: "fauiogl94",
     avatar: "images/ig_avatar.png",
     hasStory: true,              // true = 頭像外圈顯示限時動態框
+    // 點頭像看到的限時動態（可放多張，會自動輪播）
+    story: [
+      { image: "images/ig_story_1.png", time: "test101" },
+      { image: "images/ig_story_2.png", time: "test102" }
+    ],
     name: "fauiogl94",
     postsCount: "2",
     followersCount: "0",
@@ -106,15 +111,66 @@ window.SITE_DATA = {
     music: { title: "Nostalgic", artist: "No Guindce" },
     editProfileLabel: "編輯個人檔案",
     shareProfileLabel: "分享個人檔案",
+    // 精選動態：image = 圓圈封面，stories = 點進去看到的內容
     highlights: [
-      { image: "images/ig_highlight_1.png", label: "mood" },
-      { image: "images/ig_highlight_2.png", label: "🕺" },
-      { image: "images/ig_highlight_3.png", label: "ㅇㄱ" },
-      { image: "images/ig_highlight_4.png", label: "しゅう" }
+      { image: "images/ig_highlight_1.png", label: "mood",
+        stories: [
+          { image: "images/ig_hl1_story_1.png", time: "test103" },
+          { image: "images/ig_hl1_story_2.png", time: "test104" }
+        ] },
+      { image: "images/ig_highlight_2.png", label: "🕺",
+        stories: [
+          { image: "images/ig_hl2_story_1.png", time: "test105" },
+          { image: "images/ig_hl2_story_2.png", time: "test106" }
+        ] },
+      { image: "images/ig_highlight_3.png", label: "ㅇㄱ",
+        stories: [
+          { image: "images/ig_hl3_story_1.png", time: "test107" },
+          { image: "images/ig_hl3_story_2.png", time: "test108" }
+        ] },
+      { image: "images/ig_highlight_4.png", label: "しゅう",
+        stories: [
+          { image: "images/ig_hl4_story_1.png", time: "test109" },
+          { image: "images/ig_hl4_story_2.png", time: "test110" }
+        ] }
     ],
+    // 貼文：images 可放多張（左右滑動）；格子上顯示第一張
     posts: [
-      "images/ig_post_1.png", "images/ig_post_2.png"
+      {
+        images: ["images/ig_post_1.png", "images/ig_post_1_2.png", "images/ig_post_1_3.png"],
+        likes: "test111",
+        likedBy: { avatar: "images/ig_liker.png", name: "test112" },   // 「xxx 說讚」；不要的話整行刪掉
+        caption: "test113",
+        time: "test114"
+      },
+      {
+        images: ["images/ig_post_2.png"],
+        likes: "test115",
+        likedBy: { avatar: "images/ig_liker.png", name: "test116" },   // 「xxx 說讚」；不要的話整行刪掉
+        caption: "test117",
+        time: "test118"
+      }
     ],
+
+    // 貼文頁、限時動態的固定文字
+    postTitle: "test119",             // 貼文頁上方標題「貼文」
+    likedBySuffix: "test120",         // 「說讚」
+    storyMessagePlaceholder: "test121",  // 限時動態下方「傳送訊息……」
+
+    // 右上角三條線 → 設定頁（目前每一項點了都顯示「尚未更新」）
+    settings: {
+      title: "test122",
+      sections: [
+        { title: "test123", items: [
+          { icon: "saved",   label: "test124" },
+          { icon: "archive", label: "test125" }
+        ] },
+        { title: "test126", items: [
+          { icon: "lock", label: "test127", value: "test128" },
+          { icon: "star", label: "test129", value: "test130" }
+        ] }
+      ]
+    },
 
     // 點最上方帳號名稱 → 切換帳號清單
     addAccountLabel: "新增帳號",   // 清單最下面「新增帳號」

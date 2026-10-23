@@ -128,6 +128,17 @@
     play: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path d="M10 8l6 4-6 4z" fill="currentColor"/></svg>',
     grid: '<svg viewBox="0 0 24 24"><g fill="currentColor"><rect x="2" y="2" width="5.5" height="5.5" rx="1.3"/><rect x="9.25" y="2" width="5.5" height="5.5" rx="1.3"/><rect x="16.5" y="2" width="5.5" height="5.5" rx="1.3"/><rect x="2" y="9.25" width="5.5" height="5.5" rx="1.3"/><rect x="9.25" y="9.25" width="5.5" height="5.5" rx="1.3"/><rect x="16.5" y="9.25" width="5.5" height="5.5" rx="1.3"/><rect x="2" y="16.5" width="5.5" height="5.5" rx="1.3"/><rect x="9.25" y="16.5" width="5.5" height="5.5" rx="1.3"/><rect x="16.5" y="16.5" width="5.5" height="5.5" rx="1.3"/></g></svg>',
     repost: '<svg viewBox="0 0 24 24"><path d="M19 9.5V8a3 3 0 0 0-3-3H5m0 0 3-3M5 5l3 3M5 14.5V16a3 3 0 0 0 3 3h11m0 0-3-3m3 3-3 3" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    heart: '<svg viewBox="0 0 24 24"><path d="M12 20.5s-8-4.9-8-11A4.6 4.6 0 0 1 12 6.6a4.6 4.6 0 0 1 8 2.9c0 6.1-8 11-8 11z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>',
+    comment: '<svg viewBox="0 0 24 24"><path d="M20.5 12a8.5 8.5 0 1 1-3.9-7.1A8.5 8.5 0 0 1 20.5 12l.9 6.6-5.2-1.6" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>',
+    send: '<svg viewBox="0 0 24 24"><path d="M21.5 3 2.5 9.5l7.2 3.1L13 21.5zM9.7 12.6 21.5 3" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>',
+    bookmark: '<svg viewBox="0 0 24 24"><path d="M5.5 3h13v18L12 14.8 5.5 21z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>',
+    saved: '<svg viewBox="0 0 24 24"><path d="M5.5 3h13v18L12 14.8 5.5 21z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>',
+    archive: '<svg viewBox="0 0 24 24"><path d="M3.5 5.5v4h4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 9.5A9 9 0 1 1 3 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>',
+    lock: '<svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2.5" stroke="currentColor" stroke-width="2" fill="none"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2" fill="none"/></svg>',
+    star: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path d="m12 6.8 1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7-3.2 1.7.6-3.6-2.6-2.5 3.6-.5z" fill="currentColor"/></svg>',
+    right: '<svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    close: '<svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
+    more: '<svg viewBox="0 0 24 24"><path d="M3 8h18M3 16h12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
     tagged: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" fill="none"/><path d="M6.5 20.5c1-3 3-4.3 5.5-4.3s4.5 1.3 5.5 4.3" stroke="currentColor" stroke-width="2" fill="none"/></svg>'
   };
 
@@ -168,14 +179,17 @@
         '<span></span>' +
         '<button class="ig-user" data-sheet>' + esc(g.username) + ICON.chevron + '</button>' +
         '<span class="ig-top-r">' +
-          '<button class="ig-ico"' + na + '>' + ICON.menu + '</button>' +
+          '<a class="ig-ico" href="#/ig/settings">' + ICON.menu + '</a>' +
         '</span>' +
       '</div>' +
 
       '<div class="ig-profile">' +
-        '<button class="ig-avatar' + (g.hasStory ? ' has-story' : '') + '"' + na + '>' +
+        // 有限時動態 → 點頭像進入；沒有 → 尚未更新
+        (g.story && g.story.length
+          ? '<a class="ig-avatar' + (g.hasStory ? ' has-story' : '') + '" href="#/ig/story/me">'
+          : '<button class="ig-avatar' + (g.hasStory ? ' has-story' : '') + '"' + na + '>') +
           '<img src="' + esc(g.avatar) + '" alt="">' +
-        '</button>' +
+        (g.story && g.story.length ? '</a>' : '</button>') +
         '<div class="ig-right">' +
           '<div class="ig-name">' + esc(g.name) + '</div>' +
           '<div class="ig-stats">' +
@@ -197,9 +211,9 @@
         '<button>' + esc(L.shareProfileLabel) + '</button>' +
       '</div>' +
 
-      (highlights.length ? '<div class="ig-hl">' + highlights.map(function (h) {
-        return '<button class="ig-hl-item"' + na + '><span class="ig-hl-img"><img src="' + esc(h.image) + '" alt=""></span>' +
-          '<span class="ig-hl-label">' + esc(h.label) + '</span></button>';
+      (highlights.length ? '<div class="ig-hl">' + highlights.map(function (h, i) {
+        return '<a class="ig-hl-item" href="#/ig/story/' + i + '"><span class="ig-hl-img"><img src="' + esc(h.image) + '" alt=""></span>' +
+          '<span class="ig-hl-label">' + esc(h.label) + '</span></a>';
       }).join('') + '</div>' : '') +
 
       '<div class="ig-tabs">' +
@@ -208,8 +222,10 @@
         '<button' + na + '>' + ICON.tagged + '</button>' +
       '</div>' +
 
-      '<div class="ig-grid">' + posts.map(function (src) {
-        return '<button' + na + '><img src="' + esc(src) + '" alt=""></button>';
+      '<div class="ig-grid">' + posts.map(function (p, i) {
+        var po = postObj(p);
+        return '<a href="#/ig/post/' + i + '"><img src="' + esc(po.images[0]) + '" alt="">' +
+          (po.images.length > 1 ? '<span class="ig-multi"></span>' : '') + '</a>';
       }).join('') + '</div>';
 
     // 切換帳號清單（從下方滑出）
@@ -233,6 +249,139 @@
           '</div>' +
         '</div>' +
       '</div>';
+  }
+
+  // 貼文可以只寫圖片路徑（字串），或寫成 { images: [...], caption, ... }
+  function postObj(p) {
+    if (typeof p === 'string') return { images: [p] };
+    p = p || {};
+    return { images: p.images && p.images.length ? p.images : [''], likes: p.likes, likedBy: p.likedBy, caption: p.caption, time: p.time };
+  }
+
+  function backBtn() {
+    return '<a class="ig-round-back" href="#/ig">' + ICON.back + '</a>';
+  }
+
+  // 設定和動態（右上角三條線）
+  function renderIGSettings() {
+    var st = D.instagram.settings || { sections: [] };
+    $('#ig-overlay').innerHTML = '';
+    $('#ig-scroll').innerHTML =
+      '<div class="ig-pagehead">' + backBtn() + '<div class="ig-pagehead-t"><b>' + esc(st.title) + '</b></div></div>' +
+      st.sections.map(function (sec) {
+        return '<section class="ig-set-sec">' +
+          '<div class="ig-set-title">' + esc(sec.title) + '</div>' +
+          (sec.items || []).map(function (it) {
+            return '<button class="ig-set-row" data-na>' +
+              '<span class="ig-set-ico">' + (ICON[it.icon] || '') + '</span>' +
+              '<span class="ig-set-label">' + esc(it.label) + '</span>' +
+              (it.value != null ? '<span class="ig-set-val">' + esc(it.value) + '</span>' : '') +
+              '<span class="ig-set-arrow">' + ICON.right + '</span>' +
+            '</button>';
+          }).join('') +
+        '</section>';
+      }).join('');
+  }
+
+  // 點進貼文
+  function renderIGPost(idx) {
+    var L = D.instagram, g = currentAccount();
+    var raw = (g.posts || [])[idx];
+    if (raw == null) { location.replace('#/ig'); return; }
+    var p = postObj(raw), n = p.images.length;
+    $('#ig-overlay').innerHTML = '';
+    $('#ig-scroll').innerHTML =
+      '<div class="ig-pagehead">' + backBtn() +
+        '<div class="ig-pagehead-t"><b>' + esc(L.postTitle) + '</b><small>' + esc(g.username) + '</small></div></div>' +
+      '<div class="ig-post-user">' +
+        '<img src="' + esc(g.avatar) + '" alt=""><b>' + esc(g.username) + '</b>' +
+        '<button class="ig-ico" data-na>' + ICON.more + '</button>' +
+      '</div>' +
+      '<div class="ig-car-wrap">' +
+        '<div class="ig-car" id="ig-car">' + p.images.map(function (src) {
+          return '<img src="' + esc(src) + '" alt="">';
+        }).join('') + '</div>' +
+        (n > 1 ? '<span class="ig-car-count" id="ig-car-count">1/' + n + '</span>' : '') +
+      '</div>' +
+      (n > 1 ? '<div class="ig-dots" id="ig-dots">' + p.images.map(function (_, i) {
+        return '<i' + (i ? '' : ' class="on"') + '></i>';
+      }).join('') + '</div>' : '<div class="ig-dots"></div>') +
+      '<div class="ig-actions">' +
+        '<button data-na>' + ICON.heart + '</button>' +
+        (p.likes ? '<span class="ig-likes">' + esc(p.likes) + '</span>' : '') +
+        '<button data-na>' + ICON.comment + '</button>' +
+        '<button data-na>' + ICON.send + '</button>' +
+        '<button class="ig-act-save" data-na>' + ICON.bookmark + '</button>' +
+      '</div>' +
+      (p.likedBy && p.likedBy.name ?
+        '<div class="ig-likedby"><img src="' + esc(p.likedBy.avatar) + '" alt=""><b>' + esc(p.likedBy.name) + '</b>' + esc(L.likedBySuffix) + '</div>' : '') +
+      (p.caption ? '<div class="ig-caption"><b>' + esc(g.username) + '</b> ' + multiline(p.caption) + '</div>' : '') +
+      (p.time ? '<div class="ig-time">' + esc(p.time) + '</div>' : '');
+
+    var car = $('#ig-car');
+    if (n > 1) car.addEventListener('scroll', function () {
+      var i = Math.round(car.scrollLeft / car.clientWidth);
+      $('#ig-car-count').textContent = (i + 1) + '/' + n;
+      document.querySelectorAll('#ig-dots i').forEach(function (d, k) { d.classList.toggle('on', k === i); });
+    });
+  }
+
+  // 限時動態 / 精選動態（which = "me" 或精選的編號）
+  var storyTimer = null;
+  function stopStory() {
+    clearTimeout(storyTimer);
+    $('#phone').classList.remove('dark-status');
+  }
+  function renderIGStory(which) {
+    var L = D.instagram, g = currentAccount(), items;
+    if (which === 'me') items = g.story || [];
+    else {
+      var h = (g.highlights || [])[which];
+      items = h ? (h.stories && h.stories.length ? h.stories : [{ image: h.image }]) : [];
+    }
+    if (!items.length) { location.replace('#/ig'); return; }
+    renderIG();   // 背後保留個人頁，關掉時直接回到這裡
+    $('#phone').classList.add('dark-status');
+    var i = 0;
+    $('#ig-overlay').innerHTML =
+      '<div class="ig-story">' +
+        '<div class="ig-story-bars">' + items.map(function () { return '<i><b></b></i>'; }).join('') + '</div>' +
+        '<div class="ig-story-head">' +
+          '<img src="' + esc(g.avatar) + '" alt="">' +
+          '<b>' + esc(g.username) + '</b><span class="ig-story-time"></span>' +
+          '<button class="ig-ico" data-na>' + ICON.more + '</button>' +
+          '<a class="ig-ico" href="#/ig">' + ICON.close + '</a>' +
+        '</div>' +
+        '<div class="ig-story-img"><img alt=""></div>' +
+        '<div class="ig-story-tap"><span data-prev></span><span data-next></span></div>' +
+        '<div class="ig-story-foot">' +
+          '<button class="ig-story-msg" data-na>' + esc(L.storyMessagePlaceholder) + '</button>' +
+          '<button class="ig-ico" data-na>' + ICON.heart + '</button>' +
+          '<button class="ig-ico" data-na>' + ICON.send + '</button>' +
+        '</div>' +
+      '</div>';
+
+    var bars = document.querySelectorAll('.ig-story-bars i');
+    function show(k) {
+      if (k < 0) k = 0;
+      if (k >= items.length) { location.hash = '#/ig'; return; }
+      i = k;
+      $('.ig-story-img img').src = items[i].image;
+      $('.ig-story-time').textContent = items[i].time || '';
+      bars.forEach(function (b, j) {
+        b.className = j < i ? 'done' : '';
+        b.firstChild.style.animation = 'none';
+      });
+      void bars[i].offsetWidth;                 // 重新開始進度條動畫
+      bars[i].firstChild.style.animation = '';
+      bars[i].className = 'run';
+      clearTimeout(storyTimer);
+      storyTimer = setTimeout(function () { show(i + 1); }, 5000);
+    }
+    $('.ig-story-tap').onclick = function (e) {
+      if (e.target.hasAttribute('data-prev')) show(i - 1); else show(i + 1);
+    };
+    show(0);
   }
 
   // 登入畫面：只在網頁內比對 data.js 裡的帳密，不會把輸入送到任何地方
@@ -323,9 +472,15 @@
       $('#forum-scroll').scrollTop = 0;
     } else if (parts[0] === 'ig') {
       openApp('ig');
-      if (parts[1] === 'login') renderIGLogin(); else renderIG();
+      stopStory();
+      if (parts[1] === 'login') renderIGLogin();
+      else if (parts[1] === 'settings') renderIGSettings();
+      else if (parts[1] === 'post') renderIGPost(+parts[2]);
+      else if (parts[1] === 'story') renderIGStory(parts[2] === 'me' ? 'me' : +parts[2]);
+      else renderIG();
       $('#ig-scroll').scrollTop = 0;
     } else {
+      stopStory();
       showHome();
     }
   }
