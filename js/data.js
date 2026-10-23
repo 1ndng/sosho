@@ -113,9 +113,7 @@ window.SITE_DATA = {
       { image: "images/ig_highlight_4.png", label: "しゅう" }
     ],
     posts: [
-      "images/ig_post_1.png", "images/ig_post_2.png", "images/ig_post_3.png",
-      "images/ig_post_4.png", "images/ig_post_5.png", "images/ig_post_6.png",
-      "images/ig_post_7.png", "images/ig_post_8.png", "images/ig_post_9.png"
+      "images/ig_post_1.png", "images/ig_post_2.png"
     ],
 
     // 點最上方帳號名稱 → 切換帳號清單
@@ -127,7 +125,7 @@ window.SITE_DATA = {
       usernamePlaceholder: "帳號",
       passwordPlaceholder: "密碼",
       loginLabel: "登入",
-      forgotLabel: "test76"
+      forgotLabel: "忘記密碼"
     }
   }
 };
