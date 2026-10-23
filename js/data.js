@@ -207,7 +207,6 @@ window.SITE_DATA = {
       cancelLabel: "取消",
       doneLabel: "完成",
       closeFriendsTitle: "摯友",
-      closeFriendsBadge: "摯友",       // 摯友限時動態上方的綠色標籤
       noCloseFriends: "還沒有摯友",
       archiveTitle: "典藏",
       archiveStories: "限時動態",

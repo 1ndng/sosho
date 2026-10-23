@@ -490,7 +490,7 @@
     savedTitle: '已儲存', noSaved: '還沒有儲存任何貼文', noReposts: '還沒有轉發任何貼文', noTagged: '還沒有被標註的相片',
     storyMessageSent: '訊息已傳送', recentTitle: '最近',
     editTitle: '編輯個人檔案', nameLabel: '名稱', bioLabel: '個人簡介', cancelLabel: '取消', doneLabel: '完成',
-    closeFriendsTitle: '摯友', closeFriendsBadge: '摯友', noCloseFriends: '還沒有摯友',
+    closeFriendsTitle: '摯友', noCloseFriends: '還沒有摯友',
     privateTitle: '此帳號不公開', privateDesc: '追蹤這個帳號即可查看相片和影片。', requestedLabel: '已要求',
     soundOn: '開啟聲音', soundOff: '關閉聲音',
     privacyTitle: '帳號隱私設定', privacyLabel: '不公開帳號', privateOn: '不公開', privateOff: '公開',
@@ -847,8 +847,10 @@
         '<div class="ig-story-bars">' + items.map(function () { return '<i><b></b></i>'; }).join('') + '</div>' +
         '<div class="ig-story-head">' +
           '<img src="' + esc(headImg) + '" alt="">' +
-          '<b>' + esc(headName) + '</b><span class="ig-story-cf" id="ig-story-cf">' + ICON.starFill + esc(T().closeFriendsBadge) + '</span>' +
+          '<b>' + esc(headName) + '</b>' +
           '<span class="ig-story-time"></span>' +
+          // 摯友標籤：綠色膠囊＋白色星星＋小箭頭（只是標示，不能點）
+          '<span class="ig-story-cf" id="ig-story-cf">' + ICON.starFill + ICON.chevron + '</span>' +
           '<button class="ig-ico ig-story-sound" id="ig-story-sound" type="button" aria-label="sound"></button>' +
           (g === currentAccount() ? '<button class="ig-ico" type="button" data-story-menu>' + ICON.more + '</button>' : '') +
           '<button class="ig-ico" type="button" data-story-close>' + ICON.close + '</button>' +

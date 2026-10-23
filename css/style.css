@@ -457,8 +457,10 @@ input.ig-story-msg::placeholder { color: rgba(255,255,255,.9); }
 #ig-story-like.on-like { color: #ff3040; }
 
 /* ---------- 摯友、典藏、名單 ---------- */
-.ig-story-cf { display: inline-flex; align-items: center; gap: 3px; background: #1bc84b; color: #fff; font-size: 11px; font-weight: 600; padding: 2px 7px 2px 5px; border-radius: 10px; text-shadow: none; }
-.ig-story-cf svg { width: 11px; height: 11px; }
+.ig-story-cf { display: inline-flex; align-items: center; gap: 2px; height: 26px; padding: 0 8px 0 10px; border-radius: 13px; background: #5fd057; color: #fff; pointer-events: none; flex: none; }
+.ig-story-cf svg { width: 17px; height: 17px; display: block; }
+.ig-story-cf svg + svg { width: 11px; height: 11px; }
+.ig-story-cf svg + svg path { stroke-width: 3.4; }
 .ig-cf-star { width: 26px; height: 26px; border-radius: 50%; background: #1bc84b; color: #fff; display: flex; align-items: center; justify-content: center; flex: none; }
 .ig-cf-star svg { width: 18px; height: 18px; }
 .ig-arch-grid a { position: relative; }
