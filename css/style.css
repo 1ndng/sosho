@@ -463,3 +463,27 @@ div.ig-frow-main { cursor: default; }
 .pd-cimg { display: block; flex-basis: 100%; max-width: 100%; max-height: 220px; object-fit: contain; object-position: left; border-radius: 8px; margin-top: 4px; cursor: zoom-in; }
 .pd-viewer { position: absolute; inset: 0; z-index: 40; background: rgba(0,0,0,.92); display: flex; align-items: center; justify-content: center; padding: 44px 0 34px; }
 .pd-viewer img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+/* ---------- 手機密碼鎖 ---------- */
+.lock { position: absolute; inset: 0; z-index: 80; background: #333 center / cover no-repeat; color: #fff; transition: transform .45s cubic-bezier(.4,0,.2,1), opacity .45s; }
+.lock.unlocked { transform: translateY(-100%); opacity: .6; pointer-events: none; }
+.lock-shade { position: absolute; inset: 0; background: rgba(20,20,25,.45); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); }
+.lock-inner { position: relative; height: 100%; display: flex; flex-direction: column; align-items: center; padding-top: 90px; }
+.lock-ico { width: 22px; height: 22px; margin-bottom: 14px; }
+.lock-title { font-size: 20px; margin-bottom: 18px; }
+.lock-dots { display: flex; gap: 22px; margin-bottom: 56px; }
+.lock-dots i { width: 13px; height: 13px; border-radius: 50%; border: 1.5px solid #fff; }
+.lock-dots i.on { background: #fff; }
+.lock-dots.shake { animation: lockshake .4s; }
+@keyframes lockshake { 0%,100% { transform: none; } 20% { transform: translateX(-14px); } 40% { transform: translateX(12px); } 60% { transform: translateX(-8px); } 80% { transform: translateX(5px); } }
+.lock-keys { display: grid; grid-template-columns: repeat(3, 78px); gap: 18px 26px; }
+.lock-key { width: 78px; height: 78px; border-radius: 50%; background: rgba(255,255,255,.18); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.lock-key:active { background: rgba(255,255,255,.45); }
+.lock-key b { font-size: 34px; font-weight: 400; line-height: 1; }
+.lock-key small { font-size: 9px; font-weight: 600; letter-spacing: 1.5px; margin-top: 2px; }
+.lock-del { color: #fff; font-size: 16px; align-self: center; justify-self: center; }
+.phone.locked .statusbar { color: #fff; z-index: 90; }
+.phone.locked .home-gesture { z-index: 90; }
+.phone.locked .home-gesture { pointer-events: none; }
+.phone.locked .home-indicator { background: #fff; }
+@media (max-height: 700px) { .lock-inner { padding-top: 60px; } .lock-dots { margin-bottom: 34px; } .lock-keys { grid-template-columns: repeat(3, 70px); gap: 14px 24px; } .lock-key { width: 70px; height: 70px; } }

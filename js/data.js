@@ -9,6 +9,13 @@ window.SITE_DATA = {
   /* ---------- 共用 ---------- */
   notUpdatedText: "尚未更新",   // 點到未開放功能時跳出的文字
 
+  /* ---------- 手機密碼鎖（每次打開網址都要先輸入） ---------- */
+  lock: {
+    passcode: "0000",
+    title: "輸入密碼",
+    deleteLabel: "刪除"
+  },
+
   /* ---------- 手機首頁 ---------- */
   home: {
     wallpaper: "images/wallpaper.jpg",
@@ -167,9 +174,9 @@ window.SITE_DATA = {
     },
 
     // 貼文頁、限時動態的固定文字
-    postTitle: "test119",             // 貼文頁上方標題「貼文」
-    likedBySuffix: "test120",         // 「說讚」
-    storyMessagePlaceholder: "test121",  // 限時動態下方「傳送訊息……」
+    postTitle: "貼文",             // 貼文頁上方標題「貼文」
+    likedBySuffix: "說讚",         // 「說讚」
+    storyMessagePlaceholder: "傳送訊息……",  // 限時動態下方「傳送訊息……」
 
     // 下方功能列的搜尋頁
     searchPlaceholder: "搜尋",
@@ -208,7 +215,7 @@ window.SITE_DATA = {
 
     // 右上角三條線 → 設定頁：已儲存、典藏、摯友可以點進去；帳號隱私設定顯示「尚未更新」
     settings: {
-      title: "test122",
+      title: "設定和動態",
       sections: [
         { title: "功能", items: [
           { icon: "saved",   label: "已儲存" },

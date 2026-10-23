@@ -1214,6 +1214,55 @@
     }
   };
 
+  /* ---------------- 手機密碼鎖 ---------------- */
+  function renderLock() {
+    var L = D.lock || {}, code = String(L.passcode || ''), typed = '';
+    if (!code) return;   // 沒設密碼就不鎖
+    var keys = [['1', ''], ['2', 'A B C'], ['3', 'D E F'], ['4', 'G H I'], ['5', 'J K L'], ['6', 'M N O'],
+                ['7', 'P Q R S'], ['8', 'T U V'], ['9', 'W X Y Z'], ['', ''], ['0', ''], ['del', '']];
+    var lock = $('#lock');
+    lock.style.backgroundImage = 'url("' + (D.home && D.home.wallpaper) + '")';
+    lock.innerHTML =
+      '<div class="lock-shade"></div>' +
+      '<div class="lock-inner">' +
+        '<svg class="lock-ico" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2.5" fill="currentColor"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2" fill="none"/></svg>' +
+        '<div class="lock-title">' + esc(L.title) + '</div>' +
+        '<div class="lock-dots" id="lock-dots">' + code.split('').map(function () { return '<i></i>'; }).join('') + '</div>' +
+        '<div class="lock-keys">' + keys.map(function (k) {
+          if (k[0] === '') return '<span></span>';
+          if (k[0] === 'del') return '<button class="lock-del" data-lock-del>' + esc(L.deleteLabel) + '</button>';
+          return '<button class="lock-key" data-lock="' + k[0] + '"><b>' + k[0] + '</b>' + (k[1] ? '<small>' + k[1] + '</small>' : '') + '</button>';
+        }).join('') + '</div>' +
+      '</div>';
+    $('#phone').classList.add('locked');
+    function paint() {
+      lock.querySelectorAll('.lock-dots i').forEach(function (d, i) { d.classList.toggle('on', i < typed.length); });
+    }
+    lock.addEventListener('click', function (e) {
+      var k = e.target.closest('[data-lock]');
+      if (k && typed.length < code.length) {
+        typed += k.dataset.lock; paint();
+        if (typed.length === code.length) {
+          if (typed === code) {
+            // 解鎖：往上滑走
+            setTimeout(function () {
+              lock.classList.add('unlocked');
+              $('#phone').classList.remove('locked');
+              setTimeout(function () { lock.remove(); }, 450);
+            }, 120);
+          } else {
+            var dots = $('#lock-dots');
+            dots.classList.remove('shake'); void dots.offsetWidth; dots.classList.add('shake');
+            setTimeout(function () { typed = ''; paint(); }, 450);
+          }
+        }
+      } else if (e.target.closest('[data-lock-del]')) {
+        typed = typed.slice(0, -1); paint();
+      }
+    });
+  }
+
+  renderLock();
   renderHome();
   if (!location.hash) history.replaceState(null, '', '#/forum');  // 一進網頁先開論壇
   window.addEventListener('hashchange', route);
