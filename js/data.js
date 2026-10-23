@@ -250,7 +250,7 @@ window.SITE_DATA = {
     messageLabel: "發訊息",
     followingButtonLabel: "追蹤中",   // 按了追蹤之後按鈕變成的文字
 
-    // 右上角三條線 → 設定頁：已儲存、典藏、摯友可以點進去；帳號隱私設定顯示「尚未更新」
+    // 右上角三條線 → 設定頁：已儲存、典藏、帳號隱私設定（公開／不公開開關）、摯友都可以點進去
     settings: {
       title: "設定和動態",
       sections: [
@@ -259,7 +259,7 @@ window.SITE_DATA = {
           { icon: "archive", label: "典藏" }
         ] },
         { title: "隱私", items: [
-          { icon: "lock", label: "帳號隱私設定", value: "不公開" },
+          { icon: "lock", label: "帳號隱私設定" },          // 點進去可以切換公開／不公開，右邊會自動顯示目前狀態
           { icon: "star", label: "摯友" }      // 摯友人數會自動計算
         ] }
       ]
@@ -273,7 +273,6 @@ window.SITE_DATA = {
       usernamePlaceholder: "帳號",
       passwordPlaceholder: "密碼",
       loginLabel: "登入",
-      forgotLabel: "忘記密碼",
       errorText: "帳號或密碼錯誤"   // 帳密錯誤時跳出的提示
     },
 

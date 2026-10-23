@@ -250,7 +250,7 @@
   // 看過的限時動態、追蹤狀態（存在瀏覽器裡）
   var STORE_KEY = 'sosho-ig-state';
   // likes / saves / reposts / commentLikes / storyLikes 的 key 都是「目前帳號|對象」，換帳號各自分開
-  var store = { archived: {}, seen: {}, follows: {}, likes: {}, saves: {}, reposts: {}, comments: {}, commentLikes: {}, storyLikes: {}, searchHistory: [], profileEdits: {} };
+  var store = { privacy: {}, archivedStories: {}, archived: {}, seen: {}, follows: {}, likes: {}, saves: {}, reposts: {}, comments: {}, commentLikes: {}, storyLikes: {}, searchHistory: [], profileEdits: {} };
   try {
     var saved = JSON.parse(localStorage.getItem(STORE_KEY));
     if (saved) Object.keys(store).forEach(function (k) { if (saved[k]) store[k] = saved[k]; });
@@ -262,9 +262,14 @@
   function followKey(g) { return currentAccount().username + '>' + g.username; }
 
   // 非公開帳號：沒追蹤就看不到內容（自己看自己不受影響）
+  // 公開／不公開：設定 → 帳號隱私設定 改過的以玩家設定為準，沒改過就照 data.js 的 private
+  function isPrivate(g) {
+    var v = (store.privacy || {})[g.username];
+    return v == null ? !!g.private : !!v;
+  }
   function isLocked(g) {
     var me = currentAccount();
-    return !!g.private && g !== me && !isFollowing(me, g);
+    return isPrivate(g) && g !== me && !isFollowing(me, g);
   }
   function isRequested(g) { return store.follows[followKey(g)] === 'req'; }
 
@@ -303,10 +308,23 @@
     var me = currentAccount();
     return me === owner || (owner.closeFriendsList || []).indexOf(me.username) >= 0;
   }
-  function visibleStory(g) { return (g.story || []).filter(function (it) { return canSee(g, it); }); }
+  // 玩家從「⋯」典藏的限時動態（用圖片路徑記錄）：從限時動態／精選拿掉，移到 設定 → 典藏
+  function storyKey(g, it) { return g.username + '|' + (it.image || ''); }
+  function storyArchived(g, it) { return !!store.archivedStories[storyKey(g, it)]; }
+  function visibleStory(g) { return (g.story || []).filter(function (it) { return canSee(g, it) && !storyArchived(g, it); }); }
   function visibleHighlight(g, h) {
     var items = h.stories && h.stories.length ? h.stories : [{ image: h.image }];
-    return items.filter(function (it) { return canSee(g, it); });
+    return items.filter(function (it) { return canSee(g, it) && !storyArchived(g, it); });
+  }
+  // 典藏頁的限時動態：玩家典藏的排前面，再來是 data.js 寫好的
+  function archivedStories(g) {
+    var seen = {}, mine = [];
+    (g.story || []).concat.apply(g.story || [], (g.highlights || []).map(function (h) { return h.stories || []; }))
+      .forEach(function (it) {
+        var k = storyKey(g, it);
+        if (storyArchived(g, it) && !seen[k]) { seen[k] = 1; mine.push({ image: it.image, time: it.time, closeFriends: it.closeFriends, mine: true }); }
+      });
+    return mine.concat((g.archive || {}).stories || []);
   }
 
   // g = 要顯示的帳號；base = 這個帳號頁面的網址（自己 #/ig，別人 #/ig/u/帳號）
@@ -335,7 +353,7 @@
         ? '<div class="ig-top">' +
             '<a class="ig-ico" href="#/ig/search" data-back>' + ICON.back + '</a>' +
             '<span class="ig-user">' + esc(g.username) + '</span>' +
-            '<span class="ig-top-r"><button class="ig-ico"' + na + '>' + ICON.more + '</button></span>' +
+            '<span class="ig-top-r"></span>' +
           '</div>'
         : '<div class="ig-top">' +
             '<a class="ig-ico" href="#/ig/search">' + ICON.search + '</a>' +
@@ -455,6 +473,9 @@
     closeFriendsTitle: '摯友', closeFriendsBadge: '摯友', noCloseFriends: '還沒有摯友',
     privateTitle: '此帳號不公開', privateDesc: '追蹤這個帳號即可查看相片和影片。', requestedLabel: '已要求',
     soundOn: '開啟聲音', soundOff: '關閉聲音',
+    privacyTitle: '帳號隱私設定', privacyLabel: '不公開帳號', privateOn: '不公開', privateOff: '公開',
+    privacyNoteOn: '只有你核准的粉絲才能看到你的相片和影片。', privacyNoteOff: '所有人都能看到你的相片和影片。',
+    archiveStory: '典藏', unarchiveStory: '在個人檔案顯示', archivedStoryToast: '已典藏限時動態',
     archivePost: '典藏', unarchivePost: '在個人檔案顯示', archivedToast: '已典藏貼文', unarchivedToast: '已在個人檔案顯示',
     archiveTitle: '典藏', archiveStories: '限時動態', archivePosts: '貼文', noArchive: '沒有典藏的內容'
   };
@@ -540,9 +561,11 @@
               '<span class="ig-set-label">' + esc(it.label) + '</span>' +
               (it.icon === 'star'
                 ? '<span class="ig-set-val">' + (currentAccount().closeFriendsList || []).length + '</span>'
+                : it.icon === 'lock'
+                ? '<span class="ig-set-val">' + esc(isPrivate(currentAccount()) ? T().privateOn : T().privateOff) + '</span>'
                 : it.value != null ? '<span class="ig-set-val">' + esc(it.value) + '</span>' : '') +
               '<span class="ig-set-arrow">' + ICON.right + '</span>';
-            var links = { saved: '#/ig/saved', archive: '#/ig/archive', star: '#/ig/closefriends' };
+            var links = { saved: '#/ig/saved', archive: '#/ig/archive', star: '#/ig/closefriends', lock: '#/ig/privacy' };
             return links[it.icon]
               ? '<a class="ig-set-row" href="' + links[it.icon] + '">' + inner + '</a>'
               : '<button class="ig-set-row" data-na>' + inner + '</button>';
@@ -551,10 +574,23 @@
       }).join('');
   }
 
+  // 設定 → 帳號隱私設定：不公開帳號開關
+  function renderIGPrivacy() {
+    var t = T(), me = currentAccount(), on = isPrivate(me);
+    $('#ig-overlay').innerHTML = '';
+    $('#ig-scroll').innerHTML =
+      '<div class="ig-pagehead">' + backBtn('#/ig/settings') + '<div class="ig-pagehead-t"><b>' + esc(t.privacyTitle) + '</b></div></div>' +
+      '<button class="ig-privacy-card" type="button" data-privacy>' +
+        '<span>' + esc(t.privacyLabel) + '</span>' +
+        '<span class="ig-switch' + (on ? ' on' : '') + '"><i></i></span>' +
+      '</button>' +
+      '<p class="ig-privacy-note">' + esc(on ? t.privacyNoteOn : t.privacyNoteOff) + '</p>';
+  }
+
   // 典藏：限時動態（過期）／貼文（下架）兩個分頁
   var archiveTab = 'stories';
   function renderIGArchive() {
-    var t = T(), me = currentAccount(), ar = me.archive || {}, st = ar.stories || [];
+    var t = T(), me = currentAccount(), ar = me.archive || {}, st = archivedStories(me);
     // 玩家典藏的貼文排前面，再來是 data.js 寫好的典藏貼文
     var ps = (me.posts || []).map(function (p, i) { return { p: p, href: '#/ig/post/' + i, i: i }; })
       .filter(function (x) { return isArchived(me, x.i); })
@@ -800,7 +836,7 @@
     if (which === 'me') items = visibleStory(g);
     else if (fromArchive) {
       // 典藏的限時動態：從點的那一則開始播
-      items = ((g.archive || {}).stories || []);
+      items = archivedStories(g);
       startAt = Math.min(items.length - 1, +String(which).slice(8) || 0);
       base = '#/ig/archive';
     } else {
@@ -822,7 +858,7 @@
           '<b>' + esc(headName) + '</b><span class="ig-story-cf" id="ig-story-cf">' + ICON.starFill + esc(T().closeFriendsBadge) + '</span>' +
           '<span class="ig-story-time"></span>' +
           '<button class="ig-ico ig-story-sound" id="ig-story-sound" type="button" aria-label="sound"></button>' +
-          '<button class="ig-ico" data-na>' + ICON.more + '</button>' +
+          (g === currentAccount() ? '<button class="ig-ico" type="button" data-story-menu>' + ICON.more + '</button>' : '') +
           '<button class="ig-ico" type="button" data-story-close>' + ICON.close + '</button>' +
         '</div>' +
         '<div class="ig-story-img" id="ig-story-media"></div>' +
@@ -943,7 +979,7 @@
     // 往下滑關閉；只是點一下才換上一則／下一則
     var storyEl = $('.ig-story'), dragY = null, dragDy = 0, dragged = false;
     storyEl.addEventListener('pointerdown', function (e) {
-      if (e.target.closest('form, .ig-story-head')) return;
+      if (e.target.closest('form, .ig-story-head, .ig-sheet-wrap')) return;
       dragY = e.clientY; dragDy = 0; dragged = false;
     });
     storyEl.addEventListener('pointermove', function (e) {
@@ -970,6 +1006,28 @@
     }
     storyEl.addEventListener('pointerup', dragEnd);
     storyEl.addEventListener('pointercancel', dragEnd);
+    // 自己的限時動態右上角「⋯」→ 典藏／在個人檔案顯示（data.js 寫好的典藏沒有這個選項）
+    storyEl.addEventListener('click', function (e) {
+      if (e.target.closest('[data-story-menu]')) {
+        var it = items[i], canToggle = !fromArchive || it.mine;
+        if (!canToggle) return;
+        pause();
+        var wrap = document.createElement('div');
+        wrap.className = 'ig-sheet-wrap';
+        wrap.innerHTML = '<div class="ig-sheet-bg" data-story-sheet-close></div>' +
+          '<div class="ig-sheet"><div class="ig-sheet-handle" data-story-sheet-close></div>' +
+          '<button class="ig-sheet-act" type="button" data-story-archive>' + ICON.archive +
+            '<span>' + esc(fromArchive ? T().unarchiveStory : T().archiveStory) + '</span></button></div>';
+        storyEl.appendChild(wrap); void wrap.offsetWidth; wrap.classList.add('show');
+      } else if (e.target.closest('[data-story-sheet-close]')) {
+        e.target.closest('.ig-sheet-wrap').remove(); resume();
+      } else if (e.target.closest('[data-story-archive]')) {
+        var k = storyKey(g, items[i]);
+        if (fromArchive) { delete store.archivedStories[k]; toast(T().unarchivedToast); }
+        else { store.archivedStories[k] = 1; toast(T().archivedStoryToast); }
+        saveStore(); closeStory();
+      }
+    });
     $('.ig-story-tap').onclick = function (e) {
       if (dragged) return;
       if (e.target.hasAttribute('data-prev')) show(i - 1); else show(i + 1);
@@ -1004,9 +1062,7 @@
         '<a data-tab href="' + base + '/follows/following"' + (tab === 'following' ? ' class="on"' : '') + '>' + esc(c.following) + ' ' + esc(L.followingLabel) + '</a>' +
       '</div>' +
       list.map(function (a) {
-        return personRow(a,
-
-          '<button class="ig-ico" data-na>' + ICON.dots + '</button>');
+        return personRow(a, '');
       }).join('');
   }
 
@@ -1148,7 +1204,6 @@
           '<input type="text" name="u" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="' + esc(l.usernamePlaceholder) + '" autocomplete="off">' +
           '<input type="password" name="p" placeholder="' + esc(l.passwordPlaceholder) + '" autocomplete="off">' +
           '<button type="submit" class="ig-login-btn">' + esc(l.loginLabel) + '</button>' +
-          '<button type="button" class="ig-login-forgot" data-na>' + esc(l.forgotLabel) + '</button>' +
         '</form>' +
       '</div>';
   }
@@ -1220,7 +1275,7 @@
         var fk = followKey(who);
         // 只能追蹤、不能取消（避免把非公開帳號退追後再也看不到）
         if (isFollowing(currentAccount(), who) || store.follows[fk] === 'req') return;
-        store.follows[fk] = who.private ? 'req' : 1;   // 非公開帳號只會變「已要求」
+        store.follows[fk] = isPrivate(who) ? 'req' : 1;   // 非公開帳號只會變「已要求」
         saveStore();
         var top = $('#ig-scroll').scrollTop;
         renderIG(who, '#/ig/u/' + encodeURIComponent(who.username));
@@ -1252,6 +1307,11 @@
       saveStore();
       toast(was ? T().unarchivedToast : T().archivedToast);
       goBack(was ? '#/ig/archive' : '#/ig');
+      return;
+    }
+    if (e.target.closest('[data-privacy]')) {
+      var me = currentAccount();
+      store.privacy[me.username] = !isPrivate(me); saveStore(); renderIGPrivacy();
       return;
     }
     var mu = e.target.closest('[data-music]');
@@ -1386,6 +1446,7 @@
       else if (parts[1] === 'archive' && parts[2] === 'post') renderIGPost(+parts[3], null, '#/ig/archive', 'archive');
       else if (parts[1] === 'archive') renderIGArchive();
       else if (parts[1] === 'closefriends') renderIGCloseFriends();
+      else if (parts[1] === 'privacy') renderIGPrivacy();
       else if (parts[1] === 'post') renderIGPost(+parts[2]);
       else if (parts[1] === 'follows') renderIGFollows(parts[2]);
       else if (parts[1] === 'story') renderIGStory(parts[2] === 'me' || /^archive-/.test(parts[2]) ? parts[2] : +parts[2]);
