@@ -35,7 +35,7 @@ window.SITE_DATA = {
     listTitle: "文章",          // 文章列表框的標題
     backLabel: "返回",          // 文章內頁「返回」
     commentLabel: "留言",       // 「留言」
-    opLabel: "原PO",            // 留言者和文章的匿名帳號代碼一樣時，名字旁顯示的標籤
+    opLabel: "樓主",            // 留言者和文章的匿名帳號代碼一樣時，名字旁顯示的標籤
     // 留言格式：{ name: "匿名代碼", text: "內容", image: "images/xxx.jpg" }（image 可省略）
 
     // 文章：順序 = 列表顯示順序。id 請保持不重複（用於網址 #/forum/id）
@@ -63,11 +63,11 @@ window.SITE_DATA = {
         id: "3", title: "判斷一個人是不是在戀愛的妙招。",
         author: "yolo._520",          // 匿名帳號代碼
         content: "尚未更新",
-        commentsDisabled: true,        // 原PO已限制留言（不顯示任何留言）
+        commentsDisabled: true,        // 樓主已限制留言（不顯示任何留言）
         comments: []
       }
     ],
-    commentsDisabledText: "原PO已限制留言。",
+    commentsDisabledText: "樓主已限制留言。",
 
     // 底部廣告（橫條，佔滿寬度，由上往下排）：link 填外部網址；不寫 link 就只顯示、點了沒反應
     // 可以放影片（.mp4，靜音、自動循環播放）

@@ -95,7 +95,7 @@
 - 帳號的 `saved`（"帳號/貼文編號"）＝已儲存；`archive.stories` / `archive.posts` ＝典藏（設定 → 典藏）
 
 ## 論壇留言
-- 留言可加 `image`；留言者和文章 `author` 一樣時自動顯示「原PO」
+- 留言可加 `image`；留言者和文章 `author` 一樣時自動顯示「樓主」
 
 
 ## 手機密碼鎖

@@ -145,9 +145,9 @@
     markRead(p.id);
 
     var cs = p.comments || [];
-    // 留言者 = 文章作者 → 名字旁顯示「原PO」；留言可以附圖片
+    // 留言者 = 文章作者 → 名字旁顯示「樓主」；留言可以附圖片
     var comments = cs.map(function (c) {
-      var op = c.name === p.author ? '<i class="pd-op">' + esc(f.opLabel || '原PO') + '</i>' : '';
+      var op = c.name === p.author ? '<i class="pd-op">' + esc(f.opLabel || '樓主') + '</i>' : '';
       return '<div class="pd-comment"><b>' + esc(c.name) + op + '</b><span class="pd-colon">:</span>' +
         '<span class="pd-ctext">' + (c.text ? multiline(c.text) : '') + '</span>' +
         (c.image ? '<img class="pd-cimg" src="' + esc(c.image) + '" alt="" data-fimg>' : '') +
@@ -164,7 +164,7 @@
         '</div>' +
         '<div class="pd-sep"></div>' +
         (p.commentsDisabled
-          ? '<div class="pd-cbar pd-closed">' + esc(f.commentsDisabledText || '原PO已限制留言。') + '</div>'
+          ? '<div class="pd-cbar pd-closed">' + esc(f.commentsDisabledText || '樓主已限制留言。') + '</div>'
           : '<div class="pd-cbar">' + esc(f.commentLabel) + ' (' + cs.length + ')</div>') +
         comments +
       '</div>' + forumFooter();
