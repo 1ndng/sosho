@@ -82,22 +82,13 @@
 /* =========================================================
  * KakaoTalk
  * ========================================================= */
-.kakao-app .app-scroll { background: #fff; color: #191919; padding-bottom: 92px; }
+.kakao-app .app-scroll { background: #fff; color: #191919; padding-bottom: 34px; }
 .kk-head { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px 6px 18px; }
 .kk-head h1 { font-size: 22px; margin: 0; font-weight: 700; }
 .kk-head-icons { display: flex; gap: 6px; }
 .kk-head-icons button { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; }
 .kk-head-icons svg { width: 24px; height: 24px; }
-.kk-me { display: flex; align-items: center; gap: 14px; padding: 12px 18px 16px; }
-.kk-me img { width: 62px; height: 62px; border-radius: 24px; object-fit: cover; }
-.kk-me b, .kk-friend b { display: block; font-size: 16px; font-weight: 600; }
-.kk-me small, .kk-friend small { display: block; font-size: 12.5px; color: #8e8e8e; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.kk-me span, .kk-friend span { min-width: 0; }
-.kk-sec { font-size: 12px; color: #8e8e8e; padding: 10px 18px 6px; border-top: 1px solid #f1f1f1; }
-.kk-friend { display: flex; align-items: center; gap: 12px; padding: 7px 18px; }
-.kk-friend img { width: 44px; height: 44px; border-radius: 17px; object-fit: cover; flex: none; }
-.kk-friend b { font-size: 15px; font-weight: 500; }
-.kk-friend:active, .kk-chatrow:active, .kk-me:active { background: #f5f5f5; }
+.kk-chatrow:active { background: #f5f5f5; }
 .kk-chatrow { display: flex; align-items: center; gap: 12px; padding: 9px 18px; }
 .kk-chatrow img { width: 48px; height: 48px; border-radius: 19px; object-fit: cover; flex: none; }
 .kk-chatrow-mid { flex: 1; min-width: 0; }
@@ -106,36 +97,14 @@
 .kk-chatrow-r { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; }
 .kk-chatrow-r small { font-size: 11px; color: #a0a0a0; white-space: nowrap; }
 .kk-badge { font-style: normal; background: #ff4d3d; color: #fff; font-size: 11px; font-weight: 700; min-width: 18px; height: 18px; line-height: 18px; text-align: center; border-radius: 9px; padding: 0 5px; }
-.kk-tabs {
-  position: absolute; left: 0; right: 0; bottom: 0; height: 84px; padding: 4px 6px 34px;
-  display: flex; background: #fff; border-top: 1px solid #f1f1f1;
-}
-.kk-tabs > * { position: relative; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; color: #b4b4b4; font-size: 10px; }
-.kk-tabs > .on { color: #191919; }
-.kk-tabs svg { width: 26px; height: 26px; }
-.kk-tabs .kk-badge { position: absolute; top: -2px; left: calc(50% + 6px); }
 
-/* 我的資料 */
-.kk-profile { position: absolute; inset: 0; z-index: 3; background: #6d7f96 center / cover no-repeat; color: #fff; }
-.kk-profile-shade { position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,.15), rgba(0,0,0,.05) 40%, rgba(0,0,0,.5)); }
-.kk-profile-close { position: absolute; left: 14px; top: 52px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: #fff; }
-.kk-profile-close svg { width: 26px; height: 26px; }
-.kk-profile-info { position: absolute; left: 0; right: 0; bottom: 170px; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; padding: 0 24px; }
-.kk-profile-info img { width: 96px; height: 96px; border-radius: 38px; object-fit: cover; margin-bottom: 6px; }
-.kk-profile-info b { font-size: 20px; }
-.kk-profile-info small { font-size: 14px; opacity: .85; }
-.kk-profile-acts { position: absolute; left: 0; right: 0; bottom: 34px; height: 112px; display: flex; justify-content: center; gap: 30px; border-top: 1px solid rgba(255,255,255,.25); padding-top: 20px; }
-.kk-profile-acts > * { display: flex; flex-direction: column; align-items: center; gap: 8px; color: #fff; font-size: 12px; width: 76px; }
-.kk-profile-acts svg { width: 28px; height: 28px; }
 
 /* 聊天室 */
 .kk-chat { position: absolute; inset: 0; z-index: 3; background: #bacee0; display: flex; flex-direction: column; padding-top: 44px; }
-.kk-chat-head { display: grid; grid-template-columns: 40px 1fr auto; align-items: center; height: 48px; padding: 0 8px; }
+.kk-chat-head { display: grid; grid-template-columns: 40px 1fr 40px; align-items: center; height: 48px; padding: 0 8px; }
 .kk-chat-head a { display: flex; align-items: center; justify-content: center; height: 40px; color: #191919; }
 .kk-chat-head a svg { width: 24px; height: 24px; }
 .kk-chat-head b { font-size: 16px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.kk-chat-head span { display: flex; gap: 4px; }
-.kk-chat-head span button { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; }
 .kk-chat-head svg { width: 23px; height: 23px; }
 .kk-msgs { flex: 1; overflow-y: auto; padding: 6px 10px 12px; }
 .kk-date { text-align: center; margin: 12px 0; }
@@ -157,13 +126,9 @@
 .kk-msg.them .kk-bubble { background: #fff; }
 .kk-msg.them .kk-bubble.tail { border-top-left-radius: 3px; }
 .kk-row .kk-meta { align-items: flex-start; }
-.kk-input { display: flex; align-items: center; gap: 6px; background: #fff; padding: 6px 8px 40px; }
-.kk-plus { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; color: #8e8e8e; }
-.kk-plus svg { width: 24px; height: 24px; }
+.kk-input { display: flex; align-items: center; gap: 6px; background: #fff; padding: 6px 8px 40px 12px; }
 .kk-field { flex: 1; display: flex; align-items: center; background: #f4f4f4; border-radius: 18px; padding: 0 6px 0 14px; height: 36px; }
 .kk-field input { flex: 1; min-width: 0; border: 0; background: none; outline: none; font: inherit; font-size: 16px; }
-.kk-field button { width: 28px; height: 28px; color: #8e8e8e; display: flex; align-items: center; justify-content: center; }
-.kk-field svg { width: 22px; height: 22px; }
 .kk-send { width: 34px; height: 34px; border-radius: 50%; background: #fee500; color: #191919; display: flex; align-items: center; justify-content: center; }
 .kk-send:disabled { background: #f0f0f0; color: #b4b4b4; }
 .kk-send svg { width: 20px; height: 20px; }
@@ -173,7 +138,6 @@
 .kk-viewer { position: absolute; inset: 0; z-index: 6; background: #000; display: flex; align-items: center; justify-content: center; }
 .kk-viewer img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
-.kk-me-tag { font-style: normal; display: inline-block; background: #505050; color: #fff; font-size: 10px; font-weight: 700; border-radius: 50%; width: 17px; height: 17px; line-height: 17px; text-align: center; margin-left: 5px; vertical-align: 2px; }
 
 /* 接通後：字幕＋選項（取代按鈕格） */
 .ph-calling { display: flex; flex-direction: column; align-items: center; }

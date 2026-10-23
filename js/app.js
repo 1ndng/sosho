@@ -26,6 +26,15 @@
   tick();
   setInterval(tick, 15000);
 
+  /* ---------------- 列表排序：照字首順序（數字 → 英文 → 韓文／中文，不分大小寫） ---------------- */
+  var collator = window.Intl && Intl.Collator ? new Intl.Collator(['en', 'ko', 'zh-Hant'], { sensitivity: 'base', numeric: true }) : null;
+  function sortByName(list, key) {
+    return list.slice().sort(function (a, b) {
+      var x = String(key(a) || ''), y = String(key(b) || '');
+      return collator ? collator.compare(x, y) : (x < y ? -1 : x > y ? 1 : 0);
+    });
+  }
+
   /* ---------------- 提示框 ---------------- */
   var toastTimer;
   function toast(msg) {
@@ -256,10 +265,12 @@
   // 帳號清單：預設帳號 + 已登入過的帳號
   function listedAccounts() {
     var first = startAccount();
-    return [first].concat(accState.loggedIn.map(findAccount).filter(function (a) {
+    return byUsername([first].concat(accState.loggedIn.map(findAccount).filter(function (a) {
       return a && a !== first;
-    }));
+    })));
   }
+  // IG 的列表都照帳號 id 的字首排序
+  function byUsername(list) { return sortByName(list, function (a) { return a.username; }); }
   // 可以用帳密登入的帳號：有寫 password、而且不是預設帳號
   function loginAccounts() {
     return [D.instagram].concat(otherAccounts()).filter(function (a) {
@@ -639,10 +650,10 @@
   // 摯友名單（設定 → 摯友）
   function renderIGCloseFriends() {
     var t = T(), me = currentAccount();
-    var list = (me.closeFriendsList || []).map(function (u) {
+    var list = byUsername((me.closeFriendsList || []).map(function (u) {
       var f = fillerInfo(u) || {};
       return profileByName(u) || { username: u, name: f.name || '', avatar: f.avatar || DEFAULT_AVATAR, filler: true };
-    });
+    }));
     $('#ig-overlay').innerHTML = '';
     $('#ig-scroll').innerHTML =
       '<div class="ig-pagehead">' + backBtn('#/ig/settings') + '<div class="ig-pagehead-t"><b>' + esc(t.closeFriendsTitle) + '</b></div></div>' +
@@ -1036,7 +1047,7 @@
     var c = counts(g);
     // data.js 有 followersList / followingList 就照它顯示（帳號 id → 真的帳號；{ username, name } → 路人）
     var manual = tab === 'followers' ? g.followersList : g.followingList;
-    var list = manual
+    var list = byUsername(manual
       ? manual.map(function (x) {
           if (typeof x === 'string') {
             var f = fillerInfo(x) || {};
@@ -1044,7 +1055,7 @@
           }
           return { username: x.username, name: x.name, avatar: x.avatar, filler: true };
         })
-      : (tab === 'followers' ? followersOf(g) : followingOf(g));
+      : (tab === 'followers' ? followersOf(g) : followingOf(g)));
     $('#ig-overlay').innerHTML = '';
     $('#ig-scroll').innerHTML =
       '<div class="ig-pagehead">' + backBtn(base) +
@@ -1066,14 +1077,14 @@
     q = q.trim().toLowerCase();
     if (!q) return [];
     var prefix = D.instagram.searchMode === 'prefix';
-    return allProfiles().filter(function (a) {
+    return byUsername(allProfiles().filter(function (a) {
       var u = String(a.username).toLowerCase();
       return prefix ? u.indexOf(q) === 0 : u === q;
-    });
+    }));
   }
-  // 搜尋紀錄：從搜尋結果點進去過的帳號（新的在前，存在瀏覽器裡）
+  // 搜尋紀錄：從搜尋結果點進去過的帳號（照字首排序，存在瀏覽器裡）
   function searchHistory() {
-    return (store.searchHistory || []).map(profileByName).filter(Boolean);
+    return byUsername((store.searchHistory || []).map(profileByName).filter(Boolean));
   }
   function addHistory(username) {
     var h = (store.searchHistory || []).filter(function (u) { return u !== username; });
@@ -1474,7 +1485,7 @@
   /* ---------------- 啟動 ---------------- */
   // 給 js/apps/*.js 用的共用工具
   window.SOSHO = {
-    data: D, $: $, esc: esc, multiline: multiline, toast: toast, goBack: goBack, replaceHash: replaceHash,
+    data: D, $: $, esc: esc, multiline: multiline, toast: toast, sortByName: sortByName, goBack: goBack, replaceHash: replaceHash,
     setDarkStatus: function (on) { $('#phone').classList.toggle('dark-status', !!on); },
     load: function (key, def) {
       try { var v = JSON.parse(localStorage.getItem(key)); return v == null ? def : v; } catch (e) { return def; }

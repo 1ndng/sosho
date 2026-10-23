@@ -238,7 +238,7 @@ window.SITE_DATA = {
         // 追蹤了 shotaroo0（可以點）、wonbin、anton（路人，點不進去）
         followingList: [
           "shotaroo0",
-          { username: "bin032", name: "wonbin", avatar: "images/wonbin.jpg" },
+          { username: "bin032", name: "원빈", avatar: "images/wonbin.jpg" },
           { username: "antonnie", name: "anton", avatar: "images/anton.jpg" }
         ],
         posts: []
@@ -294,16 +294,16 @@ window.SITE_DATA = {
           "fauiogl94",
           "252525252_",
           "mlkt_tr5",
-          { username: "seokkkk", name: "eunseok", avatar: "images/eunseok.jpg" },
-          { username: "sungchan913", name: "sungchan", avatar: "images/sungchan.jpg" },
-          { username: "bin032", name: "wonbin", avatar: "images/wonbin.jpg" },
+          { username: "seokkkk", name: "송은석", avatar: "images/eunseok.jpg" },
+          { username: "sungchan913", name: "🦌", avatar: "images/sungchan.jpg" },
+          { username: "bin032", name: "원빈", avatar: "images/wonbin.jpg" },
           { username: "antonnie", name: "anton", avatar: "images/anton.jpg" }
         ],
         followingList: [
           "252525252_",
-          { username: "seokkkk", name: "eunseok", avatar: "images/eunseok.jpg" },
-          { username: "sungchan913", name: "sungchan", avatar: "images/sungchan.jpg" },
-          { username: "bin032", name: "wonbin", avatar: "images/wonbin.jpg" },
+          { username: "seokkkk", name: "송은석", avatar: "images/eunseok.jpg" },
+          { username: "sungchan913", name: "🦌", avatar: "images/sungchan.jpg" },
+          { username: "bin032", name: "원빈", avatar: "images/wonbin.jpg" },
           { username: "antonnie", name: "anton", avatar: "images/anton.jpg" }
         ],
         // 摯友名單：寫在這裡的帳號才看得到 closeFriends: true 的限時動態
@@ -412,16 +412,16 @@ window.SITE_DATA = {
         // 粉絲／追蹤中名單（小帳沒有追蹤她）；帳號 id 可以點進去，{ username, name, avatar } 是路人點不進去
         followersList: [
           "shotaroo0",
-          { username: "seokkkk", name: "eunseok", avatar: "images/eunseok.jpg" },
-          { username: "sungchan913", name: "sungchan", avatar: "images/sungchan.jpg" },
-          { username: "bin032", name: "wonbin", avatar: "images/wonbin.jpg" },
+          { username: "seokkkk", name: "송은석", avatar: "images/eunseok.jpg" },
+          { username: "sungchan913", name: "🦌", avatar: "images/sungchan.jpg" },
+          { username: "bin032", name: "원빈", avatar: "images/wonbin.jpg" },
           { username: "antonnie", name: "anton", avatar: "images/anton.jpg" }
         ],
         followingList: [
           "shotaroo0",
-          { username: "seokkkk", name: "eunseok", avatar: "images/eunseok.jpg" },
-          { username: "sungchan913", name: "sungchan", avatar: "images/sungchan.jpg" },
-          { username: "bin032", name: "wonbin", avatar: "images/wonbin.jpg" },
+          { username: "seokkkk", name: "송은석", avatar: "images/eunseok.jpg" },
+          { username: "sungchan913", name: "🦌", avatar: "images/sungchan.jpg" },
+          { username: "bin032", name: "원빈", avatar: "images/wonbin.jpg" },
           { username: "antonnie", name: "anton", avatar: "images/anton.jpg" }
         ],
         bio: ["Jimmy Lee", "@brunomars"],
@@ -599,21 +599,10 @@ window.SITE_DATA = {
 
   /* ---------- KakaoTalk ---------- */
   kakao: {
-    me: {                         // 手機使用者 = shotaroo0
-      name: "Shotaro",
-      status: "test164",
-      avatar: "images/1_avatar.jpg",
-      background: "images/kakao_me_bg.png",  // 點自己的資料時的全螢幕背景
-      // 나와의 채팅（自己傳給自己的聊天室）：都寫 from: "me"，也可以放照片 image
-      messages: [
-        { date: "test259" },
-        { from: "me", text: "test260", time: "test261" }
-      ]
-    },
     friends: [
       {
         id: "f1",                       // 不要重複（用於網址）
-        name: "이소희",                   // 252525252_
+        name: "소희",                     // 252525252_
         status: "test166",                  // 狀態訊息
         avatar: "images/2_avatar.jpg",
         unread: 2,       // 一開始在聊天列表顯示的未讀數
@@ -671,7 +660,7 @@ window.SITE_DATA = {
       },
       {
         id: "f2",                       // 不要重複（用於網址）
-        name: "박원빈",                   // 來韓國後舞室認識的朋友
+        name: "원빈",                     // 來韓國後舞室認識的朋友
         status: "test178",                  // 狀態訊息
         avatar: "images/wonbin.jpg",
         unread: 0,       // 一開始在聊天列表顯示的未讀數
@@ -689,7 +678,7 @@ window.SITE_DATA = {
       },
       {
         id: "f3",                       // 不要重複（用於網址）
-        name: "ANTON",                   // 李炤熙的朋友
+        name: "Anton",                   // 李炤熙的朋友
         status: "test190",                  // 狀態訊息
         avatar: "images/anton.jpg",
         unread: 0,       // 一開始在聊天列表顯示的未讀數
@@ -707,7 +696,7 @@ window.SITE_DATA = {
       },
       {
         id: "f4",
-        name: "정성찬",                   // 留學時認識的朋友
+        name: "성찬",                     // 留學時認識的朋友
         status: "",
         avatar: "images/sungchan.jpg",
         unread: 0,
@@ -717,7 +706,7 @@ window.SITE_DATA = {
       },
       {
         id: "f5",
-        name: "송은석",                   // 留學時認識的朋友
+        name: "은석",                     // 留學時認識的朋友
         status: "",
         avatar: "images/eunseok.jpg",
         unread: 0,
@@ -747,15 +736,10 @@ window.SITE_DATA = {
     ],
     // 介面文字（韓文版 KakaoTalk）
     text: {
-      friendsTitle: "친구",
       chatsTitle: "채팅",
-      friendsCount: "친구 {n}",
-      tabs: ["친구", "채팅"],
       inputPlaceholder: "메시지 입력",
-      profileActions: ["나와의 채팅", "프로필 편집", "카카오스토리"],
       ampm: ["오전", "오후"],
-      photoLabel: "사진",
-      meTag: "나"                   // 나와의 채팅 名字旁的小標            // 聊天列表裡最後一則是照片時顯示的字
+      photoLabel: "사진"            // 聊天列表裡最後一則是照片時顯示的字
     }
   }
 };

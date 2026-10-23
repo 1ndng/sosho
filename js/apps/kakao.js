@@ -1,4 +1,4 @@
-/* KakaoTalk：친구（#/kakao）、채팅 列表（#/kakao/chats）、我的資料（#/kakao/me）、聊天室（#/kakao/chat/好友id） */
+/* KakaoTalk：채팅 列表（#/kakao）、聊天室（#/kakao/chat/好友id） */
 (function () {
   'use strict';
 
@@ -6,39 +6,18 @@
   var openChatId = null;      // 目前開著的聊天室
 
   var ICON = {
-    search: '<svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.9" fill="none"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
-    music: '<svg viewBox="0 0 24 24"><path d="M9 18V5.5l11-2v12" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/><circle cx="6.5" cy="18" r="2.5" stroke="currentColor" stroke-width="1.8" fill="none"/><circle cx="17.5" cy="15.5" r="2.5" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>',
-    gear: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
-    chatAdd: '<svg viewBox="0 0 24 24"><path d="M12 4C7 4 3 7.1 3 11c0 2.4 1.5 4.5 3.8 5.8L6 20l3.8-2.2c.7.1 1.4.2 2.2.2 5 0 9-3.1 9-7s-4-7-9-7z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/><path d="M12 8v6M9 11h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
-    tabFriends: '<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.2" fill="currentColor"/><path d="M4 20.5c.8-4.3 4-6.5 8-6.5s7.2 2.2 8 6.5z" fill="currentColor"/></svg>',
-    tabChats: '<svg viewBox="0 0 24 24"><path d="M12 3.5C6.8 3.5 2.5 6.9 2.5 11c0 2.6 1.7 4.9 4.3 6.3L5.9 21l4.2-2.6c.6.1 1.2.1 1.9.1 5.2 0 9.5-3.4 9.5-7.5S17.2 3.5 12 3.5z" fill="currentColor"/></svg>',
-    tabOpen: '<svg viewBox="0 0 24 24"><path d="M12 3.5C6.8 3.5 2.5 6.9 2.5 11c0 2.6 1.7 4.9 4.3 6.3L5.9 21l4.2-2.6c.6.1 1.2.1 1.9.1 5.2 0 9.5-3.4 9.5-7.5S17.2 3.5 12 3.5z" stroke="currentColor" stroke-width="1.8" fill="none"/><circle cx="8" cy="11" r="1.2" fill="currentColor"/><circle cx="12" cy="11" r="1.2" fill="currentColor"/><circle cx="16" cy="11" r="1.2" fill="currentColor"/></svg>',
-    tabShop: '<svg viewBox="0 0 24 24"><path d="M5 8h14l-1 12.5H6z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>',
-    tabMore: '<svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.9" fill="currentColor"/><circle cx="12" cy="12" r="1.9" fill="currentColor"/><circle cx="19" cy="12" r="1.9" fill="currentColor"/></svg>',
     back: '<svg viewBox="0 0 24 24"><path d="M15 4l-8 8 8 8" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-    menu: '<svg viewBox="0 0 24 24"><path d="M4 6.5h16M4 12h16M4 17.5h16" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
-    close: '<svg viewBox="0 0 24 24"><path d="M5.5 5.5l13 13M18.5 5.5l-13 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
-    plus: '<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
-    emoji: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" fill="none"/><circle cx="9" cy="10" r="1.2" fill="currentColor"/><circle cx="15" cy="10" r="1.2" fill="currentColor"/><path d="M8.3 14c.9 1.5 2.2 2.3 3.7 2.3s2.8-.8 3.7-2.3" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>',
-    send: '<svg viewBox="0 0 24 24"><path d="M12 19V6M6.5 11.5 12 6l5.5 5.5" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-    selfChat: '<svg viewBox="0 0 24 24"><path d="M12 4C7 4 3 7.1 3 11c0 2.4 1.5 4.5 3.8 5.8L6 20l3.8-2.2c.7.1 1.4.2 2.2.2 5 0 9-3.1 9-7s-4-7-9-7z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/></svg>',
-    edit: '<svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/></svg>',
-    story: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M10 8.5v7l5.5-3.5z" fill="currentColor"/></svg>'
+    send: '<svg viewBox="0 0 24 24"><path d="M12 19V6M6.5 11.5 12 6l5.5 5.5" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'
   };
 
   function S() { return window.SOSHO; }
-  function K() { return S().data.kakao || { me: {}, friends: [], text: {} }; }
+  function K() { return S().data.kakao || { friends: [], text: {} }; }
   function TX() { return K().text || {}; }
   function esc(s) { return S().esc(s); }
   function state() {
     var st = S().load(KEY, null) || {};
     st.msgs = st.msgs || {}; st.unread = st.unread || {};
     return st;
-  }
-  // 나와의 채팅：id 是 "me" 的聊天室（自己傳給自己，沒有未讀 1、不會自動回覆）
-  function selfRoom() {
-    var me = K().me || {};
-    return { id: 'me', name: me.name, avatar: me.avatar, messages: me.messages || [], self: true, replies: [], defaultReply: [] };
   }
   function findFriend(id) {
     return (K().friends || []).filter(function (f) { return String(f.id) === String(id); })[0];
@@ -55,7 +34,6 @@
   }
   function groups() { return (K().groups || []).map(groupRoom); }
   function friend(id) {
-    if (String(id) === 'me') return selfRoom();
     return findFriend(id) || groups().filter(function (g) { return String(g.id) === String(id); })[0];
   }
   // 聊天列表的頭像：群組用成員頭像拼起來
@@ -67,7 +45,6 @@
   }
   function messagesOf(f) { return (f.messages || []).concat(state().msgs[f.id] || []); }
   function unreadOf(f) {
-    if (f.self) return 0;
     var st = state();
     return st.unread[f.id] != null ? st.unread[f.id] : (f.unread || 0);
   }
@@ -76,76 +53,21 @@
     return ap[h < 12 ? 0 : 1] + ' ' + (h % 12 || 12) + ':' + String(d.getMinutes()).padStart(2, '0');
   }
 
-  function tabbar(active) {
-    var names = TX().tabs || [];
-    // 下方只留 친구、채팅 兩個
-    var icons = [ICON.tabFriends, ICON.tabChats];
-    var hrefs = ['#/kakao', '#/kakao/chats'];
-    var totalUnread = (K().friends || []).concat(groups()).reduce(function (n, f) { return n + unreadOf(f); }, 0);
-    return '<nav class="kk-tabs">' + icons.map(function (ic, i) {
-      var label = '<span>' + esc(names[i] || '') + '</span>';
-      var badge = i === 1 && totalUnread ? '<i class="kk-badge">' + totalUnread + '</i>' : '';
-      return '<a href="' + hrefs[i] + '"' + (active === i ? ' class="on"' : '') + '>' + ic + badge + label + '</a>';
-    }).join('') + '</nav>';
-  }
-
-  function renderFriends() {
-    var k = K(), me = k.me || {}, list = k.friends || [], t = TX();
-    S().$('#kakao-scroll').innerHTML =
-      '<div class="kk-head"><h1>' + esc(t.friendsTitle) + '</h1>' +
-        '</div>' +
-      '<a class="kk-me" href="#/kakao/me">' +
-        '<img src="' + esc(me.avatar) + '" alt="">' +
-        '<span><b>' + esc(me.name) + '</b><small>' + esc(me.status) + '</small></span>' +
-      '</a>' +
-      '<div class="kk-sec">' + esc(String(t.friendsCount || '').replace('{n}', list.length)) + '</div>' +
-      list.map(function (f) {
-        return '<a class="kk-friend" href="#/kakao/chat/' + encodeURIComponent(f.id) + '">' +
-          '<img src="' + esc(f.avatar) + '" alt="">' +
-          '<span><b>' + esc(f.name) + '</b>' + (f.status ? '<small>' + esc(f.status) + '</small>' : '') + '</span>' +
-        '</a>';
-      }).join('');
-    S().$('#kakao-overlay').innerHTML = tabbar(0);
-  }
-
   function renderChats() {
-    var list = [selfRoom()].concat(groups(), K().friends || []).filter(function (f) { return messagesOf(f).some(function (m) { return m.text || m.image; }); });
+    // 所有私聊＋群組（還沒有訊息的也列出來），照名字字首排序
+    var list = S().sortByName(groups().concat(K().friends || []), function (f) { return f.name; });
     S().$('#kakao-scroll').innerHTML =
       '<div class="kk-head"><h1>' + esc(TX().chatsTitle) + '</h1>' +
         '</div>' +
       list.map(function (f) {
-        var msgs = messagesOf(f).filter(function (m) { return m.text || m.image; }), last = msgs[msgs.length - 1], n = unreadOf(f);
+        var msgs = messagesOf(f).filter(function (m) { return m.text || m.image; }), last = msgs[msgs.length - 1] || {}, n = unreadOf(f);
         return '<a class="kk-chatrow" href="#/kakao/chat/' + encodeURIComponent(f.id) + '">' +
           roomAvatar(f, 'kk-chatrow-av') +
-          '<span class="kk-chatrow-mid"><b>' + esc(f.name) + (f.group ? '<em class="kk-count">' + (f.members.length + 1) + '</em>' : '') + (f.self ? '<i class="kk-me-tag">' + esc(TX().meTag || '나') + '</i>' : '') + '</b><small>' + esc(last.text || TX().photoLabel || '사진') + '</small></span>' +
+          '<span class="kk-chatrow-mid"><b>' + esc(f.name) + (f.group ? '<em class="kk-count">' + (f.members.length + 1) + '</em>' : '') + '</b><small>' + esc(last.text || (last.image ? TX().photoLabel || '사진' : '')) + '</small></span>' +
           '<span class="kk-chatrow-r"><small>' + esc(last.time || '') + '</small>' + (n ? '<i class="kk-badge">' + n + '</i>' : '') + '</span>' +
         '</a>';
       }).join('');
-    S().$('#kakao-overlay').innerHTML = tabbar(1);
-  }
-
-  // 我的資料：全螢幕
-  function renderMe() {
-    var me = K().me || {}, acts = TX().profileActions || [];
-    var icons = [ICON.selfChat, ICON.edit, ICON.story];
-    renderFriends();
-    S().setDarkStatus(true);
-    S().$('#kakao-overlay').innerHTML =
-      '<div class="kk-profile" style="background-image:url(\'' + esc(me.background) + '\')">' +
-        '<div class="kk-profile-shade"></div>' +
-        '<a class="kk-profile-close" href="#/kakao">' + ICON.close + '</a>' +
-        '<div class="kk-profile-info">' +
-          '<img src="' + esc(me.avatar) + '" alt="">' +
-          '<b>' + esc(me.name) + '</b>' +
-          '<small>' + esc(me.status) + '</small>' +
-        '</div>' +
-        '<div class="kk-profile-acts">' + acts.map(function (a, i) {
-          // 第一個「나와의 채팅」可以進入自己的聊天室
-          return i === 0
-            ? '<a href="#/kakao/chat/me">' + icons[i] + '<span>' + esc(a) + '</span></a>'
-            : '<button data-na>' + icons[i] + '<span>' + esc(a) + '</span></button>';
-        }).join('') + '</div>' +
-      '</div>';
+    S().$('#kakao-overlay').innerHTML = '';
   }
 
   /* ---- 聊天室 ---- */
@@ -166,7 +88,7 @@
       if (m.from === 'me') {
         // 對方還沒回 → 顯示未讀數（1:1 是「1」，群組是還沒回話的人數）
         var later = msgs.slice(i + 1), unread = 0;
-        if (!f.self && m.read !== true) {
+        if (m.read !== true) {
           unread = f.group
             ? f.members.filter(function (mem) { return !later.some(function (x) { return x.from === mem.id; }); }).length
             : (later.some(function (x) { return x.from === 'them'; }) ? 0 : 1);
@@ -202,19 +124,16 @@
     if (!f) { S().replaceHash('#/kakao'); return; }
     openChatId = f.id;
     var st = state(); st.unread[f.id] = 0; S().save(KEY, st);
-    renderFriends();
+    renderChats();
     S().$('#kakao-overlay').innerHTML =
       '<div class="kk-chat">' +
         '<div class="kk-chat-head">' +
           '<a href="#/kakao" data-kback>' + ICON.back + '</a>' +
-          '<b>' + esc(f.name) + (f.group ? '<em class="kk-count">' + (f.members.length + 1) + '</em>' : '') + (f.self ? '<i class="kk-me-tag">' + esc(TX().meTag || '나') + '</i>' : '') + '</b>' +
-          '<span><button data-na>' + ICON.search + '</button><button data-na>' + ICON.menu + '</button></span>' +
+          '<b>' + esc(f.name) + (f.group ? '<em class="kk-count">' + (f.members.length + 1) + '</em>' : '') + '</b>' +
         '</div>' +
         '<div class="kk-msgs" id="kk-msgs"></div>' +
         '<form class="kk-input" id="kk-form" autocomplete="off">' +
-          '<button type="button" class="kk-plus" data-na>' + ICON.plus + '</button>' +
-          '<label class="kk-field"><input name="m" placeholder="' + esc(TX().inputPlaceholder) + '" autocomplete="off">' +
-            '<button type="button" data-na>' + ICON.emoji + '</button></label>' +
+          '<label class="kk-field"><input name="m" placeholder="' + esc(TX().inputPlaceholder) + '" autocomplete="off"></label>' +
           '<button type="submit" class="kk-send" disabled>' + ICON.send + '</button>' +
         '</form>' +
       '</div>';
@@ -269,9 +188,7 @@
     current = parts;
     openChatId = null;
     if (parts[0] === 'chat' && parts[1]) renderChat(parts[1]);
-    else if (parts[0] === 'me') renderMe();
-    else if (parts[0] === 'chats') renderChats();
-    else renderFriends();
+    else renderChats();
   }
 
   document.addEventListener('click', function (e) {
@@ -279,7 +196,7 @@
     if (!app || !app.contains(e.target)) return;
     var back = e.target.closest('[data-kback]');
     if (back) {
-      // 聊天室的返回：回到上一頁（好友或聊天列表）
+      // 聊天室的返回：回到聊天列表
       e.preventDefault();
       S().goBack('#/kakao');
       return;
@@ -295,7 +212,6 @@
       S().setDarkStatus(true);
       return;
     }
-    if (e.target.closest('[data-na]')) S().toast();
   });
 
   (window.SOSHO_APPS = window.SOSHO_APPS || {}).kakao = route;
