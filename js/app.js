@@ -183,8 +183,8 @@
     play: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path d="M10 8l6 4-6 4z" fill="currentColor"/></svg>',
     grid: '<svg viewBox="0 0 24 24"><g fill="currentColor"><rect x="2" y="2" width="5.5" height="5.5" rx="1.3"/><rect x="9.25" y="2" width="5.5" height="5.5" rx="1.3"/><rect x="16.5" y="2" width="5.5" height="5.5" rx="1.3"/><rect x="2" y="9.25" width="5.5" height="5.5" rx="1.3"/><rect x="9.25" y="9.25" width="5.5" height="5.5" rx="1.3"/><rect x="16.5" y="9.25" width="5.5" height="5.5" rx="1.3"/><rect x="2" y="16.5" width="5.5" height="5.5" rx="1.3"/><rect x="9.25" y="16.5" width="5.5" height="5.5" rx="1.3"/><rect x="16.5" y="16.5" width="5.5" height="5.5" rx="1.3"/></g></svg>',
     repost: '<svg viewBox="0 0 24 24"><path d="M19 9.5V8a3 3 0 0 0-3-3H5m0 0 3-3M5 5l3 3M5 14.5V16a3 3 0 0 0 3 3h11m0 0-3-3m3 3-3 3" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-    heart: '<svg viewBox="0 0 24 24"><path d="M16.79 3.9a5 5 0 0 1 4.71 5.22c0 3.07-2.65 4.96-5.2 7.22-2.5 2.25-3.86 3.47-4.3 3.76-.48-.31-2.14-1.83-4.3-3.76C5.14 14.07 2.5 12.17 2.5 9.12A5 5 0 0 1 7.2 3.9a4.2 4.2 0 0 1 3.68 1.94c.84 1.18.98 1.77 1.12 1.77s.28-.59 1.11-1.77a4.17 4.17 0 0 1 3.68-1.94z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>',
-    comment: '<svg viewBox="0 0 24 24"><path d="M20.66 17A9.99 9.99 0 1 0 17.07 20.62L22 22z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>',
+    heart: '<svg viewBox="0 0 24 24"><path d="M12 20.5s-8-4.9-8-11A4.6 4.6 0 0 1 12 6.6a4.6 4.6 0 0 1 8 2.9c0 6.1-8 11-8 11z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>',
+    comment: '<svg viewBox="0 0 24 24"><g transform="translate(12 12.6) scale(.8) translate(-12 -12)"><path d="M20.66 17A9.99 9.99 0 1 0 17.07 20.62L22 22z" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linejoin="round"/></g></svg>',
     send: '<svg viewBox="0 0 24 24"><path d="M21.5 3 2.5 9.5l7.2 3.1L13 21.5zM9.7 12.6 21.5 3" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>',
     bookmark: '<svg viewBox="0 0 24 24"><path d="M5.5 3h13v18L12 14.8 5.5 21z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>',
     saved: '<svg viewBox="0 0 24 24"><path d="M5.5 3h13v18L12 14.8 5.5 21z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>',
@@ -193,6 +193,8 @@
     starFill: '<svg viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3L2.9 9.5l6.3-.9z" fill="currentColor"/></svg>',
     star: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path d="m12 6.8 1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7-3.2 1.7.6-3.6-2.6-2.5 3.6-.5z" fill="currentColor"/></svg>',
     right: '<svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    // 多張照片的貼文：白色實心圓角方塊＋右下的 L 形線
+    multi: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="14.5" height="14.5" rx="3" fill="#fff"/><path d="M21 7.5v10.5a3 3 0 0 1-3 3H7.5" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>',
     clearCircle: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M8.5 8.5l7 7M15.5 8.5l-7 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>',
     close: '<svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
     more: '<svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="19" cy="12" r="1.6" fill="currentColor"/></svg>',
@@ -203,7 +205,7 @@
     addUser: '<svg viewBox="0 0 24 24"><circle cx="14" cy="8" r="4" stroke="currentColor" stroke-width="2" fill="none"/><path d="M6.5 21c.6-4 3.6-6.3 7.5-6.3s6.9 2.3 7.5 6.3M5 6v6M2 9h6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>',
     soundOn: '<svg viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>',
     soundOff: '<svg viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M15.5 9.5l5 5M20.5 9.5l-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
-    heartFill: '<svg viewBox="0 0 24 24"><path d="M16.79 3.9a5 5 0 0 1 4.71 5.22c0 3.07-2.65 4.96-5.2 7.22-2.5 2.25-3.86 3.47-4.3 3.76-.48-.31-2.14-1.83-4.3-3.76C5.14 14.07 2.5 12.17 2.5 9.12A5 5 0 0 1 7.2 3.9a4.2 4.2 0 0 1 3.68 1.94c.84 1.18.98 1.77 1.12 1.77s.28-.59 1.11-1.77a4.17 4.17 0 0 1 3.68-1.94z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
+    heartFill: '<svg viewBox="0 0 24 24"><path d="M12 20.5s-8-4.9-8-11A4.6 4.6 0 0 1 12 6.6a4.6 4.6 0 0 1 8 2.9c0 6.1-8 11-8 11z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
     bookmarkFill: '<svg viewBox="0 0 24 24"><path d="M5.5 3h13v18L12 14.8 5.5 21z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
     plusCircle: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 7.5v9M7.5 12h9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
     link: '<svg viewBox="0 0 24 24"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3.2-3.2a4.5 4.5 0 0 0-6.4-6.4L12 5.6M14 10a4.5 4.5 0 0 0-6.4 0l-3.2 3.2a4.5 4.5 0 0 0 6.4 6.4l1.2-1.2" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>',
@@ -513,7 +515,7 @@
     return '<div class="ig-grid">' + refs.map(function (r) {
       var po = postObj(r.owner.posts[r.idx]);
       return '<a href="' + postHref(r.owner, r.idx) + '"><img src="' + esc(po.images[0]) + '" alt="">' +
-        (po.images.length > 1 ? '<span class="ig-multi"></span>' : '') + '</a>';
+        (po.images.length > 1 ? '<span class="ig-multi">' + ICON.multi + '</span>' : '') + '</a>';
     }).join('') + '</div>';
   }
   // 轉發：data.js 的 reposts（"帳號/貼文編號"）＋玩家按的轉發（新的在前）
@@ -611,7 +613,7 @@
       : (ps.length ? '<div class="ig-grid">' + ps.map(function (x) {
           var po = postObj(x.p);
           return '<a href="' + x.href + '"><img src="' + esc(po.images[0]) + '" alt="">' +
-            (po.images.length > 1 ? '<span class="ig-multi"></span>' : '') + '</a>';
+            (po.images.length > 1 ? '<span class="ig-multi">' + ICON.multi + '</span>' : '') + '</a>';
         }).join('') + '</div>' : '<div class="ig-empty">' + esc(t.noArchive) + '</div>');
     $('#ig-overlay').innerHTML = '';
     $('#ig-scroll').innerHTML =
