@@ -84,16 +84,16 @@
   }
 
   function renderChats() {
-    var list = (K().friends || []).filter(function (f) { return messagesOf(f).some(function (m) { return m.text; }); });
+    var list = (K().friends || []).filter(function (f) { return messagesOf(f).some(function (m) { return m.text || m.image; }); });
     S().$('#kakao-scroll').innerHTML =
       '<div class="kk-head"><h1>' + esc(TX().chatsTitle) + '</h1>' +
         '<span class="kk-head-icons"><button data-na>' + ICON.search + '</button><button data-na>' + ICON.chatAdd + '</button>' +
         '<button data-na>' + ICON.gear + '</button></span></div>' +
       list.map(function (f) {
-        var msgs = messagesOf(f).filter(function (m) { return m.text; }), last = msgs[msgs.length - 1], n = unreadOf(f);
+        var msgs = messagesOf(f).filter(function (m) { return m.text || m.image; }), last = msgs[msgs.length - 1], n = unreadOf(f);
         return '<a class="kk-chatrow" href="#/kakao/chat/' + encodeURIComponent(f.id) + '">' +
           '<img src="' + esc(f.avatar) + '" alt="">' +
-          '<span class="kk-chatrow-mid"><b>' + esc(f.name) + '</b><small>' + esc(last.text) + '</small></span>' +
+          '<span class="kk-chatrow-mid"><b>' + esc(f.name) + '</b><small>' + esc(last.text || TX().photoLabel || '사진') + '</small></span>' +
           '<span class="kk-chatrow-r"><small>' + esc(last.time || '') + '</small>' + (n ? '<i class="kk-badge">' + n + '</i>' : '') + '</span>' +
         '</a>';
       }).join('');
@@ -122,6 +122,12 @@
   }
 
   /* ---- 聊天室 ---- */
+  // 訊息內容：文字泡泡或照片
+  function contentHTML(m, first) {
+    if (m.image) return '<button class="kk-photo" data-photo="' + esc(m.image) + '"><img src="' + esc(m.image) + '" alt="" loading="lazy"></button>';
+    return '<div class="kk-bubble' + (first ? ' tail' : '') + '">' + S().multiline(m.text) + '</div>';
+  }
+
   function bubblesHTML(f) {
     var msgs = messagesOf(f), out = '';
     msgs.forEach(function (m, i) {
@@ -135,14 +141,14 @@
         var unread = m.read !== true && !msgs.slice(i + 1).some(function (x) { return x.from === 'them'; });
         out += '<div class="kk-msg me">' +
           '<span class="kk-meta">' + (unread ? '<i>1</i>' : '') + (showTime ? '<small>' + esc(m.time || '') + '</small>' : '') + '</span>' +
-          '<div class="kk-bubble' + (first ? ' tail' : '') + '">' + S().multiline(m.text) + '</div>' +
+          contentHTML(m, first) +
         '</div>';
       } else {
         out += '<div class="kk-msg them' + (first ? ' first' : '') + '">' +
           (first ? '<img class="kk-av" src="' + esc(f.avatar) + '" alt="">' : '<span class="kk-av"></span>') +
           '<div class="kk-them-col">' +
             (first ? '<div class="kk-name">' + esc(f.name) + '</div>' : '') +
-            '<div class="kk-row"><div class="kk-bubble' + (first ? ' tail' : '') + '">' + S().multiline(m.text) + '</div>' +
+            '<div class="kk-row">' + contentHTML(m, first) +
             (showTime ? '<small class="kk-meta">' + esc(m.time || '') + '</small>' : '') + '</div>' +
           '</div>' +
         '</div>';
@@ -239,6 +245,17 @@
       // 聊天室的返回：回到上一頁（好友或聊天列表）
       e.preventDefault();
       if (history.length > 1) history.back(); else location.hash = '#/kakao';
+      return;
+    }
+    var ph = e.target.closest('[data-photo]');
+    if (ph) {
+      // 點照片 → 全螢幕檢視，點一下關閉
+      var v = document.createElement('div');
+      v.className = 'kk-viewer';
+      v.innerHTML = '<img src="' + esc(ph.dataset.photo) + '" alt="">';
+      v.onclick = function () { v.remove(); S().setDarkStatus(false); };
+      S().$('#kakao-overlay').appendChild(v);
+      S().setDarkStatus(true);
       return;
     }
     if (e.target.closest('[data-na]')) S().toast();
