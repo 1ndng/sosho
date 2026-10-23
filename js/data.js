@@ -215,7 +215,7 @@ window.SITE_DATA = {
       {
         username: "shotaroo0",           // 登入用的帳號，也是頁面上方顯示的帳號名稱
         password: "0000",
-        avatar: "1-0.jpg",
+        avatar: "images/1-0.jpg",
         hasStory: false,
         name: "Shotaro",
         postsCount: "7",
@@ -229,14 +229,14 @@ window.SITE_DATA = {
         ],
         posts: [
       {
-        images: ["2-0.jpg", "2-1.jpg", "2-2.jpg",],
+        images: ["images/2-0.jpg", "images/2-1.jpg", "images/2-2.jpg",],
         likes: "test115",
         likedBy: { avatar: "images/ig_liker.png", name: "test116" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test117",
         time: "test118"
-      }
-          {
-        images: ["1-1.jpg",],
+      },
+      {
+        images: ["images/1-1.jpg",],
         likes: "test115",
         likedBy: { avatar: "images/ig_liker.png", name: "test116" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test117",
@@ -247,7 +247,7 @@ window.SITE_DATA = {
       {
         username: "252525252",           // 登入用的帳號，也是頁面上方顯示的帳號名稱
         password: "031121",
-        avatar: "1-00.jpg",
+        avatar: "images/1-00.jpg",
         hasStory: false,
         name: "SOHEE",
         postsCount: "test93",

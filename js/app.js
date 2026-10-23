@@ -480,7 +480,7 @@
       '<div class="ig-login">' +
         '<div class="ig-login-top">' +
           '<a class="ig-login-back" href="#/ig">' + ICON.back + '</a>' +
-          '<img class="ig-login-logo" src="' + esc(l.logo) + '" alt="">' +
+          (l.logo ? '<img class="ig-login-logo" src="' + esc(l.logo) + '" alt="">' : '') +
         '</div>' +
         '<form class="ig-login-form" autocomplete="off">' +
           '<input type="text" name="u" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="' + esc(l.usernamePlaceholder) + '" autocomplete="off">' +
