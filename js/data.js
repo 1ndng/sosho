@@ -12,11 +12,11 @@ window.SITE_DATA = {
   /* ---------- 手機首頁 ---------- */
   home: {
     wallpaper: "images/wallpaper.jpg",
+    // 這些 App 放在桌布下方的 Dock（和 iPhone 一樣最多 4 個、不顯示名稱）
     apps: [
       { id: "forum", label: "ANNMS Talk", icon: "images/icon_forum.png" },
       { id: "ig",    label: "Instagram", icon: "images/icon_insta.png" },
       { id: "phone", label: "電話", icon: "images/icon_phone.png" },
-      { id: "photos", label: "相簿", icon: "images/icon_photos.png" },
       { id: "kakao", label: "KakaoTalk", icon: "images/icon_kakao.png" }
     ]
   },
@@ -322,27 +322,6 @@ window.SITE_DATA = {
       { date: "昨天", name: "test140", count: 1, missed: false, outgoing: true, type: "行動電話", time: "test148" },
       { date: "星期一", name: "test141", count: 1, missed: false, outgoing: false, type: "行動電話", time: "test149" },
       { date: "星期一", name: "test142", count: 2, missed: true, outgoing: false, type: "行動電話", time: "test150" }
-    ]
-  },
-
-  /* ---------- 相簿 ---------- */
-  photos: {
-    title: "圖庫",
-    countText: "{n} 張照片",
-    // 照片：由舊到新（最新的在最下面，和 iPhone 一樣）
-    items: [
-      { image: "images/photo_1.png", date: "test151" },
-      { image: "images/photo_2.png", date: "test152" },
-      { image: "images/photo_3.png", date: "test153" },
-      { image: "images/photo_4.png", date: "test154" },
-      { image: "images/photo_5.png", date: "test155" },
-      { image: "images/photo_6.png", date: "test156" },
-      { image: "images/photo_7.png", date: "test157" },
-      { image: "images/photo_8.png", date: "test158" },
-      { image: "images/photo_9.png", date: "test159" },
-      { image: "images/photo_10.png", date: "test160" },
-      { image: "images/photo_11.png", date: "test161" },
-      { image: "images/photo_12.png", date: "test162" }
     ]
   },
 

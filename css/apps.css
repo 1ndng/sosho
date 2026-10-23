@@ -1,4 +1,4 @@
-/* 電話、相簿、KakaoTalk */
+/* 電話、KakaoTalk */
 .app-overlay { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
 .app-overlay > * { pointer-events: auto; }
 
@@ -56,30 +56,6 @@
 .ph-end { width: 72px; height: 72px; border-radius: 50%; background: #ff3b30; color: #fff; margin-top: 46px; display: inline-flex; align-items: center; justify-content: center; }
 .ph-end svg { width: 34px; height: 34px; }
 .ph-end-label { font-size: 13px; margin-top: 6px; }
-
-/* =========================================================
- * 相簿（iOS 照片）
- * ========================================================= */
-.photos-app .app-scroll { background: #fff; color: #000; }
-.pt-head { padding: 8px 16px 10px; display: flex; align-items: baseline; justify-content: space-between; }
-.pt-head h1 { font-size: 34px; margin: 0; }
-.pt-head span { color: #8a8a8e; font-size: 14px; }
-.pt-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
-.pt-grid a { aspect-ratio: 1; overflow: hidden; background: #eee; }
-.pt-grid img { width: 100%; height: 100%; object-fit: cover; }
-.pt-view { position: absolute; inset: 0; z-index: 3; background: #fff; display: flex; flex-direction: column; padding: 44px 0 34px; }
-.pt-view-top { display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; height: 44px; padding: 0 6px; }
-.pt-back { color: #007aff; display: flex; align-items: center; justify-content: center; height: 44px; }
-.pt-back svg { width: 24px; height: 24px; }
-.pt-date { text-align: center; font-size: 15px; font-weight: 600; }
-.pt-strip { flex: 1; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
-.pt-strip::-webkit-scrollbar { display: none; }
-.pt-slide { flex: none; width: 100%; height: 100%; scroll-snap-align: center; display: flex; align-items: center; justify-content: center; }
-.pt-slide img { max-width: 100%; max-height: 100%; object-fit: contain; }
-.pt-bar { display: flex; justify-content: space-around; height: 50px; align-items: center; border-top: .5px solid #e5e5ea; }
-.pt-bar button { color: #007aff; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; }
-.pt-bar button.on { color: #ff2d55; }
-.pt-bar svg { width: 25px; height: 25px; }
 
 /* =========================================================
  * KakaoTalk

@@ -35,12 +35,12 @@
     var h = D.home;
     var home = $('#home');
     home.style.backgroundImage = 'url("' + h.wallpaper + '")';
+    // 桌布下方的 Dock（和 iPhone 一樣不顯示名稱）
     home.innerHTML =
-      '<div class="home-grid">' +
+      '<div class="home-dock">' +
       h.apps.map(function (a) {
-        return '<a class="app-icon" href="#/' + esc(a.id) + '">' +
-          '<img src="' + esc(a.icon) + '" alt="">' +
-          '<span>' + esc(a.label) + '</span></a>';
+        return '<a class="app-icon" href="#/' + esc(a.id) + '" aria-label="' + esc(a.label) + '">' +
+          '<img src="' + esc(a.icon) + '" alt=""></a>';
       }).join('') +
       '</div>';
   }
