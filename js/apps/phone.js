@@ -154,13 +154,18 @@
     document.getElementById('ph-kp-del').style.visibility = dialed ? 'visible' : 'hidden';
   }
   // 撥出的號碼在 dialable 裡 → 顯示對應的名字
-  function nameForNumber(num) {
-    var hit = (P().dialable || []).filter(function (d) { return String(d.number).replace(/\D/g, '') === num.replace(/\D/g, ''); })[0];
-    return hit && hit.name ? hit.name : num;
+  function dialEntry(num) {
+    return (P().dialable || []).filter(function (d) { return String(d.number).replace(/\D/g, '') === num.replace(/\D/g, ''); })[0] || null;
+  }
+  // 顯示的名字：有寫 name 用 name，不然顯示號碼（和 iPhone 一樣，不在聯絡人裡就顯示號碼）
+  function labelForNumber(num) {
+    var hit = dialEntry(num);
+    return hit && hit.name ? hit.name : (hit ? hit.number : num);
   }
 
-  // 撥號畫面：3 秒後顯示「無人接聽」，按結束後把這通電話加進最近通話
-  function startCall(name) {
+  // 撥號畫面：一般號碼 3 秒後顯示「無人接聽」；有 script 的號碼會接通、跑字幕對話
+  // 按結束（或對話結束）後把這通電話加進最近通話
+  function startCall(name, entry) {
     var p = P(), esc = S().esc;
     var btns = p.callButtons || [];
     var ov = document.createElement('div');
@@ -171,19 +176,110 @@
       '<div class="ph-calling-grid">' + btns.map(function (b) {
         return '<button data-na><span></span>' + esc(b) + '</button>';
       }).join('') + '</div>' +
+      '<div class="ph-captions" id="ph-captions"></div>' +
+      '<div class="ph-choices" id="ph-choices"></div>' +
       '<button class="ph-end" data-end="' + esc(name) + '">' + ICON.end + '</button>' +
       '<div class="ph-end-label">' + esc(p.endLabel) + '</div>';
     S().$('#phone-overlay').appendChild(ov);
     S().setDarkStatus(true);
     clearTimeout(callTimer);
-    callTimer = setTimeout(function () {
-      var st = document.getElementById('ph-status');
-      if (st) st.textContent = p.noAnswerText;
-    }, 3000);
+    if (entry && entry.script) {
+      callTimer = setTimeout(function () { connect(ov, name, entry.script); }, entry.ringMs || 2200);
+    } else {
+      callTimer = setTimeout(function () {
+        var st = document.getElementById('ph-status');
+        if (st) st.textContent = p.noAnswerText;
+      }, 3000);
+    }
+  }
+
+  /* ---- 接通後的字幕對話 ---- */
+  var talk = null;   // { script, node, line, timer, clock, secs }
+  function fmtSecs(n) { return String(Math.floor(n / 60)).padStart(2, '0') + ':' + String(n % 60).padStart(2, '0'); }
+
+  function connect(ov, name, script) {
+    ov.classList.add('connected');
+    stopTalk();
+    talk = { script: script, name: name, secs: 0 };
+    var st = document.getElementById('ph-status');
+    st.textContent = fmtSecs(0);
+    talk.clock = setInterval(function () { talk.secs++; st.textContent = fmtSecs(talk.secs); }, 1000);
+    goNode(script.start || 'start');
+  }
+  function stopTalk() {
+    if (!talk) return;
+    clearInterval(talk.clock); clearTimeout(talk.timer);
+    talk = null;
+  }
+  function goNode(id) {
+    if (!talk) return;
+    var node = (talk.script.nodes || {})[id];
+    if (!node) { hangUp(); return; }
+    talk.node = node; talk.line = 0;
+    if (node.flag) markFlag(node.flag);
+    S().$('#ph-choices').innerHTML = '';
+    nextLine();
+  }
+  // 一句一句顯示；點字幕可以跳到下一句
+  function nextLine() {
+    if (!talk) return;
+    clearTimeout(talk.timer);
+    var node = talk.node, lines = node.lines || [];
+    if (talk.line >= lines.length) { afterLines(); return; }
+    var l = lines[talk.line++], esc = S().esc;
+    var box = S().$('#ph-captions');
+    var el = document.createElement('div');
+    el.className = 'ph-cap ' + (l.who === 'me' ? 'me' : 'them');
+    el.innerHTML = '<div class="ph-cap-text">' + esc(l.text) + '</div>' + (l.sub ? '<div class="ph-cap-sub">' + esc(l.sub) + '</div>' : '');
+    box.appendChild(el);
+    box.scrollTop = box.scrollHeight;
+    var len = String(l.text || '').length + String(l.sub || '').length * .5;
+    talk.timer = setTimeout(nextLine, l.ms || Math.min(4500, 1200 + len * 60));
+  }
+  function afterLines() {
+    var node = talk.node, esc = S().esc;
+    if (node.choices && node.choices.length) {
+      S().$('#ph-choices').innerHTML = node.choices.map(function (c, i) {
+        return '<button class="ph-choice" data-choice="' + i + '">' + esc(c.label) + (c.sub && c.sub !== c.label ? '<small>' + esc(c.sub) + '</small>' : '') + '</button>';
+      }).join('');
+      var box = S().$('#ph-captions');
+      box.scrollTop = box.scrollHeight;   // 選項出現後字幕區變矮，捲到最後一句
+      return;
+    }
+    // 沒有選項 = 對話結束，稍等一下自動掛斷
+    talk.timer = setTimeout(hangUp, 1600);
+  }
+  function choose(i) {
+    if (!talk) return;
+    var c = (talk.node.choices || [])[i];
+    if (!c) return;
+    S().$('#ph-choices').innerHTML = '';
+    if (c.hangup) { hangUp(); return; }
+    // 玩家選的那句如果要說出口，就先顯示成「我」的字幕
+    if (c.say !== false && !c.hangup) {
+      var box = S().$('#ph-captions'), el = document.createElement('div');
+      el.className = 'ph-cap me';
+      el.innerHTML = '<div class="ph-cap-text">' + S().esc(c.say || c.label) + '</div>' + (c.sub ? '<div class="ph-cap-sub">' + S().esc(c.sub) + '</div>' : '');
+      box.appendChild(el); box.scrollTop = box.scrollHeight;
+    }
+    talk.timer = setTimeout(function () { goNode(c.next); }, 900);
+  }
+  function hangUp() {
+    var name = talk ? talk.name : '';
+    stopTalk();
+    var st = document.getElementById('ph-status');
+    if (st) st.textContent = P().endedText || '通話結束';
+    setTimeout(function () { endCall(name); }, 900);
+  }
+  // 進度紀錄（之後「全部線索解開」會用到）
+  function markFlag(f) {
+    var pr = S().load('sosho-progress', {});
+    pr[f] = 1; S().save('sosho-progress', pr);
   }
 
   function endCall(name) {
     clearTimeout(callTimer);
+    stopTalk();
     S().setDarkStatus(false);
     var p = P(), st = S().load(KEY, { calls: [] });
     var first = st.calls[0];
@@ -201,6 +297,7 @@
   function route(parts) {
     current = parts;
     clearTimeout(callTimer);
+    stopTalk();
     if (parts[0] === 'info' && parts[1]) renderInfo(parts[1]);
     else if (parts[0] === 'keypad') renderKeypad();
     else renderList();
@@ -214,9 +311,17 @@
     if ((el = e.target.closest('[data-filter]'))) { filter = el.dataset.filter; renderList(); return; }
     if ((el = e.target.closest('[data-key]'))) { if (dialed.length < 20) dialed += el.dataset.key; paintNumber(); return; }
     if (e.target.closest('[data-del]')) { dialed = dialed.slice(0, -1); paintNumber(); return; }
-    if (e.target.closest('[data-dial]')) { if (dialed) startCall(nameForNumber(dialed)); return; }
+    if (e.target.closest('[data-dial]')) { if (dialed) startCall(labelForNumber(dialed), dialEntry(dialed)); return; }
+    if ((el = e.target.closest('[data-choice]'))) { choose(+el.dataset.choice); return; }
+    if (e.target.closest('.ph-cap') && talk && !(talk.node.choices && talk.line >= (talk.node.lines || []).length)) { nextLine(); return; }
     if ((el = e.target.closest('[data-end]'))) { endCall(el.dataset.end); return; }
-    if ((el = e.target.closest('[data-call]'))) { startCall(el.dataset.call); return; }
+    if ((el = e.target.closest('[data-call]'))) {
+      // 從通話記錄再撥一次：名字或號碼對得上 dialable 的話一樣會接通
+      var nm = el.dataset.call;
+      var hit = (P().dialable || []).filter(function (d) { return d.name === nm || String(d.number) === nm; })[0] || dialEntry(nm);
+      startCall(nm, hit);
+      return;
+    }
     if (e.target.closest('[data-na]')) S().toast();
   });
 

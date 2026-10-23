@@ -389,7 +389,62 @@ window.SITE_DATA = {
     tabs: ["通話記錄", "聯絡人", "數字鍵盤"],
     // 數字鍵盤可以撥出的號碼（之後再補）：撥這些號碼時，撥號畫面會顯示 name
     // 例：{ number: "0912345678", name: "某某某" }；不在清單裡的號碼一樣能撥，但只會顯示號碼、無人接聽
-    dialable: [],
+    dialable: [
+      {
+        number: "0267-48-3615",          // 秘境咖啡廳（日本長野・輕井澤一帶的市話）；玩家輸入 0267483615 就能撥
+        // 沒寫 name → 撥號畫面和通話記錄只顯示號碼（不在聯絡人裡）
+        // 接通後的對話：nodes 裡每一段有 lines（逐句字幕）和 choices（選項）
+        //   lines：who = "them" 對方 / "me" 玩家；text = 字幕；sub = 字幕下面的小字（例如日文的中文翻譯）
+        //   choices：label = 按鈕文字；next = 接到哪一段；hangup: true = 直接掛斷；say: false = 選了不會顯示成玩家說的話
+        //   沒有 choices 的段落講完就自動掛斷；flag = 走到這段時記錄進度（之後解鎖結局用）
+        script: {
+          start: "greet",
+          nodes: {
+            greet: {
+              lines: [
+                { who: "them", text: "お電話ありがとうございます！（待取名）カフェでございます～", sub: "您好～這裡是（待取名）咖啡廳！" }
+              ],
+              choices: [
+                { label: "不⋯不好意思我打錯了><", say: "す、すみません、間違えました><", sub: "不⋯不好意思我打錯了><", next: "wrong" },
+                { label: "（直接掛斷）", hangup: true },
+                { label: "我是看到其他人推薦所以打來的！", next: "recommend" }
+              ]
+            },
+            wrong: {
+              lines: [
+                { who: "them", text: "（待寫）" }
+              ]
+            },
+            recommend: {
+              lines: [
+                { who: "them", text: "哇謝謝你——或許是看了Shotaro桑的影片嗎？" },
+                { who: "me", text: "哈哈其實不是啦⋯⋯看到有人在論壇上討論所以⋯⋯但原來taro桑有推薦過嗎！" },
+                { who: "them", text: "哎呀真是不好意思！但實在太多人因為Shotaro桑而前來本店，我們真的特別感謝他。" }
+              ],
+              choices: [
+                { label: "想知道更多細節", say: false, next: "detail" }
+              ]
+            },
+            detail: {
+              flag: "cafe_call",
+              lines: [
+                { who: "them", text: "嗯⋯⋯記得是在去年的（）月上旬，Shotaro桑和一位不是日本人的朋友一起過來的，（劇情，尚未想好）" },
+                { who: "them", text: "還有什麼好奇的嗎？" }
+              ],
+              choices: [
+                { label: "沒有了", next: "bye" }
+              ]
+            },
+            bye: {
+              lines: [
+                { who: "them", text: "那就期待您未來的光臨囉。ありがとうございました~" }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    endedText: "通話結束",
     callingText: "正在撥號⋯",
     noAnswerText: "無人接聽",
     callButtons: ["靜音", "鍵盤", "擴音", "加入通話", "FaceTime", "聯絡人"],
@@ -424,7 +479,7 @@ window.SITE_DATA = {
     friends: [
       {
         id: "f1",                       // 不要重複（用於網址）
-        name: "SOHEE",                    // 252525252
+        name: "李炤熙",                   // 252525252
         status: "test166",                  // 狀態訊息
         avatar: "images/2_avatar.jpg",
         unread: 2,       // 一開始在聊天列表顯示的未讀數
@@ -458,7 +513,7 @@ window.SITE_DATA = {
       },
       {
         id: "f2",                       // 不要重複（用於網址）
-        name: "test177",
+        name: "朴元彬",                   // 來韓國後舞室認識的朋友
         status: "test178",                  // 狀態訊息
         avatar: "images/kakao_f2.png",
         unread: 0,       // 一開始在聊天列表顯示的未讀數
@@ -476,7 +531,7 @@ window.SITE_DATA = {
       },
       {
         id: "f3",                       // 不要重複（用於網址）
-        name: "test189",
+        name: "李燦榮",                   // 李炤熙的朋友
         status: "test190",                  // 狀態訊息
         avatar: "images/kakao_f3.png",
         unread: 0,       // 一開始在聊天列表顯示的未讀數
@@ -491,6 +546,26 @@ window.SITE_DATA = {
           { keywords: ["test198"], reply: ["test199", "test200"] }
         ],
         defaultReply: []                  // 沒有符合任何關鍵字時的回覆；空的 = 不回
+      },
+      {
+        id: "f4",
+        name: "鄭成燦",                   // 留學時認識的朋友
+        status: "",
+        avatar: "images/kakao_f4.png",
+        unread: 0,
+        messages: [],
+        replies: [],
+        defaultReply: []
+      },
+      {
+        id: "f5",
+        name: "宋恩奭",                   // 留學時認識的朋友
+        status: "",
+        avatar: "images/kakao_f5.png",
+        unread: 0,
+        messages: [],
+        replies: [],
+        defaultReply: []
       }
     ],
     // 介面文字（韓文版 KakaoTalk）

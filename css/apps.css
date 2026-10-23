@@ -174,3 +174,23 @@
 .kk-viewer img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
 .kk-me-tag { font-style: normal; display: inline-block; background: #505050; color: #fff; font-size: 10px; font-weight: 700; border-radius: 50%; width: 17px; height: 17px; line-height: 17px; text-align: center; margin-left: 5px; vertical-align: 2px; }
+
+/* 接通後：字幕＋選項（取代按鈕格） */
+.ph-calling { display: flex; flex-direction: column; align-items: center; }
+.ph-calling .ph-end { margin-top: auto; margin-bottom: 0; }
+.ph-calling .ph-end-label { margin-bottom: 58px; }
+.ph-calling-grid { margin-bottom: 0; align-self: stretch; }
+.ph-captions, .ph-choices { display: none; }
+.ph-calling.connected .ph-calling-grid { display: none; }
+.ph-calling.connected .ph-captions { display: block; width: 100%; flex: 1; min-height: 0; overflow-y: auto; padding: 26px 22px 10px; text-align: left; }
+.ph-calling.connected .ph-choices { display: flex; flex-direction: column; gap: 8px; width: 100%; padding: 0 22px 14px; }
+.ph-cap { margin-bottom: 14px; animation: capin .35s ease-out; max-width: 88%; cursor: pointer; }
+.ph-cap.me { margin-left: auto; text-align: right; }
+.ph-cap-text { font-size: 17px; line-height: 1.45; }
+.ph-cap.them .ph-cap-text { color: #fff; }
+.ph-cap.me .ph-cap-text { color: #8fd3ff; }
+.ph-cap-sub { font-size: 13px; color: rgba(255,255,255,.6); margin-top: 3px; }
+@keyframes capin { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.ph-choice { width: 100%; padding: 12px 16px; border-radius: 14px; background: rgba(255,255,255,.16); color: #fff; font-size: 15px; text-align: left; line-height: 1.35; animation: capin .3s ease-out; }
+.ph-choice:active { background: rgba(255,255,255,.3); }
+.ph-choice small { display: block; font-size: 12px; color: rgba(255,255,255,.6); margin-top: 2px; }
