@@ -186,6 +186,7 @@
     check: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#3b6ef5"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     back: '<svg viewBox="0 0 24 24"><path d="M15 4l-8 8 8 8" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     menu: '<svg viewBox="0 0 24 24"><path d="M3 5h18M3 12h18M3 19h18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
+    pause: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path d="M9.5 8v8M14.5 8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
     play: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path d="M10 8l6 4-6 4z" fill="currentColor"/></svg>',
     grid: '<svg viewBox="0 0 24 24"><g fill="currentColor"><rect x="2" y="2" width="5.5" height="5.5" rx="1.3"/><rect x="9.25" y="2" width="5.5" height="5.5" rx="1.3"/><rect x="16.5" y="2" width="5.5" height="5.5" rx="1.3"/><rect x="2" y="9.25" width="5.5" height="5.5" rx="1.3"/><rect x="9.25" y="9.25" width="5.5" height="5.5" rx="1.3"/><rect x="16.5" y="9.25" width="5.5" height="5.5" rx="1.3"/><rect x="2" y="16.5" width="5.5" height="5.5" rx="1.3"/><rect x="9.25" y="16.5" width="5.5" height="5.5" rx="1.3"/><rect x="16.5" y="16.5" width="5.5" height="5.5" rx="1.3"/></g></svg>',
     repost: '<svg viewBox="0 0 24 24"><path d="M19 9.5V8a3 3 0 0 0-3-3H5m0 0 3-3M5 5l3 3M5 14.5V16a3 3 0 0 0 3 3h11m0 0-3-3m3 3-3 3" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
@@ -379,7 +380,7 @@
       (bio.length ? '<div class="ig-bio">' + bio.map(function (l) { return '<div>' + bioLine(l, g) + '</div>'; }).join('') + '</div>' : '') +
 
       (g.music && g.music.title ?
-        '<button class="ig-music"' + na + '>' + ICON.play +
+        '<button class="ig-music' + (music && music.src.indexOf(g.music.file) !== -1 && !music.paused ? ' playing' : '') + '"' + (g.music.file ? ' data-music="' + esc(g.music.file) + '"' : na) + '>' + ICON.play + ICON.pause +
           '<b>' + esc(g.music.title) + '</b><span> · ' + esc(g.music.artist) + '</span></button>' : '') +
 
       (visitor
@@ -1229,6 +1230,8 @@
       }
       return;
     }
+    var mu = e.target.closest('[data-music]');
+    if (mu) { toggleMusic(mu); return; }
     var sw = e.target.closest('[data-switch]');
     if (sw) {
       accState.current = sw.dataset.switch;
@@ -1299,7 +1302,20 @@
     $('#phone').classList.add('on-home');
   }
 
+  /* ---------------- IG 個人頁音樂（audio/ 資料夾） ---------------- */
+  var music = null;
+  function toggleMusic(btn) {
+    var src = btn.getAttribute('data-music');
+    if (!music) { music = new Audio(); music.loop = true; }
+    if (music.src.indexOf(src) === -1) music.src = src;
+    if (music.paused) {
+      music.play().then(function () { btn.classList.add('playing'); }, function () { toast(); });
+    } else { music.pause(); btn.classList.remove('playing'); }
+  }
+  function stopMusic() { if (music && !music.paused) music.pause(); }
+
   function route() {
+    stopMusic();
     try { doRoute(); } catch (err) {
       console.error(err);
       toast('data.js 有欄位填錯：' + err.message);

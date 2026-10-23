@@ -6,8 +6,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#000000">
   <title>sosho</title>
-  <link rel="stylesheet" href="css/style.css?v=38">
-  <link rel="stylesheet" href="css/apps.css?v=38">
+  <link rel="stylesheet" href="css/style.css?v=39">
+  <link rel="stylesheet" href="css/apps.css?v=39">
 </head>
 <body>
   <div class="phone" id="phone">
@@ -68,9 +68,15 @@
   </div>
 
   <!-- data.js 每次都重新下載，改完內容不會被手機快取卡住 -->
-  <script>document.write('<script src="js/data.js?t=' + Date.now() + '"><\/script>');</script>
-  <script src="js/apps/phone.js?v=38"></script>
-  <script src="js/apps/kakao.js?v=38"></script>
-  <script src="js/app.js?v=38"></script>
+  <script>
+    var t = Date.now();
+    document.write('<script src="js/data.js?t=' + t + '"><\/script>');
+    // media.js = GitHub 自動產生的檔案清單；automedia.js 依檔名把新圖片自動放進網頁
+    document.write('<script src="js/media.js?t=' + t + '"><\/script>');
+    document.write('<script src="js/automedia.js?t=' + t + '"><\/script>');
+  </script>
+  <script src="js/apps/phone.js?v=39"></script>
+  <script src="js/apps/kakao.js?v=39"></script>
+  <script src="js/app.js?v=39"></script>
 </body>
 </html>
