@@ -137,8 +137,10 @@ img { display: block; max-width: 100%; }
 /* 文章列表佔滿寬度在上方；廣告兩個左右並排在底部；淺色小字在最下面 */
 .f-body { flex: 1 0 auto; display: flex; flex-direction: column; gap: 10px; padding: 8px 6px 0; }
 .f-main { min-width: 0; }
-.f-ads { margin-top: auto; display: flex; gap: 8px; align-items: flex-end; }
-.f-ads .ad { flex: 1; min-width: 0; }
+/* 廣告：橫條，上下兩則；圖片／影片會裁成 3:1 填滿橫條 */
+.f-ads { margin-top: auto; display: flex; flex-direction: column; gap: 8px; }
+.f-ads .ad { width: 100%; aspect-ratio: 3 / 1; }
+.f-ads .ad img, .f-ads .ad video { width: 100%; height: 100%; object-fit: cover; }
 
 .f-box {
   background: #fff; border: 3px solid #3b6db8; border-radius: 12px; overflow: hidden;
@@ -162,7 +164,7 @@ img { display: block; max-width: 100%; }
   box-shadow: 0 2px 0 #e6c79f;
 }
 .ad:nth-child(odd) { border-color: #6aa3e0; box-shadow: 0 2px 0 #b9cde8; }
-.ad img { width: 100%; height: auto; }
+.ad img, .ad video { width: 100%; height: auto; display: block; pointer-events: none; }
 .ad:active { filter: brightness(.9); }
 
 .f-footer { flex: none; padding: 10px 10px 8px; text-align: center; color: #b3c0d1; font-size: 10px; }

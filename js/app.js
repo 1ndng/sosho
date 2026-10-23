@@ -91,6 +91,17 @@
     return '<footer class="f-footer">' + esc(f.copyright) + '</footer>';
   }
 
+  // 廣告可以是圖片或影片：影片會靜音、自動循環播放。
+  // 上傳同檔名的影片（例如 ad_1.mp4）就會自動取代 data.js 裡的 ad_1.png
+  function adMedia(src) {
+    var base = String(src || '').replace(/\.\w+$/, '');
+    var vid = /\.(mp4|mov|webm)$/i.test(src || '') ? src
+      : (window.SITE_MEDIA || []).filter(function (m) { return m === base + '.mp4'; })[0];
+    return vid
+      ? '<video src="' + esc(vid) + '" autoplay muted loop playsinline preload="auto" disablepictureinpicture></video>'
+      : '<img src="' + esc(src) + '" alt="">';
+  }
+
   function renderForumList() {
     var f = D.forum;
     var list = (f.posts || []).map(function (p) {
@@ -101,13 +112,13 @@
     }).join('');
 
     var ads = (f.ads || []).map(function (a, i) {
+      var media = adMedia(a.image);
       if (a.ending) {
         // 還沒登入小帳：看起來跟一般廣告一樣，只是點了沒反應
-        return '<a class="ad" href="#/ending" data-ad="' + i + '"><img src="' + esc(a.image) + '" alt=""></a>';
+        return '<a class="ad" href="#/ending" data-ad="' + i + '">' + media + '</a>';
       }
       return '<a class="ad" href="' + (a.link ? esc(a.link) : '#') + '" data-ad="' + i + '"' +
-        (a.link ? ' target="_blank" rel="noopener"' : '') + '>' +
-        '<img src="' + esc(a.image) + '" alt=""></a>';
+        (a.link ? ' target="_blank" rel="noopener"' : '') + '>' + media + '</a>';
     }).join('');
 
     $('#forum-scroll').innerHTML =
