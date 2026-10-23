@@ -309,7 +309,6 @@ window.SITE_DATA = {
               { image: "images/1_story_20260123.jpg", time: "1月23日" },
               { image: "images/1_story2_20260128.jpg", time: "1月28日", closeFriends: true },
               { image: "images/1_story_20260202.jpg", time: "2月2日" },
-              { image: "images/1_story_20260213.jpg", time: "2月13日" },
               { image: "images/1_story_20260227.jpg", time: "2月27日" },
               { image: "images/1_story_20260401.jpg", time: "4月1日" },
               { image: "images/1_story2_260426.jpg", time: "4月26日", closeFriends: true },
