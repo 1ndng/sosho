@@ -122,37 +122,17 @@ window.SITE_DATA = {
           { image: "images/story3_20261011.jpg", time: "10月11日" },
           { image: "images/story3_20261021.jpg", time: "10月21日" },
           { image: "images/story3_20261022.jpg", time: "10月22日" }
-        ] },
-      { image: "images/ig_highlight_2.png", label: "🕺",
-        stories: [
-          { image: "images/ig_hl2_story_1.png", time: "test105" },
-          { image: "images/ig_hl2_story_2.png", time: "test106" }
-        ] },
-      { image: "images/ig_highlight_3.png", label: "ㅇㄱ",
-        stories: [
-          { image: "images/ig_hl3_story_1.png", time: "test107" },
-          { image: "images/ig_hl3_story_2.png", time: "test108" }
-        ] },
-      { image: "images/ig_highlight_4.png", label: "しゅう",
-        stories: [
-          { image: "images/ig_hl4_story_1.png", time: "test109" },
-          { image: "images/ig_hl4_story_2.png", time: "test110" }
         ] }
     ],
     // 貼文：images 可放多張（左右滑動）；格子上顯示第一張
+    // 需要時可以加：comments: [{ user: "帳號", text: "留言", time: "1天" }]、tagged: ["被標註的帳號"]
     posts: [
       {
         images: ["images/post3_1.jpg"],
         likes: "test111",
         likedBy: { avatar: "images/ig_liker.png", name: "test112" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test113",
-        time: "test114",
-        // 留言：user 寫帳號 id（有這個帳號會自動用它的頭像，沒有就用 avatar）
-        comments: [
-          { user: "shotaroo0", text: "test135", time: "test136" },
-          { user: "test137", avatar: "images/ig_liker.png", text: "test138", time: "test139" }
-        ],
-        tagged: ["shotaroo0"]   // 被標註的帳號 → 會出現在對方個人頁的「被標註」分頁
+        time: "test114"
       },
       {
         images: ["images/post3_2.jpg"],
@@ -272,8 +252,7 @@ window.SITE_DATA = {
             stories: [
               { image: "images/story1_1007.jpg", time: "10月7日" },
               { image: "images/story1_1012.jpg", time: "10月12日" }
-            ] },
-          { image: "images/ig2_highlight_2.png", label: "test91" }
+            ] }
         ],
         posts: [
       {
@@ -348,8 +327,7 @@ window.SITE_DATA = {
               { image: "images/story2_250722.jpg", time: "2025年7月22日" },
               { image: "images/story1001.jpg", time: "10月1日" },
               { image: "images/story2_1004.jpg", time: "10月4日" }
-            ] },
-          { image: "images/ig3_highlight_2.png", label: "test100" }
+            ] }
         ],
         posts: [
       {
