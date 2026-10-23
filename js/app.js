@@ -143,6 +143,7 @@
     home: '<svg viewBox="0 0 24 24"><path d="M3.5 10.5 12 3l8.5 7.5V21h-5.5v-6h-6v6H3.5z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>',
     add: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 7.5v9M7.5 12h9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
     reels: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2" fill="none"/><path d="M3 8.5h18M8.5 3l3 5.5M14 3l3 5.5" stroke="currentColor" stroke-width="2" fill="none"/><path d="M10 11.5v6l5-3z" fill="currentColor"/></svg>',
+    addUser: '<svg viewBox="0 0 24 24"><circle cx="14" cy="8" r="4" stroke="currentColor" stroke-width="2" fill="none"/><path d="M6.5 21c.6-4 3.6-6.3 7.5-6.3s6.9 2.3 7.5 6.3M5 6v6M2 9h6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>',
     tagged: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" fill="none"/><path d="M6.5 20.5c1-3 3-4.3 5.5-4.3s4.5 1.3 5.5 4.3" stroke="currentColor" stroke-width="2" fill="none"/></svg>'
   };
 
@@ -171,6 +172,16 @@
     }));
   }
 
+  // 看過的限時動態、追蹤狀態（存在瀏覽器裡）
+  var STORE_KEY = 'sosho-ig-state';
+  var store = { seen: {}, follows: {} };
+  try { var saved = JSON.parse(localStorage.getItem(STORE_KEY)); if (saved) { store.seen = saved.seen || {}; store.follows = saved.follows || {}; } } catch (e) {}
+  function saveStore() {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); } catch (e) {}
+  }
+  // 追蹤是「目前登入的帳號」追蹤「對方」，換帳號登入就各自分開
+  function followKey(g) { return currentAccount().username + '>' + g.username; }
+
   // 搜尋得到的所有帳號：主帳號 + 可登入帳號 + 只能被搜尋的帳號
   function allProfiles() {
     return [D.instagram].concat(otherAccounts(), D.instagram.searchOnlyAccounts || []);
@@ -185,6 +196,8 @@
     g = g || currentAccount();
     base = base || '#/ig';
     var visitor = base !== '#/ig';   // true = 從搜尋點進去看別人的頁面
+    var ring = g.hasStory ? ' has-story' + (store.seen[g.username] ? ' seen' : '') : '';
+    var followed = visitor && store.follows[followKey(g)];
     // 欄位被刪掉或註解掉時也不會整頁空白
     var bio = g.bio || [], highlights = g.highlights || [], posts = g.posts || [];
     var na = ' data-na';   // 標記：點擊後跳出「尚未更新」
@@ -205,10 +218,10 @@
           '</div>') +
 
       '<div class="ig-profile">' +
-        // 有限時動態 → 點頭像進入；沒有 → 尚未更新
+        // 有限時動態 → 點頭像進入；沒有 → 尚未更新。看過的限時動態外框變淺灰色
         (g.story && g.story.length
-          ? '<a class="ig-avatar' + (g.hasStory ? ' has-story' : '') + '" href="' + base + '/story/me">'
-          : '<button class="ig-avatar' + (g.hasStory ? ' has-story' : '') + '"' + na + '>') +
+          ? '<a class="ig-avatar' + ring + '" href="' + base + '/story/me">'
+          : '<button class="ig-avatar' + ring + '"' + na + '>') +
           '<img src="' + esc(g.avatar) + '" alt="">' +
         (g.story && g.story.length ? '</a>' : '</button>') +
         '<div class="ig-right">' +
@@ -229,8 +242,11 @@
 
       (visitor
         ? '<div class="ig-btns ig-btns-visit">' +
-            '<button' + na + '>' + esc(L.followLabel) + '</button>' +
+            (followed
+              ? '<button class="ig-following" data-follow>' + esc(L.followingButtonLabel) + ICON.chevron + '</button>'
+              : '<button class="ig-follow" data-follow>' + esc(L.followLabel) + '</button>') +
             '<button' + na + '>' + esc(L.messageLabel) + '</button>' +
+            '<button class="ig-btn-sq"' + na + '>' + ICON.addUser + '</button>' +
           '</div>'
         : '<div class="ig-btns">' +
             '<button>' + esc(L.editProfileLabel) + '</button>' +
@@ -370,6 +386,7 @@
       items = h ? (h.stories && h.stories.length ? h.stories : [{ image: h.image }]) : [];
     }
     if (!items.length) { location.replace(base); return; }
+    if (which === 'me') { store.seen[g.username] = 1; saveStore(); }
     renderIG(g, base);   // 背後保留個人頁，關掉時直接回到這裡
     $('#phone').classList.add('dark-status');
     var i = 0;
@@ -492,6 +509,18 @@
   }
 
   $('#app-ig').addEventListener('click', function (e) {
+    if (e.target.closest('[data-follow]')) {
+      var who = profileByName(decodeURIComponent(location.hash.split('/')[3] || ''));
+      if (who) {
+        var k = followKey(who);
+        if (store.follows[k]) delete store.follows[k]; else store.follows[k] = 1;
+        saveStore();
+        var top = $('#ig-scroll').scrollTop;
+        renderIG(who, '#/ig/u/' + encodeURIComponent(who.username));
+        $('#ig-scroll').scrollTop = top;
+      }
+      return;
+    }
     var sw = e.target.closest('[data-switch]');
     if (sw) {
       accState.current = sw.dataset.switch;

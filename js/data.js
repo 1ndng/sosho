@@ -181,6 +181,7 @@ window.SITE_DATA = {
     // 從搜尋點進別人的頁面時，取代「編輯／分享個人檔案」的兩個按鈕
     followLabel: "追蹤",
     messageLabel: "發訊息",
+    followingButtonLabel: "追蹤中",   // 按了追蹤之後按鈕變成的文字
 
     // 右上角三條線 → 設定頁（目前每一項點了都顯示「尚未更新」）
     settings: {
