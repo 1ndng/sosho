@@ -102,7 +102,7 @@ window.SITE_DATA = {
     postsLabel: "貼文數",
     followersLabel: "粉絲數",
     followingLabel: "追蹤數",
-    //bio: ["test62", "test63"],     // 每一項 = 一行；@開頭的字會自動變藍色
+    bio: ["test62", "test63"],     // 每一項 = 一行；@開頭的字會自動變藍色
     music: { title: "Nostalgic", artist: "No Guindce" },
     editProfileLabel: "編輯個人檔案",
     shareProfileLabel: "分享個人檔案",
@@ -127,7 +127,7 @@ window.SITE_DATA = {
       usernamePlaceholder: "帳號",
       passwordPlaceholder: "密碼",
       loginLabel: "登入",
-      //forgotLabel: "test76"
+      forgotLabel: "test76"
     }
   }
 };
