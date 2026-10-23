@@ -486,8 +486,8 @@ div.ig-frow-main { cursor: default; }
 .pd-op { font-style: normal; font-weight: 700; font-size: 12px; color: #fff; background: #e0457b; border-radius: 3px; padding: 0 4px; margin-left: 4px; vertical-align: 2px; }
 .pd-comment { flex-wrap: wrap; }
 .pd-cimg { display: block; flex-basis: 100%; max-width: 100%; max-height: 220px; object-fit: contain; object-position: left; border-radius: 8px; margin-top: 4px; cursor: zoom-in; }
-.pd-cvid-row { flex-basis: 100%; margin-top: 6px; }
-.pd-cvid { display: block; width: 55%; height: auto; border-radius: 8px; background: #000; }
+.pd-cvid-row { display: block; margin-top: 8px; }
+.pd-cvid { display: block; width: min(180px, 100%); height: auto; border-radius: 8px; background: #000; }
 /* 回覆別人的留言：往右縮排、左邊有箭頭 */
 .pd-reply { margin-left: 22px; }
 .pd-reply::before { content: "↳"; position: absolute; left: -18px; top: 10px; color: #999; font-weight: 700; }

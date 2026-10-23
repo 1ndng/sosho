@@ -225,10 +225,12 @@
       var op = c.name === p.author ? '<i class="pd-op">' + esc(f.opLabel || '樓主') + '</i>' : '';
       var poster = c.video && (window.SITE_MEDIA || []).filter(function (m) { return m === c.video.replace(/\.\w+$/, '') + '_poster.jpg'; })[0];
       return '<div class="pd-comment' + (c.replyTo ? ' pd-reply' : '') + '"><b>' + esc(c.name) + op + '</b><span class="pd-colon">:</span>' +
-        '<span class="pd-ctext">' + (c.replyTo ? '<span class="pd-at">@' + esc(c.replyTo) + '</span> ' : '') + (c.text ? multiline(c.text) : '') + '</span>' +
+        '<span class="pd-ctext">' + (c.replyTo ? '<span class="pd-at">@' + esc(c.replyTo) + '</span> ' : '') + (c.text ? multiline(c.text) : '') +
+          // 影片放在文字底下，左邊和留言文字對齊
+          (c.video ? '<span class="pd-cvid-row"><video class="pd-cvid" src="' + esc(c.video) + '"' + (poster ? ' poster="' + esc(poster) + '"' : '') +
+            ' controls playsinline webkit-playsinline preload="metadata" disablepictureinpicture></video></span>' : '') +
+        '</span>' +
         (c.image ? '<img class="pd-cimg" src="' + esc(c.image) + '" alt="" data-fimg>' : '') +
-        (c.video ? '<div class="pd-cvid-row"><video class="pd-cvid" src="' + esc(c.video) + '"' + (poster ? ' poster="' + esc(poster) + '"' : '') +
-          ' controls playsinline webkit-playsinline preload="metadata" disablepictureinpicture></video></div>' : '') +
         '</div>';
     }).join('');
 
