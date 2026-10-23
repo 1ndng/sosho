@@ -147,5 +147,8 @@ window.SITE_MEDIA = [
 "images/kakao_me_bg.png",
 "images/sungchan.jpg",
 "images/wallpaper.jpg",
-"images/wonbin.jpg"
+"images/wonbin.jpg",
+"audio/1_music.mp3",
+"audio/2_music.mp3",
+"audio/3_music.mp3"
 ];
