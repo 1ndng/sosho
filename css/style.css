@@ -196,13 +196,14 @@ a.ad:active { filter: brightness(.9); }
 .pd-sep { border-top: 2px dotted #bbb; margin: 0 0 10px; }
 .pd-cbar { font-size: 13px; color: #555; border-bottom: 2px solid #e8e8e8; padding-bottom: 4px; margin-bottom: 12px; }
 .pd-comment {
+  /* 留言之間只用細分隔線，沒有外框 */
   display: flex; gap: 6px; align-items: flex-start;
-  background: #f4f4f4; border: 2px solid #555; border-radius: 16px;
-  padding: 10px 14px; margin-bottom: 12px; position: relative;
+  padding: 10px 2px; border-bottom: 1px solid #e3e3e3; position: relative;
 }
-.pd-comment b { flex: none; }
-.pd-colon { flex: none; font-weight: 700; }
-.pd-ctext { flex: 1; min-width: 0; font-weight: 700; word-break: break-all; }
+.pd-comment:last-child { border-bottom: 0; }
+.pd-comment b { flex: none; font-weight: 600; }
+.pd-colon { flex: none; }
+.pd-ctext { flex: 1; min-width: 0; word-break: break-all; }
 
 /* =========================================================
  * Instagram 個人頁
@@ -490,7 +491,7 @@ div.ig-frow-main { cursor: default; }
 .pd-cvid { display: block; width: min(180px, 100%); height: auto; border-radius: 8px; background: #000; }
 /* 回覆別人的留言：往右縮排、左邊有箭頭 */
 .pd-reply { margin-left: 22px; }
-.pd-reply::before { content: "↳"; position: absolute; left: -18px; top: 10px; color: #999; font-weight: 700; }
+.pd-reply::before { content: "↳"; position: absolute; left: -18px; top: 10px; color: #999; }
 .pd-at { color: #3b6db8; }
 .pd-viewer { position: absolute; inset: 0; z-index: 40; background: rgba(0,0,0,.92); display: flex; align-items: center; justify-content: center; padding: 44px 0 34px; }
 .pd-viewer img { max-width: 100%; max-height: 100%; object-fit: contain; }
