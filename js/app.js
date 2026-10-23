@@ -1011,8 +1011,8 @@
 
       '</div>' +
       '<div class="ig-ftabs">' +
-        '<a href="' + base + '/follows/followers"' + (tab === 'followers' ? ' class="on"' : '') + '>' + esc(c.followers) + ' ' + esc(L.followersLabel) + '</a>' +
-        '<a href="' + base + '/follows/following"' + (tab === 'following' ? ' class="on"' : '') + '>' + esc(c.following) + ' ' + esc(L.followingLabel) + '</a>' +
+        '<a data-tab href="' + base + '/follows/followers"' + (tab === 'followers' ? ' class="on"' : '') + '>' + esc(c.followers) + ' ' + esc(L.followersLabel) + '</a>' +
+        '<a data-tab href="' + base + '/follows/following"' + (tab === 'following' ? ' class="on"' : '') + '>' + esc(c.following) + ' ' + esc(L.followingLabel) + '</a>' +
       '</div>' +
       list.map(function (a) {
         return personRow(a,
@@ -1230,6 +1230,9 @@
       }
       return;
     }
+    // 粉絲／追蹤中切換分頁：取代目前這頁，返回鍵直接回個人頁
+    var tb = e.target.closest('[data-tab]');
+    if (tb) { e.preventDefault(); replaceHash(tb.getAttribute('href')); return; }
     var mu = e.target.closest('[data-music]');
     if (mu) { toggleMusic(mu); return; }
     var sw = e.target.closest('[data-switch]');
@@ -1290,6 +1293,7 @@
     el.classList.add('open');
     currentApp = name;
     $('#phone').classList.remove('on-home');
+    $('#phone').setAttribute('data-open', name);   // 狀態列漸層用 App 的底色
     return el;
   }
 
@@ -1300,6 +1304,7 @@
     });
     currentApp = null;
     $('#phone').classList.add('on-home');
+    $('#phone').removeAttribute('data-open');
   }
 
   /* ---------------- IG 個人頁音樂（audio/ 資料夾） ---------------- */

@@ -304,21 +304,14 @@ window.SITE_DATA = {
           { username: "seokkkk", name: "eunseok", avatar: "images/eunseok.jpg" },
           { username: "song_sungchan", name: "sungchan", avatar: "images/sungchan.jpg" },
           { username: "bin032", name: "wonbin", avatar: "images/wonbin.jpg" },
-          { username: "antonnie", name: "anton", avatar: "images/anton.jpg" },
-          { username: "test237", name: "test238" },
-          { username: "test239", name: "test240" },
-          { username: "test241", name: "test242" }
+          { username: "antonnie", name: "anton", avatar: "images/anton.jpg" }
         ],
         followingList: [
           "252525252_",
           { username: "seokkkk", name: "eunseok", avatar: "images/eunseok.jpg" },
           { username: "song_sungchan", name: "sungchan", avatar: "images/sungchan.jpg" },
           { username: "bin032", name: "wonbin", avatar: "images/wonbin.jpg" },
-          { username: "antonnie", name: "anton", avatar: "images/anton.jpg" },
-          { username: "test251", name: "test252" },
-          { username: "test253", name: "test254" },
-          { username: "test255", name: "test256" },
-          { username: "test257", name: "test258" }
+          { username: "antonnie", name: "anton", avatar: "images/anton.jpg" }
         ],
         // 摯友名單：寫在這裡的帳號才看得到 closeFriends: true 的限時動態
         closeFriendsList: ["seokkkk", "song_sungchan", "bin032", "252525252_", "antonnie"],
@@ -439,24 +432,14 @@ window.SITE_DATA = {
           { username: "seokkkk", name: "eunseok", avatar: "images/eunseok.jpg" },
           { username: "song_sungchan", name: "sungchan", avatar: "images/sungchan.jpg" },
           { username: "bin032", name: "wonbin", avatar: "images/wonbin.jpg" },
-          { username: "antonnie", name: "anton", avatar: "images/anton.jpg" },
-          { username: "test323", name: "test324" },
-          { username: "test325", name: "test326" },
-          { username: "test327", name: "test328" },
-          { username: "test329", name: "test330" },
-          { username: "test331", name: "test332" }
+          { username: "antonnie", name: "anton", avatar: "images/anton.jpg" }
         ],
         followingList: [
           "shotaroo0",
           { username: "seokkkk", name: "eunseok", avatar: "images/eunseok.jpg" },
           { username: "song_sungchan", name: "sungchan", avatar: "images/sungchan.jpg" },
           { username: "bin032", name: "wonbin", avatar: "images/wonbin.jpg" },
-          { username: "antonnie", name: "anton", avatar: "images/anton.jpg" },
-          { username: "test333", name: "test334" },
-          { username: "test335", name: "test336" },
-          { username: "test337", name: "test338" },
-          { username: "test339", name: "test340" },
-          { username: "test341", name: "test342" }
+          { username: "antonnie", name: "anton", avatar: "images/anton.jpg" }
         ],
         bio: ["Jimmy Lee", "@brunomars"],
         // 簡介裡 @帳號 點了要開的外部網址（沒寫的話：遊戲裡有的帳號會進去它的頁面，其他顯示「尚未更新」）

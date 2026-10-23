@@ -44,6 +44,19 @@ img { display: block; max-width: 100%; }
   pointer-events: none;
   transition: color .3s;
 }
+/* 內容捲到狀態列底下時：App 底色的半透明漸層（首頁、密碼鎖維持透明） */
+.statusbar::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 58px; z-index: -1;
+  background: linear-gradient(rgba(var(--sb-bg), .94) 0%, rgba(var(--sb-bg), .8) 50%, rgba(var(--sb-bg), 0) 100%);
+  opacity: 0; transition: opacity .3s;
+}
+.phone { --sb-bg: 255, 255, 255; }
+.phone[data-open="forum"] { --sb-bg: 233, 241, 250; }
+.phone[data-open="ending"] { --sb-bg: 255, 253, 248; }
+.phone.dark-status { --sb-bg: 0, 0, 0; }
+.phone[data-open] .statusbar::before { opacity: 1; }
+.phone.on-home .statusbar::before, .phone.locked .statusbar::before { opacity: 0; }
+.statusbar > * { position: relative; }
 .statusbar svg { fill: currentColor; margin-left: 5px; }
 .sb-icons { display: flex; align-items: center; }
 .sb-battery {
