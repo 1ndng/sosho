@@ -227,23 +227,7 @@ window.SITE_DATA = {
     noResultText: "查無資訊",        // 搜尋不到帳號時顯示
     searchMode: "prefix",            // "exact" = 要打完整帳號才搜得到；"prefix" = 打開頭幾個字就會出現
     // 只能被搜尋到、不能登入的帳號（格式和 otherAccounts 一樣，不用寫 password）
-    searchOnlyAccounts: [
-      {
-        username: "mlkt_tr5",                 // 粉絲帳號（會出現在 shotaroo0 的粉絲名單裡）
-        name: "",
-        avatar: "images/fan_avatar.png",
-        following: ["shotaroo0"],
-        bio: [],
-        followersList: [],               // 粉絲 0
-        // 追蹤了 shotaroo0（可以點）、wonbin、anton（路人，點不進去）
-        followingList: [
-          "shotaroo0",
-          { username: "bin032", name: "원빈", avatar: "images/wonbin.jpg" },
-          { username: "antonnie", name: "anton", avatar: "images/anton.jpg" }
-        ],
-        posts: []
-      }
-    ],
+    searchOnlyAccounts: [],
 
     // 從搜尋點進別人的頁面時，取代「編輯／分享個人檔案」的兩個按鈕
     followLabel: "追蹤",
@@ -293,18 +277,17 @@ window.SITE_DATA = {
         followersList: [
           "fauiogl94",
           "252525252_",
-          "mlkt_tr5",
           { username: "seokkkk", name: "송은석", avatar: "images/eunseok.jpg" },
           { username: "sungchan913", name: "🦌", avatar: "images/sungchan.jpg" },
           { username: "bin032", name: "원빈", avatar: "images/wonbin.jpg" },
-          { username: "antonnie", name: "anton", avatar: "images/anton.jpg" }
+          { username: "antonnie", name: "Anton", avatar: "images/anton.jpg" }
         ],
         followingList: [
           "252525252_",
           { username: "seokkkk", name: "송은석", avatar: "images/eunseok.jpg" },
           { username: "sungchan913", name: "🦌", avatar: "images/sungchan.jpg" },
           { username: "bin032", name: "원빈", avatar: "images/wonbin.jpg" },
-          { username: "antonnie", name: "anton", avatar: "images/anton.jpg" }
+          { username: "antonnie", name: "Anton", avatar: "images/anton.jpg" }
         ],
         // 摯友名單：寫在這裡的帳號才看得到 closeFriends: true 的限時動態
         closeFriendsList: ["seokkkk", "sungchan913", "bin032", "252525252_", "antonnie"],
@@ -415,14 +398,14 @@ window.SITE_DATA = {
           { username: "seokkkk", name: "송은석", avatar: "images/eunseok.jpg" },
           { username: "sungchan913", name: "🦌", avatar: "images/sungchan.jpg" },
           { username: "bin032", name: "원빈", avatar: "images/wonbin.jpg" },
-          { username: "antonnie", name: "anton", avatar: "images/anton.jpg" }
+          { username: "antonnie", name: "Anton", avatar: "images/anton.jpg" }
         ],
         followingList: [
           "shotaroo0",
           { username: "seokkkk", name: "송은석", avatar: "images/eunseok.jpg" },
           { username: "sungchan913", name: "🦌", avatar: "images/sungchan.jpg" },
           { username: "bin032", name: "원빈", avatar: "images/wonbin.jpg" },
-          { username: "antonnie", name: "anton", avatar: "images/anton.jpg" }
+          { username: "antonnie", name: "Anton", avatar: "images/anton.jpg" }
         ],
         bio: ["Jimmy Lee", "@brunomars"],
         // 簡介裡 @帳號 點了要開的外部網址（沒寫的話：遊戲裡有的帳號會進去它的頁面，其他顯示「尚未更新」）

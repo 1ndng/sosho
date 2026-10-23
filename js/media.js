@@ -135,7 +135,6 @@ window.SITE_MEDIA = [
 "images/anton.jpg",
 "images/default_avatar.png",
 "images/eunseok.jpg",
-"images/fan_avatar.png",
 "images/icon_forum.png",
 "images/icon_insta.png",
 "images/icon_kakao.png",

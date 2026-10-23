@@ -3,7 +3,7 @@
  * 這裡依「檔名」把 data.js 還沒寫到的圖片／影片／音樂自動放進網頁。
  *
  * 檔名格式：{帳號}_{種類}_{日期}[-第幾張].副檔名
- *   帳號：1 = shotaroo0、2 = 252525252_、3 = fauiogl94、4 = mlkt_tr5
+ *   帳號：1 = shotaroo0、2 = 252525252_、3 = fauiogl94
  *   種類：story（限時）、story2（摯友限時）、post（貼文）、
  *         savedstory／savedpost／saved（典藏）、msg（Kakao 照片，1 = 自己傳、2 = 소희傳）、
  *         music（IG 個人頁的音樂，放在 audio/ 資料夾，不用日期）
@@ -15,8 +15,8 @@
   var D = window.SITE_DATA, files = window.SITE_MEDIA || [];
   if (!D || !files.length) return;
 
-  var ACC = { 1: 'shotaroo0', 2: '252525252_', 3: 'fauiogl94', 4: 'mlkt_tr5' };
-  var RE = /^([1-4])_(story2|story|savedstory|savedpost|saved|post|msg|music)(?:_(\d{8}|\d{6}))?(?:-(\d+))?\.(jpg|jpeg|png|gif|webp|mp4|mp3|m4a)$/i;
+  var ACC = { 1: 'shotaroo0', 2: '252525252_', 3: 'fauiogl94' };
+  var RE = /^([1-3])_(story2|story|savedstory|savedpost|saved|post|msg|music)(?:_(\d{8}|\d{6}))?(?:-(\d+))?\.(jpg|jpeg|png|gif|webp|mp4|mp3|m4a)$/i;
   var used = JSON.stringify(D);
   var thisYear = 2026;   // 沒寫年份時（例如「4月26日」）視為 2026 年
 
