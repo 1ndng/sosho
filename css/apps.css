@@ -1,0 +1,171 @@
+/* 電話、相簿、KakaoTalk */
+.app-overlay { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
+.app-overlay > * { pointer-events: auto; }
+
+/* =========================================================
+ * 電話（iOS 最近通話）
+ * ========================================================= */
+.phone-app .app-scroll { background: #fff; color: #000; padding-bottom: 118px; }
+.ph-top { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 44px; padding: 0 16px; }
+.ph-link { color: #007aff; font-size: 17px; justify-self: start; display: inline-flex; align-items: center; }
+.ph-back svg { width: 22px; height: 22px; margin-left: -6px; }
+.ph-seg { display: flex; background: #eeeef0; border-radius: 9px; padding: 2px; }
+.ph-seg button { padding: 5px 14px; font-size: 13px; font-weight: 600; border-radius: 7px; color: #000; }
+.ph-seg button.on { background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.12); }
+.ph-title { font-size: 34px; font-weight: 700; margin: 2px 16px 8px; letter-spacing: .3px; }
+.ph-date { font-size: 13px; color: #8a8a8e; text-transform: uppercase; padding: 14px 16px 6px; font-weight: 600; }
+.ph-rows { border-top: .5px solid #d1d1d6; }
+.ph-row { display: flex; align-items: center; min-height: 60px; padding-right: 12px; border-bottom: .5px solid #d1d1d6; margin-left: 0; }
+.ph-out { width: 30px; flex: none; display: flex; justify-content: center; color: #8a8a8e; }
+.ph-out svg { width: 14px; height: 14px; }
+.ph-main { flex: 1; min-width: 0; text-align: left; padding: 8px 0; }
+.ph-name { display: block; font-size: 17px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ph-name.missed, .missed { color: #ff3b30; }
+.ph-cnt { font-weight: 400; }
+.ph-type { display: block; font-size: 14px; color: #8a8a8e; }
+.ph-time { font-size: 15px; color: #8a8a8e; margin: 0 8px; white-space: nowrap; }
+.ph-info { color: #007aff; width: 26px; height: 26px; }
+.ph-info svg { width: 26px; height: 26px; }
+.ph-tabs {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 84px; padding: 6px 8px 34px;
+  display: flex; justify-content: space-around; background: rgba(249,249,249,.94); border-top: .5px solid #d1d1d6;
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+}
+.ph-tabs button { display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; color: #8e8e93; width: 70px; }
+.ph-tabs button.on { color: #007aff; }
+.ph-tabs svg { width: 26px; height: 26px; }
+.ph-card { display: flex; flex-direction: column; align-items: center; padding: 10px 16px 18px; }
+.ph-avatar { width: 96px; height: 96px; border-radius: 50%; background: linear-gradient(#a5a9b3, #868a94); color: #fff; font-size: 42px; font-weight: 500; display: flex; align-items: center; justify-content: center; }
+.ph-card-name { font-size: 28px; margin: 10px 0 16px; text-align: center; }
+.ph-acts { display: flex; gap: 8px; width: 100%; }
+.ph-acts button { flex: 1; background: #f2f2f7; border-radius: 10px; padding: 8px 0 6px; color: #007aff; display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 11px; }
+.ph-acts svg { width: 22px; height: 22px; }
+.ph-hist { margin: 0 16px; background: #f2f2f7; border-radius: 10px; padding: 4px 14px; }
+.ph-hist-row { display: flex; justify-content: space-between; padding: 10px 0; font-size: 15px; border-bottom: .5px solid #d1d1d6; }
+.ph-hist-row:last-child { border-bottom: 0; }
+.ph-calling {
+  position: absolute; inset: 0; z-index: 3; color: #fff; text-align: center;
+  background: linear-gradient(160deg, #3f4a5c, #1d222c 60%, #12151b);
+  padding-top: 110px;
+}
+.ph-calling-status { font-size: 17px; opacity: .8; }
+.ph-calling-name { font-size: 34px; margin-top: 6px; padding: 0 20px; }
+.ph-calling-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px 0; margin: 150px 34px 0; }
+.ph-calling-grid button { display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 13px; color: #fff; }
+.ph-calling-grid span { width: 72px; height: 72px; border-radius: 50%; background: rgba(255,255,255,.18); }
+.ph-end { width: 72px; height: 72px; border-radius: 50%; background: #ff3b30; color: #fff; margin-top: 46px; display: inline-flex; align-items: center; justify-content: center; }
+.ph-end svg { width: 34px; height: 34px; }
+.ph-end-label { font-size: 13px; margin-top: 6px; }
+
+/* =========================================================
+ * 相簿（iOS 照片）
+ * ========================================================= */
+.photos-app .app-scroll { background: #fff; color: #000; }
+.pt-head { padding: 8px 16px 10px; display: flex; align-items: baseline; justify-content: space-between; }
+.pt-head h1 { font-size: 34px; margin: 0; }
+.pt-head span { color: #8a8a8e; font-size: 14px; }
+.pt-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.pt-grid a { aspect-ratio: 1; overflow: hidden; background: #eee; }
+.pt-grid img { width: 100%; height: 100%; object-fit: cover; }
+.pt-view { position: absolute; inset: 0; z-index: 3; background: #fff; display: flex; flex-direction: column; padding: 44px 0 34px; }
+.pt-view-top { display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; height: 44px; padding: 0 6px; }
+.pt-back { color: #007aff; display: flex; align-items: center; justify-content: center; height: 44px; }
+.pt-back svg { width: 24px; height: 24px; }
+.pt-date { text-align: center; font-size: 15px; font-weight: 600; }
+.pt-strip { flex: 1; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.pt-strip::-webkit-scrollbar { display: none; }
+.pt-slide { flex: none; width: 100%; height: 100%; scroll-snap-align: center; display: flex; align-items: center; justify-content: center; }
+.pt-slide img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.pt-bar { display: flex; justify-content: space-around; height: 50px; align-items: center; border-top: .5px solid #e5e5ea; }
+.pt-bar button { color: #007aff; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; }
+.pt-bar button.on { color: #ff2d55; }
+.pt-bar svg { width: 25px; height: 25px; }
+
+/* =========================================================
+ * KakaoTalk
+ * ========================================================= */
+.kakao-app .app-scroll { background: #fff; color: #191919; padding-bottom: 92px; }
+.kk-head { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px 6px 18px; }
+.kk-head h1 { font-size: 22px; margin: 0; font-weight: 700; }
+.kk-head-icons { display: flex; gap: 6px; }
+.kk-head-icons button { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; }
+.kk-head-icons svg { width: 24px; height: 24px; }
+.kk-me { display: flex; align-items: center; gap: 14px; padding: 12px 18px 16px; }
+.kk-me img { width: 62px; height: 62px; border-radius: 24px; object-fit: cover; }
+.kk-me b, .kk-friend b { display: block; font-size: 16px; font-weight: 600; }
+.kk-me small, .kk-friend small { display: block; font-size: 12.5px; color: #8e8e8e; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kk-me span, .kk-friend span { min-width: 0; }
+.kk-sec { font-size: 12px; color: #8e8e8e; padding: 10px 18px 6px; border-top: 1px solid #f1f1f1; }
+.kk-friend { display: flex; align-items: center; gap: 12px; padding: 7px 18px; }
+.kk-friend img { width: 44px; height: 44px; border-radius: 17px; object-fit: cover; flex: none; }
+.kk-friend b { font-size: 15px; font-weight: 500; }
+.kk-friend:active, .kk-chatrow:active, .kk-me:active { background: #f5f5f5; }
+.kk-chatrow { display: flex; align-items: center; gap: 12px; padding: 9px 18px; }
+.kk-chatrow img { width: 48px; height: 48px; border-radius: 19px; object-fit: cover; flex: none; }
+.kk-chatrow-mid { flex: 1; min-width: 0; }
+.kk-chatrow-mid b { display: block; font-size: 15px; font-weight: 600; }
+.kk-chatrow-mid small { display: block; font-size: 13px; color: #8e8e8e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
+.kk-chatrow-r { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; }
+.kk-chatrow-r small { font-size: 11px; color: #a0a0a0; white-space: nowrap; }
+.kk-badge { font-style: normal; background: #ff4d3d; color: #fff; font-size: 11px; font-weight: 700; min-width: 18px; height: 18px; line-height: 18px; text-align: center; border-radius: 9px; padding: 0 5px; }
+.kk-tabs {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 84px; padding: 4px 6px 34px;
+  display: flex; justify-content: space-around; background: #fff; border-top: 1px solid #f1f1f1;
+}
+.kk-tabs > * { position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; width: 64px; color: #b4b4b4; font-size: 10px; }
+.kk-tabs > .on { color: #191919; }
+.kk-tabs svg { width: 26px; height: 26px; }
+.kk-tabs .kk-badge { position: absolute; top: -2px; left: 36px; }
+
+/* 我的資料 */
+.kk-profile { position: absolute; inset: 0; z-index: 3; background: #6d7f96 center / cover no-repeat; color: #fff; }
+.kk-profile-shade { position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,.15), rgba(0,0,0,.05) 40%, rgba(0,0,0,.5)); }
+.kk-profile-close { position: absolute; left: 14px; top: 52px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: #fff; }
+.kk-profile-close svg { width: 26px; height: 26px; }
+.kk-profile-info { position: absolute; left: 0; right: 0; bottom: 170px; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; padding: 0 24px; }
+.kk-profile-info img { width: 96px; height: 96px; border-radius: 38px; object-fit: cover; margin-bottom: 6px; }
+.kk-profile-info b { font-size: 20px; }
+.kk-profile-info small { font-size: 14px; opacity: .85; }
+.kk-profile-acts { position: absolute; left: 0; right: 0; bottom: 34px; height: 112px; display: flex; justify-content: center; gap: 30px; border-top: 1px solid rgba(255,255,255,.25); padding-top: 20px; }
+.kk-profile-acts button { display: flex; flex-direction: column; align-items: center; gap: 8px; color: #fff; font-size: 12px; width: 76px; }
+.kk-profile-acts svg { width: 28px; height: 28px; }
+
+/* 聊天室 */
+.kk-chat { position: absolute; inset: 0; z-index: 3; background: #bacee0; display: flex; flex-direction: column; padding-top: 44px; }
+.kk-chat-head { display: grid; grid-template-columns: 40px 1fr auto; align-items: center; height: 48px; padding: 0 8px; }
+.kk-chat-head a { display: flex; align-items: center; justify-content: center; height: 40px; color: #191919; }
+.kk-chat-head a svg { width: 24px; height: 24px; }
+.kk-chat-head b { font-size: 16px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.kk-chat-head span { display: flex; gap: 4px; }
+.kk-chat-head span button { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; }
+.kk-chat-head svg { width: 23px; height: 23px; }
+.kk-msgs { flex: 1; overflow-y: auto; padding: 6px 10px 12px; }
+.kk-date { text-align: center; margin: 12px 0; }
+.kk-date span { display: inline-block; background: rgba(0,0,0,.12); color: #fff; font-size: 11.5px; padding: 3px 12px; border-radius: 12px; }
+.kk-msg { display: flex; margin-top: 4px; }
+.kk-msg.first { margin-top: 10px; }
+.kk-bubble { max-width: 240px; padding: 7px 10px; border-radius: 13px; font-size: 14.5px; line-height: 1.4; word-break: break-word; position: relative; }
+.kk-msg.me { justify-content: flex-end; align-items: flex-end; gap: 5px; }
+.kk-msg.me .kk-bubble { background: #fee500; color: #191919; }
+.kk-msg.me .kk-bubble.tail { border-top-right-radius: 3px; }
+.kk-meta { display: flex; flex-direction: column; align-items: flex-end; font-size: 10px; color: #556677; line-height: 1.25; white-space: nowrap; }
+.kk-meta i { font-style: normal; color: #f2c200; font-weight: 700; font-size: 11px; }
+.kk-meta small { font-size: 10px; }
+.kk-msg.them { gap: 8px; }
+.kk-av { width: 38px; height: 38px; border-radius: 15px; object-fit: cover; flex: none; }
+.kk-them-col { min-width: 0; }
+.kk-name { font-size: 12px; color: #4b5a68; margin: 0 0 4px 2px; }
+.kk-row { display: flex; align-items: flex-end; gap: 5px; }
+.kk-msg.them .kk-bubble { background: #fff; }
+.kk-msg.them .kk-bubble.tail { border-top-left-radius: 3px; }
+.kk-row .kk-meta { align-items: flex-start; }
+.kk-input { display: flex; align-items: center; gap: 6px; background: #fff; padding: 6px 8px 40px; }
+.kk-plus { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; color: #8e8e8e; }
+.kk-plus svg { width: 24px; height: 24px; }
+.kk-field { flex: 1; display: flex; align-items: center; background: #f4f4f4; border-radius: 18px; padding: 0 6px 0 14px; height: 36px; }
+.kk-field input { flex: 1; min-width: 0; border: 0; background: none; outline: none; font: inherit; font-size: 16px; }
+.kk-field button { width: 28px; height: 28px; color: #8e8e8e; display: flex; align-items: center; justify-content: center; }
+.kk-field svg { width: 22px; height: 22px; }
+.kk-send { width: 34px; height: 34px; border-radius: 50%; background: #fee500; color: #191919; display: flex; align-items: center; justify-content: center; }
+.kk-send:disabled { background: #f0f0f0; color: #b4b4b4; }
+.kk-send svg { width: 20px; height: 20px; }

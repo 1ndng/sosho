@@ -14,7 +14,10 @@ window.SITE_DATA = {
     wallpaper: "images/wallpaper.jpg",
     apps: [
       { id: "forum", label: "ANNMS Talk", icon: "images/icon_forum.png" },
-      { id: "ig",    label: "Instagram", icon: "images/icon_insta.png" }
+      { id: "ig",    label: "Instagram", icon: "images/icon_insta.png" },
+      { id: "phone", label: "電話", icon: "images/icon_phone.png" },
+      { id: "photos", label: "相簿", icon: "images/icon_photos.png" },
+      { id: "kakao", label: "KakaoTalk", icon: "images/icon_kakao.png" }
     ]
   },
 
@@ -294,5 +297,128 @@ window.SITE_DATA = {
         ]
       }
     ]
+  },
+
+  /* ---------- 電話（最近通話） ---------- */
+  phone: {
+    title: "最近通話",
+    editLabel: "編輯",
+    filterAll: "全部",
+    filterMissed: "未接來電",
+    todayLabel: "今天",          // 玩家撥出的電話會加在這個日期底下
+    tabs: ["個人收藏", "最近通話", "聯絡人", "鍵盤"],
+    callingText: "正在撥號⋯",
+    noAnswerText: "無人接聽",
+    callButtons: ["靜音", "鍵盤", "擴音", "加入通話", "FaceTime", "聯絡人"],
+    endLabel: "結束",
+    detailActions: ["訊息", "撥打", "視訊", "郵件"],
+    // 通話紀錄：同一個 date 會排在一起（順序照這裡）
+    // missed: true = 未接（紅字）；outgoing: true = 撥出（名字前有小圖示）；count = 通話次數
+    calls: [
+      { date: "今天", name: "test140", count: 3, missed: true, outgoing: false, type: "行動電話", time: "test144" },
+      { date: "今天", name: "test141", count: 1, missed: false, outgoing: true, type: "行動電話", time: "test145" },
+      { date: "今天", name: "test142", count: 2, missed: false, outgoing: false, type: "行動電話", time: "test146" },
+      { date: "昨天", name: "test143", count: 1, missed: true, outgoing: false, type: "行動電話", time: "test147" },
+      { date: "昨天", name: "test140", count: 1, missed: false, outgoing: true, type: "行動電話", time: "test148" },
+      { date: "星期一", name: "test141", count: 1, missed: false, outgoing: false, type: "行動電話", time: "test149" },
+      { date: "星期一", name: "test142", count: 2, missed: true, outgoing: false, type: "行動電話", time: "test150" }
+    ]
+  },
+
+  /* ---------- 相簿 ---------- */
+  photos: {
+    title: "圖庫",
+    countText: "{n} 張照片",
+    // 照片：由舊到新（最新的在最下面，和 iPhone 一樣）
+    items: [
+      { image: "images/photo_1.png", date: "test151" },
+      { image: "images/photo_2.png", date: "test152" },
+      { image: "images/photo_3.png", date: "test153" },
+      { image: "images/photo_4.png", date: "test154" },
+      { image: "images/photo_5.png", date: "test155" },
+      { image: "images/photo_6.png", date: "test156" },
+      { image: "images/photo_7.png", date: "test157" },
+      { image: "images/photo_8.png", date: "test158" },
+      { image: "images/photo_9.png", date: "test159" },
+      { image: "images/photo_10.png", date: "test160" },
+      { image: "images/photo_11.png", date: "test161" },
+      { image: "images/photo_12.png", date: "test162" }
+    ]
+  },
+
+  /* ---------- KakaoTalk ---------- */
+  kakao: {
+    me: {
+      name: "test163",
+      status: "test164",
+      avatar: "images/kakao_me.png",
+      background: "images/kakao_me_bg.png"   // 點自己的資料時的全螢幕背景
+    },
+    friends: [
+      {
+        id: "f1",                       // 不要重複（用於網址）
+        name: "test165",
+        status: "test166",                  // 狀態訊息
+        avatar: "images/kakao_f1.png",
+        unread: 2,       // 一開始在聊天列表顯示的未讀數
+        messages: [
+          { date: "test167" },
+          { from: "them", text: "test168", time: "test169" },
+          { from: "me", text: "test170", time: "test171" },
+          { from: "them", text: "test172", time: "test173" }
+        ],
+        // 關鍵字自動回覆：玩家傳的訊息「包含」任一個 keywords 就回 reply（可多句，依序送出）
+        replies: [
+          { keywords: ["test174"], reply: ["test175", "test176"] }
+        ],
+        defaultReply: []                  // 沒有符合任何關鍵字時的回覆；空的 = 不回
+      },
+      {
+        id: "f2",                       // 不要重複（用於網址）
+        name: "test177",
+        status: "test178",                  // 狀態訊息
+        avatar: "images/kakao_f2.png",
+        unread: 0,       // 一開始在聊天列表顯示的未讀數
+        messages: [
+          { date: "test179" },
+          { from: "them", text: "test180", time: "test181" },
+          { from: "me", text: "test182", time: "test183" },
+          { from: "them", text: "test184", time: "test185" }
+        ],
+        // 關鍵字自動回覆：玩家傳的訊息「包含」任一個 keywords 就回 reply（可多句，依序送出）
+        replies: [
+          { keywords: ["test186"], reply: ["test187", "test188"] }
+        ],
+        defaultReply: []                  // 沒有符合任何關鍵字時的回覆；空的 = 不回
+      },
+      {
+        id: "f3",                       // 不要重複（用於網址）
+        name: "test189",
+        status: "test190",                  // 狀態訊息
+        avatar: "images/kakao_f3.png",
+        unread: 0,       // 一開始在聊天列表顯示的未讀數
+        messages: [
+          { date: "test191" },
+          { from: "them", text: "test192", time: "test193" },
+          { from: "me", text: "test194", time: "test195" },
+          { from: "them", text: "test196", time: "test197" }
+        ],
+        // 關鍵字自動回覆：玩家傳的訊息「包含」任一個 keywords 就回 reply（可多句，依序送出）
+        replies: [
+          { keywords: ["test198"], reply: ["test199", "test200"] }
+        ],
+        defaultReply: []                  // 沒有符合任何關鍵字時的回覆；空的 = 不回
+      }
+    ],
+    // 介面文字（韓文版 KakaoTalk）
+    text: {
+      friendsTitle: "친구",
+      chatsTitle: "채팅",
+      friendsCount: "친구 {n}",
+      tabs: ["친구", "채팅", "오픈채팅", "쇼핑", "더보기"],
+      inputPlaceholder: "메시지 입력",
+      profileActions: ["나와의 채팅", "프로필 편집", "카카오스토리"],
+      ampm: ["오전", "오후"]
+    }
   }
 };

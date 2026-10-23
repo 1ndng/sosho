@@ -61,3 +61,18 @@
 - 讚數：`likes` 填數字會自動 +1；填文字（像 "1.2萬"）就照原樣顯示
 - 貼文的 `comments`、`tagged`，帳號的 `reposts`，以及 `instagram.text` 的提示文字都在 data.js
 - 限時動態：愛心可按、可輸入訊息送出（輸入時會暫停）
+
+## 電話（#/phone）
+- `phone.calls`：同一個 `date` 會排在同一組；`missed: true` 紅字、`count` 通話次數、`outgoing: true` 撥出
+- 點一筆通話 → 撥號畫面（3 秒後「無人接聽」），按結束會加進最近通話；點 ⓘ → 聯絡資訊與這個人的通話紀錄
+- 上方「全部／未接來電」可切換；下方四個標籤只有「最近通話」有內容
+
+## 相簿（#/photos）
+- `photos.items`：由舊到新，打開時停在最新；點照片全螢幕、可左右滑，愛心會記住
+
+## KakaoTalk（#/kakao）
+- `kakao.me`：自己的資料（點了全螢幕顯示）；`kakao.friends`：好友，點了直接進聊天室
+- 聊天室：`messages` 裡 `{ date }` 是日期分隔，`from: "me"` 黃色靠右，`from: "them"` 白色靠左
+- 自己的訊息在對方還沒回之前會顯示未讀「1」
+- `replies`：玩家訊息包含 `keywords` 任一個字 → 對方依序回 `reply`；都沒符合時用 `defaultReply`（空的就不回）
+- 玩家傳的訊息、自動回覆、未讀數都會記在瀏覽器裡

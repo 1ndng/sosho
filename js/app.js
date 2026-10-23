@@ -932,9 +932,16 @@
       toast('data.js 有欄位填錯：' + err.message);
     }
   }
+  // 其他 App（js/apps/*.js）用 window.SOSHO_APPS 註冊：網址 #/名稱/... → 呼叫它的函式
+  var APPS = window.SOSHO_APPS || {};
+
   function doRoute() {
     var parts = location.hash.replace(/^#\/?/, '').split('/');
-    if (parts[0] === 'forum') {
+    stopStory();
+    if (APPS[parts[0]]) {
+      openApp(parts[0]);
+      APPS[parts[0]](parts.slice(1).map(decodeURIComponent));
+    } else if (parts[0] === 'forum') {
       openApp('forum');
       if (parts[1]) renderPost(decodeURIComponent(parts[1])); else renderForumList();
       $('#forum-scroll').scrollTop = 0;
@@ -965,7 +972,6 @@
       if (tabs) renderTabbar(tabs);
       $('#ig-scroll').scrollTop = 0;
     } else {
-      stopStory();
       showHome();
     }
   }
@@ -1005,6 +1011,18 @@
   })();
 
   /* ---------------- 啟動 ---------------- */
+  // 給 js/apps/*.js 用的共用工具
+  window.SOSHO = {
+    data: D, $: $, esc: esc, multiline: multiline, toast: toast,
+    setDarkStatus: function (on) { $('#phone').classList.toggle('dark-status', !!on); },
+    load: function (key, def) {
+      try { var v = JSON.parse(localStorage.getItem(key)); return v == null ? def : v; } catch (e) { return def; }
+    },
+    save: function (key, val) {
+      try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {}
+    }
+  };
+
   renderHome();
   if (!location.hash) history.replaceState(null, '', '#/forum');  // 一進網頁先開論壇
   window.addEventListener('hashchange', route);

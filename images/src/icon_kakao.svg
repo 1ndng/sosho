@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#fee500"/>
+  <path d="M256 118c-104 0-188 66-188 148 0 53 35 99 88 125l-18 66c-2 6 5 11 10 7l79-52c9 1 19 2 29 2 104 0 188-66 188-148S360 118 256 118z" fill="#3c1e1e"/>
+  <text x="256" y="292" text-anchor="middle" font-family="Arial Black, Arial, Helvetica, sans-serif" font-weight="900" font-size="88" fill="#fee500" letter-spacing="2">TALK</text>
+</svg>
