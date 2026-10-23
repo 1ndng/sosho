@@ -104,9 +104,9 @@ window.SITE_DATA = {
     postsCount: "2",
     followersCount: "0",
     followingCount: "1",
-    postsLabel: "貼文數",
-    followersLabel: "粉絲數",
-    followingLabel: "追蹤數",
+    postsLabel: "貼文",
+    followersLabel: "位粉絲",
+    followingLabel: "追蹤中",
     bio: ["test62", "test63"],     // 每一項 = 一行；@開頭的字會自動變藍色
     music: { title: "Nostalgic", artist: "No Guindce" },
     editProfileLabel: "編輯個人檔案",
@@ -158,9 +158,9 @@ window.SITE_DATA = {
     storyMessagePlaceholder: "test121",  // 限時動態下方「傳送訊息……」
 
     // 下方功能列的搜尋頁
-    searchPlaceholder: "test131",
-    noResultText: "test132",        // 搜尋不到帳號時顯示
-    searchMode: "exact",            // "exact" = 要打完整帳號才搜得到；"prefix" = 打開頭幾個字就會出現
+    searchPlaceholder: "搜尋",
+    noResultText: "查無資訊",        // 搜尋不到帳號時顯示
+    searchMode: "prefix",            // "exact" = 要打完整帳號才搜得到；"prefix" = 打開頭幾個字就會出現
     explore: [                      // 搜尋頁還沒輸入時顯示的探索格子（點了顯示「尚未更新」）
       "images/explore_1.png",
       "images/explore_2.png",
