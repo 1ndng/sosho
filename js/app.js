@@ -58,8 +58,6 @@
   }
   function prevHash() { return navStack[navStack.length - 2]; }
 
-  /* ---------------- 結局：登入過小帳（D.instagram 那個帳號）就能打開 ---------------- */
-  function endingUnlocked() { return accState.loggedIn.indexOf(D.instagram.username) !== -1; }
 
   /* ---------------- 首頁 ---------------- */
   function renderHome() {
@@ -113,10 +111,6 @@
 
     var ads = (f.ads || []).map(function (a, i) {
       var media = adMedia(a.image);
-      if (a.ending) {
-        // 還沒登入小帳：看起來跟一般廣告一樣，只是點了沒反應
-        return '<a class="ad" href="#/ending" data-ad="' + i + '">' + media + '</a>';
-      }
       return '<a class="ad" href="' + (a.link ? esc(a.link) : '#') + '" data-ad="' + i + '"' +
         (a.link ? ' target="_blank" rel="noopener"' : '') + '>' + media + '</a>';
     }).join('');
@@ -178,9 +172,7 @@
     }
     var ad = e.target.closest('.ad');
     var adData = ad && (D.forum.ads || [])[ad.dataset.ad];
-    if (adData && adData.ending) {
-      if (!endingUnlocked()) e.preventDefault();
-    } else if (adData && !adData.link) { e.preventDefault(); toast(); }
+    if (adData && !adData.link) { e.preventDefault(); toast(); }
   });
 
   /* ---------------- Instagram ---------------- */
@@ -1392,7 +1384,6 @@
     var parts = location.hash.replace(/^#\/?/, '').split('/');
     stopStory();
     if (parts[0] === 'ending') {
-      if (!endingUnlocked()) { replaceHash('#/forum'); return; }
       openApp('ending');
       renderEnding();
     } else if (APPS[parts[0]]) {

@@ -120,7 +120,7 @@
 - 限時動態播影片時右上角有聲音鍵，預設靜音
 
 ## 結局
-- 論壇的結局廣告（`ads` 裡 `ending: true` 那個）：登入過小帳 fauiogl94 才點得開，點進去是感謝／劇情解說頁 `#/ending`；還沒登入時外觀一樣、點了沒反應
+- 感謝／劇情解說頁 `#/ending`（目前沒有入口連到這頁）
 - 結局頁最下面有「重新開始」：清除所有進度與紀錄，回到手機密碼鎖
 - 李炤熙的 IG 帳號 id 改成 `252525252_`（登入也用這個）
 
@@ -138,5 +138,5 @@
 - 種類：`story` 限時、`story2` 摯友限時、`post` 貼文、`savedstory`／`savedpost` 典藏、`msg` Kakao 照片（1 自己傳、2 소희傳）
 - 日期：`20260426` 或 `260426`；同一天多張加 `-2`、`-3`
 - 音樂：`1_music.mp3`（.mp3／.m4a／.wav），放進 `audio/`，IG 個人頁的音樂列點了就會播放
-- GitHub Action（`.github/workflows/media.yml`）會自動搬到 `images/`／`audio/`、壓縮（照片 1440px、影片 720p、HEIC／MOV 自動轉檔），並更新 `js/media.js`
+- GitHub Action（`.github/workflows/media.yml`）會自動搬到 `images/`／`audio/`、壓縮（照片 1440px、影片短邊 720px、長邊 1440px、HEIC／MOV 自動轉檔），並更新 `js/media.js`
 - 自動放上的貼文沒有內文；要加文字就照原本格式在 `data.js` 寫一筆，寫了就以 data.js 為準

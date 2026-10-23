@@ -24,8 +24,8 @@ jobs:
       - name: 安裝工具
         timeout-minutes: 4
         run: |
-          for i in 1 2 3; do timeout 60 pip install --quiet --disable-pip-version-check pillow pillow-heif && break; done
-          command -v ffmpeg || (timeout 150 sudo apt-get update -qq && timeout 150 sudo apt-get install -y -qq --no-install-recommends ffmpeg) || echo "沒有 ffmpeg：這次先不壓縮影片"
+          # 全部用 pip 安裝（imageio-ffmpeg 內建 ffmpeg），不用 apt
+          for i in 1 2 3; do timeout 90 pip install --quiet --disable-pip-version-check pillow pillow-heif imageio-ffmpeg && break; done
 
       - name: 搬移、壓縮、更新清單
         timeout-minutes: 4

@@ -77,15 +77,28 @@ def compress_photo(path):
     log('壓縮 %s' % rel(out))
 
 
-def probe(path):
+def ffmpeg_bin():
+    # 電腦上有裝 ffmpeg 就用；GitHub 上用 pip 裝的 imageio-ffmpeg（不用 apt，比較不會卡住）
+    found = shutil.which('ffmpeg')
+    if found:
+        return found
     try:
-        res = subprocess.run(['ffprobe', '-v', 'error', '-select_streams', 'v:0',
-                              '-show_entries', 'stream=width,height,codec_name', '-of', 'json', path],
-                             capture_output=True, text=True, check=True)
-        s = json.loads(res.stdout)['streams'][0]
-        return s['width'], s['height'], s['codec_name']
+        import imageio_ffmpeg
+        return imageio_ffmpeg.get_ffmpeg_exe()
     except Exception:
         return None
+
+
+FFMPEG = ffmpeg_bin()
+
+
+def probe(path):
+    # 從 ffmpeg -i 的輸出讀影片的編碼和尺寸
+    if not FFMPEG:
+        return None
+    res = subprocess.run([FFMPEG, '-hide_banner', '-i', path], capture_output=True, text=True)
+    m = re.search(r'Video: (\w+).*?, (\d{2,5})x(\d{2,5})', res.stderr)
+    return (int(m.group(2)), int(m.group(3)), m.group(1)) if m else None
 
 
 def compress_video(path):
@@ -94,12 +107,13 @@ def compress_video(path):
     if not info:
         return
     w, h, codec = info
-    if ext == '.mp4' and min(w, h) <= 720 and codec == 'h264':
+    if ext == '.mp4' and min(w, h) <= 720 and max(w, h) <= 1440 and codec == 'h264':
         return
     out = base + '.mp4'
     tmp = base + '.tmp.mp4'
-    scale = "scale='if(gt(iw,ih),-2,min(720,iw))':'if(gt(iw,ih),min(720,ih),-2)'"
-    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', path, '-vf', scale,
+    # 短邊最多 720px、長邊最多 1440px（很寬的橫條影片也會縮小）
+    scale = ("scale='trunc(min(iw,if(gt(iw,ih),min(1440,720*iw/ih),min(720,1440*iw/ih)))/2)*2':-2")
+    subprocess.run([FFMPEG, '-y', '-loglevel', 'error', '-i', path, '-vf', scale,
                     '-c:v', 'libx264', '-crf', '26', '-preset', 'medium', '-pix_fmt', 'yuv420p',
                     '-c:a', 'aac', '-b:a', '128k', '-movflags', '+faststart', tmp], check=True)
     os.remove(path)
@@ -114,7 +128,7 @@ def compress_audio(path):
     if ext.lower() != '.wav':
         return
     out = base + '.mp3'
-    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', path, '-b:a', '160k', out], check=True)
+    subprocess.run([FFMPEG, '-y', '-loglevel', 'error', '-i', path, '-b:a', '160k', out], check=True)
     os.remove(path)
     renamed[rel(path)] = rel(out)
     log('轉檔 %s' % rel(out))

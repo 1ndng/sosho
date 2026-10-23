@@ -69,12 +69,10 @@ window.SITE_DATA = {
     ],
     commentsDisabledText: "原PO已限制留言。",
 
-    // 底部廣告（橫條 3:1，上下兩則）：link 填外部網址；留空 "" 則點擊時顯示「尚未更新」
+    // 底部廣告（橫條，佔滿寬度）：link 填外部網址；留空 "" 則點擊時顯示「尚未更新」
     // 可以放影片（.mp4，靜音、自動循環播放）：直接上傳 ad_1.mp4 就會取代 ad_1.png，或把 image 改成影片路徑
     ads: [
-      { image: "images/ad_1.png", link: "https://www.asianfanfics.com/story/view/1770006/story-61" },
-      // ending: true = 結局廣告：登入過小帳 fauiogl94 才點得開（還沒登入時點了沒反應），打開是感謝／劇情解說頁
-      { image: "images/ad_3.png", link: "", ending: true }
+      { image: "images/ad_1.mp4", link: "https://www.asianfanfics.com/story/view/1770006/story-61" }
     ],
 
     // 最下方淺色文字
@@ -761,7 +759,6 @@ window.SITE_DATA = {
 
   /* ---------- 結局：感謝／劇情解說頁 ---------- */
   ending: {
-    // 論壇第 3 個廣告（ending: true）：登入過小帳 fauiogl94 才點得開；沒登入前看起來一樣，只是點了沒反應
     backLabel: "返回",
     title: "test343",
     image: "",                      // 最上面的圖（可留空）
