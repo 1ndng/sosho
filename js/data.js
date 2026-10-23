@@ -22,7 +22,7 @@ window.SITE_DATA = {
   home: {
     wallpaper: "images/wallpaper.jpg",
     // 左上角的備忘錄小工具（玩家可以直接打字記資訊；不要的話整段刪掉）
-    memo: { label: "備忘錄", placeholder: "輕點以記下線索⋯" },
+    memo: { label: "備忘錄" },
     // 這些 App 放在桌布下方的 Dock（和 iPhone 一樣最多 4 個、不顯示名稱）
     apps: [
       { id: "forum", label: "ANNMS Talk", icon: "images/icon_forum.png?v=2" },
