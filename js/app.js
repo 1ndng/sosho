@@ -159,6 +159,8 @@
     add: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 7.5v9M7.5 12h9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
     reels: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2" fill="none"/><path d="M3 8.5h18M8.5 3l3 5.5M14 3l3 5.5" stroke="currentColor" stroke-width="2" fill="none"/><path d="M10 11.5v6l5-3z" fill="currentColor"/></svg>',
     addUser: '<svg viewBox="0 0 24 24"><circle cx="14" cy="8" r="4" stroke="currentColor" stroke-width="2" fill="none"/><path d="M6.5 21c.6-4 3.6-6.3 7.5-6.3s6.9 2.3 7.5 6.3M5 6v6M2 9h6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>',
+    soundOn: '<svg viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>',
+    soundOff: '<svg viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M15.5 9.5l5 5M20.5 9.5l-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
     heartFill: '<svg viewBox="0 0 24 24"><path d="M12 20.5s-8-4.9-8-11A4.6 4.6 0 0 1 12 6.6a4.6 4.6 0 0 1 8 2.9c0 6.1-8 11-8 11z" fill="currentColor"/></svg>',
     bookmarkFill: '<svg viewBox="0 0 24 24"><path d="M5.5 3h13v18L12 14.8 5.5 21z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
     plusCircle: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 7.5v9M7.5 12h9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
@@ -216,10 +218,17 @@
   // 追蹤是「目前登入的帳號」追蹤「對方」，換帳號登入就各自分開
   function followKey(g) { return currentAccount().username + '>' + g.username; }
 
+  // 非公開帳號：沒追蹤就看不到內容（自己看自己不受影響）
+  function isLocked(g) {
+    var me = currentAccount();
+    return !!g.private && g !== me && !isFollowing(me, g);
+  }
+  function isRequested(g) { return store.follows[followKey(g)] === 'req'; }
+
   // a 有沒有追蹤 b：玩家按過追蹤／取消就以那個為準，否則看 data.js 的 following 名單
   function isFollowing(a, b) {
     var k = a.username + '>' + b.username;
-    if (k in store.follows) return !!store.follows[k];
+    if (k in store.follows) return store.follows[k] === 1 || store.follows[k] === true;   // 'req' = 已要求，還不算追蹤
     return (a.following || []).indexOf(b.username) >= 0;
   }
   function followingOf(g) {
@@ -263,9 +272,11 @@
     g = g || currentAccount();
     base = base || '#/ig';
     var visitor = base !== '#/ig';   // true = 從搜尋點進去看別人的頁面
-    var vis = visibleStory(g);
+    var locked = visitor && isLocked(g);
+    var vis = locked ? [] : visibleStory(g);   // 非公開又沒追蹤：看不到限時動態
     var showRing = vis.length > 0 || (g.hasStory && !g.story);
     var cf = vis.some(function (it) { return it.closeFriends; });
+    if (locked) showRing = false;
     var ring = showRing ? ' has-story' + (cf ? ' cf' : '') + (store.seen[g.username] ? ' seen' : '') : '';
     var followed = visitor && isFollowing(currentAccount(), g);
     var c = counts(g);
@@ -302,8 +313,11 @@
           '<div class="ig-name">' + esc(g.name) + '</div>' +
           '<div class="ig-stats">' +
             '<div><b>' + esc(c.posts) + '</b>' + esc(L.postsLabel) + '</div>' +
-            '<a href="' + base + '/follows/followers"><b>' + esc(c.followers) + '</b>' + esc(L.followersLabel) + '</a>' +
-            '<a href="' + base + '/follows/following"><b>' + esc(c.following) + '</b>' + esc(L.followingLabel) + '</a>' +
+            (locked
+              ? '<div><b>' + esc(c.followers) + '</b>' + esc(L.followersLabel) + '</div>' +
+                '<div><b>' + esc(c.following) + '</b>' + esc(L.followingLabel) + '</div>'
+              : '<a href="' + base + '/follows/followers"><b>' + esc(c.followers) + '</b>' + esc(L.followersLabel) + '</a>' +
+                '<a href="' + base + '/follows/following"><b>' + esc(c.following) + '</b>' + esc(L.followingLabel) + '</a>') +
           '</div>' +
         '</div>' +
       '</div>' +
@@ -318,7 +332,9 @@
         ? '<div class="ig-btns ig-btns-visit">' +
             (followed
               ? '<button class="ig-following" data-follow>' + esc(L.followingButtonLabel) + ICON.chevron + '</button>'
-              : '<button class="ig-follow" data-follow>' + esc(L.followLabel) + '</button>') +
+              : isRequested(g)
+                ? '<button class="ig-following" data-follow>' + esc(T().requestedLabel) + '</button>'
+                : '<button class="ig-follow" data-follow>' + esc(L.followLabel) + '</button>') +
             '<button' + na + '>' + esc(L.messageLabel) + '</button>' +
             '<button class="ig-btn-sq"' + na + '>' + ICON.addUser + '</button>' +
           '</div>'
@@ -327,7 +343,15 @@
             '<button>' + esc(L.shareProfileLabel) + '</button>' +
           '</div>') +
 
-      (highlights.length ? '<div class="ig-hl">' + highlights.map(function (x) {
+      (locked
+        ? '<div class="ig-private">' +
+            '<span class="ig-private-ico">' + ICON.lock + '</span>' +
+            '<b>' + esc(T().privateTitle) + '</b>' +
+            '<small>' + esc(T().privateDesc) + '</small>' +
+          '</div>'
+        : '') +
+
+      (locked ? '' : (highlights.length ? '<div class="ig-hl">' + highlights.map(function (x) {
         var h = x.h, i = x.i;
         return '<a class="ig-hl-item" href="' + base + '/story/' + i + '"><span class="ig-hl-img"><img src="' + esc(h.image) + '" alt=""></span>' +
           '<span class="ig-hl-label">' + esc(h.label) + '</span></a>';
@@ -341,7 +365,7 @@
       '</div>' +
       '<div data-pane="grid">' + gridHTML(posts.map(function (_, i) { return { owner: g, idx: i }; }), '') + '</div>' +
       '<div data-pane="reposts" hidden>' + gridHTML(repostsOf(g), T().noReposts) + '</div>' +
-      '<div data-pane="tagged" hidden>' + gridHTML(taggedOf(g), T().noTagged) + '</div>';
+      '<div data-pane="tagged" hidden>' + gridHTML(taggedOf(g), T().noTagged) + '</div>');
 
     if (visitor) { $('#ig-overlay').innerHTML = ''; return; }
 
@@ -388,6 +412,8 @@
     savedTitle: '已儲存', noSaved: '還沒有儲存任何貼文', noReposts: '還沒有轉發任何貼文', noTagged: '還沒有被標註的相片',
     storyMessageSent: '訊息已傳送',
     closeFriendsTitle: '摯友', closeFriendsBadge: '摯友', noCloseFriends: '還沒有摯友',
+    privateTitle: '此帳號不公開', privateDesc: '追蹤這個帳號即可查看相片和影片。', requestedLabel: '已要求',
+    soundOn: '開啟聲音', soundOff: '關閉聲音',
     archiveTitle: '典藏', archiveStories: '限時動態', archivePosts: '貼文', noArchive: '沒有典藏的內容'
   };
   function T() {
@@ -707,6 +733,7 @@
 
   // 限時動態 / 精選動態（which = "me" 或精選的編號）
   var storyTimer = null;
+  var storyMuted = true;   // 限時動態影片預設靜音（和 IG 一樣），按聲音鍵開啟
   function stopStory() {
     clearTimeout(storyTimer);
     $('#phone').classList.remove('dark-status');
@@ -737,6 +764,7 @@
           '<img src="' + esc(g.avatar) + '" alt="">' +
           '<b>' + esc(g.username) + '</b><span class="ig-story-cf" id="ig-story-cf">' + ICON.starFill + esc(T().closeFriendsBadge) + '</span>' +
           '<span class="ig-story-time"></span>' +
+          '<button class="ig-ico ig-story-sound" id="ig-story-sound" type="button" aria-label="sound"></button>' +
           '<button class="ig-ico" data-na>' + ICON.more + '</button>' +
           '<a class="ig-ico" href="' + base + '">' + ICON.close + '</a>' +
         '</div>' +
@@ -758,6 +786,18 @@
       btn.classList.toggle('on-like', on);
     }
     function video() { return document.querySelector('#ig-story-media video'); }
+    // 聲音按鈕：只有影片時出現；按一下開／關聲音（整段限時動態期間都記得）
+    function paintSound(show) {
+      var b = $('#ig-story-sound');
+      b.style.display = show ? '' : 'none';
+      b.innerHTML = storyMuted ? ICON.soundOff : ICON.soundOn;
+    }
+    $('#ig-story-sound').onclick = function () {
+      storyMuted = !storyMuted;
+      var v = video();
+      if (v) { v.muted = storyMuted; v.play().catch(function () {}); }
+      paintSound(!!v);
+    };
     function pause() {
       clearTimeout(storyTimer);
       remaining = Math.max(300, remaining - (Date.now() - startedAt));
@@ -779,8 +819,9 @@
       // 影片（.mp4 / .mov / .webm）播完才換下一則；圖片 5 秒
       var src = items[i].image || '', isVideo = /\.(mp4|mov|webm)$/i.test(src);
       $('#ig-story-media').innerHTML = isVideo
-        ? '<video src="' + esc(src) + '" muted playsinline autoplay preload="auto"></video>'
+        ? '<video src="' + esc(src) + '"' + (storyMuted ? ' muted' : '') + ' playsinline autoplay preload="auto"></video>'
         : '<img src="' + esc(src) + '" alt="">';
+      paintSound(isVideo);
       $('.ig-story-time').textContent = items[i].time || '';
       $('#ig-story-cf').style.display = items[i].closeFriends ? '' : 'none';
       bars.forEach(function (b, j) {
@@ -814,7 +855,10 @@
           bars[i].firstChild.style.animationPlayState = 'running';
           storyTimer = setTimeout(function () { show(i + 1); }, 5000);
         });
-        v.play().catch(function () {});
+        v.play().catch(function () {
+          // 瀏覽器不允許有聲自動播放時，改成靜音播放
+          if (!v.muted) { v.muted = true; storyMuted = true; paintSound(true); v.play().catch(function () {}); }
+        });
       }
       paintLike();
     }
@@ -1035,7 +1079,13 @@
     if (e.target.closest('[data-follow]')) {
       var who = profileByName(decodeURIComponent(location.hash.split('/')[3] || ''));
       if (who) {
-        store.follows[followKey(who)] = isFollowing(currentAccount(), who) ? 0 : 1;
+        var fk = followKey(who);
+        if (isFollowing(currentAccount(), who)) store.follows[fk] = 0;
+        else if (who.private) {
+          // 非公開帳號：按追蹤只會變成「已要求」，不會真的看得到內容；再按一次取消
+          if (store.follows[fk] === 'req') delete store.follows[fk]; else store.follows[fk] = 'req';
+        }
+        else store.follows[fk] = 1;
         saveStore();
         var top = $('#ig-scroll').scrollTop;
         renderIG(who, '#/ig/u/' + encodeURIComponent(who.username));
@@ -1141,6 +1191,7 @@
         if (!who) { location.replace('#/ig/search'); return; }
         if (who === currentAccount()) { location.replace('#/ig' + (parts[3] ? '/' + parts.slice(3).join('/') : '')); return; }
         var base = '#/ig/u/' + encodeURIComponent(who.username);
+        if (parts[3] && isLocked(who)) { location.replace(base); return; }   // 非公開又沒追蹤：不能看貼文、限時、名單
         if (parts[3] === 'post') renderIGPost(+parts[4], who, base);
         else if (parts[3] === 'follows') renderIGFollows(parts[4], who, base);
         else if (parts[3] === 'story') renderIGStory(parts[4] === 'me' ? 'me' : +parts[4], who, base);

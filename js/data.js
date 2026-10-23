@@ -84,6 +84,7 @@ window.SITE_DATA = {
     defaultAccount: "shotaroo0",   // 打開 IG 時已經登入的帳號
     username: "fauiogl94",         // ↓ 這一段是小帳 fauiogl94（同時放全部帳號共用的文字設定）
     password: "test225",           // 小帳的密碼：從「新增帳號」輸入對了才登得進去
+    private: true,                 // 非公開帳號：沒追蹤的人看不到貼文、限時、名單（按追蹤只會變「已要求」）
     avatar: "images/ig_avatar.png",
     hasStory: true,              // true = 頭像外圈顯示限時動態框
     // 點頭像看到的限時動態（可放多張，會自動輪播）
@@ -223,7 +224,10 @@ window.SITE_DATA = {
       archiveTitle: "典藏",
       archiveStories: "限時動態",
       archivePosts: "貼文",
-      noArchive: "沒有典藏的內容"
+      noArchive: "沒有典藏的內容",
+      privateTitle: "此帳號不公開",
+      privateDesc: "追蹤這個帳號即可查看相片和影片。",
+      requestedLabel: "已要求"          // 對非公開帳號按追蹤後的按鈕文字
     },
 
     // 貼文頁、限時動態的固定文字
@@ -306,25 +310,25 @@ window.SITE_DATA = {
         followersCount: "145k",          // 手動數字（蓋過自動計算）
         followingCount: "651",
         // 粉絲／追蹤中名單：寫帳號 id 的會用那個帳號的資料、可以點進去；
-        // { username, name } 是路人（灰色預設頭貼、點不進去）。名單只顯示一頁、不能滑動
+        // { username, name, avatar } 是路人（點不進去；沒寫 avatar 就是灰色預設頭貼）。名單只顯示一頁、不能滑動
         followersList: [
           "fauiogl94",
           "252525252",
           "test226",
-          { username: "test229", name: "test230" },
-          { username: "test231", name: "test232" },
-          { username: "test233", name: "test234" },
-          { username: "test235", name: "test236" },
+          { username: "seokkkk", name: "eunseok", avatar: "images/eunseok.jpg" },
+          { username: "song_sungchan", name: "sungchan", avatar: "images/sungchan.jpg" },
+          { username: "bin032", name: "wonbin", avatar: "images/wonbin.jpg" },
+          { username: "antonnie", name: "anton", avatar: "images/anton.jpg" },
           { username: "test237", name: "test238" },
           { username: "test239", name: "test240" },
           { username: "test241", name: "test242" }
         ],
         followingList: [
           "252525252",
-          { username: "test243", name: "test244" },
-          { username: "test245", name: "test246" },
-          { username: "test247", name: "test248" },
-          { username: "test249", name: "test250" },
+          { username: "seokkkk", name: "eunseok", avatar: "images/eunseok.jpg" },
+          { username: "song_sungchan", name: "sungchan", avatar: "images/sungchan.jpg" },
+          { username: "bin032", name: "wonbin", avatar: "images/wonbin.jpg" },
+          { username: "antonnie", name: "anton", avatar: "images/anton.jpg" },
           { username: "test251", name: "test252" },
           { username: "test253", name: "test254" },
           { username: "test255", name: "test256" },
@@ -436,6 +440,7 @@ window.SITE_DATA = {
       {
         username: "252525252",           // 登入用的帳號，也是頁面上方顯示的帳號名稱
         password: "031121",
+        private: true,                 // 非公開帳號
         avatar: "images/2_avatar.jpg",
         hasStory: false,
         name: "SOHEE",

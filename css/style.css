@@ -487,3 +487,12 @@ div.ig-frow-main { cursor: default; }
 .phone.locked .home-gesture { pointer-events: none; }
 .phone.locked .home-indicator { background: #fff; }
 @media (max-height: 700px) { .lock-inner { padding-top: 60px; } .lock-dots { margin-bottom: 34px; } .lock-keys { grid-template-columns: repeat(3, 70px); gap: 14px 24px; } .lock-key { width: 70px; height: 70px; } }
+
+/* 非公開帳號 */
+.ig-private { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 34px 30px; margin-top: 16px; border-top: 1px solid #efefef; }
+.ig-private-ico { width: 62px; height: 62px; border: 2px solid #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+.ig-private-ico svg { width: 30px; height: 30px; }
+.ig-private b { font-size: 16px; }
+.ig-private small { font-size: 14px; color: #737373; margin-top: 4px; }
+/* 限時動態聲音鍵 */
+.ig-story-sound svg { width: 24px; height: 24px; filter: drop-shadow(0 1px 2px rgba(0,0,0,.4)); }
