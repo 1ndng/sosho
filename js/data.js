@@ -276,9 +276,37 @@ window.SITE_DATA = {
         likedBy: { avatar: "images/ig_liker.png", name: "test116" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test117",
         time: "test118"
-      }
+      },
+      {
+        images: ["images/post1.jpg", "images/post1-2.jpg",],
+        likes: "test115",
+        likedBy: { avatar: "images/ig_liker.png", name: "test116" },   // 「xxx 說讚」；不要的話整行刪掉
+        caption: "test117",
+        time: "test118"
+      },
+      {
+        images: ["images/post2.jpg",],
+        likes: "test115",
+        likedBy: { avatar: "images/ig_liker.png", name: "test116" },   // 「xxx 說讚」；不要的話整行刪掉
+        caption: "test117",
+        time: "test118"
+      },
         ]
       },
+      {
+        images: ["images/post3.jpg", "images/post3-2.jpg", "images/post3-3.jpg",],
+        likes: "test115",
+        likedBy: { avatar: "images/ig_liker.png", name: "test116" },   // 「xxx 說讚」；不要的話整行刪掉
+        caption: "test117",
+        time: "test118"
+      },
+      {
+        images: ["images/post4.heic", "images/post4-2.heic", "images/post4-3.heic","images/post4-4.heic","images/post4-5.heic",],
+        likes: "test115",
+        likedBy: { avatar: "images/ig_liker.png", name: "test116" },   // 「xxx 說讚」；不要的話整行刪掉
+        caption: "test117",
+        time: "test118"
+      }
       {
         username: "252525252",           // 登入用的帳號，也是頁面上方顯示的帳號名稱
         password: "031121",
