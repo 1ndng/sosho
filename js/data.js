@@ -219,6 +219,11 @@ window.SITE_DATA = {
       noTagged: "還沒有被標註的相片",
       storyMessageSent: "訊息已傳送",
       recentTitle: "最近",              // 搜尋頁「搜尋紀錄」的標題
+      editTitle: "編輯個人檔案",
+      nameLabel: "名稱",
+      bioLabel: "個人簡介",
+      cancelLabel: "取消",
+      doneLabel: "完成",
       closeFriendsTitle: "摯友",
       closeFriendsBadge: "摯友",       // 摯友限時動態上方的綠色標籤
       noCloseFriends: "還沒有摯友",

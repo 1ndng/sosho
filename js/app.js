@@ -239,7 +239,7 @@
   // 看過的限時動態、追蹤狀態（存在瀏覽器裡）
   var STORE_KEY = 'sosho-ig-state';
   // likes / saves / reposts / commentLikes / storyLikes 的 key 都是「目前帳號|對象」，換帳號各自分開
-  var store = { seen: {}, follows: {}, likes: {}, saves: {}, reposts: {}, comments: {}, commentLikes: {}, storyLikes: {}, searchHistory: [] };
+  var store = { seen: {}, follows: {}, likes: {}, saves: {}, reposts: {}, comments: {}, commentLikes: {}, storyLikes: {}, searchHistory: [], profileEdits: {} };
   try {
     var saved = JSON.parse(localStorage.getItem(STORE_KEY));
     if (saved) Object.keys(store).forEach(function (k) { if (saved[k]) store[k] = saved[k]; });
@@ -322,7 +322,7 @@
     $('#ig-scroll').innerHTML =
       (visitor
         ? '<div class="ig-top">' +
-            '<a class="ig-ico" href="#/ig/search">' + ICON.back + '</a>' +
+            '<a class="ig-ico" href="#/ig/search" data-back>' + ICON.back + '</a>' +
             '<span class="ig-user">' + esc(g.username) + '</span>' +
             '<span class="ig-top-r"><button class="ig-ico"' + na + '>' + ICON.more + '</button></span>' +
           '</div>'
@@ -338,7 +338,7 @@
         // 有限時動態 → 點頭像進入；沒有 → 尚未更新。看過的限時動態外框變淺灰色
         (vis.length
           ? '<a class="ig-avatar' + ring + '" href="' + base + '/story/me">'
-          : '<button class="ig-avatar' + ring + '"' + na + '>') +
+          : '<button class="ig-avatar' + ring + '" type="button">') +
           '<img src="' + esc(g.avatar) + '" alt="">' +
         (vis.length ? '</a>' : '</button>') +
         '<div class="ig-right">' +
@@ -367,12 +367,10 @@
               : isRequested(g)
                 ? '<button class="ig-following" data-follow>' + esc(T().requestedLabel) + '</button>'
                 : '<button class="ig-follow" data-follow>' + esc(L.followLabel) + '</button>') +
-            '<button' + na + '>' + esc(L.messageLabel) + '</button>' +
-            '<button class="ig-btn-sq"' + na + '>' + ICON.addUser + '</button>' +
           '</div>'
         : '<div class="ig-btns">' +
-            '<button>' + esc(L.editProfileLabel) + '</button>' +
-            '<button>' + esc(L.shareProfileLabel) + '</button>' +
+            '<a class="ig-btn-a" href="#/ig/edit">' + esc(L.editProfileLabel) + '</a>' +
+            '<button data-share-profile>' + esc(L.shareProfileLabel) + '</button>' +
           '</div>') +
 
       (locked
@@ -392,8 +390,7 @@
       // 貼文／轉發／被標註 三個分頁，在同一頁切換
       '<div class="ig-tabs">' +
         '<button data-ptab="grid" class="active">' + ICON.grid + '</button>' +
-        '<button data-ptab="reposts">' + ICON.repost + '</button>' +
-        '<button data-ptab="tagged">' + ICON.tagged + '</button>' +
+
       '</div>' +
       '<div data-pane="grid">' + gridHTML(posts.map(function (_, i) { return { owner: g, idx: i }; }), '') + '</div>' +
       '<div data-pane="reposts" hidden>' + gridHTML(repostsOf(g), T().noReposts) + '</div>' +
@@ -443,6 +440,7 @@
     addToStory: '新增到限時動態', reposted: '已轉發到你的個人檔案', unreposted: '已取消轉發',
     savedTitle: '已儲存', noSaved: '還沒有儲存任何貼文', noReposts: '還沒有轉發任何貼文', noTagged: '還沒有被標註的相片',
     storyMessageSent: '訊息已傳送', recentTitle: '最近',
+    editTitle: '編輯個人檔案', nameLabel: '名稱', bioLabel: '個人簡介', cancelLabel: '取消', doneLabel: '完成',
     closeFriendsTitle: '摯友', closeFriendsBadge: '摯友', noCloseFriends: '還沒有摯友',
     privateTitle: '此帳號不公開', privateDesc: '追蹤這個帳號即可查看相片和影片。', requestedLabel: '已要求',
     soundOn: '開啟聲音', soundOff: '關閉聲音',
@@ -564,7 +562,10 @@
   // 摯友名單（設定 → 摯友）
   function renderIGCloseFriends() {
     var t = T(), me = currentAccount();
-    var list = (me.closeFriendsList || []).map(function (u) { return profileByName(u) || { username: u, name: '', avatar: DEFAULT_AVATAR, filler: true }; });
+    var list = (me.closeFriendsList || []).map(function (u) {
+      var f = fillerInfo(u) || {};
+      return profileByName(u) || { username: u, name: f.name || '', avatar: f.avatar || DEFAULT_AVATAR, filler: true };
+    });
     $('#ig-overlay').innerHTML = '';
     $('#ig-scroll').innerHTML =
       '<div class="ig-pagehead">' + backBtn('#/ig/settings') + '<div class="ig-pagehead-t"><b>' + esc(t.closeFriendsTitle) + '</b></div></div>' +
@@ -575,6 +576,16 @@
 
   // 名單裡的一列：真的帳號可以點進去；路人（filler）點不進去
   var DEFAULT_AVATAR = 'images/default_avatar.png';
+  // 路人的資料：從所有帳號的粉絲／追蹤名單裡找同一個 username 的 { name, avatar }
+  function fillerInfo(username) {
+    var hit = null;
+    allProfiles().forEach(function (a) {
+      (a.followersList || []).concat(a.followingList || []).forEach(function (x) {
+        if (!hit && x && typeof x === 'object' && x.username === username) hit = x;
+      });
+    });
+    return hit;
+  }
   function personRow(a, right) {
     var me = currentAccount();
     var inner = '<img src="' + esc(a.avatar || DEFAULT_AVATAR) + '" alt="">' +
@@ -619,8 +630,7 @@
         (likes ? '<span class="ig-count">' + esc(likes) + '</span>' : '') +
         '<button data-act="comments">' + ICON.comment + '</button>' +
 
-        '<button data-act="repost" class="' + (reposted ? 'on-repost' : '') + '">' + ICON.repost + '</button>' +
-        '<button data-act="share">' + ICON.send + '</button>' +
+
         '<button data-act="save" class="ig-act-save">' + (saved ? ICON.bookmarkFill : ICON.bookmark) + '</button>' +
       '</div>' +
       (cp.p.likedBy && cp.p.likedBy.name ?
@@ -805,7 +815,6 @@
         '<form class="ig-story-foot" id="ig-story-form" autocomplete="off">' +
           '<input class="ig-story-msg" name="m" placeholder="' + esc(L.storyMessagePlaceholder) + '" autocomplete="off">' +
           '<button type="button" class="ig-ico" id="ig-story-like">' + ICON.heart + '</button>' +
-          '<button type="submit" class="ig-ico">' + ICON.send + '</button>' +
         '</form>' +
       '</div>';
 
@@ -957,7 +966,10 @@
     var manual = tab === 'followers' ? g.followersList : g.followingList;
     var list = manual
       ? manual.map(function (x) {
-          if (typeof x === 'string') return profileByName(x) || { username: x, filler: true };
+          if (typeof x === 'string') {
+            var f = fillerInfo(x) || {};
+            return profileByName(x) || { username: x, name: f.name, avatar: f.avatar, filler: true };
+          }
           return { username: x.username, name: x.name, avatar: x.avatar, filler: true };
         })
       : (tab === 'followers' ? followersOf(g) : followingOf(g));
@@ -965,7 +977,7 @@
     $('#ig-scroll').innerHTML =
       '<div class="ig-pagehead">' + backBtn(base) +
         '<div class="ig-pagehead-t"><b>' + esc(g.username) + '</b></div>' +
-        '<button class="ig-round-r" data-na>' + ICON.addUser + '</button>' +
+
       '</div>' +
       '<div class="ig-ftabs">' +
         '<a href="' + base + '/follows/followers"' + (tab === 'followers' ? ' class="on"' : '') + '>' + esc(c.followers) + ' ' + esc(L.followersLabel) + '</a>' +
@@ -973,7 +985,7 @@
       '</div>' +
       list.map(function (a) {
         return personRow(a,
-          '<button class="ig-frow-btn" data-na>' + esc(L.messageLabel) + '</button>' +
+
           '<button class="ig-ico" data-na>' + ICON.dots + '</button>');
       }).join('');
   }
@@ -1040,6 +1052,59 @@
     renderSearchResults();
   }
 
+  // 編輯個人檔案：改名字和簡介（存在瀏覽器裡，重新開始會清掉）
+  function applyEdits() {
+    Object.keys(store.profileEdits || {}).forEach(function (u) {
+      var a = profileByName(u), ed = store.profileEdits[u];
+      if (!a) return;
+      if (!a._orig) a._orig = { name: a.name, bio: a.bio };
+      if (ed.name != null) a.name = ed.name;
+      if (ed.bio) a.bio = ed.bio;
+    });
+  }
+  function renderIGEdit() {
+    var g = currentAccount(), t = T();
+    $('#ig-overlay').innerHTML = '';
+    $('#ig-scroll').innerHTML =
+      '<form class="ig-edit" id="ig-edit" autocomplete="off">' +
+        '<div class="ig-edit-head">' +
+          '<a href="#/ig">' + esc(t.cancelLabel) + '</a>' +
+          '<b>' + esc(t.editTitle) + '</b>' +
+          '<button type="submit">' + esc(t.doneLabel) + '</button>' +
+        '</div>' +
+        '<div class="ig-edit-av"><img src="' + esc(g.avatar) + '" alt=""></div>' +
+        '<label class="ig-edit-row"><span>' + esc(t.nameLabel) + '</span><input name="nm" value="' + esc(g.name || '') + '" placeholder="' + esc(g.username) + '"></label>' +
+        '<label class="ig-edit-row"><span>' + esc(t.bioLabel) + '</span><textarea name="bio" rows="4">' + esc((g.bio || []).join('\n')) + '</textarea></label>' +
+      '</form>';
+    $('#ig-edit').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var f = e.target;
+      store.profileEdits = store.profileEdits || {};
+      store.profileEdits[g.username] = {
+        name: f.nm.value.trim(),
+        bio: f.bio.value.split('\n').map(function (l) { return l.trim(); }).filter(Boolean)
+      };
+      saveStore(); applyEdits();
+      location.hash = '#/ig';
+    });
+  }
+
+  // 分享個人檔案：複製目前網頁的連結
+  function copyLink() {
+    var url = location.href;
+    function done() { toast(T().linkCopied); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(done, fallback);
+    } else fallback();
+    function fallback() {
+      var ta = document.createElement('textarea');
+      ta.value = url; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      ta.remove(); done();
+    }
+  }
+
   // 登入畫面：只在網頁內比對 data.js 裡的帳密，不會把輸入送到任何地方
   function renderIGLogin() {
     var l = D.instagram.login;
@@ -1061,6 +1126,7 @@
 
   $('#app-ig').addEventListener('click', function (e) {
     var el;
+    if (e.target.closest('[data-share-profile]')) { copyLink(); return; }
     if ((el = e.target.closest('[data-hist-x]'))) {
       store.searchHistory = (store.searchHistory || []).filter(function (u) { return u !== el.dataset.histX; });
       saveStore(); renderSearchResults();
@@ -1123,12 +1189,9 @@
       var who = profileByName(decodeURIComponent(location.hash.split('/')[3] || ''));
       if (who) {
         var fk = followKey(who);
-        if (isFollowing(currentAccount(), who)) store.follows[fk] = 0;
-        else if (who.private) {
-          // 非公開帳號：按追蹤只會變成「已要求」，不會真的看得到內容；再按一次取消
-          if (store.follows[fk] === 'req') delete store.follows[fk]; else store.follows[fk] = 'req';
-        }
-        else store.follows[fk] = 1;
+        // 只能追蹤、不能取消（避免把非公開帳號退追後再也看不到）
+        if (isFollowing(currentAccount(), who) || store.follows[fk] === 'req') return;
+        store.follows[fk] = who.private ? 'req' : 1;   // 非公開帳號只會變「已要求」
         saveStore();
         var top = $('#ig-scroll').scrollTop;
         renderIG(who, '#/ig/u/' + encodeURIComponent(who.username));
@@ -1162,6 +1225,7 @@
     refreshPostActions();
   });
   $('#ig-scroll').addEventListener('submit', function (e) {
+    if (!e.target.classList.contains('ig-login-form')) return;   // 只處理登入表單
     e.preventDefault();
     var form = e.target;
     var u = form.u.value.trim(), pw = form.p.value;
@@ -1245,6 +1309,7 @@
       }
       else if (parts[1] === 'search') renderIGSearch();
       else if (parts[1] === 'login') renderIGLogin();
+      else if (parts[1] === 'edit') renderIGEdit();
       else if (parts[1] === 'settings') renderIGSettings();
       else if (parts[1] === 'saved') renderIGSaved();
       else if (parts[1] === 'archive' && parts[2] === 'post') renderIGPost(+parts[3], null, '#/ig/archive', 'archive');
@@ -1255,7 +1320,7 @@
       else if (parts[1] === 'story') renderIGStory(parts[2] === 'me' || /^archive-/.test(parts[2]) ? parts[2] : +parts[2]);
       else renderIG();
       // 粉絲／追蹤中名單只顯示一頁，不能滑動
-      $('#app-ig').classList.toggle('ig-noscroll', parts[1] === 'follows' || parts[3] === 'follows');
+      $('#app-ig').classList.remove('ig-noscroll');
       $('#ig-scroll').scrollTop = 0;
     } else {
       showHome();
@@ -1384,6 +1449,7 @@
     });
   }
 
+  applyEdits();
   renderLock();
   renderHome();
   if (!location.hash) history.replaceState(null, '', '#/forum');  // 一進網頁先開論壇
