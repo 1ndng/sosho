@@ -32,6 +32,18 @@ window.SITE_DATA = {
 
   /* ---------- 匿名論壇 ---------- */
   forum: {
+    noticeTitle: "公告",        // 公告框的標題（在文章框上面）
+    // 公告：unlock 寫解鎖條件（進度旗標名稱），達成後才會出現；不寫 unlock = 一開始就有
+    //   left_forum      = 第一次離開論壇後再回來
+    //   kakao_unlocked  = 解開 KakaoTalk 密碼
+    //   login_fauiogl94 = 登入過小帳（login_帳號id）
+    //   chat_f1         = 打開過和소희的聊天室（chat_好友id，群組是 chat_g1）
+    //   也可以在電話對話的段落寫 flag: "名稱"，走到那段就算達成
+    // 公告內頁只有標題、內文（可加 author、image），沒有留言
+    notices: [
+      { id: "guide", title: "遊玩說明", content: "test479" },
+      { id: "hint1", title: "test480", content: "test481", unlock: "left_forum" }
+    ],
     listTitle: "文章",          // 文章列表框的標題
     backLabel: "返回",          // 文章內頁「返回」
     commentLabel: "留言",       // 「留言」
@@ -498,12 +510,7 @@ window.SITE_DATA = {
   },
 
   /* ---------- 電話（最近通話） ---------- */
-  phone: {
-    title: "最近通話",
-    filterAll: "全部",
-    filterMissed: "未接來電",
-    todayLabel: "今天",          // 玩家撥出的電話會加在這個日期底下
-    tabs: ["通話記錄", "數字鍵盤"],
+  phone: {                     // 電話：只有數字鍵盤
     // 數字鍵盤可以撥出的號碼（之後再補）：撥這些號碼時，撥號畫面會顯示 name
     // 例：{ number: "0912345678", name: "某某某" }；不在清單裡的號碼一樣能撥，但只會顯示號碼、無人接聽
     dialable: [
@@ -564,23 +571,12 @@ window.SITE_DATA = {
     callingText: "正在撥號⋯",
     noAnswerText: "無人接聽",
     callButtons: ["靜音", "鍵盤", "擴音", "加入通話", "FaceTime", "聯絡人"],
-    endLabel: "結束",
-    detailActions: ["訊息", "撥打", "視訊", "郵件"],
-    // 通話紀錄：同一個 date 會排在一起（順序照這裡）
-    // missed: true = 未接（紅字）；outgoing: true = 撥出（名字前有小圖示）；count = 通話次數
-    calls: [
-      { date: "今天", name: "test140", count: 3, missed: true, outgoing: false, type: "行動電話", time: "test144" },
-      { date: "今天", name: "test141", count: 1, missed: false, outgoing: true, type: "行動電話", time: "test145" },
-      { date: "今天", name: "test142", count: 2, missed: false, outgoing: false, type: "行動電話", time: "test146" },
-      { date: "昨天", name: "test143", count: 1, missed: true, outgoing: false, type: "行動電話", time: "test147" },
-      { date: "昨天", name: "test140", count: 1, missed: false, outgoing: true, type: "行動電話", time: "test148" },
-      { date: "星期一", name: "test141", count: 1, missed: false, outgoing: false, type: "行動電話", time: "test149" },
-      { date: "星期一", name: "test142", count: 2, missed: true, outgoing: false, type: "行動電話", time: "test150" }
-    ]
+    endLabel: "結束"
   },
 
   /* ---------- KakaoTalk ---------- */
   kakao: {
+    passcode: "0318",              // 進入 KakaoTalk 要輸入的密碼（打完電話才會知道）；留空 "" = 不用密碼
     friends: [
       {
         id: "f1",                       // 不要重複（用於網址）
@@ -809,6 +805,9 @@ window.SITE_DATA = {
     ],
     // 介面文字（繁體中文）
     text: {
+      lockTitle: "輸入密碼",        // KakaoTalk 密碼畫面
+      lockHint: "",                 // 標題下的小字（可留空）
+      lockDelete: "刪除",
       chatsTitle: "聊天",
       inputPlaceholder: "輸入訊息",
       ampm: ["上午", "下午"],

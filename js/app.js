@@ -83,6 +83,19 @@
       '</div>';
   }
 
+  /* ---------------- 進度旗標：公告依條件解鎖用 ---------------- */
+  // left_forum = 第一次離開論壇；kakao_unlocked = 解開 KakaoTalk 密碼；login_帳號 = 登入過某個 IG 帳號；
+  // chat_好友id = 打開過某個 Kakao 聊天室；電話對話段落寫 flag: "名稱" → 走到那段就記錄
+  var FLAG_KEY = 'sosho-flags';
+  var flags = {};
+  try { flags = JSON.parse(localStorage.getItem(FLAG_KEY)) || {}; } catch (e) {}
+  function setFlag(name) {
+    if (!name || flags[name]) return;
+    flags[name] = 1;
+    try { localStorage.setItem(FLAG_KEY, JSON.stringify(flags)); } catch (e) {}
+  }
+  function hasFlag(name) { return !name || !!flags[name]; }
+
   /* ---------------- 論壇 ---------------- */
   // 已讀文章（存在瀏覽器裡，下次打開仍記得）
   var READ_KEY = 'sosho-read-posts';
@@ -95,8 +108,9 @@
 
   function forumFooter() {
     var f = D.forum;
-    return '<footer class="f-footer">' + esc(f.copyright) +
+    return '<footer class="f-footer">' +
       (f.restartLabel ? '<button class="f-restart" type="button" data-restart>' + esc(f.restartLabel) + '</button>' : '') +
+      '<div class="f-copy">' + esc(f.copyright) + '</div>' +
       '</footer>';
   }
 
@@ -121,8 +135,18 @@
   }
   document.addEventListener('touchstart', playAds, { passive: true });
 
+  // 公告：unlock 寫進度旗標名稱，達成後才出現（沒寫 = 一開始就有）
+  function shownNotices() {
+    return (D.forum.notices || []).filter(function (n) { return hasFlag(n.unlock); });
+  }
+
   function renderForumList() {
     var f = D.forum;
+    var notices = shownNotices().map(function (n) {
+      return '<li><a href="#/forum/notice/' + encodeURIComponent(n.id) + '">' +
+        '<span class="mark">' + (readPosts['notice-' + n.id] ? '❕' : '❗️') + '</span>' +
+        '<span class="p-title">' + esc(n.title) + '</span></a></li>';
+    }).join('');
     var list = (f.posts || []).map(function (p) {
       // 未讀 ❗️、已讀 ❕
       return '<li><a href="#/forum/' + encodeURIComponent(p.id) + '">' +
@@ -139,7 +163,12 @@
 
     $('#forum-scroll').innerHTML =
       '<div class="f-body">' +
-        '<main class="f-main"><div class="f-box">' +
+        '<main class="f-main">' +
+          (notices ? '<div class="f-box f-notice">' +
+            '<div class="f-box-title">' + esc(f.noticeTitle || '公告') + '</div>' +
+            '<ul class="f-list">' + notices + '</ul>' +
+          '</div>' : '') +
+          '<div class="f-box">' +
           '<div class="f-box-title">' + esc(f.listTitle) + '</div>' +
           '<ul class="f-list">' + list + '</ul>' +
         '</div></main>' +
@@ -147,6 +176,22 @@
         '</aside>' +
       '</div>' + forumFooter();
     playAds();
+  }
+
+  // 公告內頁：標題＋內文（沒有留言）
+  function renderNotice(id) {
+    var f = D.forum;
+    var n = shownNotices().filter(function (x) { return String(x.id) === String(id); })[0];
+    if (!n) { replaceHash('#/forum'); return; }
+    markRead('notice-' + n.id);
+    $('#forum-scroll').innerHTML =
+      '<div class="pd">' +
+        '<a class="pd-back" href="#/forum">‹ ' + esc(f.backLabel) + '</a>' +
+        '<div class="pd-head">' + esc(n.title) + '</div>' +
+        (n.author ? '<div class="pd-author">' + esc(n.author) + '</div>' : '') +
+        '<div class="pd-content">' + multiline(n.content) + '</div>' +
+        (n.image ? '<img class="pd-cimg" src="' + esc(n.image) + '" alt="" data-fimg>' : '') +
+      '</div>' + forumFooter();
   }
 
   function renderPost(id) {
@@ -1359,6 +1404,7 @@
       return;
     }
     if (accState.loggedIn.indexOf(acc.username) < 0) accState.loggedIn.push(acc.username);
+    setFlag('login_' + acc.username);
     accState.current = acc.username;
     saveAcc();
     form.reset();
@@ -1372,6 +1418,7 @@
   function openApp(name) {
     var el = $('#app-' + name);
     if (currentApp === name) return el;
+    if (currentApp === 'forum') setFlag('left_forum');
     document.querySelectorAll('.app.open').forEach(function (a) { a.classList.remove('open'); });
     el.style.transform = '';
     el.classList.add('open');
@@ -1382,6 +1429,7 @@
   }
 
   function showHome() {
+    if (currentApp === 'forum') setFlag('left_forum');
     document.querySelectorAll('.app.open').forEach(function (a) {
       a.classList.remove('open');
       a.style.transform = '';
@@ -1421,7 +1469,9 @@
       APPS[parts[0]](parts.slice(1).map(decodeURIComponent));
     } else if (parts[0] === 'forum') {
       openApp('forum');
-      if (parts[1]) renderPost(decodeURIComponent(parts[1])); else renderForumList();
+      if (parts[1] === 'notice') renderNotice(decodeURIComponent(parts[2] || ''));
+      else if (parts[1]) renderPost(decodeURIComponent(parts[1]));
+      else renderForumList();
       $('#forum-scroll').scrollTop = 0;
     } else if (parts[0] === 'ig') {
       openApp('ig');
@@ -1496,7 +1546,7 @@
   /* ---------------- 啟動 ---------------- */
   // 給 js/apps/*.js 用的共用工具
   window.SOSHO = {
-    data: D, $: $, esc: esc, multiline: multiline, toast: toast, sortByName: sortByName, goBack: goBack, replaceHash: replaceHash,
+    data: D, $: $, esc: esc, multiline: multiline, toast: toast, sortByName: sortByName, setFlag: setFlag, hasFlag: hasFlag, goBack: goBack, replaceHash: replaceHash,
     setDarkStatus: function (on) { $('#phone').classList.toggle('dark-status', !!on); },
     load: function (key, def) {
       try { var v = JSON.parse(localStorage.getItem(key)); return v == null ? def : v; } catch (e) { return def; }

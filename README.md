@@ -63,12 +63,11 @@
 - 限時動態：愛心可按、可輸入訊息送出（輸入時會暫停）
 
 ## 電話（#/phone）
-- `phone.calls`：同一個 `date` 會排在同一組；`missed: true` 紅字、`count` 通話次數、`outgoing: true` 撥出
-- 點一筆通話 → 撥號畫面（3 秒後「無人接聽」），按結束會加進最近通話；點 ⓘ → 聯絡資訊與這個人的通話紀錄
-- 上方「全部／未接來電」可切換；下方三個標籤：通話記錄、聯絡人（尚未更新）、數字鍵盤
-- 數字鍵盤（#/phone/keypad）可以輸入號碼撥出；`phone.dialable` 裡的號碼撥出時會顯示對應的名字
+- 只有數字鍵盤（沒有通話記錄、底部分頁）；撥 `phone.dialable` 裡有 `script` 的號碼會接通、跑字幕對話，其他號碼 3 秒後「無人接聽」
+- 對話段落寫 `flag: "名稱"` → 走到那段就記錄進度（解鎖論壇公告用）
 
 ## KakaoTalk（#/kakao）
+- 進入前要輸入 `kakao.passcode`（目前 0318，打完電話才會知道）；解開一次就記住，「重新開始」會清掉
 - 只有聊天列表（介面全部是繁體中文，日期線格式「2026年10月22日 星期四」）：`kakao.friends` 的私聊＋`kakao.groups` 的群組，照名字字首排序；沒有好友頁、底部分頁
 - 聊天室：`messages` 裡 `{ date }` 是日期分隔，`from: "me"` 黃色靠右，`from: "them"` 白色靠左
 - 自己的訊息在對方還沒回之前會顯示未讀「1」
@@ -93,6 +92,11 @@
 - `followersCount` / `followingCount`：手動數字；`followersList` / `followingList`：名單（帳號 id 可點進去，`{ username, name }` 是灰色預設頭貼的路人、點不進去），只顯示一頁
 - 限時動態加 `closeFriends: true` = 摯友限時；只有帳號 `closeFriendsList` 裡的帳號看得到（綠框＋摯友標籤）
 - 帳號的 `saved`（"帳號/貼文編號"）＝已儲存；`archive.stories` / `archive.posts` ＝典藏（設定 → 典藏）
+
+## 論壇公告
+- 文章框上面有「公告」框：`forum.notices`，一開始只有「遊玩說明」
+- `unlock` 寫解鎖條件：`left_forum`（第一次離開論壇再回來）、`kakao_unlocked`、`login_帳號id`、`chat_好友id`、電話對話段落的 `flag`
+- 公告內頁只有標題和內文，沒有留言
 
 ## 論壇留言
 - 留言可加 `image`；留言者和文章 `author` 一樣時自動顯示「樓主」
