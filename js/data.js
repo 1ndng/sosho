@@ -191,7 +191,6 @@ window.SITE_DATA = {
       sent: "已傳送",
       copyLink: "複製連結",
       linkCopied: "已複製連結",
-      addToStory: "新增到限時動態",
       reposted: "已轉發到你的個人檔案",
       unreposted: "已取消轉發",
       savedTitle: "已儲存",

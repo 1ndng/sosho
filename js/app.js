@@ -12,6 +12,12 @@
   // 文字換行 \n → <br>
   function multiline(s) { return esc(s).replace(/\n/g, '<br>'); }
 
+  /* ---------------- 禁止縮放：兩指放大不會改變畫面大小（連點兩下靠 CSS 的 touch-action） ---------------- */
+  document.addEventListener('dblclick', function (e) { e.preventDefault(); }, { passive: false });
+  ['gesturestart', 'gesturechange'].forEach(function (t) {
+    document.addEventListener(t, function (e) { e.preventDefault(); }, { passive: false });
+  });
+
   /* ---------------- 狀態列時間 ---------------- */
   function tick() {
     var d = new Date();
@@ -466,7 +472,7 @@
     commentsTitle: '留言', commentPlaceholder: '為 {user} 新增留言……', postButton: '發佈', reply: '回覆',
     viewAllComments: '查看全部 {n} 則留言', noComments: '還沒有留言', justNow: '剛剛',
     shareTitle: '分享', sendButton: '傳送', sent: '已傳送', copyLink: '複製連結', linkCopied: '已複製連結',
-    addToStory: '新增到限時動態', reposted: '已轉發到你的個人檔案', unreposted: '已取消轉發',
+    reposted: '已轉發到你的個人檔案', unreposted: '已取消轉發',
     savedTitle: '已儲存', noSaved: '還沒有儲存任何貼文', noReposts: '還沒有轉發任何貼文', noTagged: '還沒有被標註的相片',
     storyMessageSent: '訊息已傳送', recentTitle: '最近',
     editTitle: '編輯個人檔案', nameLabel: '名稱', bioLabel: '個人簡介', cancelLabel: '取消', doneLabel: '完成',
@@ -792,34 +798,6 @@
     slideUp();
     var f = $('#ig-cmt-form');
     f.c.addEventListener('input', function () { f.querySelector('button').disabled = !f.c.value.trim(); });
-  }
-
-  /* ---- 分享 ---- */
-  function openShare() {
-    var t = T(), me = currentAccount();
-    // 追蹤中的帳號排前面
-    var people = followingOf(me).concat(allProfiles().filter(function (a) {
-      return a !== me && !isFollowing(me, a);
-    }));
-    $('#ig-overlay').innerHTML =
-      '<div class="ig-sheet-wrap" id="ig-sheet">' +
-        '<div class="ig-sheet-bg" data-close-sheet></div>' +
-        '<div class="ig-sheet">' +
-          '<div class="ig-sheet-handle" data-close-sheet></div>' +
-          '<div class="ig-sheet-title">' + esc(t.shareTitle) + '</div>' +
-          '<div class="ig-share-grid">' + people.map(function (a) {
-            return '<button class="ig-share-p" data-pick="' + esc(a.username) + '">' +
-              '<span class="ig-share-av"><img src="' + esc(a.avatar) + '" alt=""><i>' + ICON.check + '</i></span>' +
-              '<span>' + esc(a.username) + '</span></button>';
-          }).join('') + '</div>' +
-          '<div class="ig-share-acts">' +
-            '<button data-na><span>' + ICON.plusCircle + '</span>' + esc(t.addToStory) + '</button>' +
-            '<button data-copylink><span>' + ICON.link + '</span>' + esc(t.copyLink) + '</button>' +
-          '</div>' +
-          '<button class="ig-share-send" id="ig-share-send" hidden>' + esc(t.sendButton) + '</button>' +
-        '</div>' +
-      '</div>';
-    slideUp();
   }
 
   // 限時動態 / 精選動態（which = "me" 或精選的編號）
@@ -1242,7 +1220,6 @@
         else { store.reposts[k] = Date.now(); toast(T().reposted); }
       }
       else if (act === 'comments') { openComments(); return; }
-      else if (act === 'share') { openShare(); return; }
       saveStore(); refreshPostActions();
       return;
     }
@@ -1257,17 +1234,6 @@
       inp.value = '@' + el.dataset.reply + ' '; inp.focus();
       inp.dispatchEvent(new Event('input'));
       return;
-    }
-    if ((el = e.target.closest('[data-pick]'))) {
-      el.classList.toggle('picked');
-      $('#ig-share-send').hidden = !document.querySelector('.ig-share-p.picked');
-      return;
-    }
-    if (e.target.closest('#ig-share-send')) {
-      $('#ig-sheet').classList.remove('show'); toast(T().sent); return;
-    }
-    if (e.target.closest('[data-copylink]')) {
-      $('#ig-sheet').classList.remove('show'); toast(T().linkCopied); return;
     }
     if (e.target.closest('[data-follow]')) {
       var who = profileByName(decodeURIComponent(location.hash.split('/')[3] || ''));

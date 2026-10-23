@@ -1,6 +1,8 @@
 /* ============ 基本 ============ */
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html, body { margin: 0; height: 100%; }
+/* 連續點太快不會放大畫面（iPhone 會忽略 user-scalable=no，要靠這個） */
+html, body, * { touch-action: manipulation; }
 body {
   background: #1b1b1f;
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "PingFang TC", "Noto Sans TC", "Apple SD Gothic Neo", "Noto Sans KR", "Hiragino Sans", sans-serif;
@@ -132,9 +134,11 @@ img { display: block; max-width: 100%; }
   background: #e9f1fa repeating-linear-gradient(90deg, rgba(255,255,255,.55) 0 2px, transparent 2px 4px);
   font-size: 12px; line-height: 1.55;
 }
-.f-body { flex: none; display: flex; gap: 6px; padding: 8px 6px 4px; align-items: flex-start; }
-.f-main { flex: 2; min-width: 0; }
-.f-ads { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+/* 文章列表佔滿寬度在上方；廣告兩個左右並排在底部；淺色小字在最下面 */
+.f-body { flex: 1 0 auto; display: flex; flex-direction: column; gap: 10px; padding: 8px 6px 0; }
+.f-main { min-width: 0; }
+.f-ads { margin-top: auto; display: flex; gap: 8px; align-items: flex-end; }
+.f-ads .ad { flex: 1; min-width: 0; }
 
 .f-box {
   background: #fff; border: 3px solid #3b6db8; border-radius: 12px; overflow: hidden;
@@ -161,7 +165,7 @@ img { display: block; max-width: 100%; }
 .ad img { width: 100%; height: auto; }
 .ad:active { filter: brightness(.9); }
 
-.f-footer { flex: none; padding: 14px 10px 18px; text-align: center; color: #b3c0d1; font-size: 10px; }
+.f-footer { flex: none; padding: 10px 10px 8px; text-align: center; color: #b3c0d1; font-size: 10px; }
 
 /* ---------- 論壇文章內頁（Cyworld 風） ---------- */
 /* 文章內頁白框：固定撐滿畫面，下方只留一行淺色文字 */
@@ -448,20 +452,6 @@ img { display: block; max-width: 100%; }
 .ig-cmt-form button { color: #0095f6; font-weight: 600; font-size: 14px; }
 .ig-cmt-form button:disabled { opacity: .35; }
 
-.ig-share-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px 6px; padding: 14px 0; max-height: 300px; overflow-y: auto; }
-.ig-share-p { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 12px; min-width: 0; }
-.ig-share-p > span:last-child { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.ig-share-av { position: relative; width: 62px; height: 62px; }
-.ig-share-av img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
-.ig-share-av i { position: absolute; right: -2px; bottom: -2px; width: 22px; height: 22px; display: none; border-radius: 50%; border: 2px solid #fff; }
-.ig-share-av i svg { width: 100%; height: 100%; display: block; }
-.ig-share-p.picked .ig-share-av i { display: block; }
-.ig-share-p.picked img { opacity: .75; }
-.ig-share-acts { display: flex; gap: 22px; padding: 12px 4px 4px; border-top: 1px solid #efefef; }
-.ig-share-acts button { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 12px; width: 76px; }
-.ig-share-acts span { width: 52px; height: 52px; border-radius: 50%; background: #efefef; display: flex; align-items: center; justify-content: center; }
-.ig-share-acts svg { width: 24px; height: 24px; }
-.ig-share-send { display: block; width: 100%; height: 44px; margin-top: 12px; border-radius: 10px; background: #0095f6; color: #fff; font-weight: 600; font-size: 15px; }
 
 input.ig-story-msg { background: none; outline: none; font: inherit; font-size: 15px; }
 input.ig-story-msg::placeholder { color: rgba(255,255,255,.9); }
@@ -489,7 +479,8 @@ div.ig-frow-main { cursor: default; }
 .lock { position: absolute; inset: 0; z-index: 80; background: #333 center / cover no-repeat; color: #fff; transition: transform .45s cubic-bezier(.4,0,.2,1), opacity .45s; }
 .lock.unlocked { transform: translateY(-100%); opacity: .6; pointer-events: none; }
 .lock-shade { position: absolute; inset: 0; background: rgba(20,20,25,.45); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); }
-.lock-inner { position: relative; height: 100%; display: flex; flex-direction: column; align-items: center; padding-top: 90px; }
+/* 內容整組置中（稍微偏上），手機上不會太靠上面 */
+.lock-inner { position: relative; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-bottom: 70px; }
 .lock-ico { width: 22px; height: 22px; margin-bottom: 14px; }
 .lock-title { font-size: 20px; margin-bottom: 18px; }
 .lock-dots { display: flex; gap: 22px; margin-bottom: 56px; }
@@ -507,7 +498,7 @@ div.ig-frow-main { cursor: default; }
 .phone.locked .home-gesture { z-index: 90; }
 .phone.locked .home-gesture { pointer-events: none; }
 .phone.locked .home-indicator { background: #fff; }
-@media (max-height: 700px) { .lock-inner { padding-top: 60px; } .lock-dots { margin-bottom: 34px; } .lock-keys { grid-template-columns: repeat(3, 70px); gap: 14px 24px; } .lock-key { width: 70px; height: 70px; } }
+@media (max-height: 700px) { .lock-inner { padding-bottom: 30px; } .lock-dots { margin-bottom: 34px; } .lock-keys { grid-template-columns: repeat(3, 70px); gap: 14px 24px; } .lock-key { width: 70px; height: 70px; } }
 
 /* 非公開帳號 */
 .ig-private { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 34px 30px; margin-top: 16px; border-top: 1px solid #efefef; }
