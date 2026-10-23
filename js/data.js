@@ -13,8 +13,8 @@ window.SITE_DATA = {
   home: {
     wallpaper: "images/wallpaper.png",
     apps: [
-      { id: "forum", label: "test1", icon: "images/icon_forum.png" },
-      { id: "ig",    label: "test2", icon: "images/icon_insta.png" }
+      { id: "forum", label: "ANNMS Talk", icon: "images/icon_forum.png" },
+      { id: "ig",    label: "Instagram", icon: "images/icon_insta.png" }
     ]
   },
 
