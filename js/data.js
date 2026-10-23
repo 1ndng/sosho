@@ -444,7 +444,34 @@ window.SITE_DATA = {
         avatar: "images/2_avatar.jpg",
         hasStory: false,
         name: "SOHEE",
-        following: [],
+        following: ["shotaroo0"],
+        followersCount: "1121",          // 手動數字（蓋過自動計算）
+        followingCount: "137",
+        // 粉絲／追蹤中名單（小帳沒有追蹤她）；帳號 id 可以點進去，{ username, name, avatar } 是路人點不進去
+        followersList: [
+          "shotaroo0",
+          { username: "seokkkk", name: "eunseok", avatar: "images/eunseok.jpg" },
+          { username: "song_sungchan", name: "sungchan", avatar: "images/sungchan.jpg" },
+          { username: "bin032", name: "wonbin", avatar: "images/wonbin.jpg" },
+          { username: "antonnie", name: "anton", avatar: "images/anton.jpg" },
+          { username: "test323", name: "test324" },
+          { username: "test325", name: "test326" },
+          { username: "test327", name: "test328" },
+          { username: "test329", name: "test330" },
+          { username: "test331", name: "test332" }
+        ],
+        followingList: [
+          "shotaroo0",
+          { username: "seokkkk", name: "eunseok", avatar: "images/eunseok.jpg" },
+          { username: "song_sungchan", name: "sungchan", avatar: "images/sungchan.jpg" },
+          { username: "bin032", name: "wonbin", avatar: "images/wonbin.jpg" },
+          { username: "antonnie", name: "anton", avatar: "images/anton.jpg" },
+          { username: "test333", name: "test334" },
+          { username: "test335", name: "test336" },
+          { username: "test337", name: "test338" },
+          { username: "test339", name: "test340" },
+          { username: "test341", name: "test342" }
+        ],
         bio: ["test96"],
         music: { title: "test97", artist: "test98" },
         highlights: [
@@ -640,7 +667,7 @@ window.SITE_DATA = {
     friends: [
       {
         id: "f1",                       // 不要重複（用於網址）
-        name: "李炤熙",                   // 252525252
+        name: "이소희",                   // 252525252
         status: "test166",                  // 狀態訊息
         avatar: "images/2_avatar.jpg",
         unread: 2,       // 一開始在聊天列表顯示的未讀數
@@ -716,7 +743,7 @@ window.SITE_DATA = {
       },
       {
         id: "f3",                       // 不要重複（用於網址）
-        name: "이찬영",                   // 李炤熙的朋友
+        name: "ANTON",                   // 李炤熙的朋友
         status: "test190",                  // 狀態訊息
         avatar: "images/anton.jpg",
         unread: 0,       // 一開始在聊天列表顯示的未讀數
