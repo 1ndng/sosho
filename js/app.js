@@ -135,8 +135,30 @@
     return esc(s).replace(/(@[\w.]+)/g, '<span class="ig-mention" data-na>$1</span>');
   }
 
+  /* ---- 帳號：主帳號 + 用帳密登入的其他帳號（登入狀態存在瀏覽器裡） ---- */
+  var ACC_KEY = 'sosho-ig-accounts';
+  var accState = { current: null, loggedIn: [] };
+  try { accState = JSON.parse(localStorage.getItem(ACC_KEY)) || accState; } catch (e) {}
+  function saveAcc() {
+    try { localStorage.setItem(ACC_KEY, JSON.stringify(accState)); } catch (e) {}
+  }
+  function otherAccounts() { return D.instagram.otherAccounts || []; }
+  function findAccount(username) {
+    if (!username || username === D.instagram.username) return D.instagram;
+    return otherAccounts().filter(function (a) { return a.username === username; })[0] || null;
+  }
+  // 目前帳號；data.js 改過帳號名稱導致找不到時，回到主帳號
+  function currentAccount() { return findAccount(accState.current) || D.instagram; }
+  // 帳號清單：主帳號 + 已登入過的帳號
+  function listedAccounts() {
+    return [D.instagram].concat(accState.loggedIn.map(findAccount).filter(function (a) {
+      return a && a !== D.instagram;
+    }));
+  }
+
   function renderIG() {
-    var g = D.instagram;
+    var L = D.instagram;          // 共用文字（按鈕、標籤）
+    var g = currentAccount();     // 目前顯示的帳號
     // 欄位被刪掉或註解掉時也不會整頁空白
     var bio = g.bio || [], highlights = g.highlights || [], posts = g.posts || [];
     var na = ' data-na';   // 標記：點擊後跳出「尚未更新」
@@ -157,9 +179,9 @@
         '<div class="ig-right">' +
           '<div class="ig-name">' + esc(g.name) + '</div>' +
           '<div class="ig-stats">' +
-            '<div><b>' + esc(g.postsCount) + '</b>' + esc(g.postsLabel) + '</div>' +
-            '<button' + na + '><b>' + esc(g.followersCount) + '</b>' + esc(g.followersLabel) + '</button>' +
-            '<button' + na + '><b>' + esc(g.followingCount) + '</b>' + esc(g.followingLabel) + '</button>' +
+            '<div><b>' + esc(g.postsCount) + '</b>' + esc(L.postsLabel) + '</div>' +
+            '<button' + na + '><b>' + esc(g.followersCount) + '</b>' + esc(L.followersLabel) + '</button>' +
+            '<button' + na + '><b>' + esc(g.followingCount) + '</b>' + esc(L.followingLabel) + '</button>' +
           '</div>' +
         '</div>' +
       '</div>' +
@@ -171,8 +193,8 @@
           '<b>' + esc(g.music.title) + '</b><span> · ' + esc(g.music.artist) + '</span></button>' : '') +
 
       '<div class="ig-btns">' +
-        '<button>' + esc(g.editProfileLabel) + '</button>' +
-        '<button>' + esc(g.shareProfileLabel) + '</button>' +
+        '<button>' + esc(L.editProfileLabel) + '</button>' +
+        '<button>' + esc(L.shareProfileLabel) + '</button>' +
       '</div>' +
 
       (highlights.length ? '<div class="ig-hl">' + highlights.map(function (h) {
@@ -197,21 +219,23 @@
         '<div class="ig-sheet">' +
           '<div class="ig-sheet-handle" data-close-sheet></div>' +
           '<div class="ig-acc-list">' +
-            '<button class="ig-acc" data-close-sheet>' +
-              '<img src="' + esc(g.avatar) + '" alt="">' +
-              '<span class="ig-acc-name">' + esc(g.username) + '</span>' +
-              '<span class="ig-acc-check">' + ICON.check + '</span>' +
-            '</button>' +
+            listedAccounts().map(function (a) {
+              return '<button class="ig-acc" data-switch="' + esc(a.username) + '">' +
+                '<img src="' + esc(a.avatar) + '" alt="">' +
+                '<span class="ig-acc-name">' + esc(a.username) + '</span>' +
+                (a === g ? '<span class="ig-acc-check">' + ICON.check + '</span>' : '') +
+              '</button>';
+            }).join('') +
             '<a class="ig-acc" href="#/ig/login">' +
               '<span class="ig-acc-plus">' + ICON.plus + '</span>' +
-              '<span class="ig-acc-name">' + esc(g.addAccountLabel) + '</span>' +
+              '<span class="ig-acc-name">' + esc(L.addAccountLabel) + '</span>' +
             '</a>' +
           '</div>' +
         '</div>' +
       '</div>';
   }
 
-  // 登入畫面：純裝飾，表單不會送出、不會儲存任何輸入
+  // 登入畫面：只在網頁內比對 data.js 裡的帳密，不會把輸入送到任何地方
   function renderIGLogin() {
     var l = D.instagram.login;
     $('#ig-overlay').innerHTML = '';
@@ -222,8 +246,8 @@
           '<img class="ig-login-logo" src="' + esc(l.logo) + '" alt="">' +
         '</div>' +
         '<form class="ig-login-form" autocomplete="off">' +
-          '<input type="text" placeholder="' + esc(l.usernamePlaceholder) + '" autocomplete="off">' +
-          '<input type="password" placeholder="' + esc(l.passwordPlaceholder) + '" autocomplete="off">' +
+          '<input type="text" name="u" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="' + esc(l.usernamePlaceholder) + '" autocomplete="off">' +
+          '<input type="password" name="p" placeholder="' + esc(l.passwordPlaceholder) + '" autocomplete="off">' +
           '<button type="submit" class="ig-login-btn">' + esc(l.loginLabel) + '</button>' +
           '<button type="button" class="ig-login-forgot" data-na>' + esc(l.forgotLabel) + '</button>' +
         '</form>' +
@@ -231,14 +255,35 @@
   }
 
   $('#app-ig').addEventListener('click', function (e) {
-    if (e.target.closest('[data-sheet]')) $('#ig-sheet').classList.add('show');
+    var sw = e.target.closest('[data-switch]');
+    if (sw) {
+      accState.current = sw.dataset.switch;
+      saveAcc();
+      renderIG();
+      $('#ig-scroll').scrollTop = 0;
+    }
+    else if (e.target.closest('[data-sheet]')) $('#ig-sheet').classList.add('show');
     else if (e.target.closest('[data-close-sheet]')) $('#ig-sheet').classList.remove('show');
     else if (e.target.closest('[data-na]')) toast();
   });
   $('#ig-scroll').addEventListener('submit', function (e) {
     e.preventDefault();
-    e.target.reset();
-    toast();
+    var form = e.target;
+    var u = form.u.value.trim(), pw = form.p.value;
+    var acc = otherAccounts().filter(function (a) {
+      return a.username === u && String(a.password) === pw;
+    })[0];
+    if (!acc) {
+      form.p.value = '';
+      toast(D.instagram.login.errorText || '帳號或密碼錯誤');
+      return;
+    }
+    if (accState.loggedIn.indexOf(acc.username) < 0) accState.loggedIn.push(acc.username);
+    accState.current = acc.username;
+    saveAcc();
+    form.reset();
+    $('#toast').classList.remove('show');
+    location.hash = '#/ig';
   });
 
   /* ---------------- 路由（網址 #/home、#/forum、#/forum/文章id、#/ig） ---------------- */

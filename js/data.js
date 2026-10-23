@@ -125,7 +125,51 @@ window.SITE_DATA = {
       usernamePlaceholder: "帳號",
       passwordPlaceholder: "密碼",
       loginLabel: "登入",
-      forgotLabel: "忘記密碼"
-    }
+      forgotLabel: "忘記密碼",
+      errorText: "帳號或密碼錯誤"   // 帳密錯誤時跳出的提示
+    },
+
+    // 可以從「新增帳號」登入的其他帳號（輸入對的帳號＋密碼才會登入）
+    // 欄位和上面主帳號一樣；沒寫到的欄位會不顯示
+    otherAccounts: [
+      {
+        username: "shotaroo0",           // 登入用的帳號，也是頁面上方顯示的帳號名稱
+        password: "0000",
+        avatar: "images/ig2_avatar.png",
+        hasStory: false,
+        name: "test83",
+        postsCount: "test84",
+        followersCount: "test85",
+        followingCount: "test86",
+        bio: ["test87"],
+        music: { title: "test88", artist: "test89" },
+        highlights: [
+          { image: "images/ig2_highlight_1.png", label: "test90" },
+          { image: "images/ig2_highlight_2.png", label: "test91" }
+        ],
+        posts: [
+          "images/ig2_post_1.png", "images/ig2_post_2.png", "images/ig2_post_3.png"
+        ]
+      },
+      {
+        username: "252525252",           // 登入用的帳號，也是頁面上方顯示的帳號名稱
+        password: "031121",
+        avatar: "images/ig3_avatar.png",
+        hasStory: false,
+        name: "test92",
+        postsCount: "test93",
+        followersCount: "test94",
+        followingCount: "test95",
+        bio: ["test96"],
+        music: { title: "test97", artist: "test98" },
+        highlights: [
+          { image: "images/ig3_highlight_1.png", label: "test99" },
+          { image: "images/ig3_highlight_2.png", label: "test100" }
+        ],
+        posts: [
+          "images/ig3_post_1.png", "images/ig3_post_2.png", "images/ig3_post_3.png"
+        ]
+      }
+    ]
   }
 };

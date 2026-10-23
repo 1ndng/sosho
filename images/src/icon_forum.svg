@@ -10,8 +10,8 @@
   <rect width="512" height="512" fill="url(#bg)"/>
   <rect width="512" height="512" fill="url(#stripe)"/>
   <g transform="translate(16,-14)">
-  <!-- back bubble (pink) -->
-  <path d="M190 120h200a46 46 0 0 1 46 46v104a46 46 0 0 1-46 46h-18l6 46-58-46H190a46 46 0 0 1-46-46V166a46 46 0 0 1 46-46z" fill="#f7c3d8" stroke="#2b5799" stroke-width="10"/>
+  <!-- back bubble -->
+  <path d="M190 120h200a46 46 0 0 1 46 46v104a46 46 0 0 1-46 46h-18l6 46-58-46H190a46 46 0 0 1-46-46V166a46 46 0 0 1 46-46z" fill="#fff" stroke="#2b5799" stroke-width="10"/>
   <!-- front bubble (white) -->
   <path d="M110 196h214a44 44 0 0 1 44 44v108a44 44 0 0 1-44 44H178l-66 52 10-52h-12a44 44 0 0 1-44-44V240a44 44 0 0 1 44-44z" fill="#fff" stroke="#2b5799" stroke-width="10"/>
   <!-- masked / anonymous face -->
