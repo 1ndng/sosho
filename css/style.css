@@ -194,6 +194,7 @@ img { display: block; max-width: 100%; }
 /* 頭像：外框約 3px、白色間隔約 3px（比例參考實際 IG） */
 .ig-avatar { position: relative; flex: none; width: 98px; height: 98px; border-radius: 50%; padding: 3px; }
 .ig-avatar.has-story { background: conic-gradient(from 200deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5, #feda75); }
+.ig-avatar.has-story.cf { background: #1bc84b; }
 .ig-avatar.has-story.seen { background: #dbdbdb; }
 .ig-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 3px solid #fff; }
 .ig-right { flex: 1; min-width: 0; }
@@ -444,3 +445,21 @@ img { display: block; max-width: 100%; }
 input.ig-story-msg { background: none; outline: none; font: inherit; font-size: 15px; }
 input.ig-story-msg::placeholder { color: rgba(255,255,255,.9); }
 #ig-story-like.on-like { color: #ff3040; }
+
+/* ---------- 摯友、典藏、名單 ---------- */
+.ig-story-cf { display: inline-flex; align-items: center; gap: 3px; background: #1bc84b; color: #fff; font-size: 11px; font-weight: 600; padding: 2px 7px 2px 5px; border-radius: 10px; text-shadow: none; }
+.ig-story-cf svg { width: 11px; height: 11px; }
+.ig-cf-star { width: 26px; height: 26px; border-radius: 50%; background: #1bc84b; color: #fff; display: flex; align-items: center; justify-content: center; flex: none; }
+.ig-cf-star svg { width: 18px; height: 18px; }
+.ig-arch-grid a { position: relative; }
+.ig-arch-grid video { width: 100%; height: 100%; object-fit: cover; }
+.ig-arch-date { position: absolute; left: 6px; top: 6px; background: #fff; color: #000; font-size: 11px; font-weight: 600; padding: 3px 6px; border-radius: 6px; line-height: 1.1; box-shadow: 0 1px 4px rgba(0,0,0,.2); }
+.ig.ig-noscroll .app-scroll { overflow: hidden; }
+div.ig-frow-main { cursor: default; }
+
+/* 論壇留言：原PO 標籤、圖片 */
+.pd-op { font-style: normal; font-weight: 700; font-size: 10px; color: #fff; background: #e0457b; border-radius: 3px; padding: 0 4px; margin-left: 4px; vertical-align: 2px; }
+.pd-comment { flex-wrap: wrap; }
+.pd-cimg { display: block; flex-basis: 100%; max-width: 100%; max-height: 220px; object-fit: contain; object-position: left; border-radius: 8px; margin-top: 4px; cursor: zoom-in; }
+.pd-viewer { position: absolute; inset: 0; z-index: 40; background: rgba(0,0,0,.92); display: flex; align-items: center; justify-content: center; padding: 44px 0 34px; }
+.pd-viewer img { max-width: 100%; max-height: 100%; object-fit: contain; }

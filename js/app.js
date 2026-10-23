@@ -93,9 +93,13 @@
     markRead(p.id);
 
     var cs = p.comments || [];
+    // 留言者 = 文章作者 → 名字旁顯示「原PO」；留言可以附圖片
     var comments = cs.map(function (c) {
-      return '<div class="pd-comment"><b>' + esc(c.name) + '</b><span class="pd-colon">:</span>' +
-        '<span class="pd-ctext">' + multiline(c.text) + '</span></div>';
+      var op = c.name === p.author ? '<i class="pd-op">' + esc(f.opLabel || '原PO') + '</i>' : '';
+      return '<div class="pd-comment"><b>' + esc(c.name) + op + '</b><span class="pd-colon">:</span>' +
+        '<span class="pd-ctext">' + (c.text ? multiline(c.text) : '') + '</span>' +
+        (c.image ? '<img class="pd-cimg" src="' + esc(c.image) + '" alt="" data-fimg>' : '') +
+        '</div>';
     }).join('');
 
     $('#forum-scroll').innerHTML =
@@ -114,6 +118,16 @@
 
   // 廣告沒有連結時 → 顯示尚未更新
   $('#forum-scroll').addEventListener('click', function (e) {
+    var im = e.target.closest('[data-fimg]');
+    if (im) {
+      // 點留言圖片 → 全螢幕，點一下關閉
+      var v = document.createElement('div');
+      v.className = 'pd-viewer';
+      v.innerHTML = '<img src="' + esc(im.getAttribute('src')) + '" alt="">';
+      v.onclick = function () { v.remove(); };
+      $('#app-forum').appendChild(v);
+      return;
+    }
     var ad = e.target.closest('.ad');
     if (ad && !(D.forum.ads || [])[ad.dataset.ad].link) { e.preventDefault(); toast(); }
   });
@@ -135,6 +149,7 @@
     saved: '<svg viewBox="0 0 24 24"><path d="M5.5 3h13v18L12 14.8 5.5 21z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>',
     archive: '<svg viewBox="0 0 24 24"><path d="M3.5 5.5v4h4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 9.5A9 9 0 1 1 3 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>',
     lock: '<svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2.5" stroke="currentColor" stroke-width="2" fill="none"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2" fill="none"/></svg>',
+    starFill: '<svg viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3L2.9 9.5l6.3-.9z" fill="currentColor"/></svg>',
     star: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path d="m12 6.8 1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7-3.2 1.7.6-3.6-2.6-2.5 3.6-.5z" fill="currentColor"/></svg>',
     right: '<svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     close: '<svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
@@ -230,17 +245,35 @@
     return allProfiles().filter(function (a) { return a.username === name; })[0] || null;
   }
 
+  // 摯友限時動態：只有自己或在 closeFriendsList 裡的帳號看得到
+  function canSee(owner, item) {
+    if (!item || !item.closeFriends) return true;
+    var me = currentAccount();
+    return me === owner || (owner.closeFriendsList || []).indexOf(me.username) >= 0;
+  }
+  function visibleStory(g) { return (g.story || []).filter(function (it) { return canSee(g, it); }); }
+  function visibleHighlight(g, h) {
+    var items = h.stories && h.stories.length ? h.stories : [{ image: h.image }];
+    return items.filter(function (it) { return canSee(g, it); });
+  }
+
   // g = 要顯示的帳號；base = 這個帳號頁面的網址（自己 #/ig，別人 #/ig/u/帳號）
   function renderIG(g, base) {
     var L = D.instagram;          // 共用文字（按鈕、標籤）
     g = g || currentAccount();
     base = base || '#/ig';
     var visitor = base !== '#/ig';   // true = 從搜尋點進去看別人的頁面
-    var ring = g.hasStory ? ' has-story' + (store.seen[g.username] ? ' seen' : '') : '';
+    var vis = visibleStory(g);
+    var showRing = vis.length > 0 || (g.hasStory && !g.story);
+    var cf = vis.some(function (it) { return it.closeFriends; });
+    var ring = showRing ? ' has-story' + (cf ? ' cf' : '') + (store.seen[g.username] ? ' seen' : '') : '';
     var followed = visitor && isFollowing(currentAccount(), g);
     var c = counts(g);
     // 欄位被刪掉或註解掉時也不會整頁空白
-    var bio = g.bio || [], highlights = g.highlights || [], posts = g.posts || [];
+    var bio = g.bio || [], posts = g.posts || [];
+    // 精選裡的內容全部看不到（都是摯友限時、又不是摯友）就不顯示這個精選
+    var highlights = (g.highlights || []).map(function (h, i) { return { h: h, i: i }; })
+      .filter(function (x) { return visibleHighlight(g, x.h).length; });
     var na = ' data-na';   // 標記：點擊後跳出「尚未更新」
 
     $('#ig-scroll').innerHTML =
@@ -260,11 +293,11 @@
 
       '<div class="ig-profile">' +
         // 有限時動態 → 點頭像進入；沒有 → 尚未更新。看過的限時動態外框變淺灰色
-        (g.story && g.story.length
+        (vis.length
           ? '<a class="ig-avatar' + ring + '" href="' + base + '/story/me">'
           : '<button class="ig-avatar' + ring + '"' + na + '>') +
           '<img src="' + esc(g.avatar) + '" alt="">' +
-        (g.story && g.story.length ? '</a>' : '</button>') +
+        (vis.length ? '</a>' : '</button>') +
         '<div class="ig-right">' +
           '<div class="ig-name">' + esc(g.name) + '</div>' +
           '<div class="ig-stats">' +
@@ -294,7 +327,8 @@
             '<button>' + esc(L.shareProfileLabel) + '</button>' +
           '</div>') +
 
-      (highlights.length ? '<div class="ig-hl">' + highlights.map(function (h, i) {
+      (highlights.length ? '<div class="ig-hl">' + highlights.map(function (x) {
+        var h = x.h, i = x.i;
         return '<a class="ig-hl-item" href="' + base + '/story/' + i + '"><span class="ig-hl-img"><img src="' + esc(h.image) + '" alt=""></span>' +
           '<span class="ig-hl-label">' + esc(h.label) + '</span></a>';
       }).join('') + '</div>' : '') +
@@ -352,7 +386,9 @@
     shareTitle: '分享', sendButton: '傳送', sent: '已傳送', copyLink: '複製連結', linkCopied: '已複製連結',
     addToStory: '新增到限時動態', reposted: '已轉發到你的個人檔案', unreposted: '已取消轉發',
     savedTitle: '已儲存', noSaved: '還沒有儲存任何貼文', noReposts: '還沒有轉發任何貼文', noTagged: '還沒有被標註的相片',
-    storyMessageSent: '訊息已傳送'
+    storyMessageSent: '訊息已傳送',
+    closeFriendsTitle: '摯友', closeFriendsBadge: '摯友', noCloseFriends: '還沒有摯友',
+    archiveTitle: '典藏', archiveStories: '限時動態', archivePosts: '貼文', noArchive: '沒有典藏的內容'
   };
   function T() {
     var t = D.instagram.text || {}, out = {};
@@ -398,11 +434,14 @@
     });
     return out;
   }
+  // 已儲存：玩家按的收藏（新的在前）＋ data.js 的 saved
   function savedOf() {
-    var me = currentAccount().username + '|';
-    return Object.keys(store.saves).filter(function (k) { return store.saves[k] && k.indexOf(me) === 0; })
+    var acc = currentAccount(), me = acc.username + '|', seen = {};
+    var mine = Object.keys(store.saves).filter(function (k) { return store.saves[k] && k.indexOf(me) === 0; })
       .sort(function (x, y) { return store.saves[y] - store.saves[x]; })
-      .map(function (k) { return refFromKey(k.slice(me.length)); }).filter(Boolean);
+      .map(function (k) { return k.slice(me.length); });
+    return mine.concat(acc.saved || []).filter(function (k) { return !seen[k] && (seen[k] = 1); })
+      .map(refFromKey).filter(Boolean);
   }
 
   function backBtn(href) {
@@ -426,14 +465,66 @@
             var inner =
               '<span class="ig-set-ico">' + (ICON[it.icon] || '') + '</span>' +
               '<span class="ig-set-label">' + esc(it.label) + '</span>' +
-              (it.value != null ? '<span class="ig-set-val">' + esc(it.value) + '</span>' : '') +
+              (it.icon === 'star'
+                ? '<span class="ig-set-val">' + (currentAccount().closeFriendsList || []).length + '</span>'
+                : it.value != null ? '<span class="ig-set-val">' + esc(it.value) + '</span>' : '') +
               '<span class="ig-set-arrow">' + ICON.right + '</span>';
-            return it.icon === 'saved'
-              ? '<a class="ig-set-row" href="#/ig/saved">' + inner + '</a>'
+            var links = { saved: '#/ig/saved', archive: '#/ig/archive', star: '#/ig/closefriends' };
+            return links[it.icon]
+              ? '<a class="ig-set-row" href="' + links[it.icon] + '">' + inner + '</a>'
               : '<button class="ig-set-row" data-na>' + inner + '</button>';
           }).join('') +
         '</section>';
       }).join('');
+  }
+
+  // 典藏：限時動態（過期）／貼文（下架）兩個分頁
+  var archiveTab = 'stories';
+  function renderIGArchive() {
+    var t = T(), ar = currentAccount().archive || {}, st = ar.stories || [], ps = ar.posts || [];
+    var body = archiveTab === 'stories'
+      ? (st.length ? '<div class="ig-grid ig-arch-grid">' + st.map(function (it, i) {
+          var isVideo = /\.(mp4|mov|webm)$/i.test(it.image || '');
+          return '<a href="#/ig/story/archive-' + i + '">' +
+            (isVideo ? '<video src="' + esc(it.image) + '" muted playsinline preload="metadata"></video>' : '<img src="' + esc(it.image) + '" alt="">') +
+            (it.time ? '<span class="ig-arch-date">' + esc(it.time) + '</span>' : '') + '</a>';
+        }).join('') + '</div>' : '<div class="ig-empty">' + esc(t.noArchive) + '</div>')
+      : (ps.length ? '<div class="ig-grid">' + ps.map(function (p, i) {
+          var po = postObj(p);
+          return '<a href="#/ig/archive/post/' + i + '"><img src="' + esc(po.images[0]) + '" alt="">' +
+            (po.images.length > 1 ? '<span class="ig-multi"></span>' : '') + '</a>';
+        }).join('') + '</div>' : '<div class="ig-empty">' + esc(t.noArchive) + '</div>');
+    $('#ig-overlay').innerHTML = '';
+    $('#ig-scroll').innerHTML =
+      '<div class="ig-pagehead">' + backBtn('#/ig/settings') + '<div class="ig-pagehead-t"><b>' + esc(t.archiveTitle) + '</b></div></div>' +
+      '<div class="ig-ftabs">' +
+        '<a href="#/ig/archive" data-atab="stories"' + (archiveTab === 'stories' ? ' class="on"' : '') + '>' + esc(t.archiveStories) + '</a>' +
+        '<a href="#/ig/archive" data-atab="posts"' + (archiveTab === 'posts' ? ' class="on"' : '') + '>' + esc(t.archivePosts) + '</a>' +
+      '</div>' + body;
+  }
+
+  // 摯友名單（設定 → 摯友）
+  function renderIGCloseFriends() {
+    var t = T(), me = currentAccount();
+    var list = (me.closeFriendsList || []).map(function (u) { return profileByName(u) || { username: u, name: '', avatar: DEFAULT_AVATAR, filler: true }; });
+    $('#ig-overlay').innerHTML = '';
+    $('#ig-scroll').innerHTML =
+      '<div class="ig-pagehead">' + backBtn('#/ig/settings') + '<div class="ig-pagehead-t"><b>' + esc(t.closeFriendsTitle) + '</b></div></div>' +
+      (list.length ? list.map(function (a) {
+        return personRow(a, '<span class="ig-cf-star">' + ICON.starFill + '</span>');
+      }).join('') : '<div class="ig-empty">' + esc(t.noCloseFriends) + '</div>');
+  }
+
+  // 名單裡的一列：真的帳號可以點進去；路人（filler）點不進去
+  var DEFAULT_AVATAR = 'images/default_avatar.png';
+  function personRow(a, right) {
+    var me = currentAccount();
+    var inner = '<img src="' + esc(a.avatar || DEFAULT_AVATAR) + '" alt="">' +
+      '<span><b>' + esc(a.username) + '</b>' + (a.name ? '<small>' + esc(a.name) + '</small>' : '') + '</span>';
+    var main = a.filler
+      ? '<div class="ig-frow-main">' + inner + '</div>'
+      : '<a class="ig-frow-main" href="' + (a === me ? '#/ig' : '#/ig/u/' + encodeURIComponent(a.username)) + '">' + inner + '</a>';
+    return '<div class="ig-frow">' + main + right + '</div>';
   }
 
   function renderIGSaved() {
@@ -485,13 +576,14 @@
     if (box && curPost) box.innerHTML = postActionsHTML();
   }
 
-  function renderIGPost(idx, g, base) {
+  // src = 'archive' 時顯示典藏裡的貼文
+  function renderIGPost(idx, g, base, src) {
     var L = D.instagram;
     g = g || currentAccount(); base = base || '#/ig';
-    var raw = (g.posts || [])[idx];
+    var raw = src === 'archive' ? ((g.archive || {}).posts || [])[idx] : (g.posts || [])[idx];
     if (raw == null) { location.replace(base); return; }
     var p = postObj(raw), n = p.images.length;
-    curPost = { owner: g, idx: idx, p: p, key: postKey(g, idx) };
+    curPost = { owner: g, idx: idx, p: p, key: src === 'archive' ? g.username + '/archive' + idx : postKey(g, idx) };
     $('#ig-overlay').innerHTML = '';
     $('#ig-scroll').innerHTML =
       '<div class="ig-pagehead">' + historyBackBtn(base) +
@@ -622,14 +714,20 @@
   function renderIGStory(which, g, base) {
     var L = D.instagram, items;
     g = g || currentAccount(); base = base || '#/ig';
-    if (which === 'me') items = g.story || [];
-    else {
+    var startAt = 0, fromArchive = /^archive-/.test(String(which));
+    if (which === 'me') items = visibleStory(g);
+    else if (fromArchive) {
+      // 典藏的限時動態：從點的那一則開始播
+      items = ((g.archive || {}).stories || []);
+      startAt = Math.min(items.length - 1, +String(which).slice(8) || 0);
+      base = '#/ig/archive';
+    } else {
       var h = (g.highlights || [])[which];
-      items = h ? (h.stories && h.stories.length ? h.stories : [{ image: h.image }]) : [];
+      items = h ? visibleHighlight(g, h) : [];
     }
     if (!items.length) { location.replace(base); return; }
     if (which === 'me') { store.seen[g.username] = 1; saveStore(); }
-    renderIG(g, base);   // 背後保留個人頁，關掉時直接回到這裡
+    if (fromArchive) renderIGArchive(); else renderIG(g, base);   // 背後保留原本的頁面，關掉時直接回到這裡
     $('#phone').classList.add('dark-status');
     var i = 0;
     $('#ig-overlay').innerHTML =
@@ -637,7 +735,8 @@
         '<div class="ig-story-bars">' + items.map(function () { return '<i><b></b></i>'; }).join('') + '</div>' +
         '<div class="ig-story-head">' +
           '<img src="' + esc(g.avatar) + '" alt="">' +
-          '<b>' + esc(g.username) + '</b><span class="ig-story-time"></span>' +
+          '<b>' + esc(g.username) + '</b><span class="ig-story-cf" id="ig-story-cf">' + ICON.starFill + esc(T().closeFriendsBadge) + '</span>' +
+          '<span class="ig-story-time"></span>' +
           '<button class="ig-ico" data-na>' + ICON.more + '</button>' +
           '<a class="ig-ico" href="' + base + '">' + ICON.close + '</a>' +
         '</div>' +
@@ -683,6 +782,7 @@
         ? '<video src="' + esc(src) + '" muted playsinline autoplay preload="auto"></video>'
         : '<img src="' + esc(src) + '" alt="">';
       $('.ig-story-time').textContent = items[i].time || '';
+      $('#ig-story-cf').style.display = items[i].closeFriends ? '' : 'none';
       bars.forEach(function (b, j) {
         b.className = j < i ? 'done' : '';
         b.firstChild.style.animation = 'none';
@@ -768,7 +868,7 @@
       if (dragged) return;
       if (e.target.hasAttribute('data-prev')) show(i - 1); else show(i + 1);
     };
-    show(0);
+    show(startAt);
   }
 
   // 粉絲／追蹤中名單（tab = "followers" 或 "following"）
@@ -776,8 +876,14 @@
     var L = D.instagram;
     g = g || currentAccount(); base = base || '#/ig';
     var c = counts(g);
-    var list = tab === 'followers' ? followersOf(g) : followingOf(g);
-    var me = currentAccount();
+    // data.js 有 followersList / followingList 就照它顯示（帳號 id → 真的帳號；{ username, name } → 路人）
+    var manual = tab === 'followers' ? g.followersList : g.followingList;
+    var list = manual
+      ? manual.map(function (x) {
+          if (typeof x === 'string') return profileByName(x) || { username: x, filler: true };
+          return { username: x.username, name: x.name, avatar: x.avatar, filler: true };
+        })
+      : (tab === 'followers' ? followersOf(g) : followingOf(g));
     $('#ig-overlay').innerHTML = '';
     $('#ig-scroll').innerHTML =
       '<div class="ig-pagehead">' + backBtn(base) +
@@ -789,13 +895,9 @@
         '<a href="' + base + '/follows/following"' + (tab === 'following' ? ' class="on"' : '') + '>' + esc(c.following) + ' ' + esc(L.followingLabel) + '</a>' +
       '</div>' +
       list.map(function (a) {
-        var href = a === me ? '#/ig' : '#/ig/u/' + encodeURIComponent(a.username);
-        return '<div class="ig-frow">' +
-          '<a class="ig-frow-main" href="' + href + '"><img src="' + esc(a.avatar) + '" alt="">' +
-            '<span><b>' + esc(a.username) + '</b><small>' + esc(a.name) + '</small></span></a>' +
+        return personRow(a,
           '<button class="ig-frow-btn" data-na>' + esc(L.messageLabel) + '</button>' +
-          '<button class="ig-ico" data-na>' + ICON.dots + '</button>' +
-        '</div>';
+          '<button class="ig-ico" data-na>' + ICON.dots + '</button>');
       }).join('');
   }
 
@@ -881,6 +983,11 @@
     if ((el = e.target.closest('[data-back]'))) {
       e.preventDefault();
       if (history.length > 1) history.back(); else location.hash = el.getAttribute('href');
+      return;
+    }
+    if ((el = e.target.closest('[data-atab]'))) {
+      e.preventDefault();
+      archiveTab = el.dataset.atab; renderIGArchive();
       return;
     }
     if ((el = e.target.closest('[data-ptab]'))) {
@@ -1043,11 +1150,16 @@
       else if (parts[1] === 'login') renderIGLogin();
       else if (parts[1] === 'settings') renderIGSettings();
       else if (parts[1] === 'saved') renderIGSaved();
+      else if (parts[1] === 'archive' && parts[2] === 'post') renderIGPost(+parts[3], null, '#/ig/archive', 'archive');
+      else if (parts[1] === 'archive') renderIGArchive();
+      else if (parts[1] === 'closefriends') renderIGCloseFriends();
       else if (parts[1] === 'post') renderIGPost(+parts[2]);
       else if (parts[1] === 'follows') renderIGFollows(parts[2]);
-      else if (parts[1] === 'story') renderIGStory(parts[2] === 'me' ? 'me' : +parts[2]);
+      else if (parts[1] === 'story') renderIGStory(parts[2] === 'me' || /^archive-/.test(parts[2]) ? parts[2] : +parts[2]);
       else { renderIG(); tabs = 'profile'; }
       $('#app-ig').classList.toggle('with-tabs', !!tabs);
+      // 粉絲／追蹤中名單只顯示一頁，不能滑動
+      $('#app-ig').classList.toggle('ig-noscroll', parts[1] === 'follows' || parts[3] === 'follows');
       if (tabs) renderTabbar(tabs);
       $('#ig-scroll').scrollTop = 0;
     } else {

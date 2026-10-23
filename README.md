@@ -85,3 +85,14 @@
 - `instagram.defaultAccount`：打開 IG 時已登入的帳號（目前是 shotaroo0）
 - 其他帳號有寫 `password` 才能從「新增帳號」登入；小帳 fauiogl94 的密碼在 `instagram.password`
 - 限時動態：往下滑可以關閉
+
+## 粉絲名單、摯友、已儲存、典藏
+- `followersCount` / `followingCount`：手動數字；`followersList` / `followingList`：名單（帳號 id 可點進去，`{ username, name }` 是灰色預設頭貼的路人、點不進去），只顯示一頁
+- 限時動態加 `closeFriends: true` = 摯友限時；只有帳號 `closeFriendsList` 裡的帳號看得到（綠框＋摯友標籤）
+- 帳號的 `saved`（"帳號/貼文編號"）＝已儲存；`archive.stories` / `archive.posts` ＝典藏（設定 → 典藏）
+
+## 論壇留言
+- 留言可加 `image`；留言者和文章 `author` 一樣時自動顯示「原PO」
+
+## KakaoTalk 나와의 채팅
+- `kakao.me.messages`：自己傳給自己的聊天室（我的資料 → 나와의 채팅，也會出現在聊天列表最上面）

@@ -36,9 +36,18 @@
     st.msgs = st.msgs || {}; st.unread = st.unread || {};
     return st;
   }
-  function friend(id) { return (K().friends || []).filter(function (f) { return String(f.id) === String(id); })[0]; }
+  // 나와의 채팅：id 是 "me" 的聊天室（自己傳給自己，沒有未讀 1、不會自動回覆）
+  function selfRoom() {
+    var me = K().me || {};
+    return { id: 'me', name: me.name, avatar: me.avatar, messages: me.messages || [], self: true, replies: [], defaultReply: [] };
+  }
+  function friend(id) {
+    if (String(id) === 'me') return selfRoom();
+    return (K().friends || []).filter(function (f) { return String(f.id) === String(id); })[0];
+  }
   function messagesOf(f) { return (f.messages || []).concat(state().msgs[f.id] || []); }
   function unreadOf(f) {
+    if (f.self) return 0;
     var st = state();
     return st.unread[f.id] != null ? st.unread[f.id] : (f.unread || 0);
   }
@@ -80,7 +89,7 @@
   }
 
   function renderChats() {
-    var list = (K().friends || []).filter(function (f) { return messagesOf(f).some(function (m) { return m.text || m.image; }); });
+    var list = [selfRoom()].concat(K().friends || []).filter(function (f) { return messagesOf(f).some(function (m) { return m.text || m.image; }); });
     S().$('#kakao-scroll').innerHTML =
       '<div class="kk-head"><h1>' + esc(TX().chatsTitle) + '</h1>' +
         '<span class="kk-head-icons"><button data-na>' + ICON.addFriend + '</button></span></div>' +
@@ -88,7 +97,7 @@
         var msgs = messagesOf(f).filter(function (m) { return m.text || m.image; }), last = msgs[msgs.length - 1], n = unreadOf(f);
         return '<a class="kk-chatrow" href="#/kakao/chat/' + encodeURIComponent(f.id) + '">' +
           '<img src="' + esc(f.avatar) + '" alt="">' +
-          '<span class="kk-chatrow-mid"><b>' + esc(f.name) + '</b><small>' + esc(last.text || TX().photoLabel || '사진') + '</small></span>' +
+          '<span class="kk-chatrow-mid"><b>' + esc(f.name) + (f.self ? '<i class="kk-me-tag">' + esc(TX().meTag || '나') + '</i>' : '') + '</b><small>' + esc(last.text || TX().photoLabel || '사진') + '</small></span>' +
           '<span class="kk-chatrow-r"><small>' + esc(last.time || '') + '</small>' + (n ? '<i class="kk-badge">' + n + '</i>' : '') + '</span>' +
         '</a>';
       }).join('');
@@ -111,7 +120,10 @@
           '<small>' + esc(me.status) + '</small>' +
         '</div>' +
         '<div class="kk-profile-acts">' + acts.map(function (a, i) {
-          return '<button data-na>' + icons[i] + '<span>' + esc(a) + '</span></button>';
+          // 第一個「나와의 채팅」可以進入自己的聊天室
+          return i === 0
+            ? '<a href="#/kakao/chat/me">' + icons[i] + '<span>' + esc(a) + '</span></a>'
+            : '<button data-na>' + icons[i] + '<span>' + esc(a) + '</span></button>';
         }).join('') + '</div>' +
       '</div>';
   }
@@ -133,7 +145,7 @@
       var showTime = !next || next.date || next.from !== m.from || next.time !== m.time;
       if (m.from === 'me') {
         // 對方還沒回 → 顯示未讀「1」
-        var unread = m.read !== true && !msgs.slice(i + 1).some(function (x) { return x.from === 'them'; });
+        var unread = !f.self && m.read !== true && !msgs.slice(i + 1).some(function (x) { return x.from === 'them'; });
         out += '<div class="kk-msg me">' +
           '<span class="kk-meta">' + (unread ? '<i>1</i>' : '') + (showTime ? '<small>' + esc(m.time || '') + '</small>' : '') + '</span>' +
           contentHTML(m, first) +
@@ -169,7 +181,7 @@
       '<div class="kk-chat">' +
         '<div class="kk-chat-head">' +
           '<a href="#/kakao" data-kback>' + ICON.back + '</a>' +
-          '<b>' + esc(f.name) + '</b>' +
+          '<b>' + esc(f.name) + (f.self ? '<i class="kk-me-tag">' + esc(TX().meTag || '나') + '</i>' : '') + '</b>' +
           '<span><button data-na>' + ICON.search + '</button><button data-na>' + ICON.menu + '</button></span>' +
         '</div>' +
         '<div class="kk-msgs" id="kk-msgs"></div>' +

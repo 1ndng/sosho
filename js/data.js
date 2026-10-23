@@ -26,6 +26,8 @@ window.SITE_DATA = {
     listTitle: "文章",          // 文章列表框的標題
     backLabel: "返回",          // 文章內頁「返回」
     commentLabel: "留言",       // 「留言」
+    opLabel: "原PO",            // 留言者和文章的匿名帳號代碼一樣時，名字旁顯示的標籤
+    // 留言格式：{ name: "匿名代碼", text: "內容", image: "images/xxx.jpg" }（image 可省略）
 
     // 文章：順序 = 列表顯示順序。id 請保持不重複（用於網址 #/forum/id）
     posts: [
@@ -101,6 +103,7 @@ window.SITE_DATA = {
     avatar: "images/ig_avatar.png",
     hasStory: true,              // true = 頭像外圈顯示限時動態框
     // 點頭像看到的限時動態（可放多張，會自動輪播）
+    // 加上 closeFriends: true 就是摯友限時：只有在這個帳號 closeFriendsList 裡的帳號看得到（綠色外框＋摯友標籤）
     story: [
       { image: "images/ig_story_1.png", time: "test101" },
       { image: "images/ig_story_2.png", time: "test102" }
@@ -176,7 +179,14 @@ window.SITE_DATA = {
       noSaved: "還沒有儲存任何貼文",
       noReposts: "還沒有轉發任何貼文",
       noTagged: "還沒有被標註的相片",
-      storyMessageSent: "訊息已傳送"
+      storyMessageSent: "訊息已傳送",
+      closeFriendsTitle: "摯友",
+      closeFriendsBadge: "摯友",       // 摯友限時動態上方的綠色標籤
+      noCloseFriends: "還沒有摯友",
+      archiveTitle: "典藏",
+      archiveStories: "限時動態",
+      archivePosts: "貼文",
+      noArchive: "沒有典藏的內容"
     },
 
     // 貼文頁、限時動態的固定文字
@@ -203,14 +213,23 @@ window.SITE_DATA = {
       "images/explore_12.png"
     ],
     // 只能被搜尋到、不能登入的帳號（格式和 otherAccounts 一樣，不用寫 password）
-    searchOnlyAccounts: [],
+    searchOnlyAccounts: [
+      {
+        username: "test226",                 // 粉絲帳號（會出現在 shotaroo0 的粉絲名單裡）
+        name: "test227",
+        avatar: "images/fan_avatar.png",
+        following: ["shotaroo0"],
+        bio: ["test228"],
+        posts: []
+      }
+    ],
 
     // 從搜尋點進別人的頁面時，取代「編輯／分享個人檔案」的兩個按鈕
     followLabel: "追蹤",
     messageLabel: "發訊息",
     followingButtonLabel: "追蹤中",   // 按了追蹤之後按鈕變成的文字
 
-    // 右上角三條線 → 設定頁（目前每一項點了都顯示「尚未更新」）
+    // 右上角三條線 → 設定頁：已儲存、典藏、摯友可以點進去；帳號隱私設定顯示「尚未更新」
     settings: {
       title: "test122",
       sections: [
@@ -220,7 +239,7 @@ window.SITE_DATA = {
         ] },
         { title: "隱私", items: [
           { icon: "lock", label: "帳號隱私設定", value: "不公開" },
-          { icon: "star", label: "摯友", value: "0" }
+          { icon: "star", label: "摯友" }      // 摯友人數會自動計算
         ] }
       ]
     },
@@ -246,7 +265,40 @@ window.SITE_DATA = {
         avatar: "images/1_avatar.jpg",
         hasStory: false,
         name: "Shotaro",
-        following: [],
+        following: ["252525252"],
+        followersCount: "145k",          // 手動數字（蓋過自動計算）
+        followingCount: "651",
+        // 粉絲／追蹤中名單：寫帳號 id 的會用那個帳號的資料、可以點進去；
+        // { username, name } 是路人（灰色預設頭貼、點不進去）。名單只顯示一頁、不能滑動
+        followersList: [
+          "fauiogl94",
+          "252525252",
+          "test226",
+          { username: "test229", name: "test230" },
+          { username: "test231", name: "test232" },
+          { username: "test233", name: "test234" },
+          { username: "test235", name: "test236" },
+          { username: "test237", name: "test238" },
+          { username: "test239", name: "test240" },
+          { username: "test241", name: "test242" }
+        ],
+        followingList: [
+          "252525252",
+          { username: "test243", name: "test244" },
+          { username: "test245", name: "test246" },
+          { username: "test247", name: "test248" },
+          { username: "test249", name: "test250" },
+          { username: "test251", name: "test252" },
+          { username: "test253", name: "test254" },
+          { username: "test255", name: "test256" },
+          { username: "test257", name: "test258" }
+        ],
+        // 摯友名單：寫在這裡的帳號才看得到 closeFriends: true 的限時動態
+        closeFriendsList: [],
+        // 已儲存：預先放好的已儲存貼文（"帳號/貼文編號"，編號從 0 開始）
+        saved: [],
+        // 典藏：stories = 過期的限時動態；posts = 下架的貼文（格式和 posts 一樣）
+        archive: { stories: [], posts: [] },
         bio: ["test87"],
         music: { title: "test88", artist: "keshi" },
         highlights: [
@@ -378,7 +430,12 @@ window.SITE_DATA = {
       name: "Shotaro",
       status: "test164",
       avatar: "images/1_avatar.jpg",
-      background: "images/kakao_me_bg.png"   // 點自己的資料時的全螢幕背景
+      background: "images/kakao_me_bg.png",  // 點自己的資料時的全螢幕背景
+      // 나와의 채팅（自己傳給自己的聊天室）：都寫 from: "me"，也可以放照片 image
+      messages: [
+        { date: "test259" },
+        { from: "me", text: "test260", time: "test261" }
+      ]
     },
     friends: [
       {
@@ -461,7 +518,8 @@ window.SITE_DATA = {
       inputPlaceholder: "메시지 입력",
       profileActions: ["나와의 채팅", "프로필 편집", "카카오스토리"],
       ampm: ["오전", "오후"],
-      photoLabel: "사진"            // 聊天列表裡最後一則是照片時顯示的字
+      photoLabel: "사진",
+      meTag: "나"                   // 나와의 채팅 名字旁的小標            // 聊天列表裡最後一則是照片時顯示的字
     }
   }
 };
