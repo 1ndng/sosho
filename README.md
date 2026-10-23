@@ -69,7 +69,7 @@
 - 數字鍵盤（#/phone/keypad）可以輸入號碼撥出；`phone.dialable` 裡的號碼撥出時會顯示對應的名字
 
 ## KakaoTalk（#/kakao）
-- 只有聊天列表（채팅）：`kakao.friends` 的私聊＋`kakao.groups` 的群組，照名字字首排序；沒有好友頁、底部分頁
+- 只有聊天列表（介面全部是繁體中文，日期線格式「2026年10月22日 星期四」）：`kakao.friends` 的私聊＋`kakao.groups` 的群組，照名字字首排序；沒有好友頁、底部分頁
 - 聊天室：`messages` 裡 `{ date }` 是日期分隔，`from: "me"` 黃色靠右，`from: "them"` 白色靠左
 - 自己的訊息在對方還沒回之前會顯示未讀「1」
 - `replies`：玩家訊息包含 `keywords` 任一個字 → 對方依序回 `reply`；都沒符合時用 `defaultReply`（空的就不回）

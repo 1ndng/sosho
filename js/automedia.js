@@ -94,14 +94,14 @@
     }
   });
 
-  // Kakao：放進同一天的日期分隔線底下；那天還沒有就新增一條「2026년 4월 26일 일요일」
+  // Kakao：放進同一天的日期分隔線底下；那天還沒有就新增一條「2026年4月26日 星期日」
   function korDate(d) {
     var y = +d.slice(0, 4), m = +d.slice(4, 6), day = +d.slice(6, 8);
-    var w = '일월화수목금토'.charAt(new Date(y, m - 1, day).getDay());
-    return y + '년 ' + m + '월 ' + day + '일 ' + w + '요일';
+    var w = '日一二三四五六'.charAt(new Date(y, m - 1, day).getDay());
+    return y + '年' + m + '月' + day + '日 星期' + w;
   }
   function parseKor(s) {
-    var m = /(\d{4})년\s*(\d+)월\s*(\d+)일/.exec(s || '');
+    var m = /(\d{4})\s*[年년]\s*(\d+)\s*[月월]\s*(\d+)\s*[日일]/.exec(s || '');
     return m ? m[1] + ('0' + m[2]).slice(-2) + ('0' + m[3]).slice(-2) : null;
   }
   function insertMsg(msgs, msg, date) {

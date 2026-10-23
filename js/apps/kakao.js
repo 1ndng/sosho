@@ -1,4 +1,4 @@
-/* KakaoTalk：채팅 列表（#/kakao）、聊天室（#/kakao/chat/好友id） */
+/* KakaoTalk：聊天列表（#/kakao）、聊天室（#/kakao/chat/好友id） */
 (function () {
   'use strict';
 
@@ -49,7 +49,7 @@
     return st.unread[f.id] != null ? st.unread[f.id] : (f.unread || 0);
   }
   function nowTime() {
-    var d = new Date(), h = d.getHours(), ap = TX().ampm || ['오전', '오후'];
+    var d = new Date(), h = d.getHours(), ap = TX().ampm || ['上午', '下午'];
     return ap[h < 12 ? 0 : 1] + ' ' + (h % 12 || 12) + ':' + String(d.getMinutes()).padStart(2, '0');
   }
 
@@ -63,7 +63,7 @@
         var msgs = messagesOf(f).filter(function (m) { return m.text || m.image; }), last = msgs[msgs.length - 1] || {}, n = unreadOf(f);
         return '<a class="kk-chatrow" href="#/kakao/chat/' + encodeURIComponent(f.id) + '">' +
           roomAvatar(f, 'kk-chatrow-av') +
-          '<span class="kk-chatrow-mid"><b>' + esc(f.name) + (f.group ? '<em class="kk-count">' + (f.members.length + 1) + '</em>' : '') + '</b><small>' + esc(last.text || (last.image ? TX().photoLabel || '사진' : '')) + '</small></span>' +
+          '<span class="kk-chatrow-mid"><b>' + esc(f.name) + (f.group ? '<em class="kk-count">' + (f.members.length + 1) + '</em>' : '') + '</b><small>' + esc(last.text || (last.image ? TX().photoLabel || '照片' : '')) + '</small></span>' +
           '<span class="kk-chatrow-r"><small>' + esc(last.time || '') + '</small>' + (n ? '<i class="kk-badge">' + n + '</i>' : '') + '</span>' +
         '</a>';
       }).join('');
@@ -73,7 +73,7 @@
   /* ---- 聊天室 ---- */
   // 訊息內容：文字泡泡或照片
   function contentHTML(m, first) {
-    if (m.image) return '<button class="kk-photo" data-photo="' + esc(m.image) + '"><img src="' + esc(m.image) + '" alt="" loading="lazy"></button>';
+    if (m.image) return '<button class="kk-photo" data-photo="' + esc(m.image) + '"><img src="' + esc(m.image) + '" alt=""></button>';
     return '<div class="kk-bubble' + (first ? ' tail' : '') + '">' + S().multiline(m.text) + '</div>';
   }
 
@@ -117,6 +117,12 @@
     if (!f || !box) return;
     box.innerHTML = bubblesHTML(f);
     box.scrollTop = box.scrollHeight;
+    // 照片載入後聊天室會變高：玩家還沒往上滑之前，一直停在最新的訊息
+    var stick = true;
+    box.ontouchstart = box.onwheel = box.onpointerdown = function () { stick = false; };
+    box.querySelectorAll('img').forEach(function (img) {
+      if (!img.complete) img.addEventListener('load', function () { if (stick) box.scrollTop = box.scrollHeight; });
+    });
   }
 
   function renderChat(id) {

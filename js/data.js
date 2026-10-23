@@ -588,52 +588,82 @@ window.SITE_DATA = {
         name: "소희",                     // 252525252_
         status: "test166",                  // 狀態訊息
         avatar: "images/2_avatar.jpg",
-        unread: 2,       // 一開始在聊天列表顯示的未讀數
+        unread: 1,       // 一開始在聊天列表顯示的未讀數
         messages: [
-          { date: "test167" },
+          // 照片訊息：image 換成圖片路徑（不用寫 text）；me = 手機使用者，them = 對方
+          { date: "2025年3月9日 星期日" },   // 相遇後第一則（2025/3/8 在日本相遇）
           { from: "them", text: "test168", time: "test169" },
           { from: "me", text: "test170", time: "test171" },
           { from: "them", text: "test172", time: "test173" },
-          // 照片訊息：image 換成圖片路徑（不用寫 text）；me = 手機使用者，them = 對方
-          { date: "2025년 6월 19일 목요일" },
+          { date: "2025年4月20日 星期日" },
+          { from: "them", text: "test347", time: "test348" },
+          { from: "me", text: "test349", time: "test350" },
+          { date: "2025年6月19日 星期四" },
           { from: "me", image: "images/1_msg_20250619.jpg", time: "test216" },
-          { date: "2025년 7월 9일 수요일" },
+          { date: "2025年7月9日 星期三" },
           { from: "me", image: "images/1_msg_20250709.jpg", time: "test293" },
-          { date: "2025년 10월 18일 토요일" },
+          { date: "2025年10月18日 星期六" },
           { from: "me", image: "images/1_msg_20251018.jpg", time: "test294" },
-          { date: "2025년 11월 7일 금요일" },
+          { date: "2025年11月7日 星期五" },
           { from: "them", image: "images/2_msg_20251107.jpg", time: "test295" },
-          { date: "2025년 12월 4일 목요일" },
+          { date: "2025年11月21日 星期五" },   // 소희 生日
+          { from: "me", text: "test351", time: "test352" },
+          { from: "them", text: "test353", time: "test354" },
+          { date: "2025年11月25日 星期二" },   // Sho 生日
+          { from: "them", text: "test355", time: "test356" },
+          { from: "me", text: "test357", time: "test358" },
+          { date: "2025年11月26日 星期三" },   // 告白、在一起（紀念日）
+          { from: "me", text: "test359", time: "test360" },
+          { from: "them", text: "test361", time: "test362" },
+          { date: "2025年12月4日 星期四" },
           { from: "them", image: "images/2_msg_20251204.jpg", time: "test296" },
-          { date: "2025년 12월 12일 금요일" },
+          { date: "2025年12月12日 星期五" },
           { from: "them", image: "images/2_msg_20251212.jpg", time: "test297" },
-          { date: "2025년 12월 18일 목요일" },
+          { date: "2025年12月18日 星期四" },
           { from: "me", image: "images/1_msg_20251218.jpg", time: "test298" },
-          { date: "2026년 1월 16일 금요일" },
+          { date: "2025年12月25日 星期四" },
+          { from: "them", text: "test363", time: "test364" },
+          { from: "me", text: "test365", time: "test366" },
+          { date: "2026年1月1日 星期四" },
+          { from: "me", text: "test367", time: "test368" },
+          { from: "them", text: "test369", time: "test370" },
+          { date: "2026年1月16日 星期五" },
           { from: "me", image: "images/1_msg_20260116.jpg", time: "test299" },
-          { date: "2026년 2월 6일 금요일" },
+          { date: "2026年2月1日 星期日" },   // 搬到韓國前一天
+          { from: "them", text: "test371", time: "test372" },
+          { from: "me", text: "test373", time: "test374" },
+          { date: "2026年2月6日 星期五" },
           { from: "me", image: "images/1_msg_20260206.jpg", time: "test318" },
-          { date: "2026년 2월 9일 월요일" },
+          { date: "2026年2月9日 星期一" },
           { from: "them", image: "images/2_msg_20260209.jpg", time: "test319" },
-          { date: "2026년 2월 27일 금요일" },
+          { date: "2026年2月27日 星期五" },
           { from: "them", image: "images/2_msg_20260227.jpg", time: "test320" },
-          { date: "2026년 4월 11일 토요일" },
+          { date: "2026年3月5日 星期四" },   // 在一起 100 天
+          { from: "them", text: "test375", time: "test376" },
+          { from: "me", text: "test377", time: "test378" },
+          { date: "2026年4月11日 星期六" },
           { from: "me", image: "images/1_msg_20260411.jpg", time: "test321" },
-          { date: "2026년 6월 26일 금요일" },
+          { date: "2026年4月25日 星期六" },
+          { from: "me", text: "test379", time: "test380" },
+          { from: "them", text: "test381", time: "test382" },
+          { date: "2026年6月26日 星期五" },
           { from: "them", image: "images/2_msg_20260626.jpg", time: "test322" },
-          { date: "2026년 7월 12일 일요일" },
+          { date: "2026年7月12日 星期日" },
           { from: "me", image: "images/1_msg_20260712.jpg", time: "test217" },
-          { date: "2026년 8월 26일 수요일" },
+          { date: "2026年8月26日 星期三" },
           { from: "me", image: "images/1_msg_20260826.jpg", time: "test218" },
-          { date: "2026년 9월 30일 수요일" },
+          { date: "2026年9月30日 星期三" },
           { from: "them", image: "images/2_msg_20260930.jpg", time: "test219" },
           { from: "them", image: "images/2_msg_20260930-2.jpg", time: "test220" },
           { from: "them", image: "images/2_msg_20260930-3.jpg", time: "test221" },
-          { date: "2026년 10월 3일 토요일" },
+          { date: "2026年10月3日 星期六" },
           { from: "them", image: "images/2_msg_20261003.jpg", time: "test222" },
-          { date: "2026년 10월 4일 일요일" },
+          { date: "2026年10月4日 星期日" },
           { from: "them", image: "images/2_msg_20261004.jpg", time: "test223" },
-          { from: "me", image: "images/1_msg.jpg", time: "test224" }   // 1_msg.jpg 檔名沒有日期，先放最後
+          { from: "me", image: "images/1_msg.jpg", time: "test224" },   // 1_msg.jpg 檔名沒有日期：補上日期後再移到對的位置
+          { date: "2026年10月22日 星期四" },   // 論壇發文後；最後一則是소희傳的（未讀 1）
+          { from: "me", text: "test383", time: "test384" },
+          { from: "them", text: "test385", time: "test386" }
         ],
         // 關鍵字自動回覆：玩家傳的訊息「包含」任一個 keywords 就回 reply（可多句，依序送出）
         replies: [
@@ -648,10 +678,19 @@ window.SITE_DATA = {
         avatar: "images/wonbin.jpg",
         unread: 0,       // 一開始在聊天列表顯示的未讀數
         messages: [
-          { date: "test179" },
+          { date: "2026年4月8日 星期三" },   // 無關主線
           { from: "them", text: "test180", time: "test181" },
           { from: "me", text: "test182", time: "test183" },
-          { from: "them", text: "test184", time: "test185" }
+          { from: "them", text: "test184", time: "test185" },
+          { date: "2026年5月19日 星期二" },
+          { from: "them", text: "test397", time: "test398" },
+          { from: "me", text: "test399", time: "test400" },
+          { date: "2026年7月11日 星期六" },
+          { from: "me", text: "test401", time: "test402" },
+          { from: "them", text: "test403", time: "test404" },
+          { date: "2026年9月27日 星期日" },   // 無關主線
+          { from: "them", text: "test405", time: "test406" },
+          { from: "me", text: "test407", time: "test408" }
         ],
         // 關鍵字自動回覆：玩家傳的訊息「包含」任一個 keywords 就回 reply（可多句，依序送出）
         replies: [
@@ -666,10 +705,16 @@ window.SITE_DATA = {
         avatar: "images/anton.jpg",
         unread: 0,       // 一開始在聊天列表顯示的未讀數
         messages: [
-          { date: "test191" },
+          { date: "2026年3月2日 星期一" },   // 無關主線
           { from: "them", text: "test192", time: "test193" },
           { from: "me", text: "test194", time: "test195" },
-          { from: "them", text: "test196", time: "test197" }
+          { from: "them", text: "test196", time: "test197" },
+          { date: "2026年6月14日 星期日" },
+          { from: "them", text: "test409", time: "test410" },
+          { from: "me", text: "test411", time: "test412" },
+          { date: "2026年10月11日 星期日" },
+          { from: "them", text: "test413", time: "test414" },
+          { from: "me", text: "test415", time: "test416" }
         ],
         // 關鍵字自動回覆：玩家傳的訊息「包含」任一個 keywords 就回 reply（可多句，依序送出）
         replies: [
@@ -683,7 +728,14 @@ window.SITE_DATA = {
         status: "",
         avatar: "images/sungchan.jpg",
         unread: 0,
-        messages: [],
+        messages: [
+          { date: "2021年11月25日 星期四" },   // Sho 生日，無關主線
+          { from: "them", text: "test417", time: "test418" },
+          { from: "me", text: "test419", time: "test420" },
+          { date: "2025年11月26日 星期三" },
+          { from: "me", text: "test421", time: "test422" },
+          { from: "them", text: "test423", time: "test424" }
+        ],
         replies: [],
         defaultReply: []
       },
@@ -693,7 +745,14 @@ window.SITE_DATA = {
         status: "",
         avatar: "images/eunseok.jpg",
         unread: 0,
-        messages: [],
+        messages: [
+          { date: "2021年11月25日 星期四" },   // Sho 生日，無關主線
+          { from: "them", text: "test425", time: "test426" },
+          { from: "me", text: "test427", time: "test428" },
+          { date: "2026年4月13日 星期一" },   // 無關主線
+          { from: "them", text: "test429", time: "test430" },
+          { from: "me", text: "test431", time: "test432" }
+        ],
         replies: [],
         defaultReply: []
       }
@@ -705,24 +764,55 @@ window.SITE_DATA = {
       {
         id: "g1",
         name: "",
-        members: ["f4", "f5"],          // 정성찬（鄭成燦）、송은석（宋恩奭）（留學時認識的朋友）
-        unread: 0,
+        members: ["f4", "f5"],          // 성찬、은석（留學時認識的朋友）
+        unread: 2,
         messages: [
-          { date: "test262" },
+          { date: "2022年1月3日 星期一" },   // 無關主線
           { from: "f4", text: "test263", time: "test264" },
           { from: "f5", text: "test265", time: "test266" },
-          { from: "me", text: "test267", time: "test268" }
+          { from: "me", text: "test267", time: "test268" },
+          { date: "2025年3月18日 星期二" },
+          { from: "me", text: "test433", time: "test434" },
+          { from: "f4", text: "test435", time: "test436" },
+          { from: "f5", text: "test437", time: "test438" },
+          { date: "2025年8月9日 星期六" },
+          { from: "f5", text: "test439", time: "test440" },
+          { from: "me", text: "test441", time: "test442" },
+          { from: "f4", text: "test443", time: "test444" },
+          { date: "2025年11月20日 星期四" },
+          { from: "me", text: "test445", time: "test446" },
+          { from: "f4", text: "test447", time: "test448" },
+          { from: "f5", text: "test449", time: "test450" },
+          { date: "2025年11月25日 星期二" },   // Sho 生日
+          { from: "f4", text: "test451", time: "test452" },
+          { from: "f5", text: "test453", time: "test454" },
+          { from: "me", text: "test455", time: "test456" },
+          { date: "2025年11月26日 星期三" },
+          { from: "f5", text: "test457", time: "test458" },
+          { from: "f4", text: "test459", time: "test460" },
+          { from: "me", text: "test461", time: "test462" },
+          { date: "2026年2月20日 星期五" },
+          { from: "f4", text: "test463", time: "test464" },
+          { from: "me", text: "test465", time: "test466" },
+          { from: "f5", text: "test467", time: "test468" },
+          { date: "2026年4月13日 星期一" },   // 無關主線
+          { from: "f5", text: "test469", time: "test470" },
+          { from: "f4", text: "test471", time: "test472" },
+          { from: "me", text: "test473", time: "test474" },
+          { date: "2026年10月22日 星期四" },   // 昨天：最後兩則未讀（未讀 2）
+          { from: "f4", text: "test475", time: "test476" },
+          { from: "f5", text: "test477", time: "test478" }
         ],
         replies: [],
         defaultReply: []
       }
     ],
-    // 介面文字（韓文版 KakaoTalk）
+    // 介面文字（繁體中文）
     text: {
-      chatsTitle: "채팅",
-      inputPlaceholder: "메시지 입력",
-      ampm: ["오전", "오후"],
-      photoLabel: "사진"            // 聊天列表裡最後一則是照片時顯示的字
+      chatsTitle: "聊天",
+      inputPlaceholder: "輸入訊息",
+      ampm: ["上午", "下午"],
+      photoLabel: "照片"            // 聊天列表裡最後一則是照片時顯示的字
     }
   }
 };

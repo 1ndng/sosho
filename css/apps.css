@@ -106,7 +106,7 @@
 .kk-chat-head a svg { width: 24px; height: 24px; }
 .kk-chat-head b { font-size: 16px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .kk-chat-head svg { width: 23px; height: 23px; }
-.kk-msgs { flex: 1; overflow-y: auto; padding: 6px 10px 12px; }
+.kk-msgs { flex: 1; overflow-y: auto; padding: 6px 10px 12px; overflow-anchor: none; }
 .kk-date { text-align: center; margin: 12px 0; }
 .kk-date span { display: inline-block; background: rgba(0,0,0,.12); color: #fff; font-size: 11.5px; padding: 3px 12px; border-radius: 12px; }
 .kk-msg { display: flex; margin-top: 4px; }
