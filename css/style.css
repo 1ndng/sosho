@@ -371,6 +371,10 @@ img { display: block; max-width: 100%; }
 .ig-searchbar { display: flex; align-items: center; gap: 10px; padding: 6px 12px 8px; }
 .ig-search-input { flex: 1; display: flex; align-items: center; gap: 8px; height: 38px; padding: 0 12px; border-radius: 12px; background: #efefef; color: #8e8e8e; }
 .ig-search-input svg { width: 18px; height: 18px; flex: none; }
+.ig-search-input input::-webkit-search-cancel-button { -webkit-appearance: none; display: none; }
+.ig-search-clear { display: none; flex: none; width: 22px; height: 22px; margin-right: -4px; color: #c7c7cc; align-items: center; justify-content: center; }
+.ig-search-clear.show { display: flex; }
+.ig-search-clear svg { width: 18px; height: 18px; }
 .ig-search-input input { flex: 1; min-width: 0; border: 0; background: none; outline: none; font: inherit; font-size: 16px; color: #000; -webkit-appearance: none; }
 .ig-searchbar .ig-ico svg { width: 26px; height: 26px; }
 .ig-explore { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
