@@ -216,7 +216,6 @@
     var node = (talk.script.nodes || {})[id];
     if (!node) { hangUp(); return; }
     talk.node = node; talk.line = 0;
-    if (node.flag) markFlag(node.flag);
     S().$('#ph-choices').innerHTML = '';
     nextLine();
   }
@@ -272,7 +271,6 @@
     setTimeout(function () { endCall(name); }, 900);
   }
   // 進度紀錄（之後「全部線索解開」會用到）
-  function markFlag(f) { S().markFlag(f); }
 
   function endCall(name) {
     clearTimeout(callTimer);

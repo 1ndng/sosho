@@ -73,7 +73,7 @@ window.SITE_DATA = {
     ads: [
       { image: "images/ad_1.png", link: "https://www.asianfanfics.com/story/view/1770006/story-61" },
       { image: "images/ad_2.png", link: "" },
-      // ending: true = 結局廣告：線索還沒全部解開時點了顯示「待解鎖」，解開後進入感謝／劇情解說頁
+      // ending: true = 結局廣告：登入過小帳 fauiogl94 才點得開（還沒登入時點了沒反應），打開是感謝／劇情解說頁
       { image: "images/ad_3.png", link: "", ending: true }
     ],
 
@@ -104,6 +104,7 @@ window.SITE_DATA = {
     followersLabel: "位粉絲",
     followingLabel: "追蹤中",
     bio: [],                       // 每一項 = 一行；@開頭的字會自動變藍色
+    music: { title: "歌名", artist: "歌手" },   // 個人頁的音樂列（音檔 audio/3_music.mp3）
     editProfileLabel: "編輯個人檔案",
     shareProfileLabel: "分享個人檔案",
     // 精選動態：image = 圓圈封面，stories = 點進去看到的內容
@@ -555,7 +556,7 @@ window.SITE_DATA = {
         // 接通後的對話：nodes 裡每一段有 lines（逐句字幕）和 choices（選項）
         //   lines：who = "them" 對方 / "me" 玩家；text = 字幕；sub = 字幕下面的小字（例如日文的中文翻譯）
         //   choices：label = 按鈕文字；next = 接到哪一段；hangup: true = 直接掛斷；say: false = 選了不會顯示成玩家說的話
-        //   沒有 choices 的段落講完就自動掛斷；flag = 走到這段時記錄進度（之後解鎖結局用）
+        //   沒有 choices 的段落講完就自動掛斷
         script: {
           start: "greet",
           nodes: {
@@ -585,7 +586,6 @@ window.SITE_DATA = {
               ]
             },
             detail: {
-              flag: "cafe_call",
               lines: [
                 { who: "them", text: "嗯⋯⋯記得是在去年的（）月上旬，Shotaro桑和一位不是日本人的朋友一起過來的，（劇情，尚未想好）" },
                 { who: "them", text: "還有什麼好奇的嗎？" }
@@ -786,14 +786,7 @@ window.SITE_DATA = {
 
   /* ---------- 結局：感謝／劇情解說頁 ---------- */
   ending: {
-    // 需要完成的進度（全部完成後，論壇的結局廣告才會解鎖）
-    //   cafe_call       = 打給咖啡廳、問到細節
-    //   chat_me         = 打開過 Kakao 的「나와의 채팅」（chat_好友id 也可以，例如 chat_f1）
-    //   login_fauiogl94 = 登入過小帳（login_帳號id）
-    //   也可以在限時動態加 flag: "名稱"，看到那則就算完成，再把名稱加進這裡
-    require: ["cafe_call", "chat_me", "login_fauiogl94"],
-    lockedLabel: "待解鎖",          // 結局廣告上的標籤
-    lockedText: "待解鎖",           // 還沒解鎖時點廣告跳出的提示
+    // 論壇第 3 個廣告（ending: true）：登入過小帳 fauiogl94 才點得開；沒登入前看起來一樣，只是點了沒反應
     backLabel: "返回",
     title: "test343",
     image: "",                      // 最上面的圖（可留空）

@@ -52,19 +52,8 @@
   }
   function prevHash() { return navStack[navStack.length - 2]; }
 
-  /* ---------------- 進度（結局解鎖用） ---------------- */
-  var PROGRESS_KEY = 'sosho-progress';
-  function progress() { try { return JSON.parse(localStorage.getItem(PROGRESS_KEY)) || {}; } catch (e) { return {}; } }
-  function markFlag(f) {
-    if (!f) return;
-    var pr = progress(); pr[f] = 1;
-    try { localStorage.setItem(PROGRESS_KEY, JSON.stringify(pr)); } catch (e) {}
-  }
-  // data.js 的 ending.require 全部完成 = 解鎖結局
-  function endingUnlocked() {
-    var req = (D.ending && D.ending.require) || [], pr = progress();
-    return req.every(function (f) { return pr[f]; });
-  }
+  /* ---------------- 結局：登入過小帳（D.instagram 那個帳號）就能打開 ---------------- */
+  function endingUnlocked() { return accState.loggedIn.indexOf(D.instagram.username) !== -1; }
 
   /* ---------------- 首頁 ---------------- */
   function renderHome() {
@@ -107,10 +96,8 @@
 
     var ads = (f.ads || []).map(function (a, i) {
       if (a.ending) {
-        var open = endingUnlocked();
-        return '<a class="ad' + (open ? '' : ' ad-locked') + '" href="' + (open ? '#/ending' : '#') + '" data-ad="' + i + '">' +
-          '<img src="' + esc(a.image) + '" alt="">' +
-          (open ? '' : '<span class="ad-lock">' + esc((D.ending && D.ending.lockedLabel) || '待解鎖') + '</span>') + '</a>';
+        // 還沒登入小帳：看起來跟一般廣告一樣，只是點了沒反應
+        return '<a class="ad" href="#/ending" data-ad="' + i + '"><img src="' + esc(a.image) + '" alt=""></a>';
       }
       return '<a class="ad" href="' + (a.link ? esc(a.link) : '#') + '" data-ad="' + i + '"' +
         (a.link ? ' target="_blank" rel="noopener"' : '') + '>' +
@@ -175,7 +162,7 @@
     var ad = e.target.closest('.ad');
     var adData = ad && (D.forum.ads || [])[ad.dataset.ad];
     if (adData && adData.ending) {
-      if (!endingUnlocked()) { e.preventDefault(); toast((D.ending && D.ending.lockedText) || '待解鎖'); }
+      if (!endingUnlocked()) e.preventDefault();
     } else if (adData && !adData.link) { e.preventDefault(); toast(); }
   });
 
@@ -896,7 +883,6 @@
       paintSound(isVideo);
       $('.ig-story-time').textContent = items[i].time || '';
       $('#ig-story-cf').style.display = items[i].closeFriends ? '' : 'none';
-      markFlag(items[i].flag);   // 限時動態寫了 flag → 看到時記錄進度
       bars.forEach(function (b, j) {
         b.className = j < i ? 'done' : '';
         b.firstChild.style.animation = 'none';
@@ -1274,7 +1260,6 @@
       return;
     }
     if (accState.loggedIn.indexOf(acc.username) < 0) accState.loggedIn.push(acc.username);
-    markFlag('login_' + acc.username);   // 進度：登入過這個帳號
     accState.current = acc.username;
     saveAcc();
     form.reset();
@@ -1415,7 +1400,7 @@
   /* ---------------- 啟動 ---------------- */
   // 給 js/apps/*.js 用的共用工具
   window.SOSHO = {
-    data: D, $: $, esc: esc, multiline: multiline, toast: toast, markFlag: markFlag, goBack: goBack, replaceHash: replaceHash,
+    data: D, $: $, esc: esc, multiline: multiline, toast: toast, goBack: goBack, replaceHash: replaceHash,
     setDarkStatus: function (on) { $('#phone').classList.toggle('dark-status', !!on); },
     load: function (key, def) {
       try { var v = JSON.parse(localStorage.getItem(key)); return v == null ? def : v; } catch (e) { return def; }

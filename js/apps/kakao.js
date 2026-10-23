@@ -202,7 +202,6 @@
     var f = friend(id);
     if (!f) { S().replaceHash('#/kakao'); return; }
     openChatId = f.id;
-    S().markFlag('chat_' + f.id);   // 進度：打開過這個聊天室（自己的聊天室是 chat_me）
     var st = state(); st.unread[f.id] = 0; S().save(KEY, st);
     renderFriends();
     S().$('#kakao-overlay').innerHTML =

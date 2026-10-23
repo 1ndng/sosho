@@ -514,9 +514,6 @@ div.ig-frow-main { cursor: default; }
 
 /* ---------- 結局廣告（待解鎖） ---------- */
 .ad { position: relative; }
-.ad-locked img { filter: grayscale(.8) brightness(.75); }
-.ad-lock { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,.65); color: #fff; font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 10px; white-space: nowrap; }
-.ad-lock::before { content: "🔒 "; }
 
 /* 論壇：原PO已限制留言 */
 .pd-closed { color: #999; text-align: center; border-bottom: 0; padding: 18px 0; }
