@@ -85,7 +85,7 @@ window.SITE_DATA = {
     username: "fauiogl94",         // ↓ 這一段是小帳 fauiogl94（同時放全部帳號共用的文字設定）
     password: "test225",           // 小帳的密碼：從「新增帳號」輸入對了才登得進去
     private: true,                 // 非公開帳號：沒追蹤的人看不到貼文、限時、名單（按追蹤只會變「已要求」）
-    avatar: "images/ig_avatar.png",
+    avatar: "images/default_avatar.png",   // 和路人一樣的預設頭貼
     hasStory: true,              // true = 頭像外圈顯示限時動態框
     // 點頭像看到的限時動態（可放多張，會自動輪播）
     // 加上 closeFriends: true 就是摯友限時：只有在這個帳號 closeFriendsList 裡的帳號看得到（綠色外框＋摯友標籤）
@@ -218,6 +218,7 @@ window.SITE_DATA = {
       noReposts: "還沒有轉發任何貼文",
       noTagged: "還沒有被標註的相片",
       storyMessageSent: "訊息已傳送",
+      recentTitle: "最近",              // 搜尋頁「搜尋紀錄」的標題
       closeFriendsTitle: "摯友",
       closeFriendsBadge: "摯友",       // 摯友限時動態上方的綠色標籤
       noCloseFriends: "還沒有摯友",
@@ -239,20 +240,6 @@ window.SITE_DATA = {
     searchPlaceholder: "搜尋",
     noResultText: "查無資訊",        // 搜尋不到帳號時顯示
     searchMode: "prefix",            // "exact" = 要打完整帳號才搜得到；"prefix" = 打開頭幾個字就會出現
-    explore: [                      // 搜尋頁還沒輸入時顯示的探索格子（點了顯示「尚未更新」）
-      "images/explore_1.png",
-      "images/explore_2.png",
-      "images/explore_3.png",
-      "images/explore_4.png",
-      "images/explore_5.png",
-      "images/explore_6.png",
-      "images/explore_7.png",
-      "images/explore_8.png",
-      "images/explore_9.png",
-      "images/explore_10.png",
-      "images/explore_11.png",
-      "images/explore_12.png"
-    ],
     // 只能被搜尋到、不能登入的帳號（格式和 otherAccounts 一樣，不用寫 password）
     searchOnlyAccounts: [
       {
