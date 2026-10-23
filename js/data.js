@@ -179,20 +179,20 @@ window.SITE_DATA = {
     searchOnlyAccounts: [],
 
     // 從搜尋點進別人的頁面時，取代「編輯／分享個人檔案」的兩個按鈕
-    followLabel: "test133",
-    messageLabel: "test134",
+    followLabel: "追蹤",
+    messageLabel: "發訊息",
 
     // 右上角三條線 → 設定頁（目前每一項點了都顯示「尚未更新」）
     settings: {
       title: "test122",
       sections: [
-        { title: "test123", items: [
-          { icon: "saved",   label: "test124" },
-          { icon: "archive", label: "test125" }
+        { title: "功能", items: [
+          { icon: "saved",   label: "已儲存" },
+          { icon: "archive", label: "典藏" }
         ] },
-        { title: "test126", items: [
-          { icon: "lock", label: "test127", value: "test128" },
-          { icon: "star", label: "test129", value: "test130" }
+        { title: "隱私", items: [
+          { icon: "lock", label: "帳號隱私設定", value: "不公開" },
+          { icon: "star", label: "摯友", value: "0" }
         ] }
       ]
     },
@@ -202,7 +202,6 @@ window.SITE_DATA = {
 
     // 按「新增帳號」後的登入畫面（只是畫面，輸入的內容不會被送出或儲存）
     login: {
-      logo: "images/login_logo.png",
       usernamePlaceholder: "帳號",
       passwordPlaceholder: "密碼",
       loginLabel: "登入",
@@ -250,7 +249,7 @@ window.SITE_DATA = {
         password: "031121",
         avatar: "1-00.jpg",
         hasStory: false,
-        name: "test92",
+        name: "SOHEE",
         postsCount: "test93",
         followersCount: "test94",
         followingCount: "test95",
