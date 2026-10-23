@@ -74,14 +74,32 @@
     var home = $('#home');
     home.style.backgroundImage = 'url("' + h.wallpaper + '")';
     // 桌布下方的 Dock（和 iPhone 一樣不顯示名稱）
+    var memo = h.memo || {};
     home.innerHTML =
+      // 左上角的備忘錄小工具：直接在上面打字，內容存在瀏覽器裡（重新開始會清掉）
+      (h.memo ? '<div class="home-widget">' +
+        '<label class="memo-widget">' +
+          '<span class="memo-head">' + ICON_MEMO + esc(memo.label || '備忘錄') + '</span>' +
+          '<textarea id="memo-text" spellcheck="false" placeholder="' + esc(memo.placeholder || '') + '"></textarea>' +
+        '</label>' +
+        '<span class="home-widget-name">' + esc(memo.label || '備忘錄') + '</span>' +
+      '</div>' : '') +
       '<div class="home-dock">' +
       h.apps.map(function (a) {
         return '<a class="app-icon" href="#/' + esc(a.id) + '" aria-label="' + esc(a.label) + '">' +
           '<img src="' + esc(a.icon) + '" alt=""></a>';
       }).join('') +
       '</div>';
+    var ta = $('#memo-text');
+    if (ta) {
+      try { ta.value = localStorage.getItem(MEMO_KEY) || ''; } catch (e) {}
+      ta.addEventListener('input', function () {
+        try { localStorage.setItem(MEMO_KEY, ta.value); } catch (e) {}
+      });
+    }
   }
+  var MEMO_KEY = 'sosho-memo';
+  var ICON_MEMO = '<svg viewBox="0 0 24 24"><rect x="3" y="2.5" width="18" height="19" rx="4" fill="#fff" stroke="#d6d6d6"/><path d="M3 7.5V6.5a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v1z" fill="#f7c600"/><path d="M7 11.5h10M7 14.5h10M7 17.5h6" stroke="#c9c9c9" stroke-width="1.2" stroke-linecap="round"/></svg>';
 
   /* ---------------- 進度旗標：公告依條件解鎖用 ---------------- */
   // left_forum = 第一次離開論壇；kakao_unlocked = 解開 KakaoTalk 密碼；login_帳號 = 登入過某個 IG 帳號；
