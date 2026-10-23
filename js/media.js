@@ -131,6 +131,7 @@ window.SITE_MEDIA = [
 "images/3_story_20261021.jpg",
 "images/3_story_20261022.jpg",
 "images/ad_1.mp4",
+"images/ad_2.mp4",
 "images/anton.jpg",
 "images/default_avatar.png",
 "images/eunseok.jpg",
