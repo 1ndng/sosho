@@ -133,61 +133,46 @@ window.SITE_DATA = {
         ] }
     ],
     // 貼文：images 可放多張（左右滑動）；格子上顯示第一張
+    // 小帳的貼文沒有人按讚（沒有 likes / likedBy）
     // 需要時可以加：comments: [{ user: "帳號", text: "留言", time: "1天" }]、tagged: ["被標註的帳號"]
     posts: [
       {
         images: ["images/3_post1.jpg"],
-        likes: "test111",
-        likedBy: { avatar: "images/ig_liker.png", name: "test112" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test113",
         time: "test114"
       },
       {
         images: ["images/3_post2.jpg"],
-        likes: "test115",
-        likedBy: { avatar: "images/ig_liker.png", name: "test116" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test117",
         time: "test118"
       },
       {
         images: ["images/3_post3.jpg", "images/3_post3-2.jpg"],
-        likes: "test208",
-        likedBy: { avatar: "images/ig_liker.png", name: "test209" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test210",
         time: "test211"
       },
       {
         images: ["images/3_post_20260705.jpg", "images/3_post_20260705-2.jpg"],
-        likes: "test315",
-        likedBy: { avatar: "images/ig_liker.png", name: "test316" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test317",
         time: "7月5日"
       },
       {
         images: ["images/3_post_20260604.jpg"],
-        likes: "test312",
-        likedBy: { avatar: "images/ig_liker.png", name: "test313" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test314",
         time: "6月4日"
       },
       {
         images: ["images/3_post_20260427.jpg"],
-        likes: "test309",
-        likedBy: { avatar: "images/ig_liker.png", name: "test310" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test311",
         time: "4月27日"
       },
       {
         images: ["images/3_post_20260406.jpg"],
-        likes: "test306",
-        likedBy: { avatar: "images/ig_liker.png", name: "test307" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test308",
         time: "4月6日"
       },
       {
         images: ["images/3_post_20260120.jpg"],
-        likes: "test290",
-        likedBy: { avatar: "images/ig_liker.png", name: "test291" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test292",
         time: "1月20日"
       }

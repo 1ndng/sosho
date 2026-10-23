@@ -200,7 +200,7 @@
 
   function renderChat(id) {
     var f = friend(id);
-    if (!f) { location.replace('#/kakao'); return; }
+    if (!f) { S().replaceHash('#/kakao'); return; }
     openChatId = f.id;
     S().markFlag('chat_' + f.id);   // 進度：打開過這個聊天室（自己的聊天室是 chat_me）
     var st = state(); st.unread[f.id] = 0; S().save(KEY, st);
@@ -283,7 +283,7 @@
     if (back) {
       // 聊天室的返回：回到上一頁（好友或聊天列表）
       e.preventDefault();
-      if (history.length > 1) history.back(); else location.hash = '#/kakao';
+      S().goBack('#/kakao');
       return;
     }
     var ph = e.target.closest('[data-photo]');

@@ -30,6 +30,28 @@
     toastTimer = setTimeout(function () { t.classList.remove('show'); }, 1600);
   }
 
+  /* ---------------- 上一頁（自己記錄瀏覽紀錄，避免「上一頁」繞回限時動態） ---------------- */
+  var navStack = [];
+  var replacing = false;
+  function trackNav() {
+    var h = location.hash;
+    if (replacing) { navStack[navStack.length - 1] = h; replacing = false; return; }
+    if (navStack.length > 1 && navStack[navStack.length - 2] === h) navStack.pop();   // 按了上一頁
+    else if (navStack[navStack.length - 1] !== h) navStack.push(h);
+  }
+  // 取代目前這一頁（不會多一筆「上一頁」）
+  function replaceHash(h) {
+    if (location.hash === h) return;
+    replacing = true;
+    location.replace(h);
+  }
+  // 回上一頁；沒有上一頁就到 fallback
+  function goBack(fallback) {
+    if (navStack.length > 1) history.back();
+    else replaceHash(fallback || '#/forum');
+  }
+  function prevHash() { return navStack[navStack.length - 2]; }
+
   /* ---------------- 進度（結局解鎖用） ---------------- */
   var PROGRESS_KEY = 'sosho-progress';
   function progress() { try { return JSON.parse(localStorage.getItem(PROGRESS_KEY)) || {}; } catch (e) { return {}; } }
@@ -501,7 +523,7 @@
   }
 
   function backBtn(href) {
-    return '<a class="ig-round-back" href="' + (href || '#/ig') + '">' + ICON.back + '</a>';
+    return '<a class="ig-round-back" href="' + (href || '#/ig') + '" data-back>' + ICON.back + '</a>';
   }
   // 返回上一頁（從轉發、已儲存點進貼文時回到原本的地方）
   function historyBackBtn(fallback) {
@@ -649,7 +671,7 @@
     var L = D.instagram;
     g = g || currentAccount(); base = base || '#/ig';
     var raw = src === 'archive' ? ((g.archive || {}).posts || [])[idx] : (g.posts || [])[idx];
-    if (raw == null) { location.replace(base); return; }
+    if (raw == null) { replaceHash(base); return; }
     var p = postObj(raw), n = p.images.length;
     curPost = { owner: g, idx: idx, p: p, key: src === 'archive' ? g.username + '/archive' + idx : postKey(g, idx) };
     $('#ig-overlay').innerHTML = '';
@@ -794,7 +816,9 @@
       var h = (g.highlights || [])[which];
       items = h ? visibleHighlight(g, h) : [];
     }
-    if (!items.length) { location.replace(base); return; }
+    // 精選動態上方顯示精選的封面和名稱；限時動態／典藏顯示帳號
+    var headImg = h ? h.image : g.avatar, headName = h ? h.label : g.username;
+    if (!items.length) { replaceHash(base); return; }
     if (which === 'me') { store.seen[g.username] = 1; saveStore(); }
     if (fromArchive) renderIGArchive(); else renderIG(g, base);   // 背後保留原本的頁面，關掉時直接回到這裡
     $('#phone').classList.add('dark-status');
@@ -803,12 +827,12 @@
       '<div class="ig-story">' +
         '<div class="ig-story-bars">' + items.map(function () { return '<i><b></b></i>'; }).join('') + '</div>' +
         '<div class="ig-story-head">' +
-          '<img src="' + esc(g.avatar) + '" alt="">' +
-          '<b>' + esc(g.username) + '</b><span class="ig-story-cf" id="ig-story-cf">' + ICON.starFill + esc(T().closeFriendsBadge) + '</span>' +
+          '<img src="' + esc(headImg) + '" alt="">' +
+          '<b>' + esc(headName) + '</b><span class="ig-story-cf" id="ig-story-cf">' + ICON.starFill + esc(T().closeFriendsBadge) + '</span>' +
           '<span class="ig-story-time"></span>' +
           '<button class="ig-ico ig-story-sound" id="ig-story-sound" type="button" aria-label="sound"></button>' +
           '<button class="ig-ico" data-na>' + ICON.more + '</button>' +
-          '<a class="ig-ico" href="' + base + '">' + ICON.close + '</a>' +
+          '<button class="ig-ico" type="button" data-story-close>' + ICON.close + '</button>' +
         '</div>' +
         '<div class="ig-story-img" id="ig-story-media"></div>' +
         '<div class="ig-story-tap"><span data-prev></span><span data-next></span></div>' +
@@ -818,6 +842,12 @@
         '</form>' +
       '</div>';
 
+    // 關閉：如果是從原本那頁點進來的，就回上一頁（不會留下一筆「上一頁 = 限時動態」）
+    function closeStory() {
+      clearTimeout(storyTimer);
+      if (prevHash() === base) history.back(); else replaceHash(base);
+    }
+    $('[data-story-close]').onclick = closeStory;
     var bars = document.querySelectorAll('.ig-story-bars i');
     var startedAt = 0, remaining = 5000;
     function likeKey() { return actKey(g.username + '/story/' + which + '/' + i); }
@@ -855,7 +885,7 @@
     }
     function show(k) {
       if (k < 0) k = 0;
-      if (k >= items.length) { location.hash = base; return; }
+      if (k >= items.length) { closeStory(); return; }
       i = k;
       // 影片（.mp4 / .mov / .webm）播完才換下一則；圖片 5 秒
       var src = items[i].image || '', isVideo = /\.(mp4|mov|webm)$/i.test(src);
@@ -942,7 +972,7 @@
       storyEl.style.transition = '';
       if (dragDy > 110) {
         storyEl.style.transform = 'translateY(100%)';
-        setTimeout(function () { location.hash = base; }, 180);
+        setTimeout(closeStory, 180);
       } else {
         storyEl.style.transform = ''; storyEl.style.borderRadius = '';
         resume();
@@ -1085,7 +1115,7 @@
         bio: f.bio.value.split('\n').map(function (l) { return l.trim(); }).filter(Boolean)
       };
       saveStore(); applyEdits();
-      location.hash = '#/ig';
+      goBack('#/ig');
     });
   }
 
@@ -1135,7 +1165,7 @@
     if ((el = e.target.closest('[data-hist]'))) addHistory(el.dataset.hist);   // 點進去的帳號記到搜尋紀錄（照常換頁）
     if ((el = e.target.closest('[data-back]'))) {
       e.preventDefault();
-      if (history.length > 1) history.back(); else location.hash = el.getAttribute('href');
+      goBack(el.getAttribute('href'));
       return;
     }
     if ((el = e.target.closest('[data-atab]'))) {
@@ -1243,7 +1273,7 @@
     saveAcc();
     form.reset();
     $('#toast').classList.remove('show');
-    location.hash = '#/ig';
+    replaceHash('#/ig');
   });
 
   /* ---------------- 路由（網址 #/home、#/forum、#/forum/文章id、#/ig） ---------------- */
@@ -1282,7 +1312,7 @@
     var parts = location.hash.replace(/^#\/?/, '').split('/');
     stopStory();
     if (parts[0] === 'ending') {
-      if (!endingUnlocked()) { location.replace('#/forum'); return; }
+      if (!endingUnlocked()) { replaceHash('#/forum'); return; }
       openApp('ending');
       renderEnding();
     } else if (APPS[parts[0]]) {
@@ -1298,10 +1328,10 @@
       if (parts[1] === 'u') {
         // 別人的頁面：#/ig/u/帳號[/post/編號 | /story/編號]
         var who = profileByName(decodeURIComponent(parts[2] || ''));
-        if (!who) { location.replace('#/ig/search'); return; }
-        if (who === currentAccount()) { location.replace('#/ig' + (parts[3] ? '/' + parts.slice(3).join('/') : '')); return; }
+        if (!who) { replaceHash('#/ig/search'); return; }
+        if (who === currentAccount()) { replaceHash('#/ig' + (parts[3] ? '/' + parts.slice(3).join('/') : '')); return; }
         var base = '#/ig/u/' + encodeURIComponent(who.username);
-        if (parts[3] && isLocked(who)) { location.replace(base); return; }   // 非公開又沒追蹤：不能看貼文、限時、名單
+        if (parts[3] && isLocked(who)) { replaceHash(base); return; }   // 非公開又沒追蹤：不能看貼文、限時、名單
         if (parts[3] === 'post') renderIGPost(+parts[4], who, base);
         else if (parts[3] === 'follows') renderIGFollows(parts[4], who, base);
         else if (parts[3] === 'story') renderIGStory(parts[4] === 'me' ? 'me' : +parts[4], who, base);
@@ -1364,7 +1394,7 @@
   /* ---------------- 啟動 ---------------- */
   // 給 js/apps/*.js 用的共用工具
   window.SOSHO = {
-    data: D, $: $, esc: esc, multiline: multiline, toast: toast, markFlag: markFlag,
+    data: D, $: $, esc: esc, multiline: multiline, toast: toast, markFlag: markFlag, goBack: goBack, replaceHash: replaceHash,
     setDarkStatus: function (on) { $('#phone').classList.toggle('dark-status', !!on); },
     load: function (key, def) {
       try { var v = JSON.parse(localStorage.getItem(key)); return v == null ? def : v; } catch (e) { return def; }
@@ -1453,6 +1483,7 @@
   renderLock();
   renderHome();
   if (!location.hash) history.replaceState(null, '', '#/forum');  // 一進網頁先開論壇
-  window.addEventListener('hashchange', route);
+  navStack.push(location.hash);
+  window.addEventListener('hashchange', function () { trackNav(); route(); });
   route();
 })();
