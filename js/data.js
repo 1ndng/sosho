@@ -660,7 +660,8 @@ window.SITE_DATA = {
           { from: "them", image: "images/2_msg_20261003.jpg", time: "test222" },
           { date: "2026年10月4日 星期日" },
           { from: "them", image: "images/2_msg_20261004.jpg", time: "test223" },
-          { from: "me", image: "images/1_msg.jpg", time: "test224" },   // 1_msg.jpg 檔名沒有日期：補上日期後再移到對的位置
+          { date: "2026年10月10日 星期六" },
+          { from: "me", image: "images/1_msg_20261010.jpg", time: "test224" },
           { date: "2026年10月22日 星期四" },   // 論壇發文後；最後一則是소희傳的（未讀 1）
           { from: "me", text: "test383", time: "test384" },
           { from: "them", text: "test385", time: "test386" }

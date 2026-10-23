@@ -134,6 +134,7 @@
 
 - 格式：`{帳號}_{種類}_{日期}[-第幾張].副檔名`，帳號 1 = shotaroo0、2 = 252525252_、3 = fauiogl94
 - 種類：`story` 限時、`story2` 摯友限時、`post` 貼文、`savedstory`／`savedpost` 典藏、`msg` Kakao 照片（1 自己傳、2 소희傳）
+- Kakao 其他好友傳的照片：`at_msg_日期.jpg` = Anton、`wb_` = 원빈、`sc_` = 성찬、`es_` = 은석
 - 日期：`20260426` 或 `260426`；同一天多張加 `-2`、`-3`
 - 音樂：`1_music.mp3`（.mp3／.m4a／.wav），放進 `audio/`，IG 個人頁的音樂列點了就會播放
 - GitHub Action（`.github/workflows/media.yml`）會自動搬到 `images/`／`audio/`、壓縮（照片 1440px、影片短邊 720px、長邊 1440px、HEIC／MOV 自動轉檔），並更新 `js/media.js`

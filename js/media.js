@@ -1,7 +1,6 @@
 /* 自動產生，不用手動修改：images/ 和 audio/ 裡的檔案清單（js/automedia.js 會用到） */
 window.SITE_MEDIA = [
 "images/1_avatar.jpg",
-"images/1_msg.jpg",
 "images/1_msg_20250619.jpg",
 "images/1_msg_20250709.jpg",
 "images/1_msg_20251018.jpg",
@@ -12,6 +11,7 @@ window.SITE_MEDIA = [
 "images/1_msg_20260411.jpg",
 "images/1_msg_20260712.jpg",
 "images/1_msg_20260826.jpg",
+"images/1_msg_20261010.jpg",
 "images/1_post1-2.jpg",
 "images/1_post1-3.jpg",
 "images/1_post1.jpg",
@@ -134,7 +134,6 @@ window.SITE_MEDIA = [
 "images/2_story_20261004.jpg",
 "images/3_post1.jpg",
 "images/3_post2.jpg",
-"images/3_post20260827.jpg",
 "images/3_post3-2.jpg",
 "images/3_post3.jpg",
 "images/3_post_20260120.jpg",
@@ -145,6 +144,7 @@ window.SITE_MEDIA = [
 "images/3_post_20260604.jpg",
 "images/3_post_20260705-2.jpg",
 "images/3_post_20260705.jpg",
+"images/3_post_20260827.jpg",
 "images/3_story_20250904.jpg",
 "images/3_story_20251128.jpg",
 "images/3_story_20251130.jpg",

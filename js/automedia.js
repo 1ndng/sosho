@@ -8,6 +8,8 @@
  *         savedstory／savedpost／saved（典藏）、msg（Kakao 照片，1 = 自己傳、2 = 소희傳）、
  *         music（IG 個人頁的音樂，放在 audio/ 資料夾，不用日期）
  *   日期：20260426 或 260426（同一天多張用 -2、-3…）
+ * Kakao 其他好友傳來的照片：{好友代號}_msg_{日期}.jpg
+ *   at = Anton、wb = 원빈、sc = 성찬、es = 은석（例如 at_msg_20260826.jpg = Anton 傳給 Shotaro）
  * data.js 裡已經寫過的檔案不會重複加；想改文字就照平常在 data.js 寫一筆，寫了就以 data.js 為準。
  * ========================================================= */
 (function () {
@@ -16,7 +18,8 @@
   if (!D || !files.length) return;
 
   var ACC = { 1: 'shotaroo0', 2: '252525252_', 3: 'fauiogl94' };
-  var RE = /^([1-3])_(story2|story|savedstory|savedpost|saved|post|msg|music)(?:_(\d{8}|\d{6}))?(?:-(\d+))?\.(jpg|jpeg|png|gif|webp|mp4|mp3|m4a)$/i;
+  var KAKAO = { at: 'f3', wb: 'f2', sc: 'f4', es: 'f5' };   // Kakao 好友代號 → data.js 的好友 id
+  var RE = /^([1-3]|at|wb|sc|es)_(story2|story|savedstory|savedpost|saved|post|msg|music)(?:_(\d{8}|\d{6}))?(?:-(\d+))?\.(jpg|jpeg|png|gif|webp|mp4|mp3|m4a)$/i;
   var used = JSON.stringify(D);
   var thisYear = 2026;   // 沒寫年份時（例如「4月26日」）視為 2026 年
 
@@ -56,6 +59,11 @@
     if (!groups[key]) { groups[key] = { acc: m[1], type: m[2].toLowerCase(), date: m[3] ? ymd(m[3]) : null, files: [] }; order.push(key); }
     groups[key].files.push({ path: path, n: +(m[4] || 1) });
   });
+  // 同一天的照片照 -2、-3 的順序放（檔案清單裡 xxx-2.jpg 會排在 xxx.jpg 前面）
+  order.sort(function (x, y) {
+    var gx = groups[x], gy = groups[y];
+    return (gx.date || '').localeCompare(gy.date || '') || gx.files[0].n - gy.files[0].n;
+  });
 
   order.forEach(function (key) {
     var g = groups[key], a = account(g.acc);
@@ -69,6 +77,12 @@
     var time = timeLabel(g.date);
 
     if (g.type === 'msg') {
+      var fid = KAKAO[g.acc.toLowerCase()];
+      if (fid) {   // 其他好友傳來的照片
+        var fr = D.kakao && (D.kakao.friends || []).filter(function (x) { return x.id === fid; })[0];
+        if (fr) insertMsg(fr.messages = fr.messages || [], { from: 'them', image: paths[0], time: '' }, g.date);
+        return;
+      }
       var f1 = D.kakao && (D.kakao.friends || [])[0];
       if (!f1 || (g.acc !== '1' && g.acc !== '2')) return;   // Kakao 只有 Shotaro 和 소희 的聊天
       var msgs = f1.messages = f1.messages || [];
