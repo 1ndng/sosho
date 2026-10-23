@@ -44,3 +44,9 @@
 - 點格子裡的貼文 → `#/ig/post/編號`；貼文寫成 `{ images: [...], likes, likedBy, caption, time }`，也可以只寫一個圖片路徑字串
 - 點頭像（有 `story` 時）→ `#/ig/story/me`；點精選動態 → `#/ig/story/編號`，內容在每個精選的 `stories`
 - 限時動態每張 5 秒自動換下一張，點左邊 1/3 上一張、點右邊下一張，看完自動回個人頁
+
+## IG 下方功能列與搜尋
+- 個人頁、搜尋頁、從搜尋點進去的別人頁面，下方都有功能列；主頁、新增、Reels 目前顯示「尚未更新」
+- 搜尋頁 `#/ig/search`：輸入帳號 id 會列出帳號，點進去是 `#/ig/u/帳號`
+- `searchMode`："exact" 要打完整 id（不分大小寫）；"prefix" 打開頭幾個字就會出現
+- 搜得到的帳號 = 主帳號 + `otherAccounts` + `searchOnlyAccounts`（只能被搜尋、不能登入）

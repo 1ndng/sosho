@@ -157,6 +157,31 @@ window.SITE_DATA = {
     likedBySuffix: "test120",         // 「說讚」
     storyMessagePlaceholder: "test121",  // 限時動態下方「傳送訊息……」
 
+    // 下方功能列的搜尋頁
+    searchPlaceholder: "test131",
+    noResultText: "test132",        // 搜尋不到帳號時顯示
+    searchMode: "exact",            // "exact" = 要打完整帳號才搜得到；"prefix" = 打開頭幾個字就會出現
+    explore: [                      // 搜尋頁還沒輸入時顯示的探索格子（點了顯示「尚未更新」）
+      "images/explore_1.png",
+      "images/explore_2.png",
+      "images/explore_3.png",
+      "images/explore_4.png",
+      "images/explore_5.png",
+      "images/explore_6.png",
+      "images/explore_7.png",
+      "images/explore_8.png",
+      "images/explore_9.png",
+      "images/explore_10.png",
+      "images/explore_11.png",
+      "images/explore_12.png"
+    ],
+    // 只能被搜尋到、不能登入的帳號（格式和 otherAccounts 一樣，不用寫 password）
+    searchOnlyAccounts: [],
+
+    // 從搜尋點進別人的頁面時，取代「編輯／分享個人檔案」的兩個按鈕
+    followLabel: "test133",
+    messageLabel: "test134",
+
     // 右上角三條線 → 設定頁（目前每一項點了都顯示「尚未更新」）
     settings: {
       title: "test122",
