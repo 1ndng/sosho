@@ -1625,7 +1625,7 @@
   applyEdits();
   renderLock();
   renderHome();
-  if (!location.hash) history.replaceState(null, '', '#/forum');  // 一進網頁先開論壇
+  if (!location.hash) history.replaceState(null, '', '#/home');  // 一進網頁先到桌面
   navStack.push(location.hash);
   window.addEventListener('hashchange', function () { trackNav(); route(); });
   route();
