@@ -249,7 +249,7 @@
   // 看過的限時動態、追蹤狀態（存在瀏覽器裡）
   var STORE_KEY = 'sosho-ig-state';
   // likes / saves / reposts / commentLikes / storyLikes 的 key 都是「目前帳號|對象」，換帳號各自分開
-  var store = { seen: {}, follows: {}, likes: {}, saves: {}, reposts: {}, comments: {}, commentLikes: {}, storyLikes: {}, searchHistory: [], profileEdits: {} };
+  var store = { archived: {}, seen: {}, follows: {}, likes: {}, saves: {}, reposts: {}, comments: {}, commentLikes: {}, storyLikes: {}, searchHistory: [], profileEdits: {} };
   try {
     var saved = JSON.parse(localStorage.getItem(STORE_KEY));
     if (saved) Object.keys(store).forEach(function (k) { if (saved[k]) store[k] = saved[k]; });
@@ -282,7 +282,7 @@
   // 有手動填數字就用手動的，沒有就自動計算
   function counts(g) {
     return {
-      posts: g.postsCount != null ? g.postsCount : (g.posts || []).length,
+      posts: g.postsCount != null ? g.postsCount : shownPosts(g).length,
       followers: g.followersCount != null ? g.followersCount : g.followersList ? g.followersList.length : followersOf(g).length,
       following: g.followingCount != null ? g.followingCount : g.followingList ? g.followingList.length : followingOf(g).length
     };
@@ -402,7 +402,7 @@
         '<button data-ptab="grid" class="active">' + ICON.grid + '</button>' +
 
       '</div>' +
-      '<div data-pane="grid">' + gridHTML(posts.map(function (_, i) { return { owner: g, idx: i }; }), '') + '</div>' +
+      '<div data-pane="grid">' + gridHTML(shownPosts(g).map(function (i) { return { owner: g, idx: i }; }), '') + '</div>' +
       '<div data-pane="reposts" hidden>' + gridHTML(repostsOf(g), T().noReposts) + '</div>' +
       '<div data-pane="tagged" hidden>' + gridHTML(taggedOf(g), T().noTagged) + '</div>');
 
@@ -454,6 +454,7 @@
     closeFriendsTitle: '摯友', closeFriendsBadge: '摯友', noCloseFriends: '還沒有摯友',
     privateTitle: '此帳號不公開', privateDesc: '追蹤這個帳號即可查看相片和影片。', requestedLabel: '已要求',
     soundOn: '開啟聲音', soundOff: '關閉聲音',
+    archivePost: '典藏', unarchivePost: '在個人檔案顯示', archivedToast: '已典藏貼文', unarchivedToast: '已在個人檔案顯示',
     archiveTitle: '典藏', archiveStories: '限時動態', archivePosts: '貼文', noArchive: '沒有典藏的內容'
   };
   function T() {
@@ -466,6 +467,11 @@
   }
 
   function postKey(owner, idx) { return owner.username + '/' + idx; }
+  // 玩家自己典藏的貼文（從個人頁拿掉、移到 設定 → 典藏）
+  function isArchived(owner, idx) { return !!(store.archived || {})[postKey(owner, idx)]; }
+  function shownPosts(g) {
+    return (g.posts || []).map(function (_, i) { return i; }).filter(function (i) { return !isArchived(g, i); });
+  }
   function actKey(k) { return currentAccount().username + '|' + k; }
   function postHref(owner, idx) {
     return owner === currentAccount() ? '#/ig/post/' + idx : '#/ig/u/' + encodeURIComponent(owner.username) + '/post/' + idx;
@@ -547,7 +553,11 @@
   // 典藏：限時動態（過期）／貼文（下架）兩個分頁
   var archiveTab = 'stories';
   function renderIGArchive() {
-    var t = T(), ar = currentAccount().archive || {}, st = ar.stories || [], ps = ar.posts || [];
+    var t = T(), me = currentAccount(), ar = me.archive || {}, st = ar.stories || [];
+    // 玩家典藏的貼文排前面，再來是 data.js 寫好的典藏貼文
+    var ps = (me.posts || []).map(function (p, i) { return { p: p, href: '#/ig/post/' + i, i: i }; })
+      .filter(function (x) { return isArchived(me, x.i); })
+      .concat((ar.posts || []).map(function (p, i) { return { p: p, href: '#/ig/archive/post/' + i }; }));
     var body = archiveTab === 'stories'
       ? (st.length ? '<div class="ig-grid ig-arch-grid">' + st.map(function (it, i) {
           var isVideo = /\.(mp4|mov|webm)$/i.test(it.image || '');
@@ -555,9 +565,9 @@
             (isVideo ? '<video src="' + esc(it.image) + '" muted playsinline preload="metadata"></video>' : '<img src="' + esc(it.image) + '" alt="">') +
             (it.time ? '<span class="ig-arch-date">' + esc(it.time) + '</span>' : '') + '</a>';
         }).join('') + '</div>' : '<div class="ig-empty">' + esc(t.noArchive) + '</div>')
-      : (ps.length ? '<div class="ig-grid">' + ps.map(function (p, i) {
-          var po = postObj(p);
-          return '<a href="#/ig/archive/post/' + i + '"><img src="' + esc(po.images[0]) + '" alt="">' +
+      : (ps.length ? '<div class="ig-grid">' + ps.map(function (x) {
+          var po = postObj(x.p);
+          return '<a href="' + x.href + '"><img src="' + esc(po.images[0]) + '" alt="">' +
             (po.images.length > 1 ? '<span class="ig-multi"></span>' : '') + '</a>';
         }).join('') + '</div>' : '<div class="ig-empty">' + esc(t.noArchive) + '</div>');
     $('#ig-overlay').innerHTML = '';
@@ -661,7 +671,7 @@
       '<div class="ig-post-user">' +
         '<a class="ig-post-user-link" href="' + (g === currentAccount() ? '#/ig' : '#/ig/u/' + encodeURIComponent(g.username)) + '">' +
           '<img src="' + esc(g.avatar) + '" alt=""><b>' + esc(g.username) + '</b></a>' +
-        '<button class="ig-ico" data-na>' + ICON.more + '</button>' +
+        (g === currentAccount() && src !== 'archive' ? '<button class="ig-ico" data-post-menu>' + ICON.more + '</button>' : '') +
       '</div>' +
       '<div class="ig-car-wrap">' +
         '<div class="ig-car" id="ig-car">' + p.images.map(function (src) {
@@ -1211,6 +1221,29 @@
     // 粉絲／追蹤中切換分頁：取代目前這頁，返回鍵直接回個人頁
     var tb = e.target.closest('[data-tab]');
     if (tb) { e.preventDefault(); replaceHash(tb.getAttribute('href')); return; }
+    // 自己的貼文右上角「⋯」→ 典藏／在個人檔案顯示
+    if (e.target.closest('[data-post-menu]') && curPost) {
+      var arch = isArchived(curPost.owner, curPost.idx);
+      $('#ig-overlay').innerHTML =
+        '<div class="ig-sheet-wrap" id="ig-sheet">' +
+          '<div class="ig-sheet-bg" data-close-sheet></div>' +
+          '<div class="ig-sheet">' +
+            '<div class="ig-sheet-handle" data-close-sheet></div>' +
+            '<button class="ig-sheet-act" data-archive-post>' + ICON.archive +
+              '<span>' + esc(arch ? T().unarchivePost : T().archivePost) + '</span></button>' +
+          '</div>' +
+        '</div>';
+      var sh = $('#ig-sheet'); void sh.offsetWidth; sh.classList.add('show');
+      return;
+    }
+    if (e.target.closest('[data-archive-post]') && curPost) {
+      var k = postKey(curPost.owner, curPost.idx), was = !!store.archived[k];
+      if (was) delete store.archived[k]; else store.archived[k] = 1;
+      saveStore();
+      toast(was ? T().unarchivedToast : T().archivedToast);
+      goBack(was ? '#/ig/archive' : '#/ig');
+      return;
+    }
     var mu = e.target.closest('[data-music]');
     if (mu) { toggleMusic(mu); return; }
     var sw = e.target.closest('[data-switch]');
