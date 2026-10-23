@@ -32,53 +32,30 @@ window.SITE_DATA = {
     // 文章：順序 = 列表顯示順序。id 請保持不重複（用於網址 #/forum/id）
     posts: [
       {
-        id: "1", title: "求推薦裝潢好看食物又好吃的咖啡廳啊啊啊",
-        author: "f00d1smylife_",          // 匿名帳號代碼
-        content: "如題。",
+        id: "1", title: "Shotaro是不是談戀愛了？",
+        author: "test77",          // 匿名帳號代碼
+        content: "test12",
         comments: [
           { name: "test13", text: "test14" },
           { name: "test15", text: "test16" }
         ]
       },
       {
-        id: "2", title: "test18",
-        author: "test78",          // 匿名帳號代碼
-        content: "test19",
+        id: "2", title: "秘境餐廳推薦！",
+        author: "f00d1smylife_",          // 匿名帳號代碼
+        content: "如題。",
         comments: [
           { name: "test20", text: "test21" }
         ]
       },
       {
-        id: "3", title: "test23",
+        id: "3", title: "判斷一個人是不是在戀愛的妙招。",
         author: "test79",          // 匿名帳號代碼
         content: "test24",
         comments: [
           { name: "test25", text: "test26" },
           { name: "test27", text: "test28" },
           { name: "test29", text: "test30" }
-        ]
-      },
-      {
-        id: "4", title: "test32",
-        author: "test80",          // 匿名帳號代碼
-        content: "test33",
-        comments: []
-      },
-      {
-        id: "5", title: "test35",
-        author: "test81",          // 匿名帳號代碼
-        content: "test36",
-        comments: [
-          { name: "test37", text: "test38" }
-        ]
-      },
-      {
-        id: "6", title: "test40",
-        author: "test82",          // 匿名帳號代碼
-        content: "test41",
-        comments: [
-          { name: "test42", text: "test43" },
-          { name: "test44", text: "test45" }
         ]
       }
     ],
