@@ -367,3 +367,23 @@ img { display: block; max-width: 100%; }
 .ig-following svg { width: 16px; height: 16px; }
 .ig-btns .ig-btn-sq { flex: none; width: 40px; display: flex; align-items: center; justify-content: center; }
 .ig-btn-sq svg { width: 20px; height: 20px; }
+
+/* ---------- 粉絲／追蹤中名單 ---------- */
+.ig-round-r {
+  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  width: 44px; height: 44px; border-radius: 50%; background: #fff;
+  box-shadow: 0 2px 12px rgba(0,0,0,.08); display: flex; align-items: center; justify-content: center;
+}
+.ig-round-r svg { width: 22px; height: 22px; }
+.ig-ftabs { display: flex; border-bottom: 1px solid #efefef; margin-top: 4px; }
+.ig-ftabs a { flex: 1; text-align: center; padding: 12px 0; font-size: 14px; font-weight: 600; color: #737373; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+.ig-ftabs a.on { color: #000; border-bottom-color: #000; }
+.ig-frow { display: flex; align-items: center; gap: 8px; padding: 8px 12px 8px 16px; }
+.ig-frow-main { flex: 1; min-width: 0; display: flex; align-items: center; gap: 12px; }
+.ig-frow-main img { flex: none; width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 1px solid #efefef; }
+.ig-frow-main span { min-width: 0; }
+.ig-frow-main b, .ig-frow-main small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ig-frow-main b { font-size: 14px; }
+.ig-frow-main small { font-size: 13px; color: #737373; }
+.ig-frow-btn { flex: none; background: #efefef; border-radius: 8px; height: 32px; padding: 0 22px; font-weight: 600; font-size: 14px; }
+.ig-frow .ig-ico svg { width: 20px; height: 20px; }

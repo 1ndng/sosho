@@ -101,9 +101,9 @@ window.SITE_DATA = {
       { image: "images/ig_story_2.png", time: "test102" }
     ],
     name: "fauiogl94",
-    postsCount: "2",
-    followersCount: "0",
-    followingCount: "1",
+    // 貼文數、粉絲數、追蹤數會自動計算（貼文 = posts 的數量；粉絲／追蹤 = following 名單）
+    // 想顯示固定數字（例如 "145k"）時，再加上 postsCount / followersCount / followingCount 就會蓋過自動計算
+    following: ["shotaroo0"],    // 這個帳號追蹤中的帳號（寫帳號 id）
     postsLabel: "貼文",
     followersLabel: "位粉絲",
     followingLabel: "追蹤中",
@@ -219,9 +219,7 @@ window.SITE_DATA = {
         avatar: "images/1-0.jpg",
         hasStory: false,
         name: "Shotaro",
-        postsCount: "7",
-        followersCount: "145k",
-        followingCount: "651",
+        following: [],
         bio: ["test87"],
         music: { title: "test88", artist: "keshi" },
         highlights: [
@@ -251,9 +249,7 @@ window.SITE_DATA = {
         avatar: "images/1-00.jpg",
         hasStory: false,
         name: "SOHEE",
-        postsCount: "test93",
-        followersCount: "test94",
-        followingCount: "test95",
+        following: [],
         bio: ["test96"],
         music: { title: "test97", artist: "test98" },
         highlights: [

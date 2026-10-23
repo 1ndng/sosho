@@ -50,3 +50,8 @@
 - 搜尋頁 `#/ig/search`：輸入帳號 id 會列出帳號，點進去是 `#/ig/u/帳號`
 - `searchMode`："exact" 要打完整 id（不分大小寫）；"prefix" 打開頭幾個字就會出現
 - 搜得到的帳號 = 主帳號 + `otherAccounts` + `searchOnlyAccounts`（只能被搜尋、不能登入）
+
+## IG 貼文數／粉絲／追蹤自動計算
+- 貼文數 = `posts` 的數量；粉絲、追蹤中 = 依各帳號的 `following` 名單（加上玩家按的追蹤／取消）自動算
+- 想顯示固定數字（例如 "145k"）就在帳號裡加 `postsCount` / `followersCount` / `followingCount`，會蓋過自動計算
+- 點粉絲或追蹤中 → `#/ig/follows/followers`、`#/ig/follows/following`（別人的是 `#/ig/u/帳號/follows/...`）

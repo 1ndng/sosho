@@ -144,6 +144,7 @@
     add: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 7.5v9M7.5 12h9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
     reels: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2" fill="none"/><path d="M3 8.5h18M8.5 3l3 5.5M14 3l3 5.5" stroke="currentColor" stroke-width="2" fill="none"/><path d="M10 11.5v6l5-3z" fill="currentColor"/></svg>',
     addUser: '<svg viewBox="0 0 24 24"><circle cx="14" cy="8" r="4" stroke="currentColor" stroke-width="2" fill="none"/><path d="M6.5 21c.6-4 3.6-6.3 7.5-6.3s6.9 2.3 7.5 6.3M5 6v6M2 9h6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>',
+    dots: '<svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.8" fill="currentColor"/><circle cx="12" cy="12" r="1.8" fill="currentColor"/><circle cx="19" cy="12" r="1.8" fill="currentColor"/></svg>',
     tagged: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" fill="none"/><path d="M6.5 20.5c1-3 3-4.3 5.5-4.3s4.5 1.3 5.5 4.3" stroke="currentColor" stroke-width="2" fill="none"/></svg>'
   };
 
@@ -182,6 +183,27 @@
   // 追蹤是「目前登入的帳號」追蹤「對方」，換帳號登入就各自分開
   function followKey(g) { return currentAccount().username + '>' + g.username; }
 
+  // a 有沒有追蹤 b：玩家按過追蹤／取消就以那個為準，否則看 data.js 的 following 名單
+  function isFollowing(a, b) {
+    var k = a.username + '>' + b.username;
+    if (k in store.follows) return !!store.follows[k];
+    return (a.following || []).indexOf(b.username) >= 0;
+  }
+  function followingOf(g) {
+    return allProfiles().filter(function (b) { return b !== g && isFollowing(g, b); });
+  }
+  function followersOf(g) {
+    return allProfiles().filter(function (a) { return a !== g && isFollowing(a, g); });
+  }
+  // 有手動填數字就用手動的，沒有就自動計算
+  function counts(g) {
+    return {
+      posts: g.postsCount != null ? g.postsCount : (g.posts || []).length,
+      followers: g.followersCount != null ? g.followersCount : followersOf(g).length,
+      following: g.followingCount != null ? g.followingCount : followingOf(g).length
+    };
+  }
+
   // 搜尋得到的所有帳號：主帳號 + 可登入帳號 + 只能被搜尋的帳號
   function allProfiles() {
     return [D.instagram].concat(otherAccounts(), D.instagram.searchOnlyAccounts || []);
@@ -197,7 +219,8 @@
     base = base || '#/ig';
     var visitor = base !== '#/ig';   // true = 從搜尋點進去看別人的頁面
     var ring = g.hasStory ? ' has-story' + (store.seen[g.username] ? ' seen' : '') : '';
-    var followed = visitor && store.follows[followKey(g)];
+    var followed = visitor && isFollowing(currentAccount(), g);
+    var c = counts(g);
     // 欄位被刪掉或註解掉時也不會整頁空白
     var bio = g.bio || [], highlights = g.highlights || [], posts = g.posts || [];
     var na = ' data-na';   // 標記：點擊後跳出「尚未更新」
@@ -227,9 +250,9 @@
         '<div class="ig-right">' +
           '<div class="ig-name">' + esc(g.name) + '</div>' +
           '<div class="ig-stats">' +
-            '<div><b>' + esc(g.postsCount) + '</b>' + esc(L.postsLabel) + '</div>' +
-            '<button' + na + '><b>' + esc(g.followersCount) + '</b>' + esc(L.followersLabel) + '</button>' +
-            '<button' + na + '><b>' + esc(g.followingCount) + '</b>' + esc(L.followingLabel) + '</button>' +
+            '<div><b>' + esc(c.posts) + '</b>' + esc(L.postsLabel) + '</div>' +
+            '<a href="' + base + '/follows/followers"><b>' + esc(c.followers) + '</b>' + esc(L.followersLabel) + '</a>' +
+            '<a href="' + base + '/follows/following"><b>' + esc(c.following) + '</b>' + esc(L.followingLabel) + '</a>' +
           '</div>' +
         '</div>' +
       '</div>' +
@@ -431,6 +454,34 @@
     show(0);
   }
 
+  // 粉絲／追蹤中名單（tab = "followers" 或 "following"）
+  function renderIGFollows(tab, g, base) {
+    var L = D.instagram;
+    g = g || currentAccount(); base = base || '#/ig';
+    var c = counts(g);
+    var list = tab === 'followers' ? followersOf(g) : followingOf(g);
+    var me = currentAccount();
+    $('#ig-overlay').innerHTML = '';
+    $('#ig-scroll').innerHTML =
+      '<div class="ig-pagehead">' + backBtn(base) +
+        '<div class="ig-pagehead-t"><b>' + esc(g.username) + '</b></div>' +
+        '<button class="ig-round-r" data-na>' + ICON.addUser + '</button>' +
+      '</div>' +
+      '<div class="ig-ftabs">' +
+        '<a href="' + base + '/follows/followers"' + (tab === 'followers' ? ' class="on"' : '') + '>' + esc(c.followers) + ' ' + esc(L.followersLabel) + '</a>' +
+        '<a href="' + base + '/follows/following"' + (tab === 'following' ? ' class="on"' : '') + '>' + esc(c.following) + ' ' + esc(L.followingLabel) + '</a>' +
+      '</div>' +
+      list.map(function (a) {
+        var href = a === me ? '#/ig' : '#/ig/u/' + encodeURIComponent(a.username);
+        return '<div class="ig-frow">' +
+          '<a class="ig-frow-main" href="' + href + '"><img src="' + esc(a.avatar) + '" alt="">' +
+            '<span><b>' + esc(a.username) + '</b><small>' + esc(a.name) + '</small></span></a>' +
+          '<button class="ig-frow-btn" data-na>' + esc(L.messageLabel) + '</button>' +
+          '<button class="ig-ico" data-na>' + ICON.dots + '</button>' +
+        '</div>';
+      }).join('');
+  }
+
   // 搜尋頁：上方搜尋框；沒輸入時顯示探索格子，輸入後列出符合的帳號
   var searchQuery = '';
   function searchMatches(q) {
@@ -512,8 +563,7 @@
     if (e.target.closest('[data-follow]')) {
       var who = profileByName(decodeURIComponent(location.hash.split('/')[3] || ''));
       if (who) {
-        var k = followKey(who);
-        if (store.follows[k]) delete store.follows[k]; else store.follows[k] = 1;
+        store.follows[followKey(who)] = isFollowing(currentAccount(), who) ? 0 : 1;
         saveStore();
         var top = $('#ig-scroll').scrollTop;
         renderIG(who, '#/ig/u/' + encodeURIComponent(who.username));
@@ -599,6 +649,7 @@
         if (who === currentAccount()) { location.replace('#/ig' + (parts[3] ? '/' + parts.slice(3).join('/') : '')); return; }
         var base = '#/ig/u/' + encodeURIComponent(who.username);
         if (parts[3] === 'post') renderIGPost(+parts[4], who, base);
+        else if (parts[3] === 'follows') renderIGFollows(parts[4], who, base);
         else if (parts[3] === 'story') renderIGStory(parts[4] === 'me' ? 'me' : +parts[4], who, base);
         else { renderIG(who, base); tabs = 'visit'; }
       }
@@ -606,6 +657,7 @@
       else if (parts[1] === 'login') renderIGLogin();
       else if (parts[1] === 'settings') renderIGSettings();
       else if (parts[1] === 'post') renderIGPost(+parts[2]);
+      else if (parts[1] === 'follows') renderIGFollows(parts[2]);
       else if (parts[1] === 'story') renderIGStory(parts[2] === 'me' ? 'me' : +parts[2]);
       else { renderIG(); tabs = 'profile'; }
       $('#app-ig').classList.toggle('with-tabs', !!tabs);
