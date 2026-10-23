@@ -114,6 +114,17 @@ window.SITE_DATA = {
           { image: "images/3_story_20260127.jpg", time: "1月27日" },
           { image: "images/3_story_20260128.jpg", time: "1月28日" },
           { image: "images/3_story_20260129.jpg", time: "1月29日" },
+          { image: "images/3_story_20260202.jpg", time: "2月2日" },
+          { image: "images/3_story_20260206.jpg", time: "2月6日" },
+          { image: "images/3_story_20260206-2.jpg", time: "2月6日" },
+          { image: "images/3_story_20260218.jpg", time: "2月18日" },
+          { image: "images/3_story_20260225.jpg", time: "2月25日" },
+          { image: "images/3_story_20260301.jpg", time: "3月1日" },
+          { image: "images/3_story_20260323.jpg", time: "3月23日" },
+          { image: "images/3_story_20260604.jpg", time: "6月4日" },
+          { image: "images/3_story_20260711.jpg", time: "7月11日" },
+          { image: "images/3_story_20260712.jpg", time: "7月12日" },
+          { image: "images/3_story_20260920.jpg", time: "9月20日" },
           { image: "images/3_story_20261010.jpg", time: "10月10日" },
           { image: "images/3_story_20261011.jpg", time: "10月11日" },
           { image: "images/3_story_20261021.jpg", time: "10月21日" },
@@ -145,13 +156,41 @@ window.SITE_DATA = {
         time: "test211"
       },
       {
+        images: ["images/3_post_20260705.jpg", "images/3_post_20260705-2.jpg"],
+        likes: "test315",
+        likedBy: { avatar: "images/ig_liker.png", name: "test316" },   // 「xxx 說讚」；不要的話整行刪掉
+        caption: "test317",
+        time: "7月5日"
+      },
+      {
+        images: ["images/3_post_20260604.jpg"],
+        likes: "test312",
+        likedBy: { avatar: "images/ig_liker.png", name: "test313" },   // 「xxx 說讚」；不要的話整行刪掉
+        caption: "test314",
+        time: "6月4日"
+      },
+      {
+        images: ["images/3_post_20260427.jpg"],
+        likes: "test309",
+        likedBy: { avatar: "images/ig_liker.png", name: "test310" },   // 「xxx 說讚」；不要的話整行刪掉
+        caption: "test311",
+        time: "4月27日"
+      },
+      {
+        images: ["images/3_post_20260406.jpg"],
+        likes: "test306",
+        likedBy: { avatar: "images/ig_liker.png", name: "test307" },   // 「xxx 說讚」；不要的話整行刪掉
+        caption: "test308",
+        time: "4月6日"
+      },
+      {
         images: ["images/3_post_20260120.jpg"],
         likes: "test290",
         likedBy: { avatar: "images/ig_liker.png", name: "test291" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test292",
         time: "1月20日"
       }
-    ],
+        ],
 
     // 這個帳號轉發的貼文（"帳號/貼文編號"，編號從 0 開始）；玩家按的轉發會自動加在前面
     reposts: [],
@@ -310,7 +349,13 @@ window.SITE_DATA = {
               { image: "images/1_story_20251219.jpg", time: "2025年12月19日" },
               { image: "images/1_story_20260123.jpg", time: "1月23日" },
               { image: "images/1_story2_20260128.jpg", time: "1月28日", closeFriends: true },
+              { image: "images/1_story_20260202.jpg", time: "2月2日" },
+              { image: "images/1_story_20260213.jpg", time: "2月13日" },
+              { image: "images/1_story_20260227.jpg", time: "2月27日" },
+              { image: "images/1_story_20260401.jpg", time: "4月1日" },
               { image: "images/1_story2_260426.jpg", time: "4月26日", closeFriends: true },
+              { image: "images/1_story2_20260524.mp4", time: "5月24日", closeFriends: true },
+              { image: "images/1_story_20260602.jpg", time: "6月2日" },
               { image: "images/1_story_20261007.jpg", time: "10月7日" },
               { image: "images/1_story_20261012.jpg", time: "10月12日" }
             ] }
@@ -359,6 +404,13 @@ window.SITE_DATA = {
         time: "test215"
       },
       {
+        images: ["images/1_post_20260122.jpg", "images/1_post_20260122-2.jpg", "images/1_post_20260122-3.jpg"],
+        likes: "test300",
+        likedBy: { avatar: "images/ig_liker.png", name: "test301" },   // 「xxx 說讚」；不要的話整行刪掉
+        caption: "test302",
+        time: "1月22日"
+      },
+      {
         images: ["images/1_post_20251212.jpg", "images/1_post_20251212-2.jpg"],
         likes: "test269",
         likedBy: { avatar: "images/ig_liker.png", name: "test270" },   // 「xxx 說讚」；不要的話整行刪掉
@@ -400,6 +452,16 @@ window.SITE_DATA = {
               { image: "images/2_story_20251207.jpg", time: "2025年12月7日" },
               { image: "images/2_story_20260117.jpg", time: "1月17日" },
               { image: "images/2_story_20260128.jpg", time: "1月28日" },
+              { image: "images/2_story2_20260202.jpg", time: "2月2日", closeFriends: true },
+              { image: "images/2_story_20260202.jpg", time: "2月2日" },
+              { image: "images/2_story_20260209.jpg", time: "2月9日" },
+              { image: "images/2_story_20260219.jpg", time: "2月19日" },
+              { image: "images/2_story_20260219-2.jpg", time: "2月19日" },
+              { image: "images/2_story_20260225.jpg", time: "2月25日" },
+              { image: "images/2_story2_20260427.jpg", time: "4月27日", closeFriends: true },
+              { image: "images/2_story_20260427.jpg", time: "4月27日" },
+              { image: "images/2_story_20260506.mp4", time: "5月6日" },
+              { image: "images/2_story_20260524.jpg", time: "5月24日" },
               { image: "images/2_story_20260606.mp4", time: "6月6日" },
               { image: "images/2_story_20260609.jpg", time: "6月9日" },
               { image: "images/2_story_20260609-2.jpg", time: "6月9日" },
@@ -408,10 +470,13 @@ window.SITE_DATA = {
               { image: "images/2_story_20261004.jpg", time: "10月4日" }
             ] }
         ],
+        // 摯友名單：寫在這裡的帳號才看得到 closeFriends: true（story2）的限時動態
+        closeFriendsList: ["shotaroo0"],
         // 典藏（登入這個帳號後：設定 → 典藏）
         archive: {
           stories: [
-            { image: "images/2_savedstory_20260125.jpg", time: "1月25日" }
+            { image: "images/2_savedstory_20260125.jpg", time: "1月25日" },
+            { image: "images/2_savedstory_20260602.jpg", time: "6月2日" }
           ],
           posts: [
             {
@@ -451,6 +516,13 @@ window.SITE_DATA = {
         likedBy: { avatar: "images/ig_liker.png", name: "test206" },   // 「xxx 說讚」；不要的話整行刪掉
         caption: "test207",
         time: "7月7日"
+      },
+      {
+        images: ["images/2_post_20260129.jpg"],
+        likes: "test303",
+        likedBy: { avatar: "images/ig_liker.png", name: "test304" },   // 「xxx 說讚」；不要的話整行刪掉
+        caption: "test305",
+        time: "1月29日"
       },
       {
         images: ["images/2_post_20251219.jpg"],
@@ -589,6 +661,16 @@ window.SITE_DATA = {
           { from: "me", image: "images/1_msg_20251218.jpg", time: "test298" },
           { date: "2026년 1월 16일 금요일" },
           { from: "me", image: "images/1_msg_20260116.jpg", time: "test299" },
+          { date: "2026년 2월 6일 금요일" },
+          { from: "me", image: "images/1_msg_20260206.jpg", time: "test318" },
+          { date: "2026년 2월 9일 월요일" },
+          { from: "them", image: "images/2_msg_20260209.jpg", time: "test319" },
+          { date: "2026년 2월 27일 금요일" },
+          { from: "them", image: "images/2_msg_20260227.jpg", time: "test320" },
+          { date: "2026년 4월 11일 토요일" },
+          { from: "me", image: "images/1_msg_20260411.jpg", time: "test321" },
+          { date: "2026년 6월 26일 금요일" },
+          { from: "them", image: "images/2_msg_20260626.jpg", time: "test322" },
           { date: "2026년 7월 12일 일요일" },
           { from: "me", image: "images/1_msg_20260712.jpg", time: "test217" },
           { date: "2026년 8월 26일 수요일" },
@@ -611,9 +693,9 @@ window.SITE_DATA = {
       },
       {
         id: "f2",                       // 不要重複（用於網址）
-        name: "朴元彬",                   // 來韓國後舞室認識的朋友
+        name: "박원빈",                   // 來韓國後舞室認識的朋友
         status: "test178",                  // 狀態訊息
-        avatar: "images/kakao_f2.png",
+        avatar: "images/wonbin.jpg",
         unread: 0,       // 一開始在聊天列表顯示的未讀數
         messages: [
           { date: "test179" },
@@ -629,9 +711,9 @@ window.SITE_DATA = {
       },
       {
         id: "f3",                       // 不要重複（用於網址）
-        name: "李燦榮",                   // 李炤熙的朋友
+        name: "이찬영",                   // 李炤熙的朋友
         status: "test190",                  // 狀態訊息
-        avatar: "images/kakao_f3.png",
+        avatar: "images/anton.jpg",
         unread: 0,       // 一開始在聊天列表顯示的未讀數
         messages: [
           { date: "test191" },
@@ -647,9 +729,9 @@ window.SITE_DATA = {
       },
       {
         id: "f4",
-        name: "鄭成燦",                   // 留學時認識的朋友
+        name: "정성찬",                   // 留學時認識的朋友
         status: "",
-        avatar: "images/kakao_f4.png",
+        avatar: "images/sungchan.jpg",
         unread: 0,
         messages: [],
         replies: [],
@@ -657,9 +739,9 @@ window.SITE_DATA = {
       },
       {
         id: "f5",
-        name: "宋恩奭",                   // 留學時認識的朋友
+        name: "송은석",                   // 留學時認識的朋友
         status: "",
-        avatar: "images/kakao_f5.png",
+        avatar: "images/eunseok.jpg",
         unread: 0,
         messages: [],
         replies: [],
@@ -673,7 +755,7 @@ window.SITE_DATA = {
       {
         id: "g1",
         name: "",
-        members: ["f4", "f5"],          // 鄭成燦、宋恩奭（留學時認識的朋友）
+        members: ["f4", "f5"],          // 정성찬（鄭成燦）、송은석（宋恩奭）（留學時認識的朋友）
         unread: 0,
         messages: [
           { date: "test262" },
