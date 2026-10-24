@@ -311,7 +311,6 @@ window.SITE_DATA = {
       noReposts: "還沒有轉發任何貼文",
       noTagged: "還沒有被標註的相片",
       storyMessageSent: "訊息已傳送",
-      recentTitle: "最近",              // 搜尋頁「搜尋紀錄」的標題
       editTitle: "編輯個人檔案",
       nameLabel: "名稱",
       bioLabel: "個人簡介",
@@ -334,10 +333,7 @@ window.SITE_DATA = {
     storyMessagePlaceholder: "傳送訊息……",  // 限時動態下方「傳送訊息……」
 
     // 下方功能列的搜尋頁
-    searchPlaceholder: "搜尋",
-    noResultText: "查無資訊",        // 搜尋不到帳號時顯示
-    searchMode: "prefix",            // "exact" = 要打完整帳號才搜得到；"prefix" = 打開頭幾個字就會出現
-    // 只能被搜尋到、不能登入的帳號（格式和 otherAccounts 一樣，不用寫 password）
+    // 不能登入、只會出現在粉絲／追蹤名單裡可以點進去的帳號（格式和 otherAccounts 一樣，不用寫 password）
     searchOnlyAccounts: [],
 
     // 從搜尋點進別人的頁面時，取代「編輯／分享個人檔案」的兩個按鈕

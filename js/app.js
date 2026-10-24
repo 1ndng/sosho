@@ -311,10 +311,8 @@
     right: '<svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     // 多張照片的貼文：白色實心圓角方塊＋右下的 L 形線
     multi: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="14.5" height="14.5" rx="3" fill="#fff"/><path d="M21 7.5v10.5a3 3 0 0 1-3 3H7.5" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>',
-    clearCircle: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M8.5 8.5l7 7M15.5 8.5l-7 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>',
     close: '<svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
     more: '<svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="19" cy="12" r="1.6" fill="currentColor"/></svg>',
-    search: '<svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="7" stroke="currentColor" stroke-width="2.2" fill="none"/><path d="m16 16 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
     home: '<svg viewBox="0 0 24 24"><path d="M3.5 10.5 12 3l8.5 7.5V21h-5.5v-6h-6v6H3.5z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>',
     add: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 7.5v9M7.5 12h9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
     reels: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2" fill="none"/><path d="M3 8.5h18M8.5 3l3 5.5M14 3l3 5.5" stroke="currentColor" stroke-width="2" fill="none"/><path d="M10 11.5v6l5-3z" fill="currentColor"/></svg>',
@@ -376,7 +374,7 @@
   // 看過的限時動態、追蹤狀態（存在瀏覽器裡）
   var STORE_KEY = 'sosho-ig-state';
   // likes / saves / reposts / commentLikes / storyLikes 的 key 都是「目前帳號|對象」，換帳號各自分開
-  var store = { privacy: {}, archivedStories: {}, archived: {}, seen: {}, follows: {}, likes: {}, saves: {}, reposts: {}, comments: {}, commentLikes: {}, storyLikes: {}, searchHistory: [], profileEdits: {} };
+  var store = { privacy: {}, archivedStories: {}, archived: {}, seen: {}, follows: {}, likes: {}, saves: {}, reposts: {}, comments: {}, commentLikes: {}, storyLikes: {}, profileEdits: {} };
   try {
     var saved = JSON.parse(localStorage.getItem(STORE_KEY));
     if (saved) Object.keys(store).forEach(function (k) { if (saved[k]) store[k] = saved[k]; });
@@ -420,7 +418,7 @@
     };
   }
 
-  // 搜尋得到的所有帳號：主帳號 + 可登入帳號 + 只能被搜尋的帳號
+  // 遊戲裡所有的 IG 帳號：主帳號 + 可登入帳號 + 只能點進去看的帳號
   function allProfiles() {
     return [D.instagram].concat(otherAccounts(), D.instagram.searchOnlyAccounts || []);
   }
@@ -478,12 +476,12 @@
     $('#ig-scroll').innerHTML =
       (visitor
         ? '<div class="ig-top">' +
-            '<a class="ig-ico" href="#/ig/search" data-back>' + ICON.back + '</a>' +
+            '<a class="ig-ico" href="#/ig" data-back>' + ICON.back + '</a>' +
             '<span class="ig-user">' + esc(g.username) + '</span>' +
             '<span class="ig-top-r"></span>' +
           '</div>'
         : '<div class="ig-top">' +
-            '<a class="ig-ico" href="#/ig/search">' + ICON.search + '</a>' +
+            '<span></span>' +   // 沒有搜尋功能：只能從粉絲／追蹤中名單找到其他帳號
             '<button class="ig-user" data-sheet>' + esc(g.username) + ICON.chevron + '</button>' +
             '<span class="ig-top-r">' +
               '<a class="ig-ico" href="#/ig/settings">' + ICON.menu + '</a>' +
@@ -595,7 +593,7 @@
     shareTitle: '分享', sendButton: '傳送', sent: '已傳送', copyLink: '複製連結', linkCopied: '已複製連結',
     reposted: '已轉發到你的個人檔案', unreposted: '已取消轉發',
     savedTitle: '已儲存', noSaved: '還沒有儲存任何貼文', noReposts: '還沒有轉發任何貼文', noTagged: '還沒有被標註的相片',
-    storyMessageSent: '訊息已傳送', recentTitle: '最近',
+    storyMessageSent: '訊息已傳送',
     editTitle: '編輯個人檔案', nameLabel: '名稱', bioLabel: '個人簡介', cancelLabel: '取消', doneLabel: '完成',
     closeFriendsTitle: '摯友', noCloseFriends: '還沒有摯友',
     privateTitle: '此帳號不公開', privateDesc: '追蹤這個帳號即可查看相片和影片。', requestedLabel: '已要求',
@@ -1167,77 +1165,6 @@
       }).join('');
   }
 
-  // 搜尋頁：上方返回鍵＋搜尋框；沒輸入時列出搜尋紀錄（沒有就空白），輸入後列出符合的帳號
-  var searchQuery = '';
-  function searchMatches(q) {
-    q = q.trim().toLowerCase();
-    if (!q) return [];
-    var prefix = D.instagram.searchMode === 'prefix';
-    return byUsername(allProfiles().filter(function (a) {
-      var u = String(a.username).toLowerCase();
-      return prefix ? u.indexOf(q) === 0 : u === q;
-    }));
-  }
-  // 搜尋紀錄：從搜尋結果點進去過的帳號（照字首排序，存在瀏覽器裡）
-  function searchHistory() {
-    return byUsername((store.searchHistory || []).map(profileByName).filter(Boolean));
-  }
-  function addHistory(username) {
-    var h = (store.searchHistory || []).filter(function (u) { return u !== username; });
-    h.unshift(username);
-    store.searchHistory = h.slice(0, 20);
-    saveStore();
-  }
-  function resultRow(a, removable) {
-    var href = a === currentAccount() ? '#/ig' : '#/ig/u/' + encodeURIComponent(a.username);
-    return '<div class="ig-result-row">' +
-      '<a class="ig-result" href="' + href + '" data-hist="' + esc(a.username) + '">' +
-        '<img src="' + esc(a.avatar) + '" alt="">' +
-        '<span><b>' + esc(a.username) + '</b><small>' + esc(a.name || '') + '</small></span></a>' +
-      (removable ? '<button class="ig-hist-x" data-hist-x="' + esc(a.username) + '">' + ICON.close + '</button>' : '') +
-    '</div>';
-  }
-  function renderSearchResults() {
-    var L = D.instagram, box = $('#ig-search-body');
-    if (!box) return;
-    if (!searchQuery.trim()) {
-      var hist = searchHistory();
-      box.innerHTML = hist.length
-        ? '<div class="ig-hist-title">' + esc(T().recentTitle) + '</div>' + hist.map(function (a) { return resultRow(a, true); }).join('')
-        : '';
-      return;
-    }
-    var found = searchMatches(searchQuery);
-    box.innerHTML = found.length
-      ? found.map(function (a) { return resultRow(a, false); }).join('')
-      : '<div class="ig-noresult">' + esc(L.noResultText) + '</div>';
-  }
-  function renderIGSearch() {
-    var L = D.instagram;
-    $('#ig-overlay').innerHTML = '';
-    $('#ig-scroll').innerHTML =
-      '<div class="ig-searchbar">' +
-        '<a class="ig-ico" href="#/ig">' + ICON.back + '</a>' +
-        '<label class="ig-search-input">' + ICON.search +
-          '<input type="search" id="ig-search-q" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="' + esc(L.searchPlaceholder) + '">' +
-          '<button type="button" class="ig-search-clear" id="ig-search-clear" aria-label="清除">' + ICON.clearCircle + '</button>' +
-        '</label>' +
-      '</div>' +
-      '<div id="ig-search-body"></div>';
-    var input = $('#ig-search-q');
-    input.value = searchQuery;
-    // 有輸入字才出現右邊的灰色叉叉，點了清空
-    var clearBtn = $('#ig-search-clear');
-    function syncClear() { clearBtn.classList.toggle('show', !!input.value); }
-    syncClear();
-    clearBtn.addEventListener('click', function (e) {
-      e.preventDefault();
-      input.value = searchQuery = ''; syncClear(); renderSearchResults(); input.focus();
-    });
-    input.addEventListener('input', function () { searchQuery = input.value; syncClear(); renderSearchResults(); });
-    renderSearchResults();
-  }
-
   // 編輯個人檔案：改名字和簡介（存在瀏覽器裡，重新開始會清掉）
   function applyEdits() {
     Object.keys(store.profileEdits || {}).forEach(function (u) {
@@ -1312,12 +1239,6 @@
   $('#app-ig').addEventListener('click', function (e) {
     var el;
     if (e.target.closest('[data-share-profile]')) { copyLink(); return; }
-    if ((el = e.target.closest('[data-hist-x]'))) {
-      store.searchHistory = (store.searchHistory || []).filter(function (u) { return u !== el.dataset.histX; });
-      saveStore(); renderSearchResults();
-      return;
-    }
-    if ((el = e.target.closest('[data-hist]'))) addHistory(el.dataset.hist);   // 點進去的帳號記到搜尋紀錄（照常換頁）
     if ((el = e.target.closest('[data-back]'))) {
       e.preventDefault();
       goBack(el.getAttribute('href'));
@@ -1519,7 +1440,7 @@
       if (parts[1] === 'u') {
         // 別人的頁面：#/ig/u/帳號[/post/編號 | /story/編號]
         var who = profileByName(decodeURIComponent(parts[2] || ''));
-        if (!who) { replaceHash('#/ig/search'); return; }
+        if (!who) { replaceHash('#/ig'); return; }
         if (who === currentAccount()) { replaceHash('#/ig' + (parts[3] ? '/' + parts.slice(3).join('/') : '')); return; }
         var base = '#/ig/u/' + encodeURIComponent(who.username);
         if (parts[3] && isLocked(who)) { replaceHash(base); return; }   // 非公開又沒追蹤：不能看貼文、限時、名單
@@ -1528,7 +1449,6 @@
         else if (parts[3] === 'story') renderIGStory(parts[4] === 'me' ? 'me' : +parts[4], who, base);
         else renderIG(who, base);
       }
-      else if (parts[1] === 'search') renderIGSearch();
       else if (parts[1] === 'login') renderIGLogin();
       else if (parts[1] === 'edit') renderIGEdit();
       else if (parts[1] === 'settings') renderIGSettings();
