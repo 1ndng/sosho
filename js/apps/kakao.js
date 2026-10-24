@@ -93,7 +93,7 @@
         var msgs = messagesOf(f).filter(function (m) { return m.text || m.image || m.expired || m.call || m.link || m.recalled; }), last = msgs[msgs.length - 1] || {}, n = unreadOf(f);
         return '<a class="kk-chatrow" href="#/kakao/chat/' + encodeURIComponent(f.id) + '">' +
           roomAvatar(f, 'kk-chatrow-av') +
-          '<span class="kk-chatrow-mid"><b>' + esc(f.name) + (f.group ? '<em class="kk-count">' + (f.members.length + 1) + '</em>' : '') + (f.self ? '<i class="kk-me-tag">' + esc(TX().meTag || '我') + '</i>' : '') + '</b><small>' + esc(last.text || (last.recalled ? TX().recalledText || '已收回訊息' : '') || (last.link ? linkInfo(last).title : '') || ((last.image || last.expired) ? TX().photoLabel || '照片' : last.call ? (last.call === 'voice' ? TX().voiceCall || '語音通話' : TX().videoCall || '視訊通話') : '')) + '</small></span>' +
+          '<span class="kk-chatrow-mid"><b>' + esc(f.name) + (f.group ? '<em class="kk-count">' + (f.members.length + 1) + '</em>' : '') + (f.self ? '<i class="kk-me-tag">' + esc(TX().meTag || '我') + '</i>' : '') + '</b><small>' + esc(last.text || (last.recalled ? TX().recalledText || '已收回訊息' : '') || (last.link ? linkInfo(last).title : '') || (last.expired === 'video' ? TX().videoLabel || '影片' : (last.image || last.expired) ? TX().photoLabel || '照片' : last.call ? (last.call === 'voice' ? TX().voiceCall || '語音通話' : TX().videoCall || '視訊通話') : '')) + '</small></span>' +
           '<span class="kk-chatrow-r"><small>' + esc(last.time || '') + '</small>' + (n ? '<i class="kk-badge">' + n + '</i>' : '') + '</span>' +
         '</a>';
       }).join('');
@@ -125,8 +125,10 @@
       return '<div class="kk-bubble kk-call' + (first ? ' tail' : '') + '">' + (m.call === 'voice' ? ICON.phone : ICON.video) +
         '<span><b>' + esc(label) + '</b><small>' + esc(m.duration || t.missedCall || '未接') + '</small></span></div>';
     }
-    // 過期的照片：{ from, expired: true }（灰色方塊「照片已過期」，點了沒反應）
-    if (m.expired) return '<div class="kk-expired">' + ICON.photo + '<span>' + esc(TX().expiredText || '照片已過期') + '</span></div>';
+    // 過期的照片：{ from, expired: true }；過期的影片：{ from, expired: "video" }（灰色方塊，點了沒反應）
+    if (m.expired) return m.expired === 'video'
+      ? '<div class="kk-expired">' + ICON.video + '<span>' + esc(TX().expiredVideoText || '影片已過期') + '</span></div>'
+      : '<div class="kk-expired">' + ICON.photo + '<span>' + esc(TX().expiredText || '照片已過期') + '</span></div>';
     if (m.image) return '<button class="kk-photo" data-photo="' + esc(m.image) + '"><img src="' + esc(m.image) + '" alt=""></button>';
     return '<div class="kk-bubble' + (first ? ' tail' : '') + '">' + S().multiline(m.text) + '</div>';
   }
