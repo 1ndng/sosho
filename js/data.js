@@ -550,22 +550,22 @@ window.SITE_DATA = {
         time: "9月24日"
       },
       {
-        images: ["images/2_post_20251123.jpg", "images/2_post_20251123-2.jpg"],
+        images: ["images/2_post_20260222.jpg", "images/2_post_20260222-2.jpg"],
         likedBy: { avatar: "images/anton.jpg", name: "antonnie" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
-        caption: "thank u all",
-        time: "2025年11月23日"
+        caption: "",
+        time: "2月22日"
+      },
+      {
+        images: ["images/2_post_20260103.jpg", "images/2_post_20260103-2.jpg", "images/2_post_20260103-3.jpg"],
+        likedBy: { avatar: "images/eunseok.jpg", name: "seokkkk" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
+        caption: "假扮學生~~",
+        time: "1月3日"
       },
       {
         images: ["images/2_post_20251121.jpg"],
         likedBy: { avatar: "images/eunseok.jpg", name: "seokkkk" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
-        caption: "",
+        caption: "thank u all",
         time: "2025年11月21日"
-      },
-      {
-        images: ["images/2_post_20251105.jpg", "images/2_post_20251105-2.jpg", "images/2_post_20251105-3.jpg"],
-        likedBy: { avatar: "images/eunseok.jpg", name: "seokkkk" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
-        caption: "假扮學生~~",
-        time: "2025年11月5日"
       },
       {
         images: ["images/2_post_20250520.jpg"],
