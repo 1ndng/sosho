@@ -951,8 +951,8 @@ window.SITE_DATA = {
           { date: "2026年2月22日 星期日" },   // 決定搬來韓國
           { from: "me", text: "在幹嘛~", time: "下午 6:24" },
           { from: "them", image: "images/2_msg_20260222.jpg", time: "下午 7:12" },
-          { from: "them", image: "images/2_msg_20260222-3.jpg", time: "下午 7:12" },
           { from: "them", call: "video", duration: "0:02:32", time: "下午 7:13" },
+          { from: "them", image: "images/2_msg_20260222-2.jpg", time: "下午 7:15" },
           { from: "them", text: "晚安~", time: "下午 7:16" },
           { from: "me", text: "ㅋㅋ現在才幾點呢", time: "下午 7:17" },
           { date: "2026年3月4日 星期三" },
@@ -974,11 +974,14 @@ window.SITE_DATA = {
           { from: "them", image: "images/2_msg_20260706.jpg", time: "下午 11:36" },
           { from: "me", recalled: true, time: "下午 11:38" },
           { from: "them", text: "等我。", time: "下午 11:39" },
-          { date: "2026年7月12日 星期日" },
-          { from: "me", image: "images/1_msg_20260712.jpg", time: "test217" },
-          { date: "2026年10月22日 星期四" },   // 論壇發文後；最後一則是소희傳的（未讀 1）
-          { from: "me", text: "test383", time: "test384" },
-          { from: "them", text: "test385", time: "test386" }
+          { from: "me", text: "😳", time: "下午 11:40" },
+          { date: "2026年7月13日 星期一" },
+          { from: "me", image: "images/1_msg_20260713.jpg", time: "下午 6:38" },
+          { from: "me", text: "這個很好喝😋", time: "下午 6:38" },
+          { from: "them", text: "等等去嗎", time: "下午 6:41" },
+          { from: "me", text: "엉~", time: "下午 6:42" },
+          { date: "2026年10月22日 星期四" },   // 論壇發文後（昨天）；소희傳的，未讀 1
+          { from: "them", text: "要公開嗎？", time: "下午 11:30" }
         ],
         // 關鍵字自動回覆：玩家傳的訊息「包含」任一個 keywords 就回 reply（可多句，依序送出）
         replies: [
