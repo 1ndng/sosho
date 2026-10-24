@@ -839,10 +839,22 @@ window.SITE_DATA = {
           { from: "them", text: "在嗎", time: "下午 11:19" },
           { from: "me", text: "응", time: "下午 11:19" },
           { from: "them", call: "video", duration: "5:24:36", time: "下午 11:20" },
-          { date: "2025年10月18日 星期六" },
-          { from: "me", image: "images/1_msg_20251018.jpg", time: "test294" },
-          { date: "2025年11月7日 星期五" },
-          { from: "them", image: "images/2_msg_20251107.jpg", time: "test295" },
+          { date: "2025年7月22日 星期二" },
+          { from: "me", image: "images/1_msg_20250722.jpg", time: "下午 1:07" },
+          { date: "2025年8月4日 星期一" },
+          { from: "them", image: "images/2_msg_20250804.jpg", time: "上午 10:39" },
+          { date: "2025年8月9日 星期六" },
+          { from: "them", image: "images/2_msg_20250809.jpg", time: "上午 11:48" },
+          { from: "me", image: "images/1_msg_20250809.jpg", time: "下午 2:28" },
+          { date: "2025年8月21日 星期四" },
+          { from: "them", image: "images/2_msg_20250821.jpg", time: "下午 9:09" },
+          { date: "2025年8月29日 星期五" },
+          { from: "them", image: "images/2_msg_20250829.jpg", time: "上午 9:28" },
+          { date: "2025年9月10日 星期三" },
+          { from: "me", image: "images/1_msg_20250910.jpg", time: "上午 7:24" },
+          { date: "2025年9月17日 星期三" },
+          { from: "them", image: "images/2_msg_20250917.jpg", time: "上午 11:06" },
+          { from: "them", image: "images/2_msg_20250917-2.jpg", time: "下午 11:33" },
           { date: "2025年11月19日 星期三" },   // 李炤熙明天帶學生去日本比賽（11/20～11/26）
           { from: "them", text: "test498", time: "test499" },
           { from: "me", text: "test500", time: "test501" },
@@ -853,15 +865,9 @@ window.SITE_DATA = {
           { from: "them", text: "test506", time: "test507" },
           { from: "me", text: "test508", time: "test509" },
           { from: "them", text: "test510", time: "test511" },
-          { date: "2025年12月4日 星期四" },
-          { from: "them", image: "images/2_msg_20251204.jpg", time: "test296" },
-          { date: "2025年12月12日 星期五" },
-          { from: "them", image: "images/2_msg_20251212.jpg", time: "test297" },
           { date: "2025年12月14日 星期日" },   // 遠距離：視訊通話 1
           { from: "me", call: "video", duration: "test512", time: "test513" },   // 視訊通話紀錄（duration 寫通話長度，例如 "1:02:33"）
           { from: "me", text: "test514", time: "test515" },
-          { date: "2025年12月18日 星期四" },
-          { from: "me", image: "images/1_msg_20251218.jpg", time: "test298" },
           { date: "2025年12月30日 星期二" },   // 明天快閃日本跨年
           { from: "them", text: "test516", time: "test517" },
           { from: "me", text: "test518", time: "test519" },
@@ -869,8 +875,6 @@ window.SITE_DATA = {
           { from: "them", text: "test520", time: "test521" },
           { from: "me", text: "test522", time: "test523" },
           { from: "me", image: "images/1_msg_20260102.jpg", time: "test218" },
-          { date: "2026年1月16日 星期五" },
-          { from: "me", image: "images/1_msg_20260116.jpg", time: "test299" },
           { date: "2026年1月18日 星期日" },   // 遠距離：視訊通話 2
           { from: "me", call: "video", duration: "test524", time: "test525" },   // 視訊通話紀錄（duration 寫通話長度，例如 "1:02:33"）
           { from: "them", text: "test526", time: "test527" },
@@ -886,13 +890,9 @@ window.SITE_DATA = {
           { from: "them", image: "images/2_msg_20260222.jpg", time: "test219" },
           { from: "them", image: "images/2_msg_20260222-2.jpg", time: "test220" },
           { from: "them", image: "images/2_msg_20260222-3.jpg", time: "test221" },
-          { date: "2026年2月27日 星期五" },
-          { from: "them", image: "images/2_msg_20260227.jpg", time: "test320" },
           { date: "2026年3月5日 星期四" },   // 交往 100 日、將太郎搬到韓國
           { from: "them", text: "test538", time: "test539" },
           { from: "me", text: "test540", time: "test541" },
-          { date: "2026年4月11日 星期六" },
-          { from: "me", image: "images/1_msg_20260411.jpg", time: "test321" },
           { date: "2026年5月19日 星期二" },   // 吵架
           { from: "me", text: "test542", time: "test543" },
           { from: "them", text: "test544", time: "test545" },
@@ -902,8 +902,6 @@ window.SITE_DATA = {
           { from: "me", text: "test546", time: "test547" },
           { date: "2026年7月12日 星期日" },
           { from: "me", image: "images/1_msg_20260712.jpg", time: "test217" },
-          { date: "2026年10月10日 星期六" },
-          { from: "me", image: "images/1_msg_20261010.jpg", time: "test224" },
           { date: "2026年10月22日 星期四" },   // 論壇發文後；最後一則是소희傳的（未讀 1）
           { from: "me", text: "test383", time: "test384" },
           { from: "them", text: "test385", time: "test386" }
