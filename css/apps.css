@@ -148,3 +148,10 @@
 .kk-call span { display: flex; flex-direction: column; line-height: 1.25; }
 .kk-call b { font-weight: 600; font-size: 14px; }
 .kk-call small { font-size: 12px; opacity: .65; }
+
+/* Kakao 連結訊息（點了打開論壇文章） */
+.kk-link { display: flex; flex-direction: column; gap: 3px; max-width: 230px; padding: 10px 12px; background: #fff; color: #191919; text-decoration: none; }
+.kk-link small { font-size: 11px; color: #8a8a8a; }
+.kk-link b { font-size: 14px; font-weight: 600; line-height: 1.35; }
+.kk-link span { font-size: 11px; color: #3b6db8; word-break: break-all; }
+.kk-link:active { filter: brightness(.95); }

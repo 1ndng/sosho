@@ -877,10 +877,9 @@ window.SITE_DATA = {
           { from: "them", text: "很開心認識哥~", time: "下午 11:11" },
           { from: "me", text: "ㅎㅎ我也很開心認識你~以後經常一起吃飯吧！", time: "下午 11:49" },
           { date: "2025年11月26日 星期三" },   // 追問群組裡的細節
-          { from: "them", text: "群組裡面那個是什麼意思？", time: "下午 10:24" },
+          { from: "them", text: "所以那個朋友到底是誰？", time: "下午 10:24" },
           { date: "2025年11月27日 星期四" },
-          { from: "me", text: "什麼意思ㅎㅎ", time: "上午 1:37" },
-          { from: "them", text: "算了沒事。", time: "下午 12:07" }
+          { from: "me", text: "什麼ㅎㅎ", time: "上午 1:37", read: true }
         ],
         replies: [],
         defaultReply: []
@@ -918,41 +917,47 @@ window.SITE_DATA = {
         members: ["f4", "f5"],          // 성찬、은석（留學時認識的朋友）
         unread: 2,
         messages: [
-          { date: "2022年1月3日 星期一" },   // 留學結束回日本前一天，終於創了群組（無關主線）
-          { from: "f4", text: "test263", time: "test264" },
-          { from: "f5", text: "test265", time: "test266" },
-          { from: "me", text: "test267", time: "test268" },
+          { date: "2022年1月3日 星期一" },   // 將太郎留學結束回日本前一天，終於創了群組（無關主線）
+          { from: "f4", text: "明天幾點的飛機？", time: "下午 10:07" },
+          { from: "me", text: "早上九點二十ㅋㅋㅋ你們要來嗎", time: "下午 10:13" },
+          { from: "f4", text: "必須得去吧！", time: "下午 10:14" },
+          { from: "f5", text: "必須得起床啊......", time: "下午 10:16" },
+          { from: "me", text: "謝謝你們🥺", time: "下午 10:17" },
+          { from: "me", text: "我可以打電話叫你們起床😊", time: "下午 10:17" },
           { date: "2025年3月18日 星期二" },   // 將太郎分享遇到了有趣的韓國遊客
-          { from: "me", text: "test592", time: "test593" },
-          { from: "f4", text: "test594", time: "test595" },
-          { from: "f5", text: "test596", time: "test597" },
+          // 之後在這裡放照片：{ from: "me", image: "images/檔名.jpg", time: "下午 3:06" },
+          { from: "me", text: "遇到了有趣的韓國人~", time: "下午 3:06" },
+          { from: "f4", text: "衣服很好看耶哪裡買的", time: "下午 4:59" },
+          { from: "f5", text: "氣場非比尋常。", time: "下午 9:08" },
+          { from: "me", text: "😊😊", time: "下午 9:11" },
           { date: "2025年8月9日 星期六" },   // 閒聊（無關主線）
-          { from: "f5", text: "test598", time: "test599" },
-          { from: "me", text: "test600", time: "test601" },
-          { from: "f4", text: "test602", time: "test603" },
-          { date: "2025年11月20日 星期四" },   // 將太郎分享與李炤熙再次相遇
-          { from: "me", text: "test604", time: "test605" },
-          { from: "f4", text: "test606", time: "test607" },
-          { from: "f5", text: "test608", time: "test609" },
-          { date: "2025年11月25日 星期二" },   // 祝將太郎生日快樂（將太郎當天沒回）
-          { from: "f4", text: "test610", time: "test611" },
-          { from: "f5", text: "test612", time: "test613" },
+          { from: "f4", text: "在嗎", time: "上午 10:23" },
+          { from: "f5", text: "起床了", time: "下午 1:56" },
+          { from: "f4", text: "沒事了", time: "下午 5:35" },
+          { from: "me", text: "抱歉才看到訊息 怎麼了？", time: "下午 8:01" },
+          { date: "2025年11月25日 星期二" },   // 祝將太郎生日快樂，將太郎當天沒回
+          { from: "f5", text: "taro哥生日快樂", time: "下午 9:08" },
+          { from: "f4", text: "有趕上ㅋㅋ生日快樂哥", time: "下午 11:47" },
+          { from: "f4", text: "哥居然不在線上？", time: "下午 11:59" },
           { date: "2025年11月26日 星期三" },   // 將太郎回覆，透露跟某人一起過生日、已在一起的線索
-          { from: "me", text: "test614", time: "test615" },
-          { from: "f5", text: "test616", time: "test617" },
-          { from: "f4", text: "test618", time: "test619" },
-          { from: "me", text: "test620", time: "test621" },
+          { from: "me", text: "謝謝你們~昨天跟別人待著沒機會看訊息ㅎㅎ", time: "下午 1:12" },
+          { from: "f4", text: "你什麼時候有其他這麼好的朋友了？介紹一下", time: "下午 3:14" },
+          { from: "me", text: "以後你們會見到的~是韓國人~", time: "下午 3:57" },
+          { from: "f5", text: "事情越來越有趣了。", time: "下午 6:22" },
+          { from: "f4", text: "到底是誰啊？", time: "下午 10:20" },
           { date: "2026年3月6日 星期五" },   // 將太郎分享昨天搬到韓國
-          { from: "me", text: "test622", time: "test623" },
-          { from: "f4", text: "test624", time: "test625" },
-          { from: "f5", text: "test626", time: "test627" },
+          { from: "me", text: "等等一起吃飯嗎？好久沒一起吃了ㅋㅋ", time: "下午 5:04" },
+          { from: "f5", text: "？？", time: "下午 5:06" },
+          { from: "f4", text: "？？", time: "下午 5:19" },
+          { from: "me", text: "ㅋㅋㅋ 吃之前很常去的那家吧，我已經到了~", time: "下午 5:26" },
           { date: "2026年4月13日 星期一" },   // 성찬約三人吃飯（無關主線）
-          { from: "f4", text: "test628", time: "test629" },
-          { from: "f5", text: "test630", time: "test631" },
-          { from: "me", text: "test632", time: "test633" },
+          { from: "f4", text: "明晚吃飯嗎？老地方？", time: "下午 7:43" },
+          { from: "f5", text: "OK", time: "下午 7:44" },
+          { from: "me", text: "OK", time: "下午 11:19" },
+          { from: "f4", text: "預約好了", time: "下午 11:30" },
           { date: "2026年10月22日 星期四" },   // 昨天：성찬傳論壇文章給將太郎、逼問是不是真的（未讀 2）
-          { from: "f4", text: "test634", time: "test635" },
-          { from: "f4", text: "test636", time: "test637" }
+          { from: "f4", link: "#/forum/1", time: "下午 11:07" },   // 連結訊息：點了打開論壇第 1 篇
+          { from: "f4", text: "這是真的嗎？", time: "下午 11:07" }
         ],
         replies: [],
         defaultReply: []

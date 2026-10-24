@@ -64,10 +64,10 @@
       '<div class="kk-head"><h1>' + esc(TX().chatsTitle) + '</h1>' +
         '</div>' +
       list.map(function (f) {
-        var msgs = messagesOf(f).filter(function (m) { return m.text || m.image || m.call; }), last = msgs[msgs.length - 1] || {}, n = unreadOf(f);
+        var msgs = messagesOf(f).filter(function (m) { return m.text || m.image || m.call || m.link; }), last = msgs[msgs.length - 1] || {}, n = unreadOf(f);
         return '<a class="kk-chatrow" href="#/kakao/chat/' + encodeURIComponent(f.id) + '">' +
           roomAvatar(f, 'kk-chatrow-av') +
-          '<span class="kk-chatrow-mid"><b>' + esc(f.name) + (f.group ? '<em class="kk-count">' + (f.members.length + 1) + '</em>' : '') + '</b><small>' + esc(last.text || (last.image ? TX().photoLabel || '照片' : last.call ? (last.call === 'voice' ? TX().voiceCall || '語音通話' : TX().videoCall || '視訊通話') : '')) + '</small></span>' +
+          '<span class="kk-chatrow-mid"><b>' + esc(f.name) + (f.group ? '<em class="kk-count">' + (f.members.length + 1) + '</em>' : '') + '</b><small>' + esc(last.text || (last.link ? linkInfo(last).title : '') || (last.image ? TX().photoLabel || '照片' : last.call ? (last.call === 'voice' ? TX().voiceCall || '語音通話' : TX().videoCall || '視訊通話') : '')) + '</small></span>' +
           '<span class="kk-chatrow-r"><small>' + esc(last.time || '') + '</small>' + (n ? '<i class="kk-badge">' + n + '</i>' : '') + '</span>' +
         '</a>';
       }).join('');
@@ -76,7 +76,19 @@
 
   /* ---- 聊天室 ---- */
   // 訊息內容：文字泡泡或照片
+  // 連結訊息：{ from, link: "#/forum/1" }（論壇文章會自動帶出標題；其他網址可以加 linkTitle）
+  function linkInfo(m) {
+    var mm = /^#\/forum\/([^/]+)$/.exec(m.link || ''), post = null;
+    if (mm) post = ((S().data.forum || {}).posts || []).filter(function (x) { return String(x.id) === mm[1]; })[0];
+    return { title: m.linkTitle || (post ? post.title : m.link), site: m.linkSite || (post ? (TX().forumSite || 'ANNMS Talk') : '') };
+  }
   function contentHTML(m, first) {
+    if (m.link) {
+      var li = linkInfo(m);
+      return '<a class="kk-bubble kk-link' + (first ? ' tail' : '') + '" href="' + esc(m.link) + '">' +
+        '<small>' + esc(li.site) + '</small><b>' + esc(li.title) + '</b>' +
+        '<span>' + esc(m.link.charAt(0) === '#' ? (TX().forumUrl || 'annms.talk') + m.link.slice(1) : m.link) + '</span></a>';
+    }
     // 通話紀錄：{ from, call: "video" 或 "voice", duration: "1:02:33" }（沒寫 duration = 未接）
     if (m.call) {
       var t = TX(), label = m.call === 'voice' ? (t.voiceCall || '語音通話') : (t.videoCall || '視訊通話');
@@ -97,8 +109,10 @@
       var showTime = !next || next.date || next.from !== m.from || next.time !== m.time;
       if (m.from === 'me') {
         // 對方還沒回 → 顯示未讀數（1:1 是「1」，群組是還沒回話的人數）
+        // 只有最後一天（最後一條日期線之後）的訊息會顯示；更早的都當作已讀
         var later = msgs.slice(i + 1), unread = 0;
-        if (m.read !== true) {
+        var isOld = later.some(function (x) { return x.date; });
+        if (m.read !== true && !isOld) {
           unread = f.group
             ? f.members.filter(function (mem) { return !later.some(function (x) { return x.from === mem.id; }); }).length
             : (later.some(function (x) { return x.from === 'them'; }) ? 0 : 1);
