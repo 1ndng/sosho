@@ -581,8 +581,8 @@ window.SITE_DATA = {
               { image: "images/2_story_20260312.jpg", time: "3月12日" },
               { image: "images/2_story_20260410.jpg", time: "4月10日", note: "舞室的哥~" },
               { image: "images/2_story2_20260410-2.jpg", time: "4月10日", closeFriends: true },
-              { image: "images/2_story2_20260427.jpg", time: "4月27日", closeFriends: true },
               { image: "images/2_story_20260427.jpg", time: "4月27日" },
+              { image: "images/2_story2_20260427-2.jpg", time: "4月27日", closeFriends: true },
               { image: "images/2_story_20260606.mp4", time: "6月6日", likedBy: ["shotaroo0"] },
               { image: "images/2_story_20260709.jpg", time: "7月9日" },
               { image: "images/2_story_20260830.jpg", time: "8月30日", note: "怎麼不帶我去？", noteBy: "sungchan913" }

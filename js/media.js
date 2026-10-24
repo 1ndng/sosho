@@ -96,7 +96,7 @@ window.SITE_MEDIA = [
 "images/2_story2_20250524_poster.jpg",
 "images/2_story2_20250526-3.jpg",
 "images/2_story2_20260410-2.jpg",
-"images/2_story2_20260427.jpg",
+"images/2_story2_20260427-2.jpg",
 "images/2_story2_20260604.jpg",
 "images/2_story2_20260617.jpg",
 "images/2_story2_20260626.jpg",
