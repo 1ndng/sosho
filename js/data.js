@@ -213,9 +213,9 @@ window.SITE_DATA = {
     followingLabel: "追蹤中",
     bio: [],                       // 每一項 = 一行；@開頭的字會自動變藍色
     music: { title: "Nostalgic", artist: "No Guindce" },   // 個人頁的音樂列（音檔 audio/3_music.mp3）
-    // 小帳預先儲存的貼文：Shotaro 和 소희 同一天發的貼文（"帳號/圖片檔名"）
-    saved: ["shotaroo0/1_post_20250318.jpg", "252525252_/2_post_20250318.jpg",
-            "shotaroo0/1_post_20240822.jpg", "252525252_/2_post_20240822.jpg"],
+    // 小帳預先儲存的貼文：Shotaro 和 소희 同一天（或差一天）發的貼文（"帳號/圖片檔名"）
+    saved: ["252525252_/2_post_20251121.jpg", "shotaroo0/1_post_20251120.jpg",
+            "shotaroo0/1_post_20250318.jpg", "252525252_/2_post_20250318.jpg"],
     editProfileLabel: "編輯個人檔案",
     shareProfileLabel: "分享個人檔案",
     // 精選動態：image = 圓圈封面，stories = 點進去看到的內容
