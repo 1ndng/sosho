@@ -87,7 +87,7 @@ window.SITE_MEDIA = [
 "images/2_post2-3.jpg",
 "images/2_post2.jpg",
 "images/2_post_20250520.jpg",
-"images/2_post_20251219.jpg",
+"images/2_post_20251121.jpg",
 "images/2_post_20260407-2.jpg",
 "images/2_post_20260407.jpg",
 "images/2_post_20260603.jpg",
