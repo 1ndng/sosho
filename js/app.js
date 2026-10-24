@@ -839,9 +839,15 @@
     return a ? a.avatar : (fallback || '');
   }
 
+  // 這則貼文目前帳號有沒有按讚：玩家按過就照玩家的；沒按過就看 likedBy 是不是目前帳號
+  function postLiked(cp) {
+    var k = actKey(cp.key);
+    if (k in store.likes) return !!store.likes[k];
+    return !cp.archived && !!(cp.p.likedBy && cp.p.likedBy.name === currentAccount().username);
+  }
   function postActionsHTML() {
     var cp = curPost, L = D.instagram, t = T();
-    var liked = !!store.likes[actKey(cp.key)], saved = isSaved(cp.key), reposted = !!store.reposts[actKey(cp.key)];
+    var liked = postLiked(cp), saved = isSaved(cp.key), reposted = !!store.reposts[actKey(cp.key)];
     return '<div class="ig-actions">' +
         '<button data-act="like" class="' + (liked ? 'on-like' : '') + '">' + (liked ? ICON.heartFill : ICON.heart) + '</button>' +
         '<button data-act="comments">' + ICON.comment + '</button>' +
@@ -849,7 +855,7 @@
 
         '<button data-act="save" class="ig-act-save">' + (saved ? ICON.bookmarkFill : ICON.bookmark) + '</button>' +
       '</div>' +
-      (!cp.archived && cp.p.likedBy && cp.p.likedBy.name ?
+      (!cp.archived && cp.p.likedBy && cp.p.likedBy.name && (cp.p.likedBy.name !== currentAccount().username || liked) ?
         '<div class="ig-likedby"><img src="' + esc(cp.p.likedBy.avatar || avatarOf(cp.p.likedBy.name)) + '" alt=""><b>' + esc(cp.p.likedBy.name) + '</b>' + esc(L.likedBySuffix) + '</div>' : '') +
       (cp.p.caption ? '<div class="ig-caption"><b>' + esc(cp.owner.username) + '</b> ' + multiline(cp.p.caption) + '</div>' : '') +
 
@@ -1355,7 +1361,7 @@
     }
     if ((el = e.target.closest('[data-act]')) && curPost) {
       var act = el.dataset.act, k = actKey(curPost.key);
-      if (act === 'like') { if (store.likes[k]) delete store.likes[k]; else store.likes[k] = 1; }
+      if (act === 'like') { store.likes[k] = postLiked(curPost) ? 0 : 1; }
       else if (act === 'save') { store.saves[k] = isSaved(curPost.key) ? 0 : Date.now(); }   // 0 = 取消儲存（連預先儲存的也能取消）
       else if (act === 'repost') {
         if (store.reposts[k]) { delete store.reposts[k]; toast(T().unreposted); }
