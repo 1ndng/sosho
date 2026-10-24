@@ -373,8 +373,8 @@ window.SITE_DATA = {
               { image: "images/1_story_20250709.jpg", time: "2025年7月9日" },
               { image: "images/1_story_20250904.jpg", time: "2025年9月4日" },
               { image: "images/1_story_20251030.jpg", time: "2025年10月30日" },
+              { image: "images/1_story2_20251121.jpg", time: "2025年11月21日", closeFriends: true },
               { image: "images/1_story_20251206.jpg", time: "2025年12月6日" },
-              { image: "images/1_story_20251219.jpg", time: "2025年12月19日" },
               { image: "images/1_story_20260123.jpg", time: "1月23日" },
               { image: "images/1_story2_20260128.jpg", time: "1月28日", closeFriends: true },
               { image: "images/1_story_20260202.jpg", time: "2月2日" },
@@ -544,28 +544,40 @@ window.SITE_DATA = {
         },
         posts: [
       {
-        images: ["images/2_post1.jpg", "images/2_post1-2.jpg"],
+        images: ["images/2_post_20260924.jpg"],
+        likedBy: { avatar: "images/1_avatar.jpg", name: "shotaroo0" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
+        caption: "",
+        time: "9月24日"
+      },
+      {
+        images: ["images/2_post_20251123.jpg", "images/2_post_20251123-2.jpg"],
         likedBy: { avatar: "images/anton.jpg", name: "antonnie" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
-        caption: "test203",
-        time: "test204"
+        caption: "thank u all",
+        time: "2025年11月23日"
       },
       {
-        images: ["images/2_post2.jpg", "images/2_post2-2.jpg", "images/2_post2-3.jpg"],
+        images: ["images/2_post_20251121.jpg"],
         likedBy: { avatar: "images/eunseok.jpg", name: "seokkkk" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
-        caption: "test207",
-        time: "7月7日"
+        caption: "",
+        time: "2025年11月21日"
       },
       {
-        images: ["images/2_post_20251219.jpg"],
+        images: ["images/2_post_20251105.jpg", "images/2_post_20251105-2.jpg", "images/2_post_20251105-3.jpg"],
         likedBy: { avatar: "images/eunseok.jpg", name: "seokkkk" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
-        caption: "test280",
-        time: "2025年12月19日"
+        caption: "假扮學生~~",
+        time: "2025年11月5日"
       },
       {
         images: ["images/2_post_20250520.jpg"],
         likedBy: { avatar: "images/sungchan.jpg", name: "sungchan913" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
-        caption: "test305",
+        caption: "ナルト",
         time: "2025年5月20日"
+      },
+      {
+        images: ["images/2_post_20240822.jpg", "images/2_post_20240822-2.jpg"],
+        likedBy: { avatar: "images/wonbin.jpg", name: "bin032" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
+        caption: "",
+        time: "2024年8月22日"
       }
         ]
       }
