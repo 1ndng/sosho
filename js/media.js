@@ -54,7 +54,6 @@ window.SITE_MEDIA = [
 "images/1_story_20251125.jpg",
 "images/1_story_20260401.jpg",
 "images/1_story_20260410.jpg",
-"images/1_story_20260513.jpg",
 "images/1_story_20260605.jpg",
 "images/1_story_20260830.jpg",
 "images/1_story_250520.jpg",

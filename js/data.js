@@ -435,7 +435,6 @@ window.SITE_DATA = {
               { image: "images/1_story_20251125.jpg", time: "2025年11月25日" },
               { image: "images/1_story_20260401.jpg", time: "4月1日" },
               { image: "images/1_story_20260410.jpg", time: "4月10日" },
-              { image: "images/1_story_20260513.jpg", time: "5月13日" },
               { image: "images/1_story2_20261007.jpg", time: "10月7日", closeFriends: true }
             ] }
         ],
