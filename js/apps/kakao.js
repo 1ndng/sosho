@@ -57,8 +57,9 @@
   }
 
   function renderChats() {
-    // 所有私聊＋群組（還沒有訊息的也列出來），照名字字首排序
-    var list = S().sortByName(groups().concat(K().friends || []), function (f) { return f.name; });
+    // 所有私聊＋群組（還沒有訊息的也列出來）：有未讀的排最上面，其他照名字字首排序
+    var sorted = S().sortByName(groups().concat(K().friends || []), function (f) { return f.name; });
+    var list = sorted.filter(function (f) { return unreadOf(f); }).concat(sorted.filter(function (f) { return !unreadOf(f); }));
     S().$('#kakao-scroll').innerHTML =
       '<div class="kk-head"><h1>' + esc(TX().chatsTitle) + '</h1>' +
         '</div>' +
