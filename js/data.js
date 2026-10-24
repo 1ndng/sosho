@@ -437,12 +437,6 @@ window.SITE_DATA = {
         time: "10月3日"
       },
       {
-        images: ["images/1_post_20260924.jpg"],
-        likedBy: { avatar: "images/eunseok.jpg", name: "seokkkk" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
-        caption: "",
-        time: "9月24日"
-      },
-      {
         images: ["images/1_post_260601.jpg", "images/1_post_260601-2.jpg", "images/1_post_260601-3.jpg",],
         likedBy: { avatar: "images/sungchan.jpg", name: "sungchan913" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
         caption: "送一朵花給你🌼",
@@ -471,6 +465,12 @@ window.SITE_DATA = {
         likedBy: { avatar: "images/eunseok.jpg", name: "seokkkk" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
         caption: "",
         time: "2025年11月20日"
+      },
+      {
+        images: ["images/1_post_20250318.jpg"],
+        likedBy: { avatar: "images/eunseok.jpg", name: "seokkkk" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
+        caption: "",
+        time: "2025年3月18日"
       },
       {
         images: ["images/1_post_20250310.jpg", "images/1_post_20250310-2.jpg", "images/1_post_20250310-3.jpg", "images/1_post_20250310-4.jpg"],
@@ -586,12 +586,6 @@ window.SITE_DATA = {
         },
         posts: [
       {
-        images: ["images/2_post_20260924.jpg"],
-        likedBy: { avatar: "images/1_avatar.jpg", name: "shotaroo0" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
-        caption: "",
-        time: "9月24日"
-      },
-      {
         images: ["images/2_post_20260222.jpg", "images/2_post_20260222-2.jpg"],
         likedBy: { avatar: "images/anton.jpg", name: "antonnie" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
         caption: "",
@@ -614,6 +608,12 @@ window.SITE_DATA = {
         likedBy: { avatar: "images/sungchan.jpg", name: "sungchan913" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
         caption: "ナルト",
         time: "2025年5月20日"
+      },
+      {
+        images: ["images/2_post_20250318.jpg"],
+        likedBy: { avatar: "images/1_avatar.jpg", name: "shotaroo0" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
+        caption: "",
+        time: "2025年3月18日"
       },
       {
         images: ["images/2_post_20240822.jpg", "images/2_post_20240822-2.jpg"],
