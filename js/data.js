@@ -229,19 +229,21 @@ window.SITE_DATA = {
           { image: "images/3_story_20251231.jpg", time: "2025年12月31日" },
           { image: "images/3_story_20260206.jpg", time: "2月6日" },
           { image: "images/3_story_20260206-2.jpg", time: "2月6日" },
-          { image: "images/3_story_20260305.jpg", time: "3月5日" },
+          { image: "images/3_story_20260305.jpg", time: "3月5日", note: "來接機的小狗^^" },
           { image: "images/3_story_20260306.jpg", time: "3月6日" },
           { image: "images/3_story_20260323.jpg", time: "3月23日" },
-          { image: "images/3_story_20260401.jpg", time: "4月1日" },
+          { image: "images/3_story_20260401.jpg", time: "4月1日", note: "永遠是小孩啊" },
           { image: "images/3_story_20260409.jpg", time: "4月9日" },
           { image: "images/3_story_20260410.jpg", time: "4月10日" },
           { image: "images/3_story_20260416.jpg", time: "4月16日" },
           { image: "images/3_story_20260422.jpg", time: "4月22日" },
-          { image: "images/3_story_20260601.jpg", time: "6月1日" },
+          { image: "images/3_story_20260601.jpg", time: "6月1日", note: "ㅋㅋ辛苦了" },
+          { image: "images/3_story_20260614.jpg", time: "6月14日" },
+          { image: "images/3_story_20260614-2.jpg", time: "6月14日" },
+          { image: "images/3_story_20260614-3.jpg", time: "6月14日", note: "我可愛的男友❤️" },
           { image: "images/3_story_20260710.jpg", time: "7月10日" },
-          { image: "images/3_story_20260711.jpg", time: "7月11日" },
-          { image: "images/3_story_20261011.jpg", time: "10月11日" },
-          { image: "images/3_story_20261011-2.jpg", time: "10月11日" }
+          { image: "images/3_story_20260711.jpg", time: "7月11日", note: "希望以後不會再吵架了。" },
+          { image: "images/3_story_20261011.jpg", time: "10月11日" }
         ] }
     ],
     // 貼文：images 可放多張（左右滑動）；格子上顯示第一張
