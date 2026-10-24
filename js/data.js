@@ -593,7 +593,7 @@ window.SITE_DATA = {
           posts: [
       {
               images: ["images/2_savedpost_20260924.jpg"],
-              caption: "",
+              caption: "I love you",
               time: "9月24日"
             },
             {
