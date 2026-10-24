@@ -171,6 +171,7 @@ window.SITE_MEDIA = [
 "images/eunseok.jpg",
 "images/forum_1_c3.mp4",
 "images/forum_1_c3_poster.jpg",
+"images/g1_msg_20250318.jpg",
 "images/icon_forum.png",
 "images/icon_insta.png",
 "images/icon_kakao.png",

@@ -1088,7 +1088,7 @@ window.SITE_DATA = {
           { from: "me", text: "謝謝你們🥺", time: "下午 10:17" },
           { from: "me", text: "我可以打電話叫你們起床😊", time: "下午 10:17" },
           { date: "2025年3月18日" },   // 將太郎分享遇到了有趣的韓國遊客
-          // 之後在這裡放照片：{ from: "me", image: "images/檔名.jpg", time: "下午 3:06" },
+          { from: "me", image: "images/g1_msg_20250318.jpg", time: "下午 3:05" },
           { from: "me", text: "遇到了有趣的韓國人~", time: "下午 3:06" },
           { from: "f4", text: "衣服很好看耶哪裡買的", time: "下午 4:59" },
           { from: "f5", text: "氣場非比尋常。", time: "下午 9:08" },
