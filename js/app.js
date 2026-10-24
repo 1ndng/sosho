@@ -440,15 +440,29 @@
     var items = h.stories && h.stories.length ? h.stories : [{ image: h.image }];
     return items.filter(function (it) { return canSee(g, it) && !storyArchived(g, it); });
   }
-  // 典藏頁的限時動態：玩家典藏的排前面，再來是 data.js 寫好的
+  // 典藏頁的限時動態：發過的限時動態都會在這裡（有沒有放精選都算）＋ data.js 的 archive.stories，依日期排（舊的在前）
+  // mine = 玩家從「⋯」典藏的（典藏頁的「⋯」可以放回個人檔案）
+  function storyDate(it) {
+    var m = /_(\d{8}|\d{6})(?:-(\d+))?(?:_\w+)?\.\w+$/.exec(it.image || '');
+    if (m) return (m[1].length === 6 ? '20' + m[1] : m[1]) + '-' + ('0' + (m[2] || 1)).slice(-2);
+    // 檔名沒有日期（例如論壇影片）→ 看 time「2025年5月24日」／「5月24日」（沒寫年份 = 2026）
+    var t = /(?:(\d{4})年)?(\d+)月(\d+)日/.exec(it.time || '');
+    return t ? (t[1] || '2026') + ('0' + t[2]).slice(-2) + ('0' + t[3]).slice(-2) + '-01' : '';
+  }
   function archivedStories(g) {
-    var seen = {}, mine = [];
-    (g.story || []).concat.apply(g.story || [], (g.highlights || []).map(function (h) { return h.stories || []; }))
+    var seen = {}, list = [];
+    [].concat.apply(g.story || [], (g.highlights || []).map(function (h) { return h.stories || []; }))
+      .concat((g.archive || {}).stories || [])
       .forEach(function (it) {
         var k = storyKey(g, it);
-        if (storyArchived(g, it) && !seen[k]) { seen[k] = 1; mine.push({ image: it.image, time: it.time, closeFriends: it.closeFriends, mine: true }); }
+        if (!it.image || seen[k]) return;
+        seen[k] = 1;
+        list.push({ image: it.image, time: it.time, closeFriends: it.closeFriends, mine: storyArchived(g, it), n: list.length });
       });
-    return mine.concat((g.archive || {}).stories || []);
+    return list.sort(function (a, b) {
+      var da = storyDate(a), db = storyDate(b);
+      return da && db && da !== db ? (da < db ? -1 : 1) : a.n - b.n;
+    });
   }
 
   // g = 要顯示的帳號；base = 這個帳號頁面的網址（自己 #/ig，別人 #/ig/u/帳號）
@@ -1042,6 +1056,9 @@
       paintSound(isVideo);
       $('.ig-story-time').textContent = items[i].time || '';
       $('#ig-story-cf').style.display = items[i].closeFriends ? '' : 'none';
+      // 典藏頁：只有玩家自己典藏的才有「⋯」（可以放回個人檔案）
+      var menu = document.querySelector('[data-story-menu]');
+      if (menu && fromArchive) menu.style.visibility = items[i].mine ? '' : 'hidden';
       bars.forEach(function (b, j) {
         b.className = j < i ? 'done' : '';
         b.firstChild.style.animation = 'none';

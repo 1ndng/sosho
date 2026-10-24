@@ -223,6 +223,7 @@ window.SITE_DATA = {
       { image: "images/3_story_20250526.jpg", label: "🧡",
         stories: [
           { image: "images/3_story_20250526.jpg", time: "2025年5月26日" },
+          { image: "images/3_story_20250528.jpg", time: "2025年5月28日" },
           { image: "images/3_story_20251130.jpg", time: "2025年11月30日" },
           { image: "images/3_story_20251207.jpg", time: "2025年12月7日" },
           { image: "images/3_story_20251207-2.jpg", time: "2025年12月7日" },
@@ -236,12 +237,9 @@ window.SITE_DATA = {
           { image: "images/3_story_20260225.jpg", time: "2月25日" },
           { image: "images/3_story_20260301.jpg", time: "3月1日" },
           { image: "images/3_story_20260323.jpg", time: "3月23日" },
-          { image: "images/3_story_20260604.jpg", time: "6月4日" },
+          { image: "images/3_story_20260601.jpg", time: "6月1日" },
+          { image: "images/3_story_20260710.jpg", time: "7月10日" },
           { image: "images/3_story_20260711.jpg", time: "7月11日" },
-          { image: "images/3_story_20260712.jpg", time: "7月12日" },
-          { image: "images/3_story_20260920.jpg", time: "9月20日" },
-          { image: "images/3_story_20261010.jpg", time: "10月10日" },
-          { image: "images/3_story_20261011.jpg", time: "10月11日" },
           { image: "images/3_story_20261021.jpg", time: "10月21日" },
           { image: "images/3_story_20261022.jpg", time: "10月22日" }
         ] }
@@ -574,7 +572,8 @@ window.SITE_DATA = {
           stories: [
             { image: "images/2_savedstory_20250318.jpg", time: "2025年3月18日" },
             { image: "images/2_savedstory_20251124.jpg", time: "2025年11月24日" },
-            { image: "images/2_savedstory_20260305.jpg", time: "3月5日" }
+            { image: "images/2_savedstory_20260305.jpg", time: "3月5日" },
+            { image: "images/2_story2_20260604.jpg", time: "6月4日", closeFriends: true }   // 摯友限動，沒放精選
           ],
           posts: [
       {
@@ -737,6 +736,8 @@ window.SITE_DATA = {
         { from: "me", text: "test662", time: "test663" },
         { date: "2026年5月19日 星期二" },   // 吵架後寫好又沒傳的道歉
         { from: "me", text: "test664", time: "test665" },
+        { date: "2026年10月10日 星期六" },
+        { from: "me", image: "images/me_msg_20261010.jpg", time: "test670" },
         { date: "2026年10月23日 星期五" },   // 今天：「論壇⋯⋯要刪嗎」
         { from: "me", text: "test666", time: "test667" },
         { from: "me", text: "test668", time: "test669" }
@@ -902,9 +903,8 @@ window.SITE_DATA = {
           { from: "them", text: "taro哥", time: "下午 3:02" },
           { from: "them", text: "fu28,;.4", time: "下午 3:17" },
           { from: "me", text: "？怎麼了", time: "下午 3:19" },
-          // 照片上傳後（建議檔名 at_msg_20260614.jpg、at_msg_20260614-2.jpg）把下面兩行前面的 // 拿掉
-          // { from: "them", image: "images/at_msg_20260614.jpg", time: "下午 3:20" },
-          // { from: "them", image: "images/at_msg_20260614-2.jpg", time: "下午 3:26" },
+          { from: "them", image: "images/at_msg_20260614.jpg", time: "下午 3:20" },   // 小帳 6/14 限動的前兩張
+          { from: "them", image: "images/at_msg_20260614-2.jpg", time: "下午 3:26" },
           { from: "them", recalled: true, time: "下午 3:27" },   // 收回了一張照片
           { from: "me", text: "ㅋㅋㅋㅋㅋㅋㅋㅋ儲存了", time: "下午 3:28" },
           { from: "them", text: "李燦榮你完蛋了。", time: "下午 3:29" },
