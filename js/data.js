@@ -772,7 +772,7 @@ window.SITE_DATA = {
           { from: "me", text: "有平安回到家嗎☺️", time: "上午 1:28" },
           { from: "them", text: "はい 謝謝這幾天的照顧", time: "上午 1:44" },
           { from: "me", text: "以後保持聯繫吧 不准無視我ㅎㅎ", time: "上午 1:47" },
-          { from: "them", text: "ᄃᄃ", time: "上午 1:48" },
+          { from: "them", text: "ㄷㄷ", time: "上午 1:48" },
           { from: "them", text: "晚安~", time: "上午 1:49" },
           { date: "2025年4月19日 星期六" },   // 曖昧初期的閒聊
           { from: "them", text: "test482", time: "test483" },
