@@ -11,6 +11,7 @@
     info: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M12 11v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="7.8" r="1.1" fill="currentColor"/></svg>',
     video: '<svg viewBox="0 0 24 24"><rect x="2.5" y="6" width="13" height="12" rx="2.5" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M15.5 10.5 21 7.5v9l-5.5-3z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/></svg>',
     phone: '<svg viewBox="0 0 24 24"><path d="M6.6 3.5c.7-.3 1.5 0 1.9.6l1.6 2.8c.4.7.2 1.5-.4 2l-1.3 1c.9 1.9 2.4 3.4 4.3 4.3l1-1.3c.5-.6 1.3-.8 2-.4l2.8 1.6c.6.4.9 1.2.6 1.9-.6 1.6-2.1 2.6-3.8 2.4C9.6 17.8 5.2 13.4 4.6 7.7c-.2-1.7.8-3.4 2-4.2z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/></svg>',
+    photo: '<svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="2.5" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="8.5" cy="9.5" r="1.6" fill="currentColor"/><path d="M3.5 17l5-5 4 4 3-3 5 5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/></svg>',
     send: '<svg viewBox="0 0 24 24"><path d="M12 19V6M6.5 11.5 12 6l5.5 5.5" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'
   };
 
@@ -89,10 +90,10 @@
       '<div class="kk-head"><h1>' + esc(TX().chatsTitle) + '</h1>' +
         '</div>' +
       list.map(function (f) {
-        var msgs = messagesOf(f).filter(function (m) { return m.text || m.image || m.call || m.link || m.recalled; }), last = msgs[msgs.length - 1] || {}, n = unreadOf(f);
+        var msgs = messagesOf(f).filter(function (m) { return m.text || m.image || m.expired || m.call || m.link || m.recalled; }), last = msgs[msgs.length - 1] || {}, n = unreadOf(f);
         return '<a class="kk-chatrow" href="#/kakao/chat/' + encodeURIComponent(f.id) + '">' +
           roomAvatar(f, 'kk-chatrow-av') +
-          '<span class="kk-chatrow-mid"><b>' + esc(f.name) + (f.group ? '<em class="kk-count">' + (f.members.length + 1) + '</em>' : '') + (f.self ? '<i class="kk-me-tag">' + esc(TX().meTag || '我') + '</i>' : '') + '</b><small>' + esc(last.text || (last.recalled ? TX().recalledText || '已收回訊息' : '') || (last.link ? linkInfo(last).title : '') || (last.image ? TX().photoLabel || '照片' : last.call ? (last.call === 'voice' ? TX().voiceCall || '語音通話' : TX().videoCall || '視訊通話') : '')) + '</small></span>' +
+          '<span class="kk-chatrow-mid"><b>' + esc(f.name) + (f.group ? '<em class="kk-count">' + (f.members.length + 1) + '</em>' : '') + (f.self ? '<i class="kk-me-tag">' + esc(TX().meTag || '我') + '</i>' : '') + '</b><small>' + esc(last.text || (last.recalled ? TX().recalledText || '已收回訊息' : '') || (last.link ? linkInfo(last).title : '') || ((last.image || last.expired) ? TX().photoLabel || '照片' : last.call ? (last.call === 'voice' ? TX().voiceCall || '語音通話' : TX().videoCall || '視訊通話') : '')) + '</small></span>' +
           '<span class="kk-chatrow-r"><small>' + esc(last.time || '') + '</small>' + (n ? '<i class="kk-badge">' + n + '</i>' : '') + '</span>' +
         '</a>';
       }).join('');
@@ -124,6 +125,8 @@
       return '<div class="kk-bubble kk-call' + (first ? ' tail' : '') + '">' + (m.call === 'voice' ? ICON.phone : ICON.video) +
         '<span><b>' + esc(label) + '</b><small>' + esc(m.duration || t.missedCall || '未接') + '</small></span></div>';
     }
+    // 過期的照片：{ from, expired: true }（灰色方塊「照片已過期」，點了沒反應）
+    if (m.expired) return '<div class="kk-expired">' + ICON.photo + '<span>' + esc(TX().expiredText || '照片已過期') + '</span></div>';
     if (m.image) return '<button class="kk-photo" data-photo="' + esc(m.image) + '"><img src="' + esc(m.image) + '" alt=""></button>';
     return '<div class="kk-bubble' + (first ? ' tail' : '') + '">' + S().multiline(m.text) + '</div>';
   }

@@ -1,7 +1,7 @@
 /* 自動產生，不用手動修改：images/ 和 audio/ 裡的檔案清單（js/automedia.js 會用到） */
 window.SITE_MEDIA = [
 "images/1_avatar.jpg",
-"images/1_msg_20250619.jpg",
+"images/1_msg_20250419.jpg",
 "images/1_msg_20250709.jpg",
 "images/1_msg_20251018.jpg",
 "images/1_msg_20251218.jpg",

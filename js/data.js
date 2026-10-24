@@ -775,19 +775,26 @@ window.SITE_DATA = {
           { from: "them", text: "ㄷㄷ", time: "上午 1:48" },
           { from: "them", text: "晚安~", time: "上午 1:49" },
           { date: "2025年4月19日 星期六" },   // 曖昧初期的閒聊
-          { from: "them", text: "test482", time: "test483" },
-          { from: "me", text: "test484", time: "test485" },
-          { date: "2025年5月13日 星期二" },   // 將太郎明天到韓國（5/14～5/27 韓國旅遊）
-          { from: "me", text: "test486", time: "test487" },
-          { from: "them", text: "test488", time: "test489" },
-          { date: "2025年5月20日 星期二" },   // 送火影周邊、李炤熙喊「螺旋丸」（之後放照片、影片證據）
-          { from: "me", text: "test490", time: "test491" },
-          { from: "them", text: "test492", time: "test493" },
+          { from: "them", text: "好無聊 在幹嘛", time: "下午 8:34" },
+          { from: "me", image: "images/1_msg_20250419.jpg", time: "下午 8:48" },
+          { from: "me", text: "剛吃飽飯食困中~~ 😴", time: "下午 8:48" },
+          { from: "them", expired: true, time: "下午 8:50" },   // 已過期的照片
+          { from: "them", text: "正在吃辣炒年糕", time: "下午 8:51" },
+          { from: "me", text: "好懷念..🥺", time: "下午 8:56" },
+          { from: "them", text: "什麼時候要來韓國玩？", time: "下午 9:03" },
+          { from: "me", text: "要去的話會跟你說的，別擔心~", time: "下午 9:04" },
+          { date: "2025年5月13日 星期二" },
+          { from: "me", text: "sohee呀 如果說到日本 你第一個會想到什麼？", time: "下午 2:02" },
+          { from: "them", text: "Naruto.", time: "下午 5:26" },
+          { from: "me", text: "🙂‍↕️", time: "下午 5:58" },
+          { date: "2025年5月19日 星期一" },   // 將太郎到韓國
+          { from: "me", text: "猜猜我在哪~", time: "上午 11:38" },
+          { from: "them", text: "你來韓國了？", time: "下午 12:05" },
+          { from: "me", text: "沒錯 要見面嗎ㅋㅋ", time: "下午 12:08" },
+          { from: "them", text: "要。", time: "下午 12:08" },
           { date: "2025年5月27日 星期二" },   // 將太郎回日本
           { from: "them", text: "test494", time: "test495" },
           { from: "me", text: "test496", time: "test497" },
-          { date: "2025年6月19日 星期四" },
-          { from: "me", image: "images/1_msg_20250619.jpg", time: "test216" },
           { date: "2025年7月9日 星期三" },
           { from: "me", image: "images/1_msg_20250709.jpg", time: "test293" },
           { date: "2025年10月18日 星期六" },
@@ -1042,6 +1049,7 @@ window.SITE_DATA = {
       ampm: ["上午", "下午"],
       photoLabel: "照片",           // 聊天列表裡最後一則是照片時顯示的字
       recalledText: "已收回訊息",    // 收回的訊息
+      expiredText: "照片已過期",     // 過期的照片（expired: true）
       meTag: "我"                   // 自己的聊天室名字旁的小標
     }
   }
