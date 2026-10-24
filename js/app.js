@@ -633,6 +633,11 @@
     return owner && idx >= 0 && (owner.posts || [])[idx] != null ? { owner: owner, idx: idx } : null;
   }
   // data.js 裡預先儲存的貼文（換成 "帳號/編號"）
+  // 影片的封面圖（GitHub 自動產生的 xxx_poster.jpg；沒有就空白）
+  function posterOf(src) {
+    var p = String(src || '').replace(/\.\w+$/, '') + '_poster.jpg';
+    return (window.SITE_MEDIA || []).indexOf(p) >= 0 ? p : '';
+  }
   function presetSaved(acc) {
     return (acc.saved || []).map(refFromKey).filter(Boolean).map(function (r) { return postKey(r.owner, r.idx); });
   }
@@ -740,7 +745,7 @@
       ? (st.length ? '<div class="ig-grid ig-arch-grid">' + st.map(function (it, i) {
           var isVideo = /\.(mp4|mov|webm)$/i.test(it.image || '');
           return '<a href="#/ig/story/archive-' + i + '">' +
-            (isVideo ? '<video src="' + esc(it.image) + '" muted playsinline preload="metadata"></video>' : '<img src="' + esc(it.image) + '" alt="">') +
+            (isVideo ? '<video src="' + esc(it.image) + '" poster="' + esc(posterOf(it.image)) + '" muted playsinline preload="metadata"></video>' : '<img src="' + esc(it.image) + '" alt="">') +
             (it.time ? '<span class="ig-arch-date">' + esc(it.time) + '</span>' : '') + '</a>';
         }).join('') + '</div>' : '<div class="ig-empty">' + esc(t.noArchive) + '</div>')
       : (ps.length ? '<div class="ig-grid">' + ps.map(function (x) {
@@ -1032,7 +1037,7 @@
       // 影片（.mp4 / .mov / .webm）播完才換下一則；圖片 5 秒
       var src = items[i].image || '', isVideo = /\.(mp4|mov|webm)$/i.test(src);
       $('#ig-story-media').innerHTML = isVideo
-        ? '<video src="' + esc(src) + '"' + (storyMuted ? ' muted' : '') + ' playsinline autoplay preload="auto"></video>'
+        ? '<video src="' + esc(src) + '" poster="' + esc(posterOf(src)) + '"' + (storyMuted ? ' muted' : '') + ' playsinline autoplay preload="auto"></video>'
         : '<img src="' + esc(src) + '" alt="">';
       paintSound(isVideo);
       $('.ig-story-time').textContent = items[i].time || '';

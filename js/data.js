@@ -404,9 +404,17 @@ window.SITE_DATA = {
         saved: ["252525252_/2_post_20240822.jpg"],
         // 典藏：stories = 過期的限時動態；posts = 下架的貼文（格式和 posts 一樣）
         archive: {
+          // 典藏的限時動態（照日期）；closeFriends: true = 摯友限時（綠色標籤）
           stories: [
+            { image: "images/1_story2_20250319.jpg", time: "2025年3月19日", closeFriends: true },
             // 論壇 452_.rq 貼出來的那則「秒刪」限動（叫あにき的那支影片）
-            { image: "images/forum_1_c3.mp4", time: "2025年5月24日" }
+            { image: "images/forum_1_c3.mp4", time: "2025年5月24日" },
+            { image: "images/1_story2_20251121.jpg", time: "2025年11月21日", closeFriends: true },
+            { image: "images/1_story2_20260128.jpg", time: "1月28日", closeFriends: true },
+            { image: "images/1_story2_260426.jpg", time: "4月26日", closeFriends: true },
+            { image: "images/1_story2_20260519.jpg", time: "5月19日", closeFriends: true },
+            { image: "images/1_story2_20260830.mp4", time: "8月30日", closeFriends: true },
+            { image: "images/1_story2_20260926.jpg", time: "9月26日", closeFriends: true }
           ],
           posts: []
         },
@@ -417,19 +425,14 @@ window.SITE_DATA = {
             // 依日期排序；story2 是摯友限時（closeFriends: true，只有摯友名單裡的人看得到）
             stories: [
               { image: "images/1_story_20240820.jpg", time: "2024年8月20日" },
-              { image: "images/1_story2_20250319.jpg", time: "2025年3月19日", closeFriends: true },
               { image: "images/1_story_20250526.jpg", time: "2025年5月26日" },
               { image: "images/1_story_20250709.jpg", time: "2025年7月9日" },
               { image: "images/1_story_20251030.jpg", time: "2025年10月30日" },
-              { image: "images/1_story2_20251121.jpg", time: "2025年11月21日", closeFriends: true },
               { image: "images/1_story_20251206.jpg", time: "2025年12月6日" },
               { image: "images/1_story_20260123.jpg", time: "1月23日" },
-              { image: "images/1_story2_20260128.jpg", time: "1月28日", closeFriends: true },
               { image: "images/1_story_20260202.jpg", time: "2月2日" },
               { image: "images/1_story_20260227.jpg", time: "2月27日" },
               { image: "images/1_story_20260401.jpg", time: "4月1日" },
-              { image: "images/1_story2_260426.jpg", time: "4月26日", closeFriends: true },
-              { image: "images/1_story2_20260830.mp4", time: "8月30日", closeFriends: true },
               { image: "images/1_story_20261007.jpg", time: "10月7日" }
             ] }
         ],

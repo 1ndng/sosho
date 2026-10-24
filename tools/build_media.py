@@ -190,12 +190,12 @@ def write_manifest():
 
 
 def make_posters():
-    # 廣告、論壇留言影片的第一格存成 xxx_poster.jpg：影片還沒開始播（或手機省電模式不自動播）時先顯示這張
+    # 每支影片的第一格存成 xxx_poster.jpg：影片還沒開始播（或手機沒有先載入畫面）時先顯示這張
     d = os.path.join(ROOT, IMG_DIR)
     if not FFMPEG or not os.path.isdir(d):
         return
     for name in sorted(os.listdir(d)):
-        if not re.match(r'(ad|forum)_.*\.mp4$', name):
+        if not name.endswith('.mp4'):
             continue
         video = os.path.join(d, name)
         poster = os.path.join(d, name[:-4] + '_poster.jpg')
