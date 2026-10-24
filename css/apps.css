@@ -141,3 +141,10 @@
 .kk-lock-key:active { color: #999; }
 .kk-lock-del { height: 74px; display: flex; align-items: center; justify-content: center; color: #8a8a8a; }
 .kk-lock-del svg { width: 32px; height: 22px; }
+
+/* Kakao 通話紀錄泡泡 */
+.kk-call { display: flex; align-items: center; gap: 9px; padding: 9px 13px 9px 11px; }
+.kk-call svg { width: 24px; height: 24px; flex: none; }
+.kk-call span { display: flex; flex-direction: column; line-height: 1.25; }
+.kk-call b { font-weight: 600; font-size: 14px; }
+.kk-call small { font-size: 12px; opacity: .65; }

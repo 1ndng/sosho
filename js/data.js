@@ -35,16 +35,62 @@ window.SITE_DATA = {
   /* ---------- 匿名論壇 ---------- */
   forum: {
     noticeTitle: "公告",        // 公告框的標題（在文章框上面）
-    // 公告：unlock 寫解鎖條件（進度旗標名稱），達成後才會出現；不寫 unlock = 一開始就有
-    //   left_forum      = 第一次離開論壇後再回來
-    //   kakao_unlocked  = 解開 KakaoTalk 密碼
-    //   login_fauiogl94 = 登入過小帳（login_帳號id）
-    //   chat_f1         = 打開過和소희的聊天室（chat_好友id，群組是 chat_g1）
-    //   也可以在電話對話的段落寫 flag: "名稱"，走到那段就算達成
-    // 公告內頁只有標題、內文（可加 author、image），沒有留言
+
+    // 遊戲進度階段：每一階段要達成的條件（全部達成才算）；第 0 階段 = 一開始
+    //   left_forum       = 第一次離開論壇後
+    //   kakao_lock_seen  = 點進 KakaoTalk 看到要輸入密碼
+    //   kakao_unlocked   = 解開 KakaoTalk 密碼
+    //   locked_fauiogl94 = 點進小帳主頁、看到「此帳號不公開」（locked_帳號id）
+    //   login_fauiogl94  = 登入過小帳（login_帳號id）
+    //   其他可用：chat_好友id（打開過那個 Kakao 聊天室）、電話對話段落的 flag
+    stages: [
+      [],
+      ["left_forum", "kakao_lock_seen"],                      // 1 → 提示1
+      ["kakao_unlocked", "locked_fauiogl94"],                 // 2 → 提示2
+      ["login_fauiogl94"],                                    // 3 → 提示3
+      ["left_forum", "kakao_lock_seen", "kakao_unlocked", "locked_fauiogl94",
+       "login_fauiogl94", "login_252525252_"]                 // 4 → 感謝遊玩＋故事線整理
+    ],
+
+    // 公告：同一篇有好幾個版本，stage = 從第幾階段開始顯示這個版本
+    // 換到新版本時，標題和內文一起換，而且會變回未讀（❗）；還沒到第一個版本的階段 = 不顯示這篇
+    // 內文用 `反引號` 包起來就可以直接換行
     notices: [
-      { id: "guide", title: "遊玩說明", content: "test479" },
-      { id: "hint1", title: "test480", content: "test481", unlock: "left_forum" }
+      { id: "main", versions: [
+        { stage: 0, title: "[Notice!]", content: `首先感謝你撿起了Shotaro的手機！(？？？)
+礙於作者筆力不足寫不出逃亡(下)，故決定以撿手機形式呈現。但比起單純的撿手機其實更像小型解謎遊戲啦哈哈哈，目標是找出李炤熙和將太郎談戀愛的證據！相信你可以的。
+我就說到這了，祝福你能順利打探到他們的隱私(。)` },
+        { stage: 4, title: "[Thanks!]", content: `哇有人能玩到這嗎......我愛你們。
+希望你們有良好的遊玩體驗，也希望故事你們會喜歡！
+如果喜歡這款遊戲，可以多多按讚讓我得到一些正反饋><
+有任何建議或想法(如果你想投放廣告......。。)也歡迎跟我說！再次感謝，非常感謝。` }
+      ] },
+      { id: "hint", versions: [
+        { stage: 1, title: "[提示]我哪知道密碼啊！", content: `哼哼恭喜你遇到第一個難關，撿到大網紅手機肯定要偷看他的聊天紀錄啦~但要怎麼知道他的鎖定密碼？
+請多留意論壇提供的資訊，或許，可以，利用一下通話功能......？
+加油呀相信你可以的你可以看到反差系網紅的反差真面目了。` },
+        { stage: 2, title: "[提示]那個fauiogl94是誰......？", content: `聰明的你一定有預感到，那個莫名其妙沒有頭貼的帳號裡肯定藏著點什麼。既然如此就登入他！
+請多留意Kakao的訊息，並試著傳訊息給朋友們，他們說不定會提供給你一些意想不到的資訊喔。` },
+        { stage: 3, title: "[提示]如果你想做點壞事。", content: `其實呢故事到這裡基本上就結束了，熙醬談戀愛的證據已罪證確鑿。但如果呢到現在都還沒滿足你的窺探欲，要不要試著登入李炤熙的帳號呀(嘿嘿)
+沒什麼困難的，就跟將太郎手機和他們倆屬羊遊戲的帳號一樣好登入。嗯相信你很快就能登入了。` },
+        { stage: 4, title: "故事線整理", content: `提供給對故事時間線有興趣，但玩完後依舊一頭霧水的人觀看！
+2021/9/1-2022/1/4：將太郎在韓國留學，認識宋恩奭和鄭成燦。
+2025/3/18-2025/3/20：李炤熙逃到日本，機緣下認識了將太郎並陪同前往秘境探店，兩人就此認識，交換了聯絡方式。回韓國後兩人持續訊息聯絡。
+2025/5/14-2025/5/27：將太郎前往韓國旅遊兩周，跟李炤熙見面，關係逐漸曖昧。
+2025/5/20：將太郎送李炤熙火影忍者周邊，李炤熙對著將太郎喊出了忍術「螺旋丸」。
+2025/11/20-2025/11/26：因帶學生比賽，李炤熙前往日本，在離開前的最後一天(11/26)兩人互訴心意。為交往紀念日。期間兩人一起度過了李炤熙(11/21)和將太郎(11/25)的生日。
+2025/12/31-2026/1/1：李炤熙快閃日本，美好跨年夜^~^
+2026/2/8：兩人開始思考遠距離的可能性，以及思考該如何在生活和愛情間做出取捨、達成平衡。
+2026/3/5：交往100日。將太郎搬到韓國定居。
+2026/3/8：與李炤熙和他朋友見面，認識了李燦榮。
+2026/4/8：將太郎前往舞室，認識朴元彬。
+2026/5/19：兩人吵架，將太郎向朴元彬傾訴。
+2026/6/14：李燦榮向將太郎透露了一些李炤熙的故事。
+2026/7/11：兩人在舞室明顯鬧僵，朴元彬忍不住傳訊息關心。
+2026/10/11：三人一起出去玩，李燦榮傳了兩人的合照給將太郎。
+2026/10月中下旬：網友在論壇懷疑將太郎談戀愛。
+2026/10/22：鄭成燦把論壇文章傳給將太郎，逼問是不是真的。` }
+      ] }
     ],
     listTitle: "文章",          // 文章列表框的標題
     backLabel: "返回",          // 文章內頁「返回」
@@ -597,13 +643,23 @@ window.SITE_DATA = {
         unread: 1,       // 一開始在聊天列表顯示的未讀數
         messages: [
           // 照片訊息：image 換成圖片路徑（不用寫 text）；me = 手機使用者，them = 對方
-          { date: "2025年3月9日 星期日" },   // 相遇後第一則（2025/3/8 在日本相遇）
+          // 通話紀錄：{ from: "me", call: "video"（視訊）或 "voice"（語音）, duration: "通話長度" }
+          { date: "2025年3月20日 星期四" },   // 李炤熙回韓國，相遇後第一則（3/18～3/20 在日本認識、一起去秘境探店）
           { from: "them", text: "test168", time: "test169" },
           { from: "me", text: "test170", time: "test171" },
           { from: "them", text: "test172", time: "test173" },
-          { date: "2025年4月20日 星期日" },
-          { from: "them", text: "test347", time: "test348" },
-          { from: "me", text: "test349", time: "test350" },
+          { date: "2025年4月19日 星期六" },   // 曖昧初期的閒聊
+          { from: "them", text: "test482", time: "test483" },
+          { from: "me", text: "test484", time: "test485" },
+          { date: "2025年5月13日 星期二" },   // 將太郎明天到韓國（5/14～5/27 韓國旅遊）
+          { from: "me", text: "test486", time: "test487" },
+          { from: "them", text: "test488", time: "test489" },
+          { date: "2025年5月20日 星期二" },   // 送火影周邊、李炤熙喊「螺旋丸」（之後放照片、影片證據）
+          { from: "me", text: "test490", time: "test491" },
+          { from: "them", text: "test492", time: "test493" },
+          { date: "2025年5月27日 星期二" },   // 將太郎回日本
+          { from: "them", text: "test494", time: "test495" },
+          { from: "me", text: "test496", time: "test497" },
           { date: "2025年6月19日 星期四" },
           { from: "me", image: "images/1_msg_20250619.jpg", time: "test216" },
           { date: "2025年7月9日 星期三" },
@@ -612,48 +668,61 @@ window.SITE_DATA = {
           { from: "me", image: "images/1_msg_20251018.jpg", time: "test294" },
           { date: "2025年11月7日 星期五" },
           { from: "them", image: "images/2_msg_20251107.jpg", time: "test295" },
-          { date: "2025年11月21日 星期五" },   // 소희 生日
-          { from: "me", text: "test351", time: "test352" },
-          { from: "them", text: "test353", time: "test354" },
-          { date: "2025年11月25日 星期二" },   // Sho 生日
-          { from: "them", text: "test355", time: "test356" },
-          { from: "me", text: "test357", time: "test358" },
-          { date: "2025年11月26日 星期三" },   // 告白、在一起（紀念日）
-          { from: "me", text: "test359", time: "test360" },
-          { from: "them", text: "test361", time: "test362" },
+          { date: "2025年11月19日 星期三" },   // 李炤熙明天帶學生去日本比賽（11/20～11/26）
+          { from: "them", text: "test498", time: "test499" },
+          { from: "me", text: "test500", time: "test501" },
+          { date: "2025年11月21日 星期五" },   // 李炤熙生日（在日本）
+          { from: "me", text: "test502", time: "test503" },
+          { from: "them", text: "test504", time: "test505" },
+          { date: "2025年11月26日 星期三" },   // 互訴心意、交往紀念日（建議用「오늘부터 1일」）
+          { from: "them", text: "test506", time: "test507" },
+          { from: "me", text: "test508", time: "test509" },
+          { from: "them", text: "test510", time: "test511" },
           { date: "2025年12月4日 星期四" },
           { from: "them", image: "images/2_msg_20251204.jpg", time: "test296" },
           { date: "2025年12月12日 星期五" },
           { from: "them", image: "images/2_msg_20251212.jpg", time: "test297" },
+          { date: "2025年12月14日 星期日" },   // 遠距離：視訊通話 1
+          { from: "me", call: "video", duration: "test512", time: "test513" },   // 視訊通話紀錄（duration 寫通話長度，例如 "1:02:33"）
+          { from: "me", text: "test514", time: "test515" },
           { date: "2025年12月18日 星期四" },
           { from: "me", image: "images/1_msg_20251218.jpg", time: "test298" },
-          { date: "2025年12月25日 星期四" },
-          { from: "them", text: "test363", time: "test364" },
-          { from: "me", text: "test365", time: "test366" },
-          { date: "2026年1月1日 星期四" },
-          { from: "me", text: "test367", time: "test368" },
-          { from: "them", text: "test369", time: "test370" },
+          { date: "2025年12月30日 星期二" },   // 明天快閃日本跨年
+          { from: "them", text: "test516", time: "test517" },
+          { from: "me", text: "test518", time: "test519" },
+          { date: "2026年1月2日 星期五" },   // 跨年後回韓國
+          { from: "them", text: "test520", time: "test521" },
+          { from: "me", text: "test522", time: "test523" },
           { date: "2026年1月16日 星期五" },
           { from: "me", image: "images/1_msg_20260116.jpg", time: "test299" },
-          { date: "2026年2月1日 星期日" },   // 搬到韓國前一天
-          { from: "them", text: "test371", time: "test372" },
-          { from: "me", text: "test373", time: "test374" },
+          { date: "2026年1月18日 星期日" },   // 遠距離：視訊通話 2
+          { from: "me", call: "video", duration: "test524", time: "test525" },   // 視訊通話紀錄（duration 寫通話長度，例如 "1:02:33"）
+          { from: "them", text: "test526", time: "test527" },
           { date: "2026年2月6日 星期五" },
           { from: "me", image: "images/1_msg_20260206.jpg", time: "test318" },
+          { date: "2026年2月8日 星期日" },   // 遠距離：視訊通話 3，思考遠距離、生活和愛情的取捨
+          { from: "me", call: "video", duration: "test528", time: "test529" },   // 視訊通話紀錄（duration 寫通話長度，例如 "1:02:33"）
+          { from: "me", text: "test530", time: "test531" },
+          { from: "them", text: "test532", time: "test533" },
           { date: "2026年2月9日 星期一" },
           { from: "them", image: "images/2_msg_20260209.jpg", time: "test319" },
+          { date: "2026年2月22日 星期日" },   // 遠距離：視訊通話 4，決定搬來韓國
+          { from: "me", call: "video", duration: "test534", time: "test535" },   // 視訊通話紀錄（duration 寫通話長度，例如 "1:02:33"）
+          { from: "me", text: "test536", time: "test537" },
           { date: "2026年2月27日 星期五" },
           { from: "them", image: "images/2_msg_20260227.jpg", time: "test320" },
-          { date: "2026年3月5日 星期四" },   // 在一起 100 天
-          { from: "them", text: "test375", time: "test376" },
-          { from: "me", text: "test377", time: "test378" },
+          { date: "2026年3月5日 星期四" },   // 交往 100 日、將太郎搬到韓國
+          { from: "them", text: "test538", time: "test539" },
+          { from: "me", text: "test540", time: "test541" },
           { date: "2026年4月11日 星期六" },
           { from: "me", image: "images/1_msg_20260411.jpg", time: "test321" },
-          { date: "2026年4月25日 星期六" },
-          { from: "me", text: "test379", time: "test380" },
-          { from: "them", text: "test381", time: "test382" },
+          { date: "2026年5月19日 星期二" },   // 吵架
+          { from: "me", text: "test542", time: "test543" },
+          { from: "them", text: "test544", time: "test545" },
           { date: "2026年6月26日 星期五" },
           { from: "them", image: "images/2_msg_20260626.jpg", time: "test322" },
+          { date: "2026年7月11日 星期六" },   // 舞室鬧僵之後
+          { from: "me", text: "test546", time: "test547" },
           { date: "2026年7月12日 星期日" },
           { from: "me", image: "images/1_msg_20260712.jpg", time: "test217" },
           { date: "2026年8月26日 星期三" },
@@ -685,19 +754,22 @@ window.SITE_DATA = {
         avatar: "images/wonbin.jpg",
         unread: 0,       // 一開始在聊天列表顯示的未讀數
         messages: [
-          { date: "2026年4月8日 星期三" },   // 無關主線
+          { date: "2026年4月8日 星期三" },   // 認識時的寒暄（無關主線）
           { from: "them", text: "test180", time: "test181" },
           { from: "me", text: "test182", time: "test183" },
           { from: "them", text: "test184", time: "test185" },
-          { date: "2026年5月19日 星期二" },
-          { from: "them", text: "test397", time: "test398" },
-          { from: "me", text: "test399", time: "test400" },
-          { date: "2026年7月11日 星期六" },
-          { from: "me", text: "test401", time: "test402" },
-          { from: "them", text: "test403", time: "test404" },
-          { date: "2026年9月27日 星期日" },   // 無關主線
-          { from: "them", text: "test405", time: "test406" },
-          { from: "me", text: "test407", time: "test408" }
+          { date: "2026年5月19日 星期二" },   // 將太郎訴說吵架的事，원빈陪伴、給建議
+          { from: "me", text: "test548", time: "test549" },
+          { from: "them", text: "test550", time: "test551" },
+          { from: "me", text: "test552", time: "test553" },
+          { from: "them", text: "test554", time: "test555" },
+          { date: "2026年7月11日 星期六" },   // 兩人在舞室明顯鬧僵，원빈忍不住傳訊息詢問、給建議
+          { from: "them", text: "test556", time: "test557" },
+          { from: "me", text: "test558", time: "test559" },
+          { from: "them", text: "test560", time: "test561" },
+          { date: "2026年9月27日 星期日" },   // 討論舞蹈、互相鼓勵（無關主線）
+          { from: "them", text: "test562", time: "test563" },
+          { from: "me", text: "test564", time: "test565" }
         ],
         // 關鍵字自動回覆：玩家傳的訊息「包含」任一個 keywords 就回 reply（可多句，依序送出）
         replies: [
@@ -712,16 +784,16 @@ window.SITE_DATA = {
         avatar: "images/anton.jpg",
         unread: 0,       // 一開始在聊天列表顯示的未讀數
         messages: [
-          { date: "2026年3月2日 星期一" },   // 無關主線
+          { date: "2026年3月8日 星期日" },   // 認識時的寒暄（無關主線）
           { from: "them", text: "test192", time: "test193" },
           { from: "me", text: "test194", time: "test195" },
           { from: "them", text: "test196", time: "test197" },
-          { date: "2026年6月14日 星期日" },
-          { from: "them", text: "test409", time: "test410" },
-          { from: "me", text: "test411", time: "test412" },
-          { date: "2026年10月11日 星期日" },
-          { from: "them", text: "test413", time: "test414" },
-          { from: "me", text: "test415", time: "test416" }
+          { date: "2026年6月14日 星期日" },   // 燦榮透露了一些炤熙的故事
+          { from: "them", text: "test566", time: "test567" },
+          { from: "me", text: "test568", time: "test569" },
+          { date: "2026年10月11日 星期日" },   // 三人一起出去，燦榮傳兩人的合照給將太郎
+          { from: "them", text: "test570", time: "test571" },
+          { from: "me", text: "test572", time: "test573" }
         ],
         // 關鍵字自動回覆：玩家傳的訊息「包含」任一個 keywords 就回 reply（可多句，依序送出）
         replies: [
@@ -736,12 +808,13 @@ window.SITE_DATA = {
         avatar: "images/sungchan.jpg",
         unread: 0,
         messages: [
-          { date: "2021年11月25日 星期四" },   // Sho 生日，無關主線
-          { from: "them", text: "test417", time: "test418" },
-          { from: "me", text: "test419", time: "test420" },
-          { date: "2025年11月26日 星期三" },
-          { from: "me", text: "test421", time: "test422" },
-          { from: "them", text: "test423", time: "test424" }
+          { date: "2021年10月16日 星期六" },   // 認識時的寒暄（無關主線）
+          { from: "them", text: "test574", time: "test575" },
+          { from: "me", text: "test576", time: "test577" },
+          { date: "2025年11月26日 星期三" },   // 追問群組裡的細節
+          { from: "them", text: "test578", time: "test579" },
+          { from: "me", text: "test580", time: "test581" },
+          { from: "them", text: "test582", time: "test583" }
         ],
         replies: [],
         defaultReply: []
@@ -753,12 +826,12 @@ window.SITE_DATA = {
         avatar: "images/eunseok.jpg",
         unread: 0,
         messages: [
-          { date: "2021年11月25日 星期四" },   // Sho 生日，無關主線
-          { from: "them", text: "test425", time: "test426" },
-          { from: "me", text: "test427", time: "test428" },
-          { date: "2026年4月13日 星期一" },   // 無關主線
-          { from: "them", text: "test429", time: "test430" },
-          { from: "me", text: "test431", time: "test432" }
+          { date: "2021年9月4日 星期六" },   // 認識時的寒暄（無關主線）
+          { from: "them", text: "test584", time: "test585" },
+          { from: "me", text: "test586", time: "test587" },
+          { date: "2026年4月13日 星期一" },   // 問群組的約要不要去（無關主線）
+          { from: "them", text: "test588", time: "test589" },
+          { from: "me", text: "test590", time: "test591" }
         ],
         replies: [],
         defaultReply: []
@@ -774,41 +847,41 @@ window.SITE_DATA = {
         members: ["f4", "f5"],          // 성찬、은석（留學時認識的朋友）
         unread: 2,
         messages: [
-          { date: "2022年1月3日 星期一" },   // 無關主線
+          { date: "2022年1月3日 星期一" },   // 留學結束回日本前一天，終於創了群組（無關主線）
           { from: "f4", text: "test263", time: "test264" },
           { from: "f5", text: "test265", time: "test266" },
           { from: "me", text: "test267", time: "test268" },
-          { date: "2025年3月18日 星期二" },
-          { from: "me", text: "test433", time: "test434" },
-          { from: "f4", text: "test435", time: "test436" },
-          { from: "f5", text: "test437", time: "test438" },
-          { date: "2025年8月9日 星期六" },
-          { from: "f5", text: "test439", time: "test440" },
-          { from: "me", text: "test441", time: "test442" },
-          { from: "f4", text: "test443", time: "test444" },
-          { date: "2025年11月20日 星期四" },
-          { from: "me", text: "test445", time: "test446" },
-          { from: "f4", text: "test447", time: "test448" },
-          { from: "f5", text: "test449", time: "test450" },
-          { date: "2025年11月25日 星期二" },   // Sho 生日
-          { from: "f4", text: "test451", time: "test452" },
-          { from: "f5", text: "test453", time: "test454" },
-          { from: "me", text: "test455", time: "test456" },
-          { date: "2025年11月26日 星期三" },
-          { from: "f5", text: "test457", time: "test458" },
-          { from: "f4", text: "test459", time: "test460" },
-          { from: "me", text: "test461", time: "test462" },
-          { date: "2026年2月20日 星期五" },
-          { from: "f4", text: "test463", time: "test464" },
-          { from: "me", text: "test465", time: "test466" },
-          { from: "f5", text: "test467", time: "test468" },
-          { date: "2026年4月13日 星期一" },   // 無關主線
-          { from: "f5", text: "test469", time: "test470" },
-          { from: "f4", text: "test471", time: "test472" },
-          { from: "me", text: "test473", time: "test474" },
-          { date: "2026年10月22日 星期四" },   // 昨天：最後兩則未讀（未讀 2）
-          { from: "f4", text: "test475", time: "test476" },
-          { from: "f5", text: "test477", time: "test478" }
+          { date: "2025年3月18日 星期二" },   // 將太郎分享遇到了有趣的韓國遊客
+          { from: "me", text: "test592", time: "test593" },
+          { from: "f4", text: "test594", time: "test595" },
+          { from: "f5", text: "test596", time: "test597" },
+          { date: "2025年8月9日 星期六" },   // 閒聊（無關主線）
+          { from: "f5", text: "test598", time: "test599" },
+          { from: "me", text: "test600", time: "test601" },
+          { from: "f4", text: "test602", time: "test603" },
+          { date: "2025年11月20日 星期四" },   // 將太郎分享與李炤熙再次相遇
+          { from: "me", text: "test604", time: "test605" },
+          { from: "f4", text: "test606", time: "test607" },
+          { from: "f5", text: "test608", time: "test609" },
+          { date: "2025年11月25日 星期二" },   // 祝將太郎生日快樂（將太郎當天沒回）
+          { from: "f4", text: "test610", time: "test611" },
+          { from: "f5", text: "test612", time: "test613" },
+          { date: "2025年11月26日 星期三" },   // 將太郎回覆，透露跟某人一起過生日、已在一起的線索
+          { from: "me", text: "test614", time: "test615" },
+          { from: "f5", text: "test616", time: "test617" },
+          { from: "f4", text: "test618", time: "test619" },
+          { from: "me", text: "test620", time: "test621" },
+          { date: "2026年3月6日 星期五" },   // 將太郎分享昨天搬到韓國
+          { from: "me", text: "test622", time: "test623" },
+          { from: "f4", text: "test624", time: "test625" },
+          { from: "f5", text: "test626", time: "test627" },
+          { date: "2026年4月13日 星期一" },   // 성찬約三人吃飯（無關主線）
+          { from: "f4", text: "test628", time: "test629" },
+          { from: "f5", text: "test630", time: "test631" },
+          { from: "me", text: "test632", time: "test633" },
+          { date: "2026年10月22日 星期四" },   // 昨天：성찬傳論壇文章給將太郎、逼問是不是真的（未讀 2）
+          { from: "f4", text: "test634", time: "test635" },
+          { from: "f4", text: "test636", time: "test637" }
         ],
         replies: [],
         defaultReply: []

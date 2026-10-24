@@ -102,7 +102,8 @@
   var ICON_MEMO = '<svg viewBox="0 0 24 24"><rect x="3" y="2.5" width="18" height="19" rx="4" fill="#fff" stroke="#d6d6d6"/><path d="M3 7.5V6.5a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v1z" fill="#f7c600"/><path d="M7 11.5h10M7 14.5h10M7 17.5h6" stroke="#c9c9c9" stroke-width="1.2" stroke-linecap="round"/></svg>';
 
   /* ---------------- 進度旗標：公告依條件解鎖用 ---------------- */
-  // left_forum = 第一次離開論壇；kakao_unlocked = 解開 KakaoTalk 密碼；login_帳號 = 登入過某個 IG 帳號；
+  // left_forum = 第一次離開論壇；kakao_lock_seen = 看過 KakaoTalk 的密碼畫面；kakao_unlocked = 解開 KakaoTalk 密碼；
+  // locked_帳號 = 看過那個帳號「此帳號不公開」的頁面；login_帳號 = 登入過某個 IG 帳號；
   // chat_好友id = 打開過某個 Kakao 聊天室；電話對話段落寫 flag: "名稱" → 走到那段就記錄
   var FLAG_KEY = 'sosho-flags';
   var flags = {};
@@ -153,16 +154,30 @@
   }
   document.addEventListener('touchstart', playAds, { passive: true });
 
-  // 公告：unlock 寫進度旗標名稱，達成後才出現（沒寫 = 一開始就有）
+  // 遊戲進度階段：forum.stages 第 k 項的旗標全部達成 = 到第 k 階段（取最高的那個）
+  function stage() {
+    var st = D.forum.stages || [], k = 0;
+    st.forEach(function (need, i) {
+      if (i && (need || []).every(hasFlag)) k = i;
+    });
+    return k;
+  }
+  // 公告：每篇有好幾個版本（versions），依目前階段顯示最新的那個；
+  // 換版本後標題、內文跟著變，而且會變回未讀（❗）
   function shownNotices() {
-    return (D.forum.notices || []).filter(function (n) { return hasFlag(n.unlock); });
+    var k = stage();
+    return (D.forum.notices || []).map(function (n) {
+      var vs = (n.versions || [n]).filter(function (v) { return (v.stage || 0) <= k; });
+      var v = vs[vs.length - 1];
+      return v ? { id: n.id, readKey: 'notice-' + n.id + '@' + (v.stage || 0), title: v.title, content: v.content, author: v.author, image: v.image } : null;
+    }).filter(Boolean);
   }
 
   function renderForumList() {
     var f = D.forum;
     var notices = shownNotices().map(function (n) {
       return '<li><a href="#/forum/notice/' + encodeURIComponent(n.id) + '">' +
-        '<span class="mark">' + (readPosts['notice-' + n.id] ? '❕' : '❗️') + '</span>' +
+        '<span class="mark">' + (readPosts[n.readKey] ? '❕' : '❗️') + '</span>' +
         '<span class="p-title">' + esc(n.title) + '</span></a></li>';
     }).join('');
     var list = (f.posts || []).map(function (p) {
@@ -201,7 +216,7 @@
     var f = D.forum;
     var n = shownNotices().filter(function (x) { return String(x.id) === String(id); })[0];
     if (!n) { replaceHash('#/forum'); return; }
-    markRead('notice-' + n.id);
+    markRead(n.readKey);
     $('#forum-scroll').innerHTML =
       '<div class="pd">' +
         '<a class="pd-back" href="#/forum">‹ ' + esc(f.backLabel) + '</a>' +
@@ -445,6 +460,7 @@
     base = base || '#/ig';
     var visitor = base !== '#/ig';   // true = 從搜尋點進去看別人的頁面
     var locked = visitor && isLocked(g);
+    if (locked) setFlag('locked_' + g.username);   // 看過這個帳號「此帳號不公開」的頁面（解鎖提示用）
     var vis = locked ? [] : visibleStory(g);   // 非公開又沒追蹤：看不到限時動態
     var showRing = vis.length > 0 || (g.hasStory && !g.story);
     var cf = vis.some(function (it) { return it.closeFriends; });

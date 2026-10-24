@@ -67,6 +67,7 @@
 - 對話段落寫 `flag: "名稱"` → 走到那段就記錄進度（解鎖論壇公告用）
 
 ## KakaoTalk（#/kakao）
+- 訊息可以是通話紀錄：`{ from: "me", call: "video"（或 "voice"）, duration: "1:02:33" }`
 - 進入前要輸入 `kakao.passcode`（目前 0318，打完電話才會知道）；解開一次就記住，「重新開始」會清掉
 - 只有聊天列表（介面全部是繁體中文，日期線格式「2026年10月22日 星期四」）：`kakao.friends` 的私聊＋`kakao.groups` 的群組，照名字字首排序；沒有好友頁、底部分頁
 - 聊天室：`messages` 裡 `{ date }` 是日期分隔，`from: "me"` 黃色靠右，`from: "them"` 白色靠左
@@ -93,10 +94,14 @@
 - 限時動態加 `closeFriends: true` = 摯友限時；只有帳號 `closeFriendsList` 裡的帳號看得到（綠框＋摯友標籤）
 - 帳號的 `saved`（"帳號/貼文編號"）＝已儲存；`archive.stories` / `archive.posts` ＝典藏（設定 → 典藏）
 
-## 論壇公告
-- 文章框上面有「公告」框：`forum.notices`，一開始只有「遊玩說明」
-- `unlock` 寫解鎖條件：`left_forum`（第一次離開論壇再回來）、`kakao_unlocked`、`login_帳號id`、`chat_好友id`、電話對話段落的 `flag`
-- 公告內頁只有標題和內文，沒有留言
+## 論壇公告與遊戲進度
+- `forum.stages`：每個進度階段要達成的條件（第 0 階段 = 一開始）
+  1. 離開過論壇＋看過 KakaoTalk 密碼畫面 → 提示 1
+  2. 解開 KakaoTalk＋看過小帳「此帳號不公開」的頁面 → 提示 2
+  3. 登入小帳 → 提示 3
+  4. 以上全部＋登入소희帳號 → 公告變「感謝遊玩」、提示變「故事線整理」
+- `forum.notices`：每篇公告有好幾個版本（`versions`），依階段顯示；換版本時標題、內文一起換，並變回未讀 ❗
+- 條件名稱：`left_forum`、`kakao_lock_seen`、`kakao_unlocked`、`locked_帳號id`、`login_帳號id`、`chat_好友id`、電話對話段落的 `flag`
 
 ## 論壇留言
 - 留言可加 `image`；留言者和文章 `author` 一樣時自動顯示「樓主」

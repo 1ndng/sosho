@@ -8,6 +8,8 @@
   var ICON = {
     back: '<svg viewBox="0 0 24 24"><path d="M15 4l-8 8 8 8" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     del: '<svg viewBox="0 0 32 22"><path d="M10 1.5h19a1.5 1.5 0 0 1 1.5 1.5v16a1.5 1.5 0 0 1-1.5 1.5H10L1.5 11z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/><path d="M15.5 7l7 8M22.5 7l-7 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
+    video: '<svg viewBox="0 0 24 24"><rect x="2.5" y="6" width="13" height="12" rx="2.5" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M15.5 10.5 21 7.5v9l-5.5-3z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/></svg>',
+    phone: '<svg viewBox="0 0 24 24"><path d="M6.6 3.5c.7-.3 1.5 0 1.9.6l1.6 2.8c.4.7.2 1.5-.4 2l-1.3 1c.9 1.9 2.4 3.4 4.3 4.3l1-1.3c.5-.6 1.3-.8 2-.4l2.8 1.6c.6.4.9 1.2.6 1.9-.6 1.6-2.1 2.6-3.8 2.4C9.6 17.8 5.2 13.4 4.6 7.7c-.2-1.7.8-3.4 2-4.2z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/></svg>',
     send: '<svg viewBox="0 0 24 24"><path d="M12 19V6M6.5 11.5 12 6l5.5 5.5" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'
   };
 
@@ -61,10 +63,10 @@
       '<div class="kk-head"><h1>' + esc(TX().chatsTitle) + '</h1>' +
         '</div>' +
       list.map(function (f) {
-        var msgs = messagesOf(f).filter(function (m) { return m.text || m.image; }), last = msgs[msgs.length - 1] || {}, n = unreadOf(f);
+        var msgs = messagesOf(f).filter(function (m) { return m.text || m.image || m.call; }), last = msgs[msgs.length - 1] || {}, n = unreadOf(f);
         return '<a class="kk-chatrow" href="#/kakao/chat/' + encodeURIComponent(f.id) + '">' +
           roomAvatar(f, 'kk-chatrow-av') +
-          '<span class="kk-chatrow-mid"><b>' + esc(f.name) + (f.group ? '<em class="kk-count">' + (f.members.length + 1) + '</em>' : '') + '</b><small>' + esc(last.text || (last.image ? TX().photoLabel || '照片' : '')) + '</small></span>' +
+          '<span class="kk-chatrow-mid"><b>' + esc(f.name) + (f.group ? '<em class="kk-count">' + (f.members.length + 1) + '</em>' : '') + '</b><small>' + esc(last.text || (last.image ? TX().photoLabel || '照片' : last.call ? (last.call === 'voice' ? TX().voiceCall || '語音通話' : TX().videoCall || '視訊通話') : '')) + '</small></span>' +
           '<span class="kk-chatrow-r"><small>' + esc(last.time || '') + '</small>' + (n ? '<i class="kk-badge">' + n + '</i>' : '') + '</span>' +
         '</a>';
       }).join('');
@@ -74,6 +76,12 @@
   /* ---- 聊天室 ---- */
   // 訊息內容：文字泡泡或照片
   function contentHTML(m, first) {
+    // 通話紀錄：{ from, call: "video" 或 "voice", duration: "1:02:33" }（沒寫 duration = 未接）
+    if (m.call) {
+      var t = TX(), label = m.call === 'voice' ? (t.voiceCall || '語音通話') : (t.videoCall || '視訊通話');
+      return '<div class="kk-bubble kk-call' + (first ? ' tail' : '') + '">' + (m.call === 'voice' ? ICON.phone : ICON.video) +
+        '<span><b>' + esc(label) + '</b><small>' + esc(m.duration || t.missedCall || '未接') + '</small></span></div>';
+    }
     if (m.image) return '<button class="kk-photo" data-photo="' + esc(m.image) + '"><img src="' + esc(m.image) + '" alt=""></button>';
     return '<div class="kk-bubble' + (first ? ' tail' : '') + '">' + S().multiline(m.text) + '</div>';
   }
@@ -195,6 +203,7 @@
   var typed = '';
   function locked() { return !!K().passcode && !S().hasFlag('kakao_unlocked'); }
   function renderLock() {
+    S().setFlag('kakao_lock_seen');   // 看過密碼畫面（解鎖提示用）
     var t = TX(), keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '', '0', 'del'];
     typed = '';
     S().$('#kakao-overlay').innerHTML = '';
