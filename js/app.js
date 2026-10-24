@@ -457,7 +457,7 @@
         var k = storyKey(g, it);
         if (!it.image || seen[k]) return;
         seen[k] = 1;
-        list.push({ image: it.image, time: it.time, closeFriends: it.closeFriends, mine: storyArchived(g, it), n: list.length });
+        list.push({ image: it.image, time: it.time, closeFriends: it.closeFriends, note: it.note, likedBy: it.likedBy, mine: storyArchived(g, it), n: list.length });
       });
     return list.sort(function (a, b) {
       var da = storyDate(a), db = storyDate(b);
@@ -602,6 +602,7 @@
 
   // IG 互動用的固定文字（data.js 的 instagram.text，沒寫就用預設）
   var T_DEFAULT = {
+    storyActivity: '活動',
     commentsTitle: '留言', commentPlaceholder: '為 {user} 新增留言……', postButton: '發佈', reply: '回覆',
     viewAllComments: '查看全部 {n} 則留言', noComments: '還沒有留言', justNow: '剛剛',
     shareTitle: '分享', sendButton: '傳送', sent: '已傳送', copyLink: '複製連結', linkCopied: '已複製連結',
@@ -997,7 +998,11 @@
         '</div>' +
         '<div class="ig-story-img" id="ig-story-media"></div>' +
         '<div class="ig-story-tap"><span data-prev></span><span data-next></span></div>' +
-        '<form class="ig-story-foot" id="ig-story-form" autocomplete="off">' +
+        // 帳號主人自己在限動下方的留言（data.js 限動加 note: "文字"）
+        '<div class="ig-story-note" id="ig-story-note"><img src="' + esc(g.avatar) + '" alt=""><span></span></div>' +
+        // 自己的限動：下方顯示「活動」（按讚的人頭貼＋紅色愛心），不是傳訊息
+        (g === currentAccount() ? '<div class="ig-story-act" id="ig-story-act"></div>' : '') +
+        '<form class="ig-story-foot' + (g === currentAccount() ? ' own' : '') + '" id="ig-story-form" autocomplete="off">' +
           '<input class="ig-story-msg" name="m" placeholder="' + esc(L.storyMessagePlaceholder) + '" autocomplete="off">' +
           '<button type="button" class="ig-ico" id="ig-story-like">' + ICON.heart + '</button>' +
         '</form>' +
@@ -1012,8 +1017,13 @@
     var bars = document.querySelectorAll('.ig-story-bars i');
     var startedAt = 0, remaining = 5000;
     function likeKey() { return actKey(g.username + '/story/' + which + '/' + i); }
+    // data.js 限動的 likedBy: ["帳號"] = 預設已按讚的人（玩家按過就照玩家的）
+    function likedNow() {
+      var k = likeKey();
+      return k in store.storyLikes ? !!store.storyLikes[k] : (items[i].likedBy || []).indexOf(currentAccount().username) >= 0;
+    }
     function paintLike() {
-      var on = !!store.storyLikes[likeKey()], btn = $('#ig-story-like');
+      var on = likedNow(), btn = $('#ig-story-like');
       btn.innerHTML = on ? ICON.heartFill : ICON.heart;
       btn.classList.toggle('on-like', on);
     }
@@ -1056,6 +1066,14 @@
       paintSound(isVideo);
       $('.ig-story-time').textContent = items[i].time || '';
       $('#ig-story-cf').style.display = items[i].closeFriends ? '' : 'none';
+      var note = $('#ig-story-note');
+      note.style.display = items[i].note ? '' : 'none';
+      note.querySelector('span').textContent = items[i].note || '';
+      var act = $('#ig-story-act');
+      if (act) act.innerHTML = '<span class="ig-story-act-faces">' + (items[i].likedBy || []).map(function (u) {
+        var a = profileByName(u);
+        return '<i><img src="' + esc(a ? a.avatar : 'images/default_avatar.png') + '" alt="">' + ICON.heartFill + '</i>';
+      }).join('') + '</span><b>' + esc(T().storyActivity) + '</b>';
       // 典藏頁：只有玩家自己典藏的才有「⋯」（可以放回個人檔案）
       var menu = document.querySelector('[data-story-menu]');
       if (menu && fromArchive) menu.style.visibility = items[i].mine ? '' : 'hidden';
@@ -1110,7 +1128,7 @@
     });
     $('#ig-story-like').onclick = function () {
       var k = likeKey();
-      if (store.storyLikes[k]) delete store.storyLikes[k]; else store.storyLikes[k] = 1;
+      store.storyLikes[k] = likedNow() ? 0 : 1;
       saveStore(); paintLike();
     };
     // 往下滑關閉；只是點一下才換上一則／下一則

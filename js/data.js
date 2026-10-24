@@ -443,6 +443,9 @@ window.SITE_DATA = {
             // 依日期排序；story2 是摯友限時（closeFriends: true，只有摯友名單裡的人看得到）
             stories: [
               { image: "images/1_story_20240820.jpg", time: "2024年8月20日" },
+              { image: "images/1_story_250520.jpg", time: "2025年5月20日",
+                note: "不是今天～ㅎㅎ",        // 左下角 Shotaro 自己的留言
+                likedBy: ["252525252_"] },    // 預設按讚的人
               { image: "images/1_story_20250526.jpg", time: "2025年5月26日" },
               { image: "images/1_story_20250709.jpg", time: "2025年7月9日" },
               { image: "images/1_story_20251030.jpg", time: "2025年10月30日" },
