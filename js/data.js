@@ -424,7 +424,7 @@ window.SITE_DATA = {
           // 典藏的限時動態（照日期）；closeFriends: true = 摯友限時（綠色標籤）
           stories: [
             { image: "images/1_story2_20250318.jpg", time: "2025年3月18日", closeFriends: true },
-            { image: "images/1_story2_20250319.jpg", time: "2025年3月19日", closeFriends: true },
+            { image: "images/1_story2_20250318-2.jpg", time: "2025年3月18日", closeFriends: true },
             // 論壇 452_.rq 貼出來的那則「秒刪」限動（叫あにき的那支影片）
             { image: "images/forum_1_c3.mp4", time: "2025年5月24日" },
             { image: "images/1_story2_20251121.jpg", time: "2025年11月21日", closeFriends: true },
