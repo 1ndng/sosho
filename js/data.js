@@ -540,28 +540,25 @@ window.SITE_DATA = {
           { image: "images/2_story_20260709.jpg", label: "go",
             // 依日期排序；.mp4 影片會自動播放，播完才換下一則
             stories: [
+              { image: "images/2_story_20250301.jpg", time: "2025年3月1日" },
               { image: "images/2_story_20250526.jpg", time: "2025年5月26日" },
+              { image: "images/2_story_20250526-2.jpg", time: "2025年5月26日" },
+              { image: "images/2_story_20250526-3.jpg", time: "2025年5月26日" },
               { image: "images/2_story_20250715.jpg", time: "2025年7月15日" },
               { image: "images/2_story_20250722.jpg", time: "2025年7月22日" },
               { image: "images/2_story_20251121.jpg", time: "2025年11月21日" },
               { image: "images/2_story_20260117.jpg", time: "1月17日" },
-              { image: "images/2_story_20260128.jpg", time: "1月28日" },
-              { image: "images/2_story2_20260202.jpg", time: "2月2日", closeFriends: true },
-              { image: "images/2_story_20260202.jpg", time: "2月2日" },
               { image: "images/2_story_20260209.jpg", time: "2月9日" },
-              { image: "images/2_story_20260219.jpg", time: "2月19日" },
-              { image: "images/2_story_20260219-2.jpg", time: "2月19日" },
-              { image: "images/2_story_20260225.jpg", time: "2月25日" },
+              { image: "images/2_story_20260305.jpg", time: "3月5日" },
+              { image: "images/2_story_20260312.jpg", time: "3月12日" },
+              { image: "images/2_story_20260312-2.jpg", time: "3月12日" },
+              { image: "images/2_story2_20260410.jpg", time: "4月10日", closeFriends: true },
+              { image: "images/2_story_20260410.jpg", time: "4月10日" },
               { image: "images/2_story2_20260427.jpg", time: "4月27日", closeFriends: true },
               { image: "images/2_story_20260427.jpg", time: "4月27日" },
-              { image: "images/2_story_20260506.mp4", time: "5月6日" },
               { image: "images/2_story_20260606.mp4", time: "6月6日" },
-              { image: "images/2_story_20260609.jpg", time: "6月9日" },
-              { image: "images/2_story_20260609-2.jpg", time: "6月9日" },
               { image: "images/2_story_20260709.jpg", time: "7月9日" },
-              { image: "images/2_story_20260830.jpg", time: "8月30日" },
-              { image: "images/2_story_20261001.jpg", time: "10月1日" },
-              { image: "images/2_story_20261004.jpg", time: "10月4日" }
+              { image: "images/2_story_20260830.jpg", time: "8月30日" }
             ] }
         ],
         // 摯友名單：寫在這裡的帳號才看得到 closeFriends: true（story2）的限時動態
