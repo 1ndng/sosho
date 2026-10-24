@@ -155,3 +155,7 @@
 .kk-link b { font-size: 14px; font-weight: 600; line-height: 1.35; }
 .kk-link span { font-size: 11px; color: #3b6db8; word-break: break-all; }
 .kk-link:active { filter: brightness(.95); }
+
+/* Kakao 收回的訊息 */
+.kk-msg .kk-bubble.kk-recalled { display: flex; align-items: center; gap: 5px; background: rgba(255,255,255,.55); color: #6b7682; font-size: 13.5px; }
+.kk-recalled svg { width: 16px; height: 16px; flex: none; }

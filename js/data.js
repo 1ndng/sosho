@@ -848,17 +848,24 @@ window.SITE_DATA = {
         unread: 0,       // 一開始在聊天列表顯示的未讀數
         messages: [
           { date: "2026年3月8日 星期日" },   // 認識時的寒暄（無關主線）
-          { from: "them", text: "test192", time: "test193" },
-          { from: "me", text: "test194", time: "test195" },
-          { from: "them", text: "test196", time: "test197" },
+          { from: "me", text: "很開心認識你😊", time: "下午 4:24" },
+          { from: "them", text: "me too. 以後李炤熙欺負我我就來跟哥告狀^^", time: "下午 4:26" },
+          { from: "me", text: "我要跟他說你又不叫哥。", time: "下午 4:30" },
+          { from: "them", text: "🧟", time: "下午 4:31" },
           { date: "2026年6月14日 星期日" },   // 燦榮透露了一些炤熙的故事
-          { from: "them", text: "test566", time: "test567" },
-          { from: "me", text: "test568", time: "test569" },
-          { date: "2026年10月11日 星期日" },   // 三人一起出去，燦榮傳兩人的合照給將太郎
-          { from: "them", image: "images/at_msg_20261011.jpg", time: "test570" },
-          { from: "them", image: "images/at_msg_20261011-2.jpg", time: "test570" },
-          { from: "them", text: "test571", time: "test570" },
-          { from: "me", text: "test572", time: "test573" }
+          { from: "them", text: "taro哥", time: "下午 3:02" },
+          { from: "them", text: "fu28,;.4", time: "下午 3:17" },
+          { from: "me", text: "？怎麼了", time: "下午 3:19" },
+          // 照片上傳後（建議檔名 at_msg_20260614.jpg、at_msg_20260614-2.jpg）把下面兩行前面的 // 拿掉
+          // { from: "them", image: "images/at_msg_20260614.jpg", time: "下午 3:20" },
+          // { from: "them", image: "images/at_msg_20260614-2.jpg", time: "下午 3:26" },
+          { from: "them", recalled: true, time: "下午 3:27" },   // 收回了一張照片
+          { from: "me", text: "ㅋㅋㅋㅋㅋㅋㅋㅋ儲存了", time: "下午 3:28" },
+          { from: "them", text: "李燦榮你完蛋了。", time: "下午 3:29" },
+          { date: "2026年10月12日 星期一" },   // 10/11 三人一起出去，燦榮半夜傳兩人的合照給將太郎
+          { from: "them", image: "images/at_msg_20261012.jpg", time: "上午 2:58" },
+          { from: "them", image: "images/at_msg_20261012-2.jpg", time: "上午 2:58" },
+          { from: "me", text: "感謝😊但是不要再熬夜了", time: "上午 9:01", read: true }
         ],
         // 關鍵字自動回覆：玩家傳的訊息「包含」任一個 keywords 就回 reply（可多句，依序送出）
         replies: [
@@ -971,7 +978,8 @@ window.SITE_DATA = {
       chatsTitle: "聊天",
       inputPlaceholder: "輸入訊息",
       ampm: ["上午", "下午"],
-      photoLabel: "照片"            // 聊天列表裡最後一則是照片時顯示的字
+      photoLabel: "照片",           // 聊天列表裡最後一則是照片時顯示的字
+      recalledText: "已收回訊息"     // 收回的訊息
     }
   }
 };
