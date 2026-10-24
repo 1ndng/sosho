@@ -391,61 +391,67 @@ window.SITE_DATA = {
       {
         images: ["images/1_post_20261003.jpg",],
         likedBy: { avatar: "images/2_avatar.jpg", name: "252525252_" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
-        caption: "test117",
+        caption: "working..🙂‍↕️",
         time: "10月3日"
+      },
+      {
+        images: ["images/1_post_20260924.jpg"],
+        likedBy: { avatar: "images/eunseok.jpg", name: "seokkkk" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
+        caption: "",
+        time: "9月24日"
       },
       {
         images: ["images/1_post_260601.jpg", "images/1_post_260601-2.jpg", "images/1_post_260601-3.jpg",],
         likedBy: { avatar: "images/sungchan.jpg", name: "sungchan913" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
-        caption: "test117",
+        caption: "送一朵花給你🌼",
         time: "6月1日"
       },
       {
         images: ["images/1_post_20260518.jpg", "images/1_post_20260518-2.jpg", "images/1_post_20260518-3.jpg"],
         likedBy: { avatar: "images/anton.jpg", name: "antonnie" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
-        caption: "test302",
+        caption: "每個造型都很喜歡ㅎㅎ~",
         time: "5月18日"
       },
       {
         images: ["images/1_post_20260102.jpg", "images/1_post_20260102-2.jpg", "images/1_post_20260102-3.jpg",],
         likedBy: { avatar: "images/2_avatar.jpg", name: "252525252_" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
-        caption: "test117",
+        caption: "Happy New Year🎇",
         time: "1月2日"
       },
       {
         images: ["images/1_post_20251217.jpg", "images/1_post_20251217-2.jpg",],
         likedBy: { avatar: "images/sungchan.jpg", name: "sungchan913" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
-        caption: "test117",
+        caption: "",
         time: "2025年12月17日"
       },
       {
         images: ["images/1_post_20251120.jpg", "images/1_post_20251120-2.jpg"],
         likedBy: { avatar: "images/eunseok.jpg", name: "seokkkk" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
-        caption: "test277",
+        caption: "",
         time: "2025年11月20日"
       },
       {
         images: ["images/1_post_20250310.jpg", "images/1_post_20250310-2.jpg", "images/1_post_20250310-3.jpg", "images/1_post_20250310-4.jpg"],
         likedBy: { avatar: "images/wonbin.jpg", name: "bin032" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
-        caption: "test117",
+        caption: "😎😎",
         time: "2025年3月10日"
       },
       {
         images: ["images/1_post_20240822.jpg", "images/1_post_20240822-2.jpg"],
         likedBy: { avatar: "images/sungchan.jpg", name: "sungchan913" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
-        caption: "test214",
+        caption: "📷:お母さん♥︎♥︎",
         time: "2024年8月22日"
       },
       {
         images: ["images/1_post_20240607.jpg", "images/1_post_20240607-2.jpg"],
         likedBy: { avatar: "images/wonbin.jpg", name: "bin032" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
-        caption: "test274",
+        caption: "In Koreaㅋㅋ",
         time: "2024年6月7日"
       },
       {
         images: ["images/1_post_20240427.jpg", "images/1_post_20240427-2.jpg"],
         likedBy: { avatar: "images/2_avatar.jpg", name: "252525252_" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
-        caption: "test271",
+        caption: "",
         time: "2024年4月27日"
       }
         ]
@@ -792,7 +798,9 @@ window.SITE_DATA = {
           { from: "them", text: "test566", time: "test567" },
           { from: "me", text: "test568", time: "test569" },
           { date: "2026年10月11日 星期日" },   // 三人一起出去，燦榮傳兩人的合照給將太郎
-          { from: "them", text: "test570", time: "test571" },
+          { from: "them", image: "images/at_msg_20261011.jpg", time: "test570" },
+          { from: "them", image: "images/at_msg_20261011-2.jpg", time: "test570" },
+          { from: "them", text: "test571", time: "test570" },
           { from: "me", text: "test572", time: "test573" }
         ],
         // 關鍵字自動回覆：玩家傳的訊息「包含」任一個 keywords 就回 reply（可多句，依序送出）
