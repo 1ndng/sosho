@@ -223,11 +223,11 @@ window.SITE_DATA = {
       { image: "images/3_story_20251126.jpg", label: "🧡",
         stories: [
           // 11/26 一次補發以前的照片：左下角自己打上原本的日期
-          { image: "images/3_story_20251126.jpg", time: "2025年11月26日", note: "(2025/5/26)" },
-          { image: "images/3_story_20251126-2.jpg", time: "2025年11月26日", note: "(2025/5/28)" },
-          { image: "images/3_story_20251126-3.jpg", time: "2025年11月26日", note: "(2025/7/15)" },
-          { image: "images/3_story_20251126-4.jpg", time: "2025年11月26日", note: "(2025/7/15)" },
-          { image: "images/3_story_20251126-5.jpg", time: "2025年11月26日", note: "(2025/11/23)" },
+          { image: "images/3_story_20251126.jpg", time: "2025年11月26日", note: "2025/5/26" },
+          { image: "images/3_story_20251126-2.jpg", time: "2025年11月26日", note: "2025/5/28" },
+          { image: "images/3_story_20251126-3.jpg", time: "2025年11月26日", note: "2025/7/15" },
+          { image: "images/3_story_20251126-4.jpg", time: "2025年11月26日", note: "2025/7/15" },
+          { image: "images/3_story_20251126-5.jpg", time: "2025年11月26日", note: "2025/11/23" },
           { image: "images/3_story_20251231.jpg", time: "2025年12月31日" },
           { image: "images/3_story_20260206.jpg", time: "2月6日" },
           { image: "images/3_story_20260206-2.jpg", time: "2月6日" },
