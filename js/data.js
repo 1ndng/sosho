@@ -220,13 +220,14 @@ window.SITE_DATA = {
     shareProfileLabel: "分享個人檔案",
     // 精選動態：image = 圓圈封面，stories = 點進去看到的內容
     highlights: [
-      { image: "images/3_story_20250526.jpg", label: "🧡",
+      { image: "images/3_story_20251126.jpg", label: "🧡",
         stories: [
-          { image: "images/3_story_20250526.jpg", time: "2025年5月26日" },
-          { image: "images/3_story_20250528.jpg", time: "2025年5月28日" },
-          { image: "images/3_story_20250715.jpg", time: "2025年7月15日" },
-          { image: "images/3_story_20250715-2.jpg", time: "2025年7月15日" },
-          { image: "images/3_story_20251123.jpg", time: "2025年11月23日" },
+          // 11/26 一次補發以前的照片：左下角自己打上原本的日期
+          { image: "images/3_story_20251126.jpg", time: "2025年11月26日", note: "(2025/5/26)" },
+          { image: "images/3_story_20251126-2.jpg", time: "2025年11月26日", note: "(2025/5/28)" },
+          { image: "images/3_story_20251126-3.jpg", time: "2025年11月26日", note: "(2025/7/15)" },
+          { image: "images/3_story_20251126-4.jpg", time: "2025年11月26日", note: "(2025/7/15)" },
+          { image: "images/3_story_20251126-5.jpg", time: "2025年11月26日", note: "(2025/11/23)" },
           { image: "images/3_story_20251231.jpg", time: "2025年12月31日" },
           { image: "images/3_story_20260206.jpg", time: "2月6日" },
           { image: "images/3_story_20260206-2.jpg", time: "2月6日" },
@@ -562,7 +563,7 @@ window.SITE_DATA = {
               { image: "images/2_story_20250318.jpg", time: "2025年3月18日" },
               { image: "images/2_story_20250526.jpg", time: "2025年5月26日" },
               { image: "images/2_story_20250526-2.jpg", time: "2025年5月26日" },
-              { image: "images/2_story_20250526-3.jpg", time: "2025年5月26日" },
+              { image: "images/2_story2_20250526-3.jpg", time: "2025年5月26日", closeFriends: true },
               { image: "images/2_story_20250715.jpg", time: "2025年7月15日" },
               { image: "images/2_story_20250722.jpg", time: "2025年7月22日" },
               { image: "images/2_story_20251121.jpg", time: "2025年11月21日" },
