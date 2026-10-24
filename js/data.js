@@ -812,6 +812,9 @@ window.SITE_DATA = {
           { date: "2026年2月22日 星期日" },   // 遠距離：視訊通話 4，決定搬來韓國
           { from: "me", call: "video", duration: "test534", time: "test535" },   // 視訊通話紀錄（duration 寫通話長度，例如 "1:02:33"）
           { from: "me", text: "test536", time: "test537" },
+          { from: "them", image: "images/2_msg_20260222.jpg", time: "test219" },
+          { from: "them", image: "images/2_msg_20260222-2.jpg", time: "test220" },
+          { from: "them", image: "images/2_msg_20260222-3.jpg", time: "test221" },
           { date: "2026年2月27日 星期五" },
           { from: "them", image: "images/2_msg_20260227.jpg", time: "test320" },
           { date: "2026年3月5日 星期四" },   // 交往 100 日、將太郎搬到韓國
@@ -830,10 +833,6 @@ window.SITE_DATA = {
           { from: "me", image: "images/1_msg_20260712.jpg", time: "test217" },
           { date: "2026年8月26日 星期三" },
           { from: "me", image: "images/1_msg_20260826.jpg", time: "test218" },
-          { date: "2026年9月30日 星期三" },
-          { from: "them", image: "images/2_msg_20260930.jpg", time: "test219" },
-          { from: "them", image: "images/2_msg_20260930-2.jpg", time: "test220" },
-          { from: "them", image: "images/2_msg_20260930-3.jpg", time: "test221" },
           { date: "2026年10月3日 星期六" },
           { from: "them", image: "images/2_msg_20261003.jpg", time: "test222" },
           { date: "2026年10月4日 星期日" },
