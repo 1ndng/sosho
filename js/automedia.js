@@ -108,11 +108,10 @@
     }
   });
 
-  // Kakao：放進同一天的日期分隔線底下；那天還沒有就新增一條「2026年4月26日 星期日」
+  // Kakao：放進同一天的日期分隔線底下；那天還沒有就新增一條「2026年4月26日」
   function korDate(d) {
     var y = +d.slice(0, 4), m = +d.slice(4, 6), day = +d.slice(6, 8);
-    var w = '日一二三四五六'.charAt(new Date(y, m - 1, day).getDay());
-    return y + '年' + m + '月' + day + '日 星期' + w;
+    return y + '年' + m + '月' + day + '日';
   }
   function parseKor(s) {
     var m = /(\d{4})\s*[年년]\s*(\d+)\s*[月월]\s*(\d+)\s*[日일]/.exec(s || '');

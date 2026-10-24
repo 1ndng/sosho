@@ -725,15 +725,15 @@ window.SITE_DATA = {
       name: "Shotaro",
       avatar: "images/1_avatar.jpg",
       messages: [
-        { date: "2021年8月31日 星期二" },   // 出發去韓國留學前，把問 AI 的回答存起來
+        { date: "2021年8月31日" },   // 出發去韓國留學前，把問 AI 的回答存起來
         { from: "me", text: "赴韓留學必備韓語用語整理\n\n一、基本問候\n1. 안녕하세요（您好）\n2. 감사합니다（謝謝）\n3. 죄송합니다（對不起）\n4. 처음 뵙겠습니다. 저는 일본에서 온 유학생입니다.（初次見面，我是從日本來的留學生。）\n\n二、學校生活\n1. 교수님, 질문이 있습니다.（教授，我有問題。）\n2. 다시 한번 말씀해 주시겠어요?（可以請您再說一次嗎？）\n3. 과제 마감이 언제예요?（作業的截止日是什麼時候？）\n\n三、日常生活\n1. 이거 얼마예요?（這個多少錢？）\n2. 카드 돼요?（可以刷卡嗎？）\n3. 화장실이 어디예요?（洗手間在哪裡？）\n4. 교통카드 충전해 주세요.（請幫我儲值交通卡。）\n\n四、行政手續\n1. 외국인등록증을 신청하러 왔습니다.（我來申請外國人登錄證。）\n2. 통장을 만들고 싶어요.（我想開立銀行帳戶。）\n\n五、緊急情況\n1. 도와주세요.（請幫幫我。）\n2. 병원에 가야 해요.（我需要去醫院。）\n\n建議您在出發前熟記上述用語，並搭配實際情境反覆練習。抵達韓國後，積極與當地人交流，將有助於您更快適應留學生活。", time: "下午 11:33" },
-        { date: "2022年1月3日 星期一" },   // 寒假回日本前的行李清單
+        { date: "2022年1月3日" },   // 寒假回日本前的行李清單
         { from: "me", text: "護照\n外國人登錄證\n機票（電子票證截圖）\n錢包（日幣、韓幣）\n手機、充電器\n行動電源\n筆電、充電線\n耳機\n羽絨外套\n圍巾、手套\n換洗衣物三天份\n盥洗用品\n隱形眼鏡、眼鏡\n常備藥\n給家人的伴手禮（海苔、柚子茶）\n給媽媽的面膜\n宿舍鑰匙交給室友\n關掉宿舍的暖氣", time: "下午 7:20" },
-        { date: "2025年11月29日 星期六" },   // 小帳密碼線索（1126 + Rasengan）
+        { date: "2025年11月29日" },   // 小帳密碼線索（1126 + Rasengan）
         { from: "me", text: "密碼是交往紀念日+他喜歡的", time: "上午 3:24" },
-        { date: "2026年4月8日 星期三" },   // 暖身菜單
+        { date: "2026年4月8日" },   // 暖身菜單
         { from: "me", text: "慢跑 3分鐘\n開合跳 ×30\n頸部繞環 左右各×8\n肩膀繞環 前後各×10\n手臂畫圈 前後各×10\n胸椎旋轉 左右各×10\n髖關節繞環 左右各×10\n弓箭步轉體 左右各×8\n深蹲 ×15\n側弓步 左右各×10\n踢腿 前後側各×10\n腳踝繞環 左右各×10\n提踵 ×20\n平板支撐 30秒×2\nIsolation 頭、肩、胸、腰 各×8拍\n律動 Bounce／Rock 各×32拍\n腿後側伸展 左右各30秒\n股四頭肌伸展 左右各30秒", time: "下午 10:15" },
-        { date: "2026年7月11日 星期六" },
+        { date: "2026年7月11日" },
         { from: "me", text: "test677", time: "test678" }
       ]
     },
@@ -748,13 +748,13 @@ window.SITE_DATA = {
         messages: [
           // 照片訊息：image 換成圖片路徑（不用寫 text）；me = 手機使用者，them = 對方
           // 通話紀錄：{ from: "me", call: "video"（視訊）或 "voice"（語音）, duration: "通話長度" }
-          { date: "2025年3月21日 星期五" },   // 李炤熙回韓國，相遇後第一則（3/18～3/20 在日本認識、一起去秘境探店）
+          { date: "2025年3月21日" },   // 李炤熙回韓國，相遇後第一則（3/18～3/20 在日本認識、一起去秘境探店）
           { from: "me", text: "有平安回到家嗎☺️", time: "上午 1:28" },
           { from: "them", text: "はい 謝謝這幾天的照顧", time: "上午 1:44" },
           { from: "me", text: "以後保持聯繫吧 不准無視我ㅎㅎ", time: "上午 1:47" },
           { from: "them", text: "ㄷㄷ", time: "上午 1:48" },
           { from: "them", text: "晚安~", time: "上午 1:49" },
-          { date: "2025年4月19日 星期六" },   // 曖昧初期的閒聊
+          { date: "2025年4月19日" },   // 曖昧初期的閒聊
           { from: "them", text: "好無聊 在幹嘛", time: "下午 8:34" },
           { from: "me", image: "images/1_msg_20250419.jpg", time: "下午 8:48" },
           { from: "me", text: "剛吃飽飯食困中~~ 😴", time: "下午 8:48" },
@@ -763,27 +763,27 @@ window.SITE_DATA = {
           { from: "me", text: "好懷念..🥺", time: "下午 8:56" },
           { from: "them", text: "什麼時候要來韓國玩？", time: "下午 9:03" },
           { from: "me", text: "要去的話會跟你說的，別擔心~", time: "下午 9:04" },
-          { date: "2025年5月13日 星期二" },
+          { date: "2025年5月13日" },
           { from: "me", text: "sohee呀 如果說到日本 你第一個會想到什麼？", time: "下午 2:02" },
           { from: "them", text: "Naruto.", time: "下午 5:26" },
           { from: "me", text: "🙂‍↕️", time: "下午 5:58" },
-          { date: "2025年5月19日 星期一" },   // 將太郎到韓國
+          { date: "2025年5月19日" },   // 將太郎到韓國
           { from: "me", text: "猜猜我在哪~", time: "上午 11:38" },
           { from: "them", text: "你來韓國了？", time: "下午 12:05" },
           { from: "me", text: "沒錯 要見面嗎ㅋㅋ", time: "下午 12:08" },
           { from: "them", text: "要。", time: "下午 12:08" },
-          { date: "2025年5月27日 星期二" },   // 將太郎回日本
+          { date: "2025年5月27日" },   // 將太郎回日本
           { from: "them", text: "到了嗎？", time: "上午 3:39" },
           { from: "me", text: "到啦~要去洗澡了 早點睡吧", time: "上午 3:47" },
           { from: "me", text: "太晚睡小心長不高ㅋㅋㅋ", time: "上午 3:48" },
           { from: "them", text: "...", time: "上午 3:49" },
           { from: "them", image: "images/2_msg_20250527.jpg", time: "上午 3:49" },
           { from: "them", text: "看來你還不懂。", time: "上午 3:50" },
-          { date: "2025年5月28日 星期三" },
+          { date: "2025年5月28日" },
           { from: "them", call: "video", duration: "1:03:47", time: "下午 11:35" },
-          { date: "2025年5月29日 星期四" },
+          { date: "2025年5月29日" },
           { from: "me", text: "晚安😴😴", time: "上午 12:40" },
-          { date: "2025年6月3日 星期二" },
+          { date: "2025年6月3日" },
           { from: "me", image: "images/1_msg_20250603.jpg", time: "上午 7:17" },
           { from: "me", text: "今天行程好早ㅎㅎ", time: "上午 7:19" },
           { from: "me", text: "感覺臉還很腫", time: "上午 7:21" },
@@ -792,7 +792,7 @@ window.SITE_DATA = {
           { from: "them", text: "今天有早八課", time: "上午 7:50" },
           { from: "them", text: "準備面對小孩..", time: "上午 7:51" },
           { from: "me", text: "你也還是小孩呀~~ 🫳", time: "上午 8:22" },
-          { date: "2025年6月17日 星期二" },
+          { date: "2025年6月17日" },
           { from: "them", image: "images/2_msg_20250617.jpg", time: "下午 6:03" },
           { from: "them", text: "如果我去打耳洞", time: "下午 6:04" },
           { from: "them", text: "怎麼樣？", time: "下午 6:05" },
@@ -801,41 +801,41 @@ window.SITE_DATA = {
           { from: "me", text: "開玩笑的~我覺得會很帥氣😳", time: "下午 6:18" },
           { from: "them", text: "ㅎㅎ", time: "下午 6:22" },
           { from: "them", text: "其實只要跟我說第二句就好。", time: "下午 6:25" },
-          { date: "2025年6月22日 星期日" },
+          { date: "2025年6月22日" },
           { from: "them", image: "images/2_msg_20250622.jpg", time: "上午 10:53" },
           { from: "them", text: "被理髮師陷害了。", time: "上午 10:54" },
           { from: "me", text: "我懂你。", time: "上午 10:55" },
-          { date: "2025年7月9日 星期三" },
+          { date: "2025年7月9日" },
           { from: "me", image: "images/1_msg_20250709.jpg", time: "下午 9:48" },
           { from: "me", text: "終於能吃飯ㅜㅜ", time: "下午 9:50" },
           { from: "them", text: "真是辛苦", time: "下午 9:57" },
           { from: "them", text: "一起吃吧。", time: "下午 9:58" },
           { from: "them", call: "video", duration: "2:45:12", time: "下午 9:59" },
-          { date: "2025年7月15日 星期二" },
+          { date: "2025年7月15日" },
           { from: "them", text: "在嗎", time: "下午 11:19" },
           { from: "me", text: "응", time: "下午 11:19" },
           { from: "them", call: "video", duration: "5:24:36", time: "下午 11:20" },
-          { date: "2025年7月22日 星期二" },
+          { date: "2025年7月22日" },
           { from: "me", image: "images/1_msg_20250722.jpg", time: "下午 1:07" },
           { from: "me", text: "健身結束🥳", time: "下午 1:07" },
           { from: "them", call: "video", duration: "0:03:38", time: "下午 1:08" },
           { from: "them", call: "video", duration: "1:43:52", time: "下午 6:02" },
-          { date: "2025年8月4日 星期一" },
+          { date: "2025年8月4日" },
           { from: "them", image: "images/2_msg_20250804.jpg", time: "上午 10:39" },
           { from: "them", text: "如何", time: "上午 10:43" },
           { from: "me", text: "很帥氣呢~？ㅎㅎ", time: "上午 11:07" },
-          { date: "2025年8月9日 星期六" },
+          { date: "2025年8月9日" },
           { from: "them", image: "images/2_msg_20250809.jpg", time: "上午 11:48" },
           { from: "them", text: "gmn~~", time: "上午 11:50" },
           { from: "me", text: "☺️☺️", time: "下午 2:27" },
           { from: "me", image: "images/1_msg_20250809.jpg", time: "下午 2:28" },
-          { date: "2025年8月21日 星期四" },
+          { date: "2025年8月21日" },
           { from: "them", image: "images/2_msg_20250821.jpg", time: "下午 9:09" },
           { from: "them", text: "在練舞室", time: "下午 9:09" },
           { from: "me", text: "？！！原來你會跳舞嗎", time: "下午 9:11" },
           { from: "them", expired: "video", time: "下午 10:19" },
           { from: "them", text: "下次一起跳吧", time: "下午 10:23" },
-          { date: "2025年8月29日 星期五" },
+          { date: "2025年8月29日" },
           { from: "them", image: "images/2_msg_20250829.jpg", time: "上午 9:28" },
           { from: "them", text: "老師居然也要拍形象照", time: "上午 9:29" },
           { from: "them", text: "等等吃什麼呢", time: "上午 9:31" },
@@ -843,27 +843,27 @@ window.SITE_DATA = {
           { from: "me", expired: true, time: "下午 12:07" },
           { from: "me", text: "我吃這個~😋", time: "下午 12:09" },
           { from: "me", text: "造型很適合你。", time: "下午 12:19" },
-          { date: "2025年9月10日 星期三" },
+          { date: "2025年9月10日" },
           { from: "me", image: "images/1_msg_20250910.jpg", time: "上午 7:24" },
           { from: "me", text: "今天早上又有行程ㅎㅎ", time: "上午 7:26" },
           { from: "them", text: "good morning", time: "上午 7:48" },
           { from: "them", text: "파이팅", time: "上午 7:49" },
-          { date: "2025年9月17日 星期三" },
+          { date: "2025年9月17日" },
           { from: "them", image: "images/2_msg_20250917.jpg", time: "下午 11:33" },
           { from: "them", text: "想看到你的臉", time: "下午 11:34" },
           { from: "me", call: "video", duration: "0:24:58", time: "下午 11:36" },
-          { date: "2025年9月18日 星期四" },
+          { date: "2025年9月18日" },
           { from: "me", text: "其實可以說想我", time: "上午 12:04" },
           { from: "me", text: "ㅋㅋ", time: "上午 12:05" },
-          { date: "2025年10月12日 星期日" },
+          { date: "2025年10月12日" },
           { from: "me", text: "戴眼鏡很帥氣呢？ㅋㅋ", time: "下午 8:24" },
           { from: "them", text: "你看了動態啊", time: "下午 10:09" },
           { from: "them", text: "我會常戴的", time: "下午 10:10" },
-          { date: "2025年11月5日 星期三" },
+          { date: "2025年11月5日" },
           { from: "them", text: "眼睛完全睜不開", time: "上午 7:39" },
           { from: "me", call: "video", duration: "0:07:35", time: "上午 7:48" },
           { from: "me", text: "別遲到啦~", time: "上午 7:57" },
-          { date: "2025年11月18日 星期二" },
+          { date: "2025年11月18日" },
           { from: "them", text: "因為工作", time: "下午 5:30" },
           { from: "them", text: "我後天要去日本", time: "下午 5:30" },
           { from: "me", text: "在哪裡？", time: "下午 5:31" },
@@ -871,97 +871,97 @@ window.SITE_DATA = {
           { from: "them", text: "期待嗎？", time: "下午 9:09" },
           { from: "me", text: "...", time: "下午 9:11" },
           { from: "me", text: "你呢？", time: "下午 9:14" },
-          { date: "2025年11月27日 星期四" },   // 11/26 交往後的第一則
+          { date: "2025年11月27日" },   // 11/26 交往後的第一則
           { from: "them", text: "請多指教~", time: "上午 1:34" },
           { from: "me", text: "嗯~請多指教☺️", time: "上午 1:35" },
-          { date: "2025年11月28日 星期五" },   // 遠距離開始：幾乎每晚視訊
+          { date: "2025年11月28日" },   // 遠距離開始：幾乎每晚視訊
           { from: "them", text: "到家了。", time: "下午 8:41" },
           { from: "me", text: "辛苦了~今天也很累吧", time: "下午 8:52" },
           { from: "me", text: "要視訊嗎？", time: "下午 8:53" },
           { from: "me", call: "video", duration: "1:52:16", time: "下午 8:53" },
-          { date: "2025年11月29日 星期六" },
+          { date: "2025年11月29日" },
           { from: "them", expired: true, time: "下午 7:36" },
           { from: "them", text: "學生送的。", time: "下午 7:37" },
           { from: "me", text: "好可愛ㅋㅋ 跟你很像", time: "下午 7:45" },
           { from: "them", text: "?", time: "下午 7:46" },
           { from: "them", call: "video", duration: "3:08:41", time: "下午 7:47" },
-          { date: "2025年12月3日 星期三" },
+          { date: "2025年12月3日" },
           { from: "me", text: "今天行程好晚才結束ㅜㅜ", time: "下午 10:14" },
           { from: "me", text: "還醒著嗎", time: "下午 10:15" },
           { from: "them", text: "剛洗完澡", time: "下午 10:31" },
           { from: "them", call: "video", duration: "0:47:09", time: "下午 10:32" },
-          { date: "2025年12月7日 星期日" },
+          { date: "2025年12月7日" },
           { from: "me", expired: true, time: "下午 7:22" },
           { from: "me", text: "下雪了❄️", time: "下午 7:22" },
           { from: "them", text: "首爾還沒", time: "下午 7:40" },
           { from: "them", text: "好羨慕", time: "下午 7:41" },
           { from: "me", call: "video", duration: "4:12:55", time: "下午 7:43" },
-          { date: "2025年12月14日 星期日" },
+          { date: "2025年12月14日" },
           { from: "them", text: "在幹嘛", time: "下午 9:05" },
           { from: "me", text: "在想你ㅎㅎ", time: "下午 9:06" },
           { from: "them", text: "...", time: "下午 9:06" },
           { from: "them", call: "video", duration: "2:26:30", time: "下午 9:07" },
-          { date: "2025年12月27日 星期六" },
+          { date: "2025年12月27日" },
           { from: "them", text: "日本現在很冷嗎？", time: "下午 10:07" },
           { from: "me", text: "蠻冷的🥶這幾天都在下雪", time: "下午 10:08" },
           { from: "them", text: "想好要吃什麼了", time: "下午 10:10" },
           { from: "me", text: "☺️", time: "下午 10:11" },
-          { date: "2026年1月2日 星期五" },   // 跨年後回韓國（同一張照片也在 Shotaro 典藏的摯友限動）
+          { date: "2026年1月2日" },   // 跨年後回韓國（同一張照片也在 Shotaro 典藏的摯友限動）
           { from: "me", image: "images/1_msg_20260102.jpg", time: "下午 11:07" },
           { from: "me", text: "這張怎麼樣ㅋㅋ", time: "下午 11:07" },
           { from: "them", text: "可愛~", time: "下午 11:09" },
-          { date: "2026年1月4日 星期日" },
+          { date: "2026年1月4日" },
           { from: "them", text: "回來第二天就好想日本。", time: "下午 8:18" },
           { from: "me", text: "想日本還是想我？ㅋㅋ", time: "下午 8:24" },
           { from: "them", text: "都想。", time: "下午 8:25" },
           { from: "them", call: "video", duration: "1:15:48", time: "下午 8:25" },
-          { date: "2026年1月9日 星期五" },
+          { date: "2026年1月9日" },
           { from: "them", expired: true, time: "下午 10:47" },
           { from: "them", text: "改作業改到現在", time: "下午 10:47" },
           { from: "me", text: "老師辛苦了~🫡", time: "下午 10:49" },
           { from: "me", call: "video", duration: "0:38:20", time: "下午 10:50" },
-          { date: "2026年1月18日 星期日" },
+          { date: "2026年1月18日" },
           { from: "me", text: "今天有空嗎", time: "下午 7:58" },
           { from: "them", text: "有。", time: "下午 8:03" },
           { from: "them", call: "video", duration: "3:31:07", time: "下午 8:03" },
-          { date: "2026年2月8日 星期日" },   // 遠距離：思考遠距離、生活和愛情的取捨
+          { date: "2026年2月8日" },   // 遠距離：思考遠距離、生活和愛情的取捨
           { from: "me", call: "video", duration: "4:24:47", time: "下午 10:35" },
-          { date: "2026年2月9日 星期一" },
+          { date: "2026年2月9日" },
           { from: "them", text: "我需要一點時間思考", time: "上午 4:12" },
           { from: "me", text: "我也是", time: "上午 4:19" },
-          { date: "2026年2月22日 星期日" },   // 決定搬來韓國
+          { date: "2026年2月22日" },   // 決定搬來韓國
           { from: "me", text: "在幹嘛~", time: "下午 6:24" },
           { from: "them", image: "images/2_msg_20260222.jpg", time: "下午 7:12" },
           { from: "them", call: "video", duration: "0:02:32", time: "下午 7:13" },
           { from: "them", image: "images/2_msg_20260222-2.jpg", time: "下午 7:15" },
           { from: "them", text: "晚安~", time: "下午 7:16" },
           { from: "me", text: "ㅋㅋ現在才幾點呢", time: "下午 7:17" },
-          { date: "2026年3月4日 星期三" },
+          { date: "2026年3月4日" },
           { from: "me", text: "在嗎", time: "上午 11:03" },
           { from: "them", call: "video", duration: "1:00:32", time: "下午 12:02" },
           { from: "me", text: "真期待~", time: "下午 1:04" },
           { from: "them", text: "謝謝你。", time: "下午 1:05" },
           { from: "me", text: "我也謝謝你😊", time: "下午 1:06" },
-          { date: "2026年3月24日 星期二" },
+          { date: "2026年3月24日" },
           { from: "them", text: "摸魚中", time: "下午 2:03" },
           { from: "them", image: "images/2_msg_20260324.jpg", time: "下午 2:05" },
           { from: "me", text: "錯過了你的摸魚ㅋㅋ", time: "下午 7:23" },
           { from: "me", call: "video", duration: "0:16:57", time: "下午 7:24" },
           { from: "me", text: "等等見~", time: "下午 7:45" },
-          { date: "2026年6月26日 星期五" },
+          { date: "2026年6月26日" },
           { from: "them", image: "images/2_msg_20260626.jpg", time: "上午 7:37" },
           { from: "me", text: "ㅋㅋㅋㅋㅋㅋㅋ可愛", time: "上午 9:24" },
-          { date: "2026年7月6日 星期一" },
+          { date: "2026年7月6日" },
           { from: "them", image: "images/2_msg_20260706.jpg", time: "下午 11:36" },
           { from: "me", recalled: true, time: "下午 11:38" },
           { from: "them", text: "等我。", time: "下午 11:39" },
           { from: "me", text: "😳", time: "下午 11:40" },
-          { date: "2026年7月13日 星期一" },
+          { date: "2026年7月13日" },
           { from: "me", image: "images/1_msg_20260713.jpg", time: "下午 6:38" },
           { from: "me", text: "這個很好喝😋", time: "下午 6:38" },
           { from: "them", text: "等等去嗎", time: "下午 6:41" },
           { from: "me", text: "엉~", time: "下午 6:42" },
-          { date: "2026年10月22日 星期四" },   // 論壇發文後（昨天）；소희傳的，未讀 1
+          { date: "2026年10月22日" },   // 論壇發文後（昨天）；소희傳的，未讀 1
           { from: "them", text: "要公開嗎？", time: "下午 11:30" }
         ],
         // 關鍵字自動回覆：玩家傳的訊息「包含」任一個 keywords 就回 reply（可多句，依序送出）
@@ -977,19 +977,19 @@ window.SITE_DATA = {
         avatar: "images/wonbin.jpg",
         unread: 0,       // 一開始在聊天列表顯示的未讀數
         messages: [
-          { date: "2026年4月8日 星期三" },   // 認識時的寒暄（無關主線）
+          { date: "2026年4月8日" },   // 認識時的寒暄（無關主線）
           { from: "me", text: "以後請多指教了😊", time: "下午 10:13" },
           { from: "me", text: "在韓國我還有很多不懂的呢ㅎㅎ再麻煩你和舞團的大家多多幫忙了🥺", time: "下午 10:14" },
           { from: "them", text: "但哥不需要別人幫忙也已經做得很好了。", time: "下午 10:18" },
           { from: "me", text: "謝謝元彬......🥺", time: "下午 10:20" },
-          { date: "2026年5月19日 星期二" },   // 將太郎訴說吵架的事，원빈陪伴、給建議
+          { date: "2026年5月19日" },   // 將太郎訴說吵架的事，원빈陪伴、給建議
           { from: "them", text: "剛剛沒有說到，但我覺得如果很困擾的話，直接跟他討論比較好吧？他會理解的。", time: "下午 10:56" },
           { from: "me", text: "知道了~謝謝你也這麼關心我的煩惱", time: "下午 11:01" },
           { from: "them", text: "🙄", time: "下午 11:02" },
-          { date: "2026年7月11日 星期六" },   // 兩人在舞室明顯鬧僵，원빈忍不住傳訊息詢問、給建議
+          { date: "2026年7月11日" },   // 兩人在舞室明顯鬧僵，원빈忍不住傳訊息詢問、給建議
           { from: "them", text: "又怎麼了？", time: "下午 10:04" },
           { from: "them", text: "哥我說真的，如果你一直把他當小孩的話，換作是我也會生氣的。", time: "下午 10:47" },
-          { date: "2026年9月27日 星期日" },   // 討論舞蹈、互相鼓勵（無關主線）
+          { date: "2026年9月27日" },   // 討論舞蹈、互相鼓勵（無關主線）
           { from: "me", text: "今天辛苦了~元彬真的跳很好呢，細節的掌握很準確，也很有自己的風格~", time: "下午 10:08" },
           { from: "them", text: "突然是怎麼了", time: "下午 10:11" },
           { from: "them", text: "哥也跳得很好，動作分解的很乾淨、漂亮。", time: "下午 10:18" },
@@ -1008,12 +1008,12 @@ window.SITE_DATA = {
         avatar: "images/anton.jpg",
         unread: 0,       // 一開始在聊天列表顯示的未讀數
         messages: [
-          { date: "2026年3月8日 星期日" },   // 認識時的寒暄（無關主線）
+          { date: "2026年3月8日" },   // 認識時的寒暄（無關主線）
           { from: "me", text: "很開心認識你😊", time: "下午 4:24" },
           { from: "them", text: "me too. 以後李炤熙欺負我我就來跟哥告狀^^", time: "下午 4:26" },
           { from: "me", text: "我要跟他說你又不叫哥。", time: "下午 4:30" },
           { from: "them", text: "🧟", time: "下午 4:31" },
-          { date: "2026年6月14日 星期日" },   // 燦榮透露了一些炤熙的故事
+          { date: "2026年6月14日" },   // 燦榮透露了一些炤熙的故事
           { from: "them", text: "taro哥", time: "下午 3:02" },
           { from: "them", text: "fu28,;.4", time: "下午 3:17" },
           { from: "me", text: "？怎麼了", time: "下午 3:19" },
@@ -1022,7 +1022,7 @@ window.SITE_DATA = {
           { from: "them", recalled: true, time: "下午 3:27" },   // 收回了一張照片
           { from: "me", text: "ㅋㅋㅋㅋㅋㅋㅋㅋ儲存了", time: "下午 3:28" },
           { from: "them", text: "李燦榮你完蛋了。", time: "下午 3:29" },
-          { date: "2026年10月12日 星期一" },   // 10/11 三人一起出去，燦榮半夜傳兩人的合照給將太郎
+          { date: "2026年10月12日" },   // 10/11 三人一起出去，燦榮半夜傳兩人的合照給將太郎
           { from: "them", image: "images/at_msg_20261012.jpg", time: "上午 2:58" },
           { from: "them", image: "images/at_msg_20261012-2.jpg", time: "上午 2:58" },
           { from: "me", text: "感謝😊但是不要再熬夜了", time: "上午 9:01", read: true }
@@ -1040,12 +1040,12 @@ window.SITE_DATA = {
         avatar: "images/sungchan.jpg",
         unread: 0,
         messages: [
-          { date: "2021年10月16日 星期六" },   // 認識時的寒暄（無關主線）
+          { date: "2021年10月16日" },   // 認識時的寒暄（無關主線）
           { from: "them", text: "很開心認識哥~", time: "下午 11:11" },
           { from: "me", text: "ㅎㅎ我也很開心認識你~以後經常一起吃飯吧！", time: "下午 11:49" },
-          { date: "2025年11月26日 星期三" },   // 追問群組裡的細節
+          { date: "2025年11月26日" },   // 追問群組裡的細節
           { from: "them", text: "所以那個朋友到底是誰？", time: "下午 10:24" },
-          { date: "2025年11月27日 星期四" },
+          { date: "2025年11月27日" },
           { from: "me", text: "什麼ㅎㅎ", time: "上午 1:37", read: true }
         ],
         replies: [],
@@ -1058,13 +1058,13 @@ window.SITE_DATA = {
         avatar: "images/eunseok.jpg",
         unread: 0,
         messages: [
-          { date: "2021年9月4日 星期六" },   // 認識時的寒暄（無關主線）
+          { date: "2021年9月4日" },   // 認識時的寒暄（無關主線）
           { from: "me", text: "今天一起吃飯聊得很開心~未來請多指教☺️", time: "下午 2:28" },
           { from: "them", text: "請多指教。", time: "下午 5:03" },
-          { date: "2021年10月21日 星期四" },   // 無關主線
+          { date: "2021年10月21日" },   // 無關主線
           { from: "me", text: "經濟學導論1-10章", time: "上午 11:30" },
           { from: "them", text: "OK感謝", time: "上午 11:32" },
-          { date: "2026年4月13日 星期一" },   // 問群組的約要不要去（無關主線）
+          { date: "2026年4月13日" },   // 問群組的約要不要去（無關主線）
           { from: "them", text: "你去嗎？", time: "下午 7:45" },
           { from: "me", text: "等我確認好近期行程再說", time: "下午 8:11" },
           { from: "them", text: "👍", time: "下午 11:22" },
@@ -1084,45 +1084,45 @@ window.SITE_DATA = {
         members: ["f4", "f5"],          // 성찬、은석（留學時認識的朋友）
         unread: 2,
         messages: [
-          { date: "2022年1月3日 星期一" },   // 將太郎留學結束回日本前一天，終於創了群組（無關主線）
+          { date: "2022年1月3日" },   // 將太郎留學結束回日本前一天，終於創了群組（無關主線）
           { from: "f4", text: "明天幾點的飛機？", time: "下午 10:07" },
           { from: "me", text: "早上九點二十ㅋㅋㅋ你們要來嗎", time: "下午 10:13" },
           { from: "f4", text: "必須得去吧！", time: "下午 10:14" },
           { from: "f5", text: "必須得起床啊......", time: "下午 10:16" },
           { from: "me", text: "謝謝你們🥺", time: "下午 10:17" },
           { from: "me", text: "我可以打電話叫你們起床😊", time: "下午 10:17" },
-          { date: "2025年3月18日 星期二" },   // 將太郎分享遇到了有趣的韓國遊客
+          { date: "2025年3月18日" },   // 將太郎分享遇到了有趣的韓國遊客
           // 之後在這裡放照片：{ from: "me", image: "images/檔名.jpg", time: "下午 3:06" },
           { from: "me", text: "遇到了有趣的韓國人~", time: "下午 3:06" },
           { from: "f4", text: "衣服很好看耶哪裡買的", time: "下午 4:59" },
           { from: "f5", text: "氣場非比尋常。", time: "下午 9:08" },
           { from: "me", text: "😊😊", time: "下午 9:11" },
-          { date: "2025年8月9日 星期六" },   // 閒聊（無關主線）
+          { date: "2025年8月9日" },   // 閒聊（無關主線）
           { from: "f4", text: "在嗎", time: "上午 10:23" },
           { from: "f5", text: "起床了", time: "下午 1:56" },
           { from: "f4", text: "沒事了", time: "下午 5:35" },
           { from: "me", text: "抱歉才看到訊息 怎麼了？", time: "下午 8:01" },
-          { date: "2025年11月25日 星期二" },   // 祝將太郎生日快樂，將太郎當天沒回
+          { date: "2025年11月25日" },   // 祝將太郎生日快樂，將太郎當天沒回
           { from: "f5", text: "taro哥生日快樂", time: "下午 9:08" },
           { from: "f4", text: "有趕上ㅋㅋ生日快樂哥", time: "下午 11:47" },
           { from: "f4", text: "哥居然不在線上？", time: "下午 11:59" },
-          { date: "2025年11月26日 星期三" },   // 將太郎回覆，透露跟某人一起過生日、已在一起的線索
+          { date: "2025年11月26日" },   // 將太郎回覆，透露跟某人一起過生日、已在一起的線索
           { from: "me", text: "謝謝你們~昨天跟別人待著沒機會看訊息ㅎㅎ", time: "下午 1:12" },
           { from: "f4", text: "你什麼時候有其他這麼好的朋友了？介紹一下", time: "下午 3:14" },
           { from: "me", text: "以後你們會見到的~是韓國人~", time: "下午 3:57" },
           { from: "f5", text: "事情越來越有趣了。", time: "下午 6:22" },
           { from: "f4", text: "到底是誰啊？", time: "下午 10:20" },
-          { date: "2026年3月6日 星期五" },   // 將太郎分享昨天搬到韓國
+          { date: "2026年3月6日" },   // 將太郎分享昨天搬到韓國
           { from: "me", text: "等等一起吃飯嗎？好久沒一起吃了ㅋㅋ", time: "下午 5:04" },
           { from: "f5", text: "？？", time: "下午 5:06" },
           { from: "f4", text: "？？", time: "下午 5:19" },
           { from: "me", text: "ㅋㅋㅋ 吃之前很常去的那家吧，我已經到了~", time: "下午 5:26" },
-          { date: "2026年4月13日 星期一" },   // 성찬約三人吃飯（無關主線）
+          { date: "2026年4月13日" },   // 성찬約三人吃飯（無關主線）
           { from: "f4", text: "明晚吃飯嗎？老地方？", time: "下午 7:43" },
           { from: "f5", text: "OK", time: "下午 7:44" },
           { from: "me", text: "OK", time: "下午 11:19" },
           { from: "f4", text: "預約好了", time: "下午 11:30" },
-          { date: "2026年10月22日 星期四" },   // 昨天：성찬傳論壇文章給將太郎、逼問是不是真的（未讀 2）
+          { date: "2026年10月22日" },   // 昨天：성찬傳論壇文章給將太郎、逼問是不是真的（未讀 2）
           { from: "f4", link: "#/forum/1", time: "下午 11:07" },   // 連結訊息：點了打開論壇第 1 篇
           { from: "f4", text: "這是真的嗎？", time: "下午 11:07" }
         ],
