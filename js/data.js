@@ -220,15 +220,15 @@ window.SITE_DATA = {
     shareProfileLabel: "分享個人檔案",
     // 精選動態：image = 圓圈封面，stories = 點進去看到的內容
     highlights: [
-      { image: "images/3_story_20251126.jpg", label: "🧡",
+      { image: "images/3_story_20251231.jpg", label: "🧡",
         stories: [
-          // 11/26 一次補發以前的照片：左下角自己打上原本的日期
-          { image: "images/3_story_20251126.jpg", time: "2025年11月26日", note: "2025/5/26" },
-          { image: "images/3_story_20251126-2.jpg", time: "2025年11月26日", note: "2025/5/28" },
-          { image: "images/3_story_20251126-3.jpg", time: "2025年11月26日", note: "2025/7/15" },
-          { image: "images/3_story_20251126-4.jpg", time: "2025年11月26日", note: "2025/7/15" },
-          { image: "images/3_story_20251126-5.jpg", time: "2025年11月26日", note: "2025/11/23" },
-          { image: "images/3_story_20251231.jpg", time: "2025年12月31日" },
+          // 12/31 一次補發以前的照片：左下角自己打上原本的日期
+          { image: "images/3_story_20251231.jpg", time: "2025年12月31日", note: "2025/5/26" },
+          { image: "images/3_story_20251231-2.jpg", time: "2025年12月31日", note: "2025/5/28" },
+          { image: "images/3_story_20251231-3.jpg", time: "2025年12月31日", note: "2025/7/15" },
+          { image: "images/3_story_20251231-4.jpg", time: "2025年12月31日", note: "2025/7/15" },
+          { image: "images/3_story_20251231-5.jpg", time: "2025年12月31日", note: "2025/11/23" },
+          { image: "images/3_story_20251231-6.jpg", time: "2025年12月31日" },
           { image: "images/3_story_20260206.jpg", time: "2月6日" },
           { image: "images/3_story_20260206-2.jpg", time: "2月6日" },
           { image: "images/3_story_20260305.jpg", time: "3月5日" },
@@ -566,7 +566,7 @@ window.SITE_DATA = {
               { image: "images/2_story2_20250526-3.jpg", time: "2025年5月26日", closeFriends: true },
               { image: "images/2_story_20250715.jpg", time: "2025年7月15日" },
               { image: "images/2_story_20250722.jpg", time: "2025年7月22日" },
-              { image: "images/2_story_20251121.jpg", time: "2025年11月21日" },
+              { image: "images/2_story_20251125.jpg", time: "2025年11月25日" },
               { image: "images/2_story_20260117.jpg", time: "1月17日" },
               { image: "images/2_story_20260209.jpg", time: "2月9日" },
               { image: "images/2_story_20260305.jpg", time: "3月5日" },
@@ -895,16 +895,9 @@ window.SITE_DATA = {
           { from: "them", text: "期待嗎？", time: "下午 9:09" },
           { from: "me", text: "...", time: "下午 9:11" },
           { from: "me", text: "你呢？", time: "下午 9:14" },
-          { date: "2025年11月19日 星期三" },   // 李炤熙明天帶學生去日本比賽（11/20～11/26）
-          { from: "them", text: "test498", time: "test499" },
-          { from: "me", text: "test500", time: "test501" },
-          { date: "2025年11月21日 星期五" },   // 李炤熙生日（在日本）
-          { from: "me", text: "test502", time: "test503" },
-          { from: "them", text: "test504", time: "test505" },
-          { date: "2025年11月26日 星期三" },   // 互訴心意、交往紀念日（建議用「오늘부터 1일」）
-          { from: "them", text: "test506", time: "test507" },
-          { from: "me", text: "test508", time: "test509" },
-          { from: "them", text: "test510", time: "test511" },
+          { date: "2025年11月27日 星期四" },   // 11/26 交往後的第一則
+          { from: "them", text: "請多指教~", time: "上午 1:34" },
+          { from: "me", text: "嗯~請多指教☺️", time: "上午 1:35" },
           { date: "2025年12月14日 星期日" },   // 遠距離：視訊通話 1
           { from: "me", call: "video", duration: "test512", time: "test513" },   // 視訊通話紀錄（duration 寫通話長度，例如 "1:02:33"）
           { from: "me", text: "test514", time: "test515" },
