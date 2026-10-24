@@ -841,7 +841,7 @@
 
         '<button data-act="save" class="ig-act-save">' + (saved ? ICON.bookmarkFill : ICON.bookmark) + '</button>' +
       '</div>' +
-      (cp.p.likedBy && cp.p.likedBy.name ?
+      (!cp.archived && cp.p.likedBy && cp.p.likedBy.name ?
         '<div class="ig-likedby"><img src="' + esc(cp.p.likedBy.avatar || avatarOf(cp.p.likedBy.name)) + '" alt=""><b>' + esc(cp.p.likedBy.name) + '</b>' + esc(L.likedBySuffix) + '</div>' : '') +
       (cp.p.caption ? '<div class="ig-caption"><b>' + esc(cp.owner.username) + '</b> ' + multiline(cp.p.caption) + '</div>' : '') +
 
@@ -859,7 +859,8 @@
     var raw = src === 'archive' ? ((g.archive || {}).posts || [])[idx] : (g.posts || [])[idx];
     if (raw == null) { replaceHash(base); return; }
     var p = postObj(raw), n = p.images.length;
-    curPost = { owner: g, idx: idx, p: p, key: src === 'archive' ? g.username + '/archive' + idx : postKey(g, idx) };
+    curPost = { owner: g, idx: idx, p: p, key: src === 'archive' ? g.username + '/archive' + idx : postKey(g, idx),
+      archived: src === 'archive' || isArchived(g, idx) };   // 典藏的貼文不顯示「xxx 說讚」
     $('#ig-overlay').innerHTML = '';
     $('#ig-scroll').innerHTML =
       '<div class="ig-pagehead">' + historyBackBtn(base) +

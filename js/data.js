@@ -594,13 +594,11 @@ window.SITE_DATA = {
           posts: [
       {
               images: ["images/2_savedpost_20260924.jpg"],
-              likedBy: { avatar: "images/anton.jpg", name: "antonnie" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
               caption: "test283",
               time: "9月24日"
             },
             {
               images: ["images/2_saved_20251204.jpg", "images/2_saved_20251204-2.jpg"],
-              likedBy: { avatar: "images/anton.jpg", name: "antonnie" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
               caption: "test289",
               time: "2025年12月4日"
             }
