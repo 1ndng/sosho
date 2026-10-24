@@ -400,8 +400,8 @@ window.SITE_DATA = {
         ],
         // 摯友名單：寫在這裡的帳號才看得到 closeFriends: true 的限時動態
         closeFriendsList: ["seokkkk", "sungchan913", "bin032", "252525252_", "antonnie"],
-        // 已儲存：預先放好的已儲存貼文（"帳號/貼文編號"，編號從 0 開始）
-        saved: [],
+        // 已儲存：預先放好的已儲存貼文（"帳號/圖片檔名"，寫那則貼文第一張圖的檔名）
+        saved: ["252525252_/2_post_20240822.jpg"],
         // 典藏：stories = 過期的限時動態；posts = 下架的貼文（格式和 posts 一樣）
         archive: { stories: [], posts: [] },
         bio: ["🦦/🍦/🕺"],
@@ -555,11 +555,14 @@ window.SITE_DATA = {
         ],
         // 摯友名單：寫在這裡的帳號才看得到 closeFriends: true（story2）的限時動態
         closeFriendsList: ["shotaroo0", "seokkkk", "sungchan913", "bin032", "antonnie"],
+        // 已儲存：預先放好的已儲存貼文（"帳號/圖片檔名"）
+        saved: ["shotaroo0/1_post_20250318.jpg"],
         // 典藏（登入這個帳號後：設定 → 典藏）
         archive: {
           stories: [
-            { image: "images/2_savedstory_20260125.jpg", time: "1月25日" },
-            { image: "images/2_savedstory_20260602.jpg", time: "6月2日" }
+            { image: "images/2_savedstory_20250318.jpg", time: "2025年3月18日" },
+            { image: "images/2_savedstory_20251124.jpg", time: "2025年11月24日" },
+            { image: "images/2_savedstory_20260305.jpg", time: "3月5日" }
           ],
           posts: [
       {

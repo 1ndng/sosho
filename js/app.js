@@ -623,9 +623,24 @@
   function postHref(owner, idx) {
     return owner === currentAccount() ? '#/ig/post/' + idx : '#/ig/u/' + encodeURIComponent(owner.username) + '/post/' + idx;
   }
+  // k = "帳號/貼文編號" 或 "帳號/圖片檔名"（例如 "252525252_/2_post_20240822.jpg"）
   function refFromKey(k) {
-    var cut = k.lastIndexOf('/'), owner = profileByName(k.slice(0, cut)), idx = +k.slice(cut + 1);
-    return owner && (owner.posts || [])[idx] != null ? { owner: owner, idx: idx } : null;
+    var cut = k.indexOf('/'), owner = profileByName(k.slice(0, cut)), rest = k.slice(cut + 1), idx = +rest;
+    if (owner && !/^\d+$/.test(rest)) {
+      idx = (owner.posts || []).map(function (p) { return postObj(p).images[0] || ''; })
+        .findIndex(function (src) { return src.split('/').pop() === rest; });
+    }
+    return owner && idx >= 0 && (owner.posts || [])[idx] != null ? { owner: owner, idx: idx } : null;
+  }
+  // data.js 裡預先儲存的貼文（換成 "帳號/編號"）
+  function presetSaved(acc) {
+    return (acc.saved || []).map(refFromKey).filter(Boolean).map(function (r) { return postKey(r.owner, r.idx); });
+  }
+  // 這則貼文目前有沒有被儲存：玩家按過就照玩家的；沒按過就看 data.js 有沒有預先儲存
+  function isSaved(key) {
+    var k = actKey(key);
+    if (k in store.saves) return !!store.saves[k];
+    return presetSaved(currentAccount()).indexOf(key) >= 0;
   }
   function gridHTML(refs, emptyText) {
     if (!refs.length) return emptyText ? '<div class="ig-empty">' + esc(emptyText) + '</div>' : '';
@@ -659,7 +674,8 @@
     var mine = Object.keys(store.saves).filter(function (k) { return store.saves[k] && k.indexOf(me) === 0; })
       .sort(function (x, y) { return store.saves[y] - store.saves[x]; })
       .map(function (k) { return k.slice(me.length); });
-    return mine.concat(acc.saved || []).filter(function (k) { return !seen[k] && (seen[k] = 1); })
+    var preset = presetSaved(acc).filter(function (k) { return !((me + k) in store.saves); });
+    return mine.concat(preset).filter(function (k) { return !seen[k] && (seen[k] = 1); })
       .map(refFromKey).filter(Boolean);
   }
 
@@ -799,7 +815,7 @@
 
   function postActionsHTML() {
     var cp = curPost, L = D.instagram, t = T();
-    var liked = !!store.likes[actKey(cp.key)], saved = !!store.saves[actKey(cp.key)], reposted = !!store.reposts[actKey(cp.key)];
+    var liked = !!store.likes[actKey(cp.key)], saved = isSaved(cp.key), reposted = !!store.reposts[actKey(cp.key)];
     return '<div class="ig-actions">' +
         '<button data-act="like" class="' + (liked ? 'on-like' : '') + '">' + (liked ? ICON.heartFill : ICON.heart) + '</button>' +
         '<button data-act="comments">' + ICON.comment + '</button>' +
@@ -1258,7 +1274,7 @@
     if ((el = e.target.closest('[data-act]')) && curPost) {
       var act = el.dataset.act, k = actKey(curPost.key);
       if (act === 'like') { if (store.likes[k]) delete store.likes[k]; else store.likes[k] = 1; }
-      else if (act === 'save') { if (store.saves[k]) delete store.saves[k]; else store.saves[k] = Date.now(); }
+      else if (act === 'save') { store.saves[k] = isSaved(curPost.key) ? 0 : Date.now(); }   // 0 = 取消儲存（連預先儲存的也能取消）
       else if (act === 'repost') {
         if (store.reposts[k]) { delete store.reposts[k]; toast(T().unreposted); }
         else { store.reposts[k] = Date.now(); toast(T().reposted); }
