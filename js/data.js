@@ -436,7 +436,6 @@ window.SITE_DATA = {
             // 論壇 452_.rq 貼出來的那則「秒刪」限動（叫あにき的那支影片）
             { image: "images/forum_1_c3.mp4", time: "2025年5月24日" },
             { image: "images/1_story2_20251121.jpg", time: "2025年11月21日", closeFriends: true },
-            { image: "images/1_story2_20260102.jpg", time: "1月2日", closeFriends: true },   // 和소희聊天室 1/2 的照片同一張
             { image: "images/1_story2_20260128.jpg", time: "1月28日", closeFriends: true },
             { image: "images/1_story2_260426.jpg", time: "4月26日", closeFriends: true },
             { image: "images/1_story2_20260519.jpg", time: "5月19日", closeFriends: true },
@@ -460,6 +459,7 @@ window.SITE_DATA = {
               { image: "images/1_story_20251030.jpg", time: "2025年10月30日" },
               { image: "images/1_story_20251122.jpg", time: "2025年11月22日" },
               { image: "images/1_story_20251125.jpg", time: "2025年11月25日" },
+              { image: "images/1_story_20260102.jpg", time: "1月2日" },   // 和소희聊天室 1/2 的照片同一張
               { image: "images/1_story_20260401.jpg", time: "4月1日" },
               { image: "images/1_story_20260410.jpg", time: "4月10日" },
               { image: "images/1_story2_20261007.jpg", time: "10月7日", closeFriends: true, pos: "20% 50%" }   // pos = 照片裁切位置（左右%、上下%），50% 50% 是置中
