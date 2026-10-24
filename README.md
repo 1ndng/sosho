@@ -69,6 +69,7 @@
 - 訊息可以是「已收回」：`{ from: "them", recalled: true }`
 - 訊息可以是通話紀錄：`{ from: "me", call: "video"（或 "voice"）, duration: "1:02:33" }`
 - 進入前要輸入 `kakao.passcode`（目前 0318，打完電話才會知道）；解開一次就記住，「重新開始」會清掉
+- 聊天列表包含 Shotaro 自己的聊天室（`kakao.me`，名字旁有「我」，沒有未讀）
 - 只有聊天列表（介面全部是繁體中文，日期線格式「2026年10月22日 星期四」）：`kakao.friends` 的私聊＋`kakao.groups` 的群組，照名字字首排序；沒有好友頁、底部分頁
 - 聊天室：`messages` 裡 `{ date }` 是日期分隔，`from: "me"` 黃色靠右，`from: "them"` 白色靠左
 - 自己的訊息在對方還沒回之前會顯示未讀「1」

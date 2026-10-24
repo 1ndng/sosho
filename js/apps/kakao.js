@@ -37,7 +37,13 @@
     };
   }
   function groups() { return (K().groups || []).map(groupRoom); }
+  // 나와의 채팅（自己的聊天室）：id 是 "me"，自己傳給自己，沒有未讀、不會自動回覆
+  function selfRoom() {
+    var me = K().me;
+    return me ? { id: 'me', name: me.name, avatar: me.avatar, messages: me.messages || [], self: true, replies: [], defaultReply: [] } : null;
+  }
   function friend(id) {
+    if (String(id) === 'me') return selfRoom();
     return findFriend(id) || groups().filter(function (g) { return String(g.id) === String(id); })[0];
   }
   // 聊天列表的頭像：群組用成員頭像拼起來
@@ -61,6 +67,7 @@
   }
   function messagesOf(f) { return (f.messages || []).concat(state().msgs[f.id] || []); }
   function unreadOf(f) {
+    if (f.self) return 0;
     var st = state();
     return st.unread[f.id] != null ? st.unread[f.id] : (f.unread || 0);
   }
@@ -71,7 +78,7 @@
 
   function renderChats() {
     // 所有私聊＋群組（還沒有訊息的也列出來）：有未讀的排最上面，再照最後一則訊息的時間（新的在前）
-    var rooms = groups().concat(K().friends || []);
+    var rooms = groups().concat(K().friends || [], selfRoom() || []);
     var list = rooms.slice().sort(function (a, b) {
       var ua = unreadOf(a) ? 1 : 0, ub = unreadOf(b) ? 1 : 0;
       return (ub - ua) || (lastTime(b) - lastTime(a));
@@ -83,7 +90,7 @@
         var msgs = messagesOf(f).filter(function (m) { return m.text || m.image || m.call || m.link || m.recalled; }), last = msgs[msgs.length - 1] || {}, n = unreadOf(f);
         return '<a class="kk-chatrow" href="#/kakao/chat/' + encodeURIComponent(f.id) + '">' +
           roomAvatar(f, 'kk-chatrow-av') +
-          '<span class="kk-chatrow-mid"><b>' + esc(f.name) + (f.group ? '<em class="kk-count">' + (f.members.length + 1) + '</em>' : '') + '</b><small>' + esc(last.text || (last.recalled ? TX().recalledText || '已收回訊息' : '') || (last.link ? linkInfo(last).title : '') || (last.image ? TX().photoLabel || '照片' : last.call ? (last.call === 'voice' ? TX().voiceCall || '語音通話' : TX().videoCall || '視訊通話') : '')) + '</small></span>' +
+          '<span class="kk-chatrow-mid"><b>' + esc(f.name) + (f.group ? '<em class="kk-count">' + (f.members.length + 1) + '</em>' : '') + (f.self ? '<i class="kk-me-tag">' + esc(TX().meTag || '我') + '</i>' : '') + '</b><small>' + esc(last.text || (last.recalled ? TX().recalledText || '已收回訊息' : '') || (last.link ? linkInfo(last).title : '') || (last.image ? TX().photoLabel || '照片' : last.call ? (last.call === 'voice' ? TX().voiceCall || '語音通話' : TX().videoCall || '視訊通話') : '')) + '</small></span>' +
           '<span class="kk-chatrow-r"><small>' + esc(last.time || '') + '</small>' + (n ? '<i class="kk-badge">' + n + '</i>' : '') + '</span>' +
         '</a>';
       }).join('');
@@ -132,7 +139,7 @@
         // 只有最後一天（最後一條日期線之後）的訊息會顯示；更早的都當作已讀
         var later = msgs.slice(i + 1), unread = 0;
         var isOld = later.some(function (x) { return x.date; });
-        if (m.read !== true && !isOld) {
+        if (m.read !== true && !isOld && !f.self) {
           unread = f.group
             ? f.members.filter(function (mem) { return !later.some(function (x) { return x.from === mem.id; }); }).length
             : (later.some(function (x) { return x.from === 'them'; }) ? 0 : 1);
@@ -180,7 +187,7 @@
       '<div class="kk-chat">' +
         '<div class="kk-chat-head">' +
           '<a href="#/kakao" data-kback>' + ICON.back + '</a>' +
-          '<b>' + esc(f.name) + (f.group ? '<em class="kk-count">' + (f.members.length + 1) + '</em>' : '') + '</b>' +
+          '<b>' + esc(f.name) + (f.group ? '<em class="kk-count">' + (f.members.length + 1) + '</em>' : '') + (f.self ? '<i class="kk-me-tag">' + esc(TX().meTag || '我') + '</i>' : '') + '</b>' +
         '</div>' +
         '<div class="kk-msgs" id="kk-msgs"></div>' +
         '<form class="kk-input" id="kk-form" autocomplete="off">' +

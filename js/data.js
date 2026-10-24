@@ -403,7 +403,13 @@ window.SITE_DATA = {
         // 已儲存：預先放好的已儲存貼文（"帳號/圖片檔名"，寫那則貼文第一張圖的檔名）
         saved: ["252525252_/2_post_20240822.jpg"],
         // 典藏：stories = 過期的限時動態；posts = 下架的貼文（格式和 posts 一樣）
-        archive: { stories: [], posts: [] },
+        archive: {
+          stories: [
+            // 論壇 452_.rq 貼出來的那則「秒刪」限動（叫あにき的那支影片）
+            { image: "images/forum_1_c3.mp4", time: "2025年5月24日" }
+          ],
+          posts: []
+        },
         bio: ["🦦/🍦/🕺"],
         music: { title: "Ride", artist: "HYBS" },
         highlights: [
@@ -697,6 +703,39 @@ window.SITE_DATA = {
 
   /* ---------- KakaoTalk ---------- */
   kakao: {
+    // 나와의 채팅（Shotaro 自己傳給自己的聊天室）：都寫 from: "me"，沒有未讀、不會有人回；也可以放照片 image
+    me: {
+      name: "Shotaro",
+      avatar: "images/1_avatar.jpg",
+      messages: [
+        { date: "2025年3月18日 星期二" },   // 存咖啡廳地址、「今天遇到的韓國人」
+        { from: "me", text: "test638", time: "test639" },
+        { from: "me", text: "test640", time: "test641" },
+        { date: "2025年5月19日 星期一" },   // 送她的禮物清單（火影周邊）
+        { from: "me", text: "test642", time: "test643" },
+        { date: "2025年11月18日 星期二" },   // 「11/21 炤熙生日🎂」＋出生年（密碼線索）
+        { from: "me", text: "test644", time: "test645" },
+        { date: "2025年11月26日 星期三" },   // 紀念日，寫得很隱晦
+        { from: "me", text: "test646", time: "test647" },
+        { date: "2025年12月20日 星期六" },   // 遠距離：記視訊時間、想說沒說的話
+        { from: "me", text: "test648", time: "test649" },
+        { from: "me", text: "test650", time: "test651" },
+        { date: "2026年1月10日 星期六" },   // 羊遊戲帳號：密碼是她的生日六碼（提示 3 的線索）
+        { from: "me", text: "test652", time: "test653" },
+        { from: "me", text: "test654", time: "test655" },
+        { date: "2026年2月8日 星期日" },   // 沒傳出去的草稿：要不要搬去韓國
+        { from: "me", text: "test656", time: "test657" },
+        { from: "me", text: "test658", time: "test659" },
+        { date: "2026年3月4日 星期三" },   // 搬家清單，最後一行「明天 100 日」
+        { from: "me", text: "test660", time: "test661" },
+        { from: "me", text: "test662", time: "test663" },
+        { date: "2026年5月19日 星期二" },   // 吵架後寫好又沒傳的道歉
+        { from: "me", text: "test664", time: "test665" },
+        { date: "2026年10月23日 星期五" },   // 今天：「論壇⋯⋯要刪嗎」
+        { from: "me", text: "test666", time: "test667" },
+        { from: "me", text: "test668", time: "test669" }
+      ]
+    },
     passcode: "0318",              // 進入 KakaoTalk 要輸入的密碼（打完電話才會知道）；留空 "" = 不用密碼
     friends: [
       {
@@ -980,7 +1019,8 @@ window.SITE_DATA = {
       inputPlaceholder: "輸入訊息",
       ampm: ["上午", "下午"],
       photoLabel: "照片",           // 聊天列表裡最後一則是照片時顯示的字
-      recalledText: "已收回訊息"     // 收回的訊息
+      recalledText: "已收回訊息",    // 收回的訊息
+      meTag: "我"                   // 自己的聊天室名字旁的小標
     }
   }
 };

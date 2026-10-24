@@ -159,3 +159,6 @@
 /* Kakao 收回的訊息 */
 .kk-msg .kk-bubble.kk-recalled { display: flex; align-items: center; gap: 5px; background: rgba(255,255,255,.55); color: #6b7682; font-size: 13.5px; }
 .kk-recalled svg { width: 16px; height: 16px; flex: none; }
+
+/* 自己的聊天室：名字旁的「我」 */
+.kk-me-tag { display: inline-flex; align-items: center; justify-content: center; min-width: 17px; height: 17px; padding: 0 4px; margin-left: 5px; border-radius: 50%; background: #5f6b7a; color: #fff; font-size: 10.5px; font-style: normal; font-weight: 700; vertical-align: 2px; }
