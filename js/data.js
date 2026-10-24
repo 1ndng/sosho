@@ -416,6 +416,8 @@ window.SITE_DATA = {
           { image: "images/1_story_20250709.jpg", label: "😚",
             // 依日期排序；story2 是摯友限時（closeFriends: true，只有摯友名單裡的人看得到）
             stories: [
+              { image: "images/1_story_20240820.jpg", time: "2024年8月20日" },
+              { image: "images/1_story2_20250319.jpg", time: "2025年3月19日", closeFriends: true },
               { image: "images/1_story_20250526.jpg", time: "2025年5月26日" },
               { image: "images/1_story_20250709.jpg", time: "2025年7月9日" },
               { image: "images/1_story_20251030.jpg", time: "2025年10月30日" },
@@ -427,10 +429,8 @@ window.SITE_DATA = {
               { image: "images/1_story_20260227.jpg", time: "2月27日" },
               { image: "images/1_story_20260401.jpg", time: "4月1日" },
               { image: "images/1_story2_260426.jpg", time: "4月26日", closeFriends: true },
-              { image: "images/1_story2_20260524.mp4", time: "5月24日", closeFriends: true },
-              { image: "images/1_story_20260602.jpg", time: "6月2日" },
-              { image: "images/1_story_20261007.jpg", time: "10月7日" },
-              { image: "images/1_story_20261012.jpg", time: "10月12日" }
+              { image: "images/1_story2_20260830.mp4", time: "8月30日", closeFriends: true },
+              { image: "images/1_story_20261007.jpg", time: "10月7日" }
             ] }
         ],
         posts: [
