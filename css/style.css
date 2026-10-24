@@ -367,20 +367,11 @@ a.ad:active { filter: brightness(.9); }
 .ig-story-tap span:first-child { width: 33%; }
 .ig-story-tap span:last-child { flex: 1; }
 .ig-story-foot { position: absolute; left: 0; right: 0; bottom: 34px; height: 52px; display: flex; align-items: center; gap: 12px; padding: 0 12px; }
-.ig-story-foot.own { display: none; }
 /* 帳號主人在自己限動左下角的留言泡泡 */
 .ig-story-note { position: absolute; left: 14px; bottom: 100px; z-index: 2; display: flex; align-items: flex-end; gap: 8px; max-width: 80%; pointer-events: none; }
 .ig-story-note img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; flex: none; }
 .ig-story-note span { position: relative; background: #fff; color: #111; font-size: 14px; line-height: 1.35; padding: 8px 13px; border-radius: 18px; margin-bottom: 4px; }
 .ig-story-note span::before { content: ''; position: absolute; left: -4px; bottom: 2px; width: 12px; height: 12px; background: #fff; border-radius: 0 0 0 10px; transform: skewX(-15deg); }
-/* 自己的限動：左下「活動」＋按讚的人 */
-.ig-story-act { position: absolute; left: 14px; bottom: 44px; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 12px; }
-.ig-story-act b { font-weight: 500; }
-.ig-story-act-faces { display: flex; }
-.ig-story-act-faces i { position: relative; width: 30px; height: 30px; margin-left: -8px; }
-.ig-story-act-faces i:first-child { margin-left: 0; }
-.ig-story-act-faces img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; border: 1.5px solid #000; }
-.ig-story-act-faces svg { position: absolute; right: -3px; bottom: -2px; width: 14px; height: 14px; color: #ff3040; fill: #ff3040; }
 .ig-story-msg { flex: 1; height: 44px; border: 1px solid rgba(255,255,255,.6); border-radius: 22px; text-align: left; padding: 0 18px; color: #fff; font-size: 14px; }
 
 /* ---------- 下方功能列 ---------- */

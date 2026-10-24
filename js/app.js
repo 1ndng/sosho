@@ -602,7 +602,6 @@
 
   // IG 互動用的固定文字（data.js 的 instagram.text，沒寫就用預設）
   var T_DEFAULT = {
-    storyActivity: '活動',
     commentsTitle: '留言', commentPlaceholder: '為 {user} 新增留言……', postButton: '發佈', reply: '回覆',
     viewAllComments: '查看全部 {n} 則留言', noComments: '還沒有留言', justNow: '剛剛',
     shareTitle: '分享', sendButton: '傳送', sent: '已傳送', copyLink: '複製連結', linkCopied: '已複製連結',
@@ -1000,9 +999,7 @@
         '<div class="ig-story-tap"><span data-prev></span><span data-next></span></div>' +
         // 帳號主人自己在限動下方的留言（data.js 限動加 note: "文字"）
         '<div class="ig-story-note" id="ig-story-note"><img src="' + esc(g.avatar) + '" alt=""><span></span></div>' +
-        // 自己的限動：下方顯示「活動」（按讚的人頭貼＋紅色愛心），不是傳訊息
-        (g === currentAccount() ? '<div class="ig-story-act" id="ig-story-act"></div>' : '') +
-        '<form class="ig-story-foot' + (g === currentAccount() ? ' own' : '') + '" id="ig-story-form" autocomplete="off">' +
+        '<form class="ig-story-foot" id="ig-story-form" autocomplete="off">' +
           '<input class="ig-story-msg" name="m" placeholder="' + esc(L.storyMessagePlaceholder) + '" autocomplete="off">' +
           '<button type="button" class="ig-ico" id="ig-story-like">' + ICON.heart + '</button>' +
         '</form>' +
@@ -1069,11 +1066,6 @@
       var note = $('#ig-story-note');
       note.style.display = items[i].note ? '' : 'none';
       note.querySelector('span').textContent = items[i].note || '';
-      var act = $('#ig-story-act');
-      if (act) act.innerHTML = '<span class="ig-story-act-faces">' + (items[i].likedBy || []).map(function (u) {
-        var a = profileByName(u);
-        return '<i><img src="' + esc(a ? a.avatar : 'images/default_avatar.png') + '" alt="">' + ICON.heartFill + '</i>';
-      }).join('') + '</span><b>' + esc(T().storyActivity) + '</b>';
       // 典藏頁：只有玩家自己典藏的才有「⋯」（可以放回個人檔案）
       var menu = document.querySelector('[data-story-menu]');
       if (menu && fromArchive) menu.style.visibility = items[i].mine ? '' : 'hidden';

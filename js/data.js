@@ -445,7 +445,7 @@ window.SITE_DATA = {
               { image: "images/1_story_20240820.jpg", time: "2024年8月20日" },
               { image: "images/1_story_250520.jpg", time: "2025年5月20日",
                 note: "不是今天～ㅎㅎ",        // 左下角 Shotaro 自己的留言
-                likedBy: ["252525252_"] },    // 預設按讚的人
+                likedBy: ["252525252_"] },    // 預設按讚的人（只有登入這個帳號看時愛心是紅的）
               { image: "images/1_story_20250526.jpg", time: "2025年5月26日" },
               { image: "images/1_story_20250709.jpg", time: "2025年7月9日" },
               { image: "images/1_story_20251030.jpg", time: "2025年10月30日" },
@@ -829,6 +829,7 @@ window.SITE_DATA = {
           { date: "2026年1月2日 星期五" },   // 跨年後回韓國
           { from: "them", text: "test520", time: "test521" },
           { from: "me", text: "test522", time: "test523" },
+          { from: "me", image: "images/1_msg_20260102.jpg", time: "test218" },
           { date: "2026年1月16日 星期五" },
           { from: "me", image: "images/1_msg_20260116.jpg", time: "test299" },
           { date: "2026年1月18日 星期日" },   // 遠距離：視訊通話 2
@@ -864,8 +865,6 @@ window.SITE_DATA = {
           { from: "me", text: "test546", time: "test547" },
           { date: "2026年7月12日 星期日" },
           { from: "me", image: "images/1_msg_20260712.jpg", time: "test217" },
-          { date: "2026年8月26日 星期三" },
-          { from: "me", image: "images/1_msg_20260826.jpg", time: "test218" },
           { date: "2026年10月3日 星期六" },
           { from: "them", image: "images/2_msg_20261003.jpg", time: "test222" },
           { date: "2026年10月4日 星期日" },
