@@ -874,12 +874,13 @@ window.SITE_DATA = {
         unread: 0,
         messages: [
           { date: "2021年10月16日 星期六" },   // 認識時的寒暄（無關主線）
-          { from: "them", text: "test574", time: "test575" },
-          { from: "me", text: "test576", time: "test577" },
+          { from: "them", text: "很開心認識哥~我都不知道宋恩奭還有你這樣的朋友ㅎㅎ", time: "下午 11:11" },
+          { from: "me", text: "ㅎㅎ我也很開心認識你~以後經常一起吃飯吧！", time: "下午 11:49" },
           { date: "2025年11月26日 星期三" },   // 追問群組裡的細節
-          { from: "them", text: "test578", time: "test579" },
-          { from: "me", text: "test580", time: "test581" },
-          { from: "them", text: "test582", time: "test583" }
+          { from: "them", text: "群組裡面那個是什麼意思？", time: "下午 10:24" },
+          { date: "2025年11月27日 星期四" },
+          { from: "me", text: "什麼意思ㅎㅎ", time: "上午 1:37" },
+          { from: "them", text: "算了沒事。", time: "下午 12:07" }
         ],
         replies: [],
         defaultReply: []
@@ -892,11 +893,16 @@ window.SITE_DATA = {
         unread: 0,
         messages: [
           { date: "2021年9月4日 星期六" },   // 認識時的寒暄（無關主線）
-          { from: "them", text: "test584", time: "test585" },
-          { from: "me", text: "test586", time: "test587" },
+          { from: "me", text: "今天一起吃飯聊得很開心~未來請多指教☺️", time: "下午 2:28" },
+          { from: "them", text: "請多指教。", time: "下午 5:03" },
+          { date: "2021年10月21日 星期四" },   // 無關主線
+          { from: "me", text: "經濟學導論1-10章", time: "上午 11:30" },
+          { from: "them", text: "OK感謝", time: "上午 11:32" },
           { date: "2026年4月13日 星期一" },   // 問群組的約要不要去（無關主線）
-          { from: "them", text: "test588", time: "test589" },
-          { from: "me", text: "test590", time: "test591" }
+          { from: "them", text: "你去嗎？", time: "下午 7:45" },
+          { from: "me", text: "等我確認好近期行程再說", time: "下午 8:11" },
+          { from: "them", text: "👍", time: "下午 11:22" },
+          { from: "me", text: "👍", time: "下午 11:23", read: true }   // read: true = 對方已讀，不顯示「1」
         ],
         replies: [],
         defaultReply: []
