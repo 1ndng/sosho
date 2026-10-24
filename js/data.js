@@ -220,15 +220,15 @@ window.SITE_DATA = {
     shareProfileLabel: "分享個人檔案",
     // 精選動態：image = 圓圈封面，stories = 點進去看到的內容
     highlights: [
-      { image: "images/3_story_20251231.jpg", label: "🧡",
+      { image: "images/3_story_20251126.jpg", label: "🧡",
         stories: [
-          // 12/31 一次補發以前的照片：左下角自己打上原本的日期
-          { image: "images/3_story_20251231.jpg", time: "2025年12月31日", note: "2025/5/26" },
-          { image: "images/3_story_20251231-2.jpg", time: "2025年12月31日", note: "2025/5/28" },
-          { image: "images/3_story_20251231-3.jpg", time: "2025年12月31日", note: "2025/7/15" },
-          { image: "images/3_story_20251231-4.jpg", time: "2025年12月31日", note: "2025/7/15" },
-          { image: "images/3_story_20251231-5.jpg", time: "2025年12月31日", note: "2025/11/23" },
-          { image: "images/3_story_20251231-6.jpg", time: "2025年12月31日" },
+          // 11/26 一次補發以前的照片：左下角自己打上原本的日期
+          { image: "images/3_story_20251126.jpg", time: "2025年11月26日", note: "2025/5/26" },
+          { image: "images/3_story_20251126-2.jpg", time: "2025年11月26日", note: "2025/5/28" },
+          { image: "images/3_story_20251126-3.jpg", time: "2025年11月26日", note: "2025/7/15" },
+          { image: "images/3_story_20251126-4.jpg", time: "2025年11月26日", note: "2025/7/15" },
+          { image: "images/3_story_20251126-5.jpg", time: "2025年11月26日", note: "2025/11/23" },
+          { image: "images/3_story_20251231.jpg", time: "2025年12月31日" },
           { image: "images/3_story_20260206.jpg", time: "2月6日" },
           { image: "images/3_story_20260206-2.jpg", time: "2月6日" },
           { image: "images/3_story_20260305.jpg", time: "3月5日" },
@@ -598,12 +598,6 @@ window.SITE_DATA = {
               likedBy: { avatar: "images/anton.jpg", name: "antonnie" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
               caption: "test283",
               time: "9月24日"
-            },
-            {
-              images: ["images/2_savedpost_20251210.jpg"],
-              likedBy: { avatar: "images/1_avatar.jpg", name: "shotaroo0" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
-              caption: "test286",
-              time: "2025年12月10日"
             },
             {
               images: ["images/2_saved_20251204.jpg", "images/2_saved_20251204-2.jpg"],
