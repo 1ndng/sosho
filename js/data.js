@@ -818,21 +818,21 @@ window.SITE_DATA = {
         unread: 0,       // 一開始在聊天列表顯示的未讀數
         messages: [
           { date: "2026年4月8日 星期三" },   // 認識時的寒暄（無關主線）
-          { from: "them", text: "test180", time: "test181" },
-          { from: "me", text: "test182", time: "test183" },
-          { from: "them", text: "test184", time: "test185" },
+          { from: "me", text: "以後請多指教了😊", time: "下午 10:13" },
+          { from: "me", text: "在韓國我還有很多不懂的呢ㅎㅎ再麻煩你和舞團的大家多多幫忙了🥺", time: "下午 10:14" },
+          { from: "them", text: "但哥不需要別人幫忙也已經做得很好了。", time: "下午 10:18" },
+          { from: "me", text: "謝謝元彬......🥺", time: "下午 10:20" },
           { date: "2026年5月19日 星期二" },   // 將太郎訴說吵架的事，원빈陪伴、給建議
-          { from: "me", text: "test548", time: "test549" },
-          { from: "them", text: "test550", time: "test551" },
-          { from: "me", text: "test552", time: "test553" },
-          { from: "them", text: "test554", time: "test555" },
+          { from: "them", text: "剛剛沒有說到，但我覺得如果很困擾的話，直接跟他討論比較好吧？他會理解的。", time: "下午 10:56" },
+          { from: "me", text: "知道了~謝謝你也這麼關心我的煩惱", time: "下午 11:01" },
+          { from: "them", text: "🙄", time: "下午 11:02" },
           { date: "2026年7月11日 星期六" },   // 兩人在舞室明顯鬧僵，원빈忍不住傳訊息詢問、給建議
-          { from: "them", text: "test556", time: "test557" },
-          { from: "me", text: "test558", time: "test559" },
-          { from: "them", text: "test560", time: "test561" },
+          { from: "them", text: "又怎麼了？", time: "下午 10:04" },
+          { from: "them", text: "(待更，先放在這)", time: "下午 10:47" },
           { date: "2026年9月27日 星期日" },   // 討論舞蹈、互相鼓勵（無關主線）
-          { from: "them", text: "test562", time: "test563" },
-          { from: "me", text: "test564", time: "test565" }
+          { from: "me", text: "今天辛苦了~元彬真的跳很好呢，細節的掌握很準確，也很有自己的風格~", time: "下午 10:08" },
+          { from: "them", text: "突然是怎麼了", time: "下午 10:11" },
+          { from: "them", text: "哥也跳得很好，動作分解的很乾淨、漂亮。", time: "下午 10:18" }
         ],
         // 關鍵字自動回覆：玩家傳的訊息「包含」任一個 keywords 就回 reply（可多句，依序送出）
         replies: [

@@ -46,6 +46,18 @@
       return '<img src="' + esc(m.avatar) + '" alt="">';
     }).join('') + '</span>';
   }
+  // 最後一則訊息的時間：最後一條日期線＋那則的時間（上午／下午 h:mm）；玩家自己傳過訊息的聊天室算最新
+  function lastTime(f) {
+    if ((state().msgs[f.id] || []).length) return 9e15;
+    var day = 0, mins = 0;
+    (f.messages || []).forEach(function (m) {
+      var d = m.date && /(\d{4})\s*[年년]\s*(\d+)\s*[月월]\s*(\d+)/.exec(m.date);
+      if (d) { day = Date.UTC(+d[1], d[2] - 1, +d[3]); mins = 0; return; }
+      var t = /(上午|下午|오전|오후)?\s*(\d{1,2}):(\d{2})/.exec(m.time || '');
+      if (t) mins = ((+t[2] % 12) + (/下午|오후/.test(t[1] || '') ? 12 : 0)) * 60 + +t[3];
+    });
+    return day + mins * 60000;
+  }
   function messagesOf(f) { return (f.messages || []).concat(state().msgs[f.id] || []); }
   function unreadOf(f) {
     var st = state();
@@ -57,9 +69,12 @@
   }
 
   function renderChats() {
-    // 所有私聊＋群組（還沒有訊息的也列出來）：有未讀的排最上面，其他照名字字首排序
-    var sorted = S().sortByName(groups().concat(K().friends || []), function (f) { return f.name; });
-    var list = sorted.filter(function (f) { return unreadOf(f); }).concat(sorted.filter(function (f) { return !unreadOf(f); }));
+    // 所有私聊＋群組（還沒有訊息的也列出來）：有未讀的排最上面，再照最後一則訊息的時間（新的在前）
+    var rooms = groups().concat(K().friends || []);
+    var list = rooms.slice().sort(function (a, b) {
+      var ua = unreadOf(a) ? 1 : 0, ub = unreadOf(b) ? 1 : 0;
+      return (ub - ua) || (lastTime(b) - lastTime(a));
+    });
     S().$('#kakao-scroll').innerHTML =
       '<div class="kk-head"><h1>' + esc(TX().chatsTitle) + '</h1>' +
         '</div>' +
