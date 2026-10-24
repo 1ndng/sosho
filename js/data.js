@@ -977,16 +977,21 @@ window.SITE_DATA = {
           { from: "them", text: "但哥不需要別人幫忙也已經做得很好了。", time: "下午 10:18" },
           { from: "me", text: "謝謝元彬......🥺", time: "下午 10:20" },
           { date: "2026年5月19日" },   // 將太郎訴說吵架的事，원빈陪伴、給建議
-          { from: "them", text: "剛剛沒有說到，但我覺得如果很困擾的話，直接跟他討論比較好吧？他會理解的。", time: "下午 10:56" },
+          { from: "them", text: "剛剛沒有說到", time: "下午 10:56" },
+          { from: "them", text: "但如果很困擾的話", time: "下午 10:56" },
+          { from: "them", text: "直接跟他討論吧", time: "下午 10:56" },
           { from: "me", text: "知道了~謝謝你也這麼關心我的煩惱", time: "下午 11:01" },
           { from: "them", text: "🙄", time: "下午 11:02" },
           { date: "2026年7月11日" },   // 兩人在舞室明顯鬧僵，원빈忍不住傳訊息詢問、給建議
-          { from: "them", text: "又怎麼了？", time: "下午 10:04" },
-          { from: "them", text: "哥我說真的，如果你一直把他當小孩的話，換作是我也會生氣的。", time: "下午 10:47" },
+          { from: "them", text: "哥", time: "下午 10:47" },
+          { from: "them", text: "我說真的", time: "下午 10:47" },
+          { from: "them", text: "被這樣當成小孩", time: "下午 10:47" },
+          { from: "them", text: "很難不生氣吧??", time: "下午 10:47" },
           { date: "2026年9月27日" },   // 討論舞蹈、互相鼓勵（無關主線）
           { from: "me", text: "今天辛苦了~元彬真的跳很好呢，細節的掌握很準確，也很有自己的風格~", time: "下午 10:08" },
           { from: "them", text: "突然是怎麼了", time: "下午 10:11" },
-          { from: "them", text: "哥也跳得很好，動作分解的很乾淨、漂亮。", time: "下午 10:18" },
+          { from: "them", text: "哥也跳得很好", time: "下午 10:18" },
+          { from: "them", text: "動作很乾淨", time: "下午 10:18" },
           { from: "me", text: "🥺", time: "下午 10:19", read: true }
         ],
         // 關鍵字自動回覆：玩家傳的訊息「包含」任一個 keywords 就回 reply（可多句，依序送出）
