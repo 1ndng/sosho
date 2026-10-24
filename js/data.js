@@ -222,7 +222,6 @@ window.SITE_DATA = {
     highlights: [
       { image: "images/3_story_20250526.jpg", label: "🧡",
         stories: [
-          { image: "images/3_story_20250318.jpg", time: "2025年3月18日" },
           { image: "images/3_story_20250526.jpg", time: "2025年5月26日" },
           { image: "images/3_story_20250528.jpg", time: "2025年5月28日" },
           { image: "images/3_story_20250715.jpg", time: "2025年7月15日" },
@@ -424,6 +423,7 @@ window.SITE_DATA = {
         archive: {
           // 典藏的限時動態（照日期）；closeFriends: true = 摯友限時（綠色標籤）
           stories: [
+            { image: "images/1_story2_20250318.jpg", time: "2025年3月18日", closeFriends: true },
             { image: "images/1_story2_20250319.jpg", time: "2025年3月19日", closeFriends: true },
             // 論壇 452_.rq 貼出來的那則「秒刪」限動（叫あにき的那支影片）
             { image: "images/forum_1_c3.mp4", time: "2025年5月24日" },
@@ -556,6 +556,7 @@ window.SITE_DATA = {
             // 依日期排序；.mp4 影片會自動播放，播完才換下一則
             stories: [
               { image: "images/2_story_20250301.jpg", time: "2025年3月1日" },
+              { image: "images/2_story_20250318.jpg", time: "2025年3月18日" },
               { image: "images/2_story_20250526.jpg", time: "2025年5月26日" },
               { image: "images/2_story_20250526-2.jpg", time: "2025年5月26日" },
               { image: "images/2_story_20250526-3.jpg", time: "2025年5月26日" },
@@ -583,7 +584,6 @@ window.SITE_DATA = {
         // 典藏（登入這個帳號後：設定 → 典藏）
         archive: {
           stories: [
-            { image: "images/2_savedstory_20250318.jpg", time: "2025年3月18日" },
             { image: "images/2_savedstory_20251124.jpg", time: "2025年11月24日" },
             { image: "images/2_savedstory_20260305.jpg", time: "3月5日" },
             { image: "images/2_story2_20260604.jpg", time: "6月4日", closeFriends: true }   // 摯友限動，沒放精選
@@ -726,6 +726,10 @@ window.SITE_DATA = {
       name: "Shotaro",
       avatar: "images/1_avatar.jpg",
       messages: [
+        { date: "2021年8月31日 星期二" },   // 出發去韓國留學前，把問 AI 的回答存起來
+        { from: "me", text: "赴韓留學必備韓語用語整理\n\n一、基本問候\n1. 안녕하세요（您好）\n2. 감사합니다（謝謝）\n3. 죄송합니다（對不起）\n4. 처음 뵙겠습니다. 저는 일본에서 온 유학생입니다.（初次見面，我是從日本來的留學生。）\n\n二、學校生活\n1. 교수님, 질문이 있습니다.（教授，我有問題。）\n2. 다시 한번 말씀해 주시겠어요?（可以請您再說一次嗎？）\n3. 과제 마감이 언제예요?（作業的截止日是什麼時候？）\n\n三、日常生活\n1. 이거 얼마예요?（這個多少錢？）\n2. 카드 돼요?（可以刷卡嗎？）\n3. 화장실이 어디예요?（洗手間在哪裡？）\n4. 교통카드 충전해 주세요.（請幫我儲值交通卡。）\n\n四、行政手續\n1. 외국인등록증을 신청하러 왔습니다.（我來申請外國人登錄證。）\n2. 통장을 만들고 싶어요.（我想開立銀行帳戶。）\n\n五、緊急情況\n1. 도와주세요.（請幫幫我。）\n2. 병원에 가야 해요.（我需要去醫院。）\n\n建議您在出發前熟記上述用語，並搭配實際情境反覆練習。抵達韓國後，積極與當地人交流，將有助於您更快適應留學生活。", time: "下午 11:33" },
+        { date: "2022年1月3日 星期一" },   // 寒假回日本前的行李清單
+        { from: "me", text: "護照\n外國人登錄證\n機票（電子票證截圖）\n錢包（日幣、韓幣）\n手機、充電器\n行動電源\n筆電、充電線\n耳機\n羽絨外套\n圍巾、手套\n換洗衣物三天份\n盥洗用品\n隱形眼鏡、眼鏡\n常備藥\n給家人的伴手禮（海苔、柚子茶）\n給媽媽的面膜\n宿舍鑰匙交給室友\n關掉宿舍的暖氣", time: "下午 7:20" },
         { date: "2025年3月18日 星期二" },   // 存咖啡廳地址、「今天遇到的韓國人」
         { from: "me", text: "test638", time: "test639" },
         { from: "me", text: "test640", time: "test641" },
