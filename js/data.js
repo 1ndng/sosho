@@ -251,19 +251,19 @@ window.SITE_DATA = {
     // 需要時可以加：comments: [{ user: "帳號", text: "留言", time: "1天" }]、tagged: ["被標註的帳號"]
     posts: [
       {
-        images: ["images/3_post1.jpg"],
+        images: ["images/3_post_20261011.jpg"],
         caption: "test113",
-        time: "test114"
+        time: "10月11日"
       },
       {
-        images: ["images/3_post2.jpg"],
-        caption: "test117",
-        time: "test118"
+        images: ["images/3_post_20260827.jpg"],
+        caption: "",
+        time: "8月27日"
       },
       {
-        images: ["images/3_post3.jpg", "images/3_post3-2.jpg"],
-        caption: "test210",
-        time: "test211"
+        images: ["images/3_post_20260812.jpg"],
+        caption: "test292",
+        time: "8月12日"
       },
       {
         images: ["images/3_post_20260705.jpg", "images/3_post_20260705-2.jpg"],
@@ -271,9 +271,24 @@ window.SITE_DATA = {
         time: "7月5日"
       },
       {
-        images: ["images/3_post_20260604.jpg"],
+        images: ["images/3_post_20260605.jpg"],
+        caption: "test117",
+        time: "6月5日"
+      },
+      {
+        images: ["images/3_post_20260519.jpg"],
+        caption: "",
+        time: "5月19日"
+      },
+      {
+        images: ["images/3_post_20260427-2.jpg"],
         caption: "test314",
-        time: "6月4日"
+        time: "4月27日"
+      },
+      {
+        images: ["images/3_post_20260427-3.jpg"],
+        caption: "",
+        time: "4月27日"
       },
       {
         images: ["images/3_post_20260427.jpg"],
@@ -281,14 +296,14 @@ window.SITE_DATA = {
         time: "4月27日"
       },
       {
-        images: ["images/3_post_20260406.jpg"],
+        images: ["images/3_post_20260418.jpg"],
         caption: "test308",
-        time: "4月6日"
+        time: "4月18日"
       },
       {
-        images: ["images/3_post_20260120.jpg"],
-        caption: "test292",
-        time: "1月20日"
+        images: ["images/3_post_20260410.jpg", "images/3_post_20260410-2.jpg"],
+        caption: "test210",
+        time: "4月10日"
       }
         ],
 
