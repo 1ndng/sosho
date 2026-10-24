@@ -224,7 +224,7 @@ window.SITE_DATA = {
     shareProfileLabel: "分享個人檔案",
     // 精選動態：image = 圓圈封面，stories = 點進去看到的內容
     highlights: [
-      { image: "images/3_story_20251126.jpg", label: "🧡",
+      { image: "images/3_hlcover.jpg", label: "🧡",
         stories: [
           // 11/26 一次補發以前的照片：左下角自己打上原本的日期
           { image: "images/3_story_20251126.jpg", time: "2025年11月26日",
@@ -250,6 +250,7 @@ window.SITE_DATA = {
           { image: "images/3_story_20260409.jpg", time: "4月9日" },
           { image: "images/3_story_20260410.jpg", time: "4月10日" },
           { image: "images/3_story_20260416.jpg", time: "4月16日" },
+          { image: "images/3_story_20260419.jpg", time: "4月19日" },
           { image: "images/3_story_20260422.jpg", time: "4月22日" },
           { image: "images/3_story_20260601.jpg", time: "6月1日", note: "ㅋㅋ辛苦了" },
           { image: "images/3_story_20260614.jpg", time: "6月14日" },
@@ -257,6 +258,7 @@ window.SITE_DATA = {
           { image: "images/3_story_20260614-3.jpg", time: "6月14日", note: "我可愛的男友❤️" },
           { image: "images/3_story_20260710.jpg", time: "7月10日" },
           { image: "images/3_story_20260711.jpg", time: "7月11日", note: "希望以後不會再吵架了。" },
+          { image: "images/3_story_20260816.jpg", time: "8月16日" },
           { image: "images/3_story_20261011.jpg", time: "10月11日" }
         ] }
     ],
@@ -454,7 +456,7 @@ window.SITE_DATA = {
         bio: ["🦦/🍦/🕺"],
         music: { title: "Ride", artist: "HYBS" },
         highlights: [
-          { image: "images/1_story_20250709.jpg", label: "😚",
+          { image: "images/1_hlcover.jpg", label: "😚",
             // 依日期排序；story2 是摯友限時（closeFriends: true，只有摯友名單裡的人看得到）
             stories: [
               { image: "images/1_story_20240820.jpg", time: "2024年8月20日" },
@@ -571,7 +573,7 @@ window.SITE_DATA = {
         bioLinks: { "@brunomars": "https://www.instagram.com/brunomars/" },
         music: { title: "Kagerou", artist: "ONE OK ROCK" },
         highlights: [
-          { image: "images/2_story_20260709.jpg", label: "go",
+          { image: "images/2_hlcover.jpg", label: "go",
             // 依日期排序；.mp4 影片會自動播放，播完才換下一則
             stories: [
               { image: "images/2_story_20250301.jpg", time: "2025年3月1日" },
