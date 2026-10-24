@@ -425,7 +425,6 @@
   function profileByName(name) {
     return allProfiles().filter(function (a) { return a.username === name; })[0] || null;
   }
-
   // 摯友限時動態：只有自己或在 closeFriendsList 裡的帳號看得到
   function canSee(owner, item) {
     if (!item || !item.closeFriends) return true;
@@ -457,7 +456,7 @@
         var k = storyKey(g, it);
         if (!it.image || seen[k]) return;
         seen[k] = 1;
-        list.push({ image: it.image, time: it.time, closeFriends: it.closeFriends, note: it.note, likedBy: it.likedBy, mine: storyArchived(g, it), n: list.length });
+        list.push({ image: it.image, time: it.time, closeFriends: it.closeFriends, note: it.note, noteBy: it.noteBy, likedBy: it.likedBy, mine: storyArchived(g, it), n: list.length });
       });
     return list.sort(function (a, b) {
       var da = storyDate(a), db = storyDate(b);
@@ -1066,6 +1065,8 @@
       var note = $('#ig-story-note');
       note.style.display = items[i].note ? '' : 'none';
       note.querySelector('span').textContent = items[i].note || '';
+      // noteBy = 留言的人（不寫就是帳號主人自己）
+      note.querySelector('img').src = items[i].noteBy ? avatarOf(items[i].noteBy, (fillerInfo(items[i].noteBy) || {}).avatar || DEFAULT_AVATAR) : g.avatar;
       // 典藏頁：只有玩家自己典藏的才有「⋯」（可以放回個人檔案）
       var menu = document.querySelector('[data-story-menu]');
       if (menu && fromArchive) menu.style.visibility = items[i].mine ? '' : 'hidden';

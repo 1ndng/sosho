@@ -569,17 +569,15 @@ window.SITE_DATA = {
               { image: "images/2_story_20250722.jpg", time: "2025年7月22日" },
               { image: "images/2_story_20251125.jpg", time: "2025年11月25日" },
               { image: "images/2_story_20260117.jpg", time: "1月17日" },
-              { image: "images/2_story_20260209.jpg", time: "2月9日" },
-              { image: "images/2_story_20260305.jpg", time: "3月5日" },
+              { image: "images/2_story_20260305.jpg", time: "3月5日", note: "你出國？", noteBy: "bin032" },
               { image: "images/2_story_20260312.jpg", time: "3月12日" },
-              { image: "images/2_story_20260312-2.jpg", time: "3月12日" },
               { image: "images/2_story2_20260410.jpg", time: "4月10日", closeFriends: true },
-              { image: "images/2_story_20260410.jpg", time: "4月10日" },
+              { image: "images/2_story_20260410.jpg", time: "4月10日", note: "舞室的哥~" },
               { image: "images/2_story2_20260427.jpg", time: "4月27日", closeFriends: true },
               { image: "images/2_story_20260427.jpg", time: "4月27日" },
-              { image: "images/2_story_20260606.mp4", time: "6月6日" },
+              { image: "images/2_story_20260606.mp4", time: "6月6日", likedBy: ["shotaroo0"] },
               { image: "images/2_story_20260709.jpg", time: "7月9日" },
-              { image: "images/2_story_20260830.jpg", time: "8月30日" }
+              { image: "images/2_story_20260830.jpg", time: "8月30日", note: "怎麼不帶我去？", noteBy: "sungchan913" }
             ] }
         ],
         // 摯友名單：寫在這裡的帳號才看得到 closeFriends: true（story2）的限時動態
