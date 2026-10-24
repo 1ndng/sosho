@@ -49,7 +49,9 @@
   // 聊天列表的頭像：群組用成員頭像拼起來
   function roomAvatar(f, cls) {
     if (!f.group) return '<img class="' + cls + '" src="' + esc(f.avatar) + '" alt="">';
-    return '<span class="' + cls + ' kk-gav">' + f.members.slice(0, 4).map(function (m) {
+    var ms = f.members.slice(0, 4);
+    // 群組頭貼：成員的圓形大頭照疊在一起（2 人斜對角、3 人三角形、4 人田字）
+    return '<span class="' + cls + ' kk-gav n' + ms.length + '">' + ms.map(function (m) {
       return '<img src="' + esc(m.avatar) + '" alt="">';
     }).join('') + '</span>';
   }
@@ -144,7 +146,7 @@
             ? f.members.filter(function (mem) { return !later.some(function (x) { return x.from === mem.id; }); }).length
             : (later.some(function (x) { return x.from === 'them'; }) ? 0 : 1);
         }
-        out += '<div class="kk-msg me">' +
+        out += '<div class="kk-msg me' + (first ? ' first' : '') + '">' +
           '<span class="kk-meta">' + (unread ? '<i>' + unread + '</i>' : '') + (showTime ? '<small>' + esc(m.time || '') + '</small>' : '') + '</span>' +
           contentHTML(m, first) +
         '</div>';
