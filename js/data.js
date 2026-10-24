@@ -550,11 +550,11 @@ window.SITE_DATA = {
               { image: "images/2_story2_20260427.jpg", time: "4月27日", closeFriends: true },
               { image: "images/2_story_20260427.jpg", time: "4月27日" },
               { image: "images/2_story_20260506.mp4", time: "5月6日" },
-              { image: "images/2_story_20260524.jpg", time: "5月24日" },
               { image: "images/2_story_20260606.mp4", time: "6月6日" },
               { image: "images/2_story_20260609.jpg", time: "6月9日" },
               { image: "images/2_story_20260609-2.jpg", time: "6月9日" },
               { image: "images/2_story_20260709.jpg", time: "7月9日" },
+              { image: "images/2_story_20260830.jpg", time: "8月30日" },
               { image: "images/2_story_20261001.jpg", time: "10月1日" },
               { image: "images/2_story_20261004.jpg", time: "10月4日" }
             ] }
