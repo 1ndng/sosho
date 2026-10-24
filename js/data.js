@@ -70,13 +70,13 @@ window.SITE_DATA = {
 請多留意論壇提供的資訊，或許，可以，利用一下通話功能......？
 加油呀相信你可以的你可以看到反差系網紅的反差真面目了。` },
         { stage: 2, title: "[提示]那個fauiogl94是誰......？", content: `聰明的你一定有預感到，那個莫名其妙沒有頭貼的帳號裡肯定藏著點什麼。既然如此就登入他！
-請多留意Kakao的訊息，並試著傳訊息給朋友們，他們說不定會提供給你一些意想不到的資訊喔。` },
+請多留意Kakao的訊息。` },
         { stage: 3, title: "[提示]如果你想做點壞事。", content: `其實呢故事到這裡基本上就結束了，熙醬談戀愛的證據已罪證確鑿。但如果呢到現在都還沒滿足你的窺探欲，要不要試著登入李炤熙的帳號呀(嘿嘿)
 沒什麼困難的，就跟將太郎手機和他們倆屬羊遊戲的帳號一樣好登入。嗯相信你很快就能登入了。` },
         { stage: 4, title: "故事線整理", content: `提供給對故事時間線有興趣，但玩完後依舊一頭霧水的人觀看！
 2021/9/1-2022/1/4：將太郎在韓國留學，認識宋恩奭和鄭成燦。
 2025/3/18-2025/3/20：李炤熙逃到日本，機緣下認識了將太郎並陪同前往秘境探店，兩人就此認識，交換了聯絡方式。回韓國後兩人持續訊息聯絡。
-2025/5/14-2025/5/27：將太郎前往韓國旅遊兩周，跟李炤熙見面，關係逐漸曖昧。
+2025/5/19-2025/5/27：將太郎前往韓國旅遊兩周，跟李炤熙見面，關係逐漸曖昧。
 2025/5/20：將太郎送李炤熙火影忍者周邊，李炤熙對著將太郎喊出了忍術「螺旋丸」。
 2025/11/20-2025/11/26：因帶學生比賽，李炤熙前往日本，在離開前的最後一天(11/26)兩人互訴心意。為交往紀念日。期間兩人一起度過了李炤熙(11/21)和將太郎(11/25)的生日。
 2025/12/31-2026/1/1：李炤熙快閃日本，美好跨年夜^~^
@@ -252,7 +252,7 @@ window.SITE_DATA = {
     posts: [
       {
         images: ["images/3_post_20261011.jpg"],
-        caption: "test113",
+        caption: "",
         time: "10月11日"
       },
       {
@@ -262,17 +262,17 @@ window.SITE_DATA = {
       },
       {
         images: ["images/3_post_20260812.jpg"],
-        caption: "test292",
+        caption: "",
         time: "8月12日"
       },
       {
         images: ["images/3_post_20260705.jpg", "images/3_post_20260705-2.jpg"],
-        caption: "test317",
+        caption: "",
         time: "7月5日"
       },
       {
         images: ["images/3_post_20260605.jpg"],
-        caption: "test117",
+        caption: "",
         time: "6月5日"
       },
       {
@@ -282,7 +282,7 @@ window.SITE_DATA = {
       },
       {
         images: ["images/3_post_20260427-2.jpg"],
-        caption: "test314",
+        caption: "",
         time: "4月27日"
       },
       {
@@ -292,17 +292,17 @@ window.SITE_DATA = {
       },
       {
         images: ["images/3_post_20260427.jpg"],
-        caption: "test311",
+        caption: "",
         time: "4月27日"
       },
       {
         images: ["images/3_post_20260418.jpg"],
-        caption: "test308",
+        caption: "",
         time: "4月18日"
       },
       {
         images: ["images/3_post_20260410.jpg", "images/3_post_20260410-2.jpg"],
-        caption: "test210",
+        caption: "",
         time: "4月10日"
       }
         ],
@@ -595,12 +595,12 @@ window.SITE_DATA = {
           posts: [
       {
               images: ["images/2_savedpost_20260924.jpg"],
-              caption: "test283",
+              caption: "",
               time: "9月24日"
             },
             {
               images: ["images/2_saved_20251204.jpg", "images/2_saved_20251204-2.jpg"],
-              caption: "test289",
+              caption: "",
               time: "2025年12月4日"
             }
           ]
@@ -730,8 +730,6 @@ window.SITE_DATA = {
         { from: "me", text: "密碼是交往紀念日+他喜歡的", time: "上午 3:24" },
         { date: "2026年4月8日" },   // 暖身菜單
         { from: "me", text: "慢跑 3分鐘\n開合跳 ×30\n頸部繞環 左右各×8\n肩膀繞環 前後各×10\n手臂畫圈 前後各×10\n胸椎旋轉 左右各×10\n髖關節繞環 左右各×10\n弓箭步轉體 左右各×8\n深蹲 ×15\n側弓步 左右各×10\n踢腿 前後側各×10\n腳踝繞環 左右各×10\n提踵 ×20\n平板支撐 30秒×2\nIsolation 頭、肩、胸、腰 各×8拍\n律動 Bounce／Rock 各×32拍\n腿後側伸展 左右各30秒\n股四頭肌伸展 左右各30秒", time: "下午 10:15" },
-        { date: "2026年7月11日" },
-        { from: "me", text: "test677", time: "test678" }
       ]
     },
     passcode: "0318",              // 進入 KakaoTalk 要輸入的密碼（打完電話才會知道）；留空 "" = 不用密碼
@@ -739,7 +737,7 @@ window.SITE_DATA = {
       {
         id: "f1",                       // 不要重複（用於網址）
         name: "소희",                     // 252525252_
-        status: "test166",                  // 狀態訊息
+        status: "",                  // 狀態訊息
         avatar: "images/2_avatar.jpg",
         unread: 1,       // 一開始在聊天列表顯示的未讀數
         messages: [
@@ -963,14 +961,13 @@ window.SITE_DATA = {
         ],
         // 關鍵字自動回覆：玩家傳的訊息「包含」任一個 keywords 就回 reply（可多句，依序送出）
         replies: [
-          { keywords: ["test174"], reply: ["test175", "test176"] }
         ],
         defaultReply: []                  // 沒有符合任何關鍵字時的回覆；空的 = 不回
       },
       {
         id: "f2",                       // 不要重複（用於網址）
         name: "원빈",                     // 來韓國後舞室認識的朋友
-        status: "test178",                  // 狀態訊息
+        status: "",                  // 狀態訊息
         avatar: "images/wonbin.jpg",
         unread: 0,       // 一開始在聊天列表顯示的未讀數
         messages: [
@@ -994,14 +991,13 @@ window.SITE_DATA = {
         ],
         // 關鍵字自動回覆：玩家傳的訊息「包含」任一個 keywords 就回 reply（可多句，依序送出）
         replies: [
-          { keywords: ["test186"], reply: ["test187", "test188"] }
         ],
         defaultReply: []                  // 沒有符合任何關鍵字時的回覆；空的 = 不回
       },
       {
         id: "f3",                       // 不要重複（用於網址）
         name: "Anton",                   // 李炤熙的朋友
-        status: "test190",                  // 狀態訊息
+        status: "",                  // 狀態訊息
         avatar: "images/anton.jpg",
         unread: 0,       // 一開始在聊天列表顯示的未讀數
         messages: [
@@ -1026,7 +1022,6 @@ window.SITE_DATA = {
         ],
         // 關鍵字自動回覆：玩家傳的訊息「包含」任一個 keywords 就回 reply（可多句，依序送出）
         replies: [
-          { keywords: ["test198"], reply: ["test199", "test200"] }
         ],
         defaultReply: []                  // 沒有符合任何關鍵字時的回覆；空的 = 不回
       },
