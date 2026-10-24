@@ -621,6 +621,11 @@ window.SITE_DATA = {
               time: "9月24日"
             },
             {
+              images: ["images/2_savedpost_20260713.jpg"],
+              caption: "他對誰都很好這點讓人很困擾啊",
+              time: "7月13日"
+            },
+            {
               images: ["images/2_savedpost_20260602.jpg"],
               caption: `他好像常常沒意識到自己做的足夠好了。明明是跳得很好但總是練得最晚，都這樣了正式表演前還要一直焦慮緊張。總之要多鼓勵他一點，他做了什麼都要明確指出來，不然他總是不相信..`,
               time: "6月2日"
