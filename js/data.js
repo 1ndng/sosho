@@ -542,9 +542,9 @@ window.SITE_DATA = {
             // 依日期排序；.mp4 影片會自動播放，播完才換下一則
             stories: [
               { image: "images/2_story_20250526.jpg", time: "2025年5月26日" },
+              { image: "images/2_story_20250715.jpg", time: "2025年7月15日" },
               { image: "images/2_story_20250722.jpg", time: "2025年7月22日" },
               { image: "images/2_story_20251121.jpg", time: "2025年11月21日" },
-              { image: "images/2_story_20251207.jpg", time: "2025年12月7日" },
               { image: "images/2_story_20260117.jpg", time: "1月17日" },
               { image: "images/2_story_20260128.jpg", time: "1月28日" },
               { image: "images/2_story2_20260202.jpg", time: "2月2日", closeFriends: true },
