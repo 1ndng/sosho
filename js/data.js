@@ -919,7 +919,7 @@ window.SITE_DATA = {
           { date: "2026年1月2日" },   // 跨年後回韓國（同一張照片也在 Shotaro 典藏的摯友限動）
           { from: "me", image: "images/1_msg_20260102.jpg", time: "下午 11:07" },
           { from: "me", text: "這張怎麼樣ㅋㅋ", time: "下午 11:07" },
-          { from: "them", text: "可愛~", time: "下午 11:09" },
+          { from: "them", text: "かわいい~", time: "下午 11:09" },
           { date: "2026年1月4日" },
           { from: "them", text: "好想油蕎麥麵", time: "下午 8:18" },
           { from: "me", text: "不想我？ㅋㅋ", time: "下午 8:24" },
