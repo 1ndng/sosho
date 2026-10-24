@@ -456,7 +456,7 @@
         var k = storyKey(g, it);
         if (!it.image || seen[k]) return;
         seen[k] = 1;
-        list.push({ image: it.image, time: it.time, closeFriends: it.closeFriends, note: it.note, noteBy: it.noteBy, likedBy: it.likedBy, mine: storyArchived(g, it), n: list.length });
+        list.push({ image: it.image, time: it.time, closeFriends: it.closeFriends, note: it.note, noteBy: it.noteBy, notes: it.notes, likedBy: it.likedBy, mine: storyArchived(g, it), n: list.length });
       });
     return list.sort(function (a, b) {
       var da = storyDate(a), db = storyDate(b);
@@ -601,6 +601,7 @@
 
   // IG 互動用的固定文字（data.js 的 instagram.text，沒寫就用預設）
   var T_DEFAULT = {
+    storyCommentsTitle: '為你推薦', storyCommentAuthor: '作者',
     commentsTitle: '留言', commentPlaceholder: '為 {user} 新增留言……', postButton: '發佈', reply: '回覆',
     viewAllComments: '查看全部 {n} 則留言', noComments: '還沒有留言', justNow: '剛剛',
     shareTitle: '分享', sendButton: '傳送', sent: '已傳送', copyLink: '複製連結', linkCopied: '已複製連結',
@@ -1025,6 +1026,49 @@
       btn.classList.toggle('on-like', on);
     }
     function video() { return document.querySelector('#ig-story-media video'); }
+    // 限動左下角的留言：note / noteBy（一則），或 notes: [{ text, by }]（好幾則：泡泡輪流顯示，點開看全部）
+    // by = 留言的人（不寫就是帳號主人自己）
+    var noteTimer = null;
+    function notesOf(it) {
+      return it.notes || (it.note ? [{ text: it.note, by: it.noteBy }] : []);
+    }
+    function noteAvatar(by) {
+      return by ? avatarOf(by, (fillerInfo(by) || {}).avatar || DEFAULT_AVATAR) : g.avatar;
+    }
+    function paintNotes() {
+      clearInterval(noteTimer);
+      var list = notesOf(items[i]), note = $('#ig-story-note'), k = 0;
+      note.style.display = list.length ? '' : 'none';
+      note.classList.toggle('multi', list.length > 1);
+      function put() {
+        var n = list[k], span = note.querySelector('span');
+        note.querySelector('img').src = noteAvatar(n.by);
+        span.textContent = n.text;
+        span.classList.remove('in'); void span.offsetWidth; span.classList.add('in');
+      }
+      if (!list.length) return;
+      put();
+      if (list.length > 1) noteTimer = setInterval(function () {
+        if (!document.body.contains(note)) { clearInterval(noteTimer); return; }
+        k = (k + 1) % list.length; put();
+      }, 2500);
+    }
+    function openNotes() {
+      var list = notesOf(items[i]);
+      pause();
+      var wrap = document.createElement('div');
+      wrap.className = 'ig-sheet-wrap ig-cmt-wrap';
+      wrap.innerHTML = '<div class="ig-sheet-bg" data-story-sheet-close></div>' +
+        '<div class="ig-sheet ig-cmt-sheet"><div class="ig-sheet-handle" data-story-sheet-close></div>' +
+        '<div class="ig-cmt-head">' + esc(T().storyCommentsTitle) + ICON.chevron + '</div>' +
+        list.map(function (n) {
+          var who = n.by || g.username;
+          return '<div class="ig-cmt-row"><img src="' + esc(noteAvatar(n.by)) + '" alt="">' +
+            '<div><b>' + esc(who) + '</b>' + (who === g.username ? '<em> · ' + esc(T().storyCommentAuthor) + '</em>' : '') +
+            '<p>' + esc(n.text) + '</p><small>' + esc(T().reply) + '</small></div></div>';
+        }).join('') + '</div>';
+      storyEl.appendChild(wrap); void wrap.offsetWidth; wrap.classList.add('show');
+    }
     // 聲音按鈕：只有影片時出現；按一下開／關聲音（整段限時動態期間都記得）
     function paintSound(show) {
       var b = $('#ig-story-sound');
@@ -1063,11 +1107,7 @@
       paintSound(isVideo);
       $('.ig-story-time').textContent = items[i].time || '';
       $('#ig-story-cf').style.display = items[i].closeFriends ? '' : 'none';
-      var note = $('#ig-story-note');
-      note.style.display = items[i].note ? '' : 'none';
-      note.querySelector('span').textContent = items[i].note || '';
-      // noteBy = 留言的人（不寫就是帳號主人自己）
-      note.querySelector('img').src = items[i].noteBy ? avatarOf(items[i].noteBy, (fillerInfo(items[i].noteBy) || {}).avatar || DEFAULT_AVATAR) : g.avatar;
+      paintNotes();
       // 典藏頁：只有玩家自己典藏的才有「⋯」（可以放回個人檔案）
       var menu = document.querySelector('[data-story-menu]');
       if (menu && fromArchive) menu.style.visibility = items[i].mine ? '' : 'hidden';
@@ -1128,7 +1168,7 @@
     // 往下滑關閉；只是點一下才換上一則／下一則
     var storyEl = $('.ig-story'), dragY = null, dragDy = 0, dragged = false;
     storyEl.addEventListener('pointerdown', function (e) {
-      if (e.target.closest('form, .ig-story-head, .ig-sheet-wrap')) return;
+      if (e.target.closest('form, .ig-story-head, .ig-sheet-wrap, .ig-story-note.multi')) return;
       dragY = e.clientY; dragDy = 0; dragged = false;
     });
     storyEl.addEventListener('pointermove', function (e) {
@@ -1157,6 +1197,7 @@
     storyEl.addEventListener('pointercancel', dragEnd);
     // 自己的限時動態右上角「⋯」→ 典藏／在個人檔案顯示（data.js 寫好的典藏沒有這個選項）
     storyEl.addEventListener('click', function (e) {
+      if (e.target.closest('.ig-story-note.multi')) { openNotes(); return; }
       if (e.target.closest('[data-story-menu]')) {
         var it = items[i], canToggle = !fromArchive || it.mine;
         if (!canToggle) return;
