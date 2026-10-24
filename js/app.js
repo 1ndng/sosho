@@ -128,7 +128,12 @@
   function forumFooter() {
     var f = D.forum;
     return '<footer class="f-footer">' +
-      (f.restartLabel ? '<button class="f-restart" type="button" data-restart>' + esc(f.restartLabel) + '</button>' : '') +
+      '<div class="f-btns">' +
+        (f.restartLabel ? '<button class="f-restart" type="button" data-restart>' + esc(f.restartLabel) + '</button>' : '') +
+        // 語言切換（繁體／简体）：按鈕上寫「要換成的語言」，不轉換這顆按鈕的字
+        (window.SOSHO_LANG ? '<button class="f-restart" type="button" data-lang data-noconv>' +
+          (window.SOSHO_LANG.lang === 'cn' ? '繁體中文' : '简体中文') + '</button>' : '') +
+      '</div>' +
       '<div class="f-copy">' + esc(f.copyright) + '</div>' +
       '</footer>';
   }
@@ -267,6 +272,8 @@
 
   // 廣告沒有連結時 → 顯示尚未更新
   $('#forum-scroll').addEventListener('click', function (e) {
+    // 語言切換（繁體／简体）
+    if (e.target.closest('[data-lang]')) { window.SOSHO_LANG.toggle(); return; }
     // 重新開始：清除所有進度與紀錄（追蹤、典藏、登入、聊天…），回到手機密碼鎖
     if (e.target.closest('[data-restart]')) {
       if (!confirm(D.forum.restartConfirm || '要清除所有進度、從頭開始嗎？')) return;
