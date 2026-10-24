@@ -456,7 +456,7 @@
         var k = storyKey(g, it);
         if (!it.image || seen[k]) return;
         seen[k] = 1;
-        list.push({ image: it.image, time: it.time, closeFriends: it.closeFriends, note: it.note, noteBy: it.noteBy, notes: it.notes, likedBy: it.likedBy, mine: storyArchived(g, it), n: list.length });
+        list.push({ image: it.image, time: it.time, closeFriends: it.closeFriends, note: it.note, noteBy: it.noteBy, notes: it.notes, pos: it.pos, likedBy: it.likedBy, mine: storyArchived(g, it), n: list.length });
       });
     return list.sort(function (a, b) {
       var da = storyDate(a), db = storyDate(b);
@@ -1103,7 +1103,7 @@
       var src = items[i].image || '', isVideo = /\.(mp4|mov|webm)$/i.test(src);
       $('#ig-story-media').innerHTML = isVideo
         ? '<video src="' + esc(src) + '" poster="' + esc(posterOf(src)) + '"' + (storyMuted ? ' muted' : '') + ' playsinline autoplay preload="auto"></video>'
-        : '<img src="' + esc(src) + '" alt="">';
+        : '<img src="' + esc(src) + '" alt=""' + (items[i].pos ? ' style="object-position:' + esc(items[i].pos) + '"' : '') + '>';
       paintSound(isVideo);
       $('.ig-story-time').textContent = items[i].time || '';
       $('#ig-story-cf').style.display = items[i].closeFriends ? '' : 'none';
