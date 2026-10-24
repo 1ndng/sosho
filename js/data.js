@@ -297,6 +297,11 @@ window.SITE_DATA = {
         time: "5月19日"
       },
       {
+        images: ["images/3_post_20260427-4.jpg"],
+        caption: "",
+        time: "4月27日"
+      },
+      {
         images: ["images/3_post_20260427-2.jpg"],
         caption: "",
         time: "4月27日"
@@ -594,7 +599,8 @@ window.SITE_DATA = {
               { image: "images/2_story2_20260427-2.jpg", time: "4月27日", closeFriends: true },
               { image: "images/2_story_20260606.mp4", time: "6月6日", likedBy: ["shotaroo0"] },
               { image: "images/2_story_20260709.jpg", time: "7月9日" },
-              { image: "images/2_story_20260830.jpg", time: "8月30日", note: "怎麼不帶我去？", noteBy: "sungchan913" }
+              { image: "images/2_story_20260830.jpg", time: "8月30日", note: "怎麼不帶我去？", noteBy: "sungchan913" },
+              { image: "images/2_story_20261011.jpg", time: "10月11日" }   // 三人一起出去玩
             ] }
         ],
         // 摯友名單：寫在這裡的帳號才看得到 closeFriends: true（story2）的限時動態
@@ -648,7 +654,7 @@ window.SITE_DATA = {
         time: "2025年11月21日"
       },
       {
-        images: ["images/2_post_20250520.jpg"],
+        images: ["images/2_post_20250520.jpg", "images/2_post_20250520-2.jpg"],
         likedBy: { avatar: "images/1_avatar.jpg", name: "shotaroo0" },   // 「xxx 說讚」（隨機放有追蹤的帳號）；不要的話整行刪掉
         caption: "ナルト",
         time: "2025年5月20日"
