@@ -227,7 +227,7 @@ window.SITE_DATA = {
           { image: "images/3_story_20251126-2.jpg", time: "2025年11月26日", note: "2025/5/28" },
           { image: "images/3_story_20251126-3.jpg", time: "2025年11月26日", note: "2025/7/15" },
           { image: "images/3_story_20251126-4.jpg", time: "2025年11月26日", note: "2025/7/15" },
-          { image: "images/3_story_20251126-5.jpg", time: "2025年11月26日", note: "2025/11/23" },
+          { image: "images/3_story_20251230.jpg", time: "2025年12月30日" },
           { image: "images/3_story_20251231.jpg", time: "2025年12月31日" },
           { image: "images/3_story_20260206.jpg", time: "2月6日" },
           { image: "images/3_story_20260206-2.jpg", time: "2月6日" },
