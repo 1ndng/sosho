@@ -562,6 +562,7 @@ window.SITE_DATA = {
             stories: [
               { image: "images/2_story_20250301.jpg", time: "2025年3月1日" },
               { image: "images/2_story_20250318.jpg", time: "2025年3月18日" },
+              { image: "images/2_story2_20250524.mp4", time: "2025年5月24日", closeFriends: true, note: "你很喜歡呢☺️", noteBy: "shotaroo0" },
               { image: "images/2_story_20250526.jpg", time: "2025年5月26日" },
               { image: "images/2_story_20250526-2.jpg", time: "2025年5月26日" },
               { image: "images/2_story2_20250526-3.jpg", time: "2025年5月26日", closeFriends: true },
