@@ -429,6 +429,7 @@ window.SITE_DATA = {
             // 論壇 452_.rq 貼出來的那則「秒刪」限動（叫あにき的那支影片）
             { image: "images/forum_1_c3.mp4", time: "2025年5月24日" },
             { image: "images/1_story2_20251121.jpg", time: "2025年11月21日", closeFriends: true },
+            { image: "images/1_story2_20260102.jpg", time: "1月2日", closeFriends: true },   // 和소희聊天室 1/2 的照片同一張
             { image: "images/1_story2_20260128.jpg", time: "1月28日", closeFriends: true },
             { image: "images/1_story2_260426.jpg", time: "4月26日", closeFriends: true },
             { image: "images/1_story2_20260519.jpg", time: "5月19日", closeFriends: true },
@@ -924,13 +925,10 @@ window.SITE_DATA = {
           { from: "me", text: "蠻冷的🥶這幾天都在下雪", time: "下午 10:08" },
           { from: "them", text: "想好要吃什麼了", time: "下午 10:10" },
           { from: "me", text: "☺️", time: "下午 10:11" },
-          { date: "2025年12月30日 星期二" },   // 明天快閃日本跨年
-          { from: "them", text: "test516", time: "test517" },
-          { from: "me", text: "test518", time: "test519" },
-          { date: "2026年1月2日 星期五" },   // 跨年後回韓國
-          { from: "them", text: "test520", time: "test521" },
-          { from: "me", text: "test522", time: "test523" },
-          { from: "me", image: "images/1_msg_20260102.jpg", time: "test218" },
+          { date: "2026年1月2日 星期五" },   // 跨年後回韓國（同一張照片也在 Shotaro 典藏的摯友限動）
+          { from: "me", image: "images/1_msg_20260102.jpg", time: "下午 11:07" },
+          { from: "me", text: "這張怎麼樣ㅋㅋ", time: "下午 11:07" },
+          { from: "them", text: "可愛~", time: "下午 11:09" },
           { date: "2026年1月4日 星期日" },
           { from: "them", text: "回來第二天就好想日本。", time: "下午 8:18" },
           { from: "me", text: "想日本還是想我？ㅋㅋ", time: "下午 8:24" },
@@ -945,28 +943,37 @@ window.SITE_DATA = {
           { from: "me", text: "今天有空嗎", time: "下午 7:58" },
           { from: "them", text: "有。", time: "下午 8:03" },
           { from: "them", call: "video", duration: "3:31:07", time: "下午 8:03" },
-          { date: "2026年2月8日 星期日" },   // 遠距離：視訊通話 3，思考遠距離、生活和愛情的取捨
-          { from: "me", call: "video", duration: "test528", time: "test529" },   // 視訊通話紀錄（duration 寫通話長度，例如 "1:02:33"）
-          { from: "me", text: "test530", time: "test531" },
-          { from: "them", text: "test532", time: "test533" },
+          { date: "2026年2月8日 星期日" },   // 遠距離：思考遠距離、生活和愛情的取捨
+          { from: "me", call: "video", duration: "4:24:47", time: "下午 10:35" },
           { date: "2026年2月9日 星期一" },
-          { from: "them", image: "images/2_msg_20260209.jpg", time: "test319" },
-          { date: "2026年2月22日 星期日" },   // 遠距離：視訊通話 4，決定搬來韓國
-          { from: "me", call: "video", duration: "test534", time: "test535" },   // 視訊通話紀錄（duration 寫通話長度，例如 "1:02:33"）
-          { from: "me", text: "test536", time: "test537" },
-          { from: "them", image: "images/2_msg_20260222.jpg", time: "test219" },
-          { from: "them", image: "images/2_msg_20260222-2.jpg", time: "test220" },
-          { from: "them", image: "images/2_msg_20260222-3.jpg", time: "test221" },
-          { date: "2026年3月5日 星期四" },   // 交往 100 日、將太郎搬到韓國
-          { from: "them", text: "test538", time: "test539" },
-          { from: "me", text: "test540", time: "test541" },
-          { date: "2026年5月19日 星期二" },   // 吵架
-          { from: "me", text: "test542", time: "test543" },
-          { from: "them", text: "test544", time: "test545" },
+          { from: "them", text: "我需要一點時間思考", time: "上午 4:12" },
+          { from: "me", text: "我也是", time: "上午 4:19" },
+          { date: "2026年2月22日 星期日" },   // 決定搬來韓國
+          { from: "me", text: "在幹嘛~", time: "下午 6:24" },
+          { from: "them", image: "images/2_msg_20260222.jpg", time: "下午 7:12" },
+          { from: "them", image: "images/2_msg_20260222-3.jpg", time: "下午 7:12" },
+          { from: "them", call: "video", duration: "0:02:32", time: "下午 7:13" },
+          { from: "them", text: "晚安~", time: "下午 7:16" },
+          { from: "me", text: "ㅋㅋ現在才幾點呢", time: "下午 7:17" },
+          { date: "2026年3月4日 星期三" },
+          { from: "me", text: "在嗎", time: "上午 11:03" },
+          { from: "them", call: "video", duration: "1:00:32", time: "下午 12:02" },
+          { from: "me", text: "真期待~", time: "下午 1:04" },
+          { from: "them", text: "謝謝你。", time: "下午 1:05" },
+          { from: "me", text: "我也謝謝你😊", time: "下午 1:06" },
+          { date: "2026年3月24日 星期二" },
+          { from: "them", text: "摸魚中", time: "下午 2:03" },
+          { from: "them", image: "images/2_msg_20260324.jpg", time: "下午 2:05" },
+          { from: "me", text: "錯過了你的摸魚ㅋㅋ", time: "下午 7:23" },
+          { from: "me", call: "video", duration: "0:16:57", time: "下午 7:24" },
+          { from: "me", text: "等等見~", time: "下午 7:45" },
           { date: "2026年6月26日 星期五" },
-          { from: "them", image: "images/2_msg_20260626.jpg", time: "test322" },
-          { date: "2026年7月11日 星期六" },   // 舞室鬧僵之後
-          { from: "me", text: "test546", time: "test547" },
+          { from: "them", image: "images/2_msg_20260626.jpg", time: "上午 7:37" },
+          { from: "me", text: "ㅋㅋㅋㅋㅋㅋㅋ可愛", time: "上午 9:24" },
+          { date: "2026年7月6日 星期一" },
+          { from: "them", image: "images/2_msg_20260706.jpg", time: "下午 11:36" },
+          { from: "me", recalled: true, time: "下午 11:38" },
+          { from: "them", text: "等我。", time: "下午 11:39" },
           { date: "2026年7月12日 星期日" },
           { from: "me", image: "images/1_msg_20260712.jpg", time: "test217" },
           { date: "2026年10月22日 星期四" },   // 論壇發文後；最後一則是소희傳的（未讀 1）
