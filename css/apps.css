@@ -22,7 +22,7 @@
 .ph-kp-bottom { display: grid; grid-template-columns: repeat(3, var(--k)); gap: 0 calc(var(--k) * .32); margin: calc(var(--k) * .2) 0 0; align-items: center; justify-items: center; }
 .ph-kp-call { width: var(--k); height: var(--k); border-radius: 50%; background: #34c759; color: #fff; display: flex; align-items: center; justify-content: center; }
 .ph-kp-call:active { background: #2aa84a; }
-.ph-kp-call svg { width: 34px; height: 34px; }
+.ph-kp-call svg { width: 40px; height: 40px; }
 .ph-kp-del { width: 44px; height: 32px; }
 .ph-kp-del svg { width: 40px; height: 28px; }
 .ph-calling {
@@ -36,7 +36,7 @@
 .ph-calling-grid button { display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 13px; color: #fff; }
 .ph-calling-grid span { width: 72px; height: 72px; border-radius: 50%; background: rgba(255,255,255,.18); }
 .ph-end { width: 72px; height: 72px; border-radius: 50%; background: #ff3b30; color: #fff; margin-top: 46px; display: inline-flex; align-items: center; justify-content: center; }
-.ph-end svg { width: 34px; height: 34px; }
+.ph-end svg { width: 38px; height: 38px; }
 .ph-end-label { font-size: 13px; margin-top: 6px; }
 
 /* =========================================================

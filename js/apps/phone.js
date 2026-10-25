@@ -6,9 +6,10 @@
   var callTimer = null;
 
   var ICON = {
-    call: '<svg viewBox="0 0 24 24"><path d="M6.5 3.5c.8-.3 1.6 0 2 .7l1.6 3c.4.7.2 1.6-.4 2.1l-1.4 1.1c.9 2 2.5 3.6 4.5 4.5l1.1-1.4c.5-.6 1.4-.8 2.1-.4l3 1.6c.7.4 1 1.2.7 2l-.7 1.6c-.5 1.1-1.6 1.7-2.8 1.6C9.5 19 4.9 14.5 4.1 7.8 4 6.6 4.6 5.5 5.7 5z" fill="currentColor"/></svg>',
+    call: '<svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" fill="currentColor" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>',
     del: '<svg viewBox="0 0 34 24"><path d="M10 2h20a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H10L1 12z" fill="#e5e5ea"/><path d="M15 8l8 8M23 8l-8 8" stroke="#000" stroke-width="2.2" stroke-linecap="round"/></svg>',
-    end: '<svg viewBox="0 0 24 24"><path d="M3 14.5c4.9-4.4 13.1-4.4 18 0l-1.9 2.4c-.4.5-1.2.6-1.8.3l-2.4-1.4c-.5-.3-.8-.9-.7-1.5l.2-1.4c-2.1-.7-4.7-.7-6.8 0l.2 1.4c.1.6-.2 1.2-.7 1.5l-2.4 1.4c-.6.3-1.4.2-1.8-.3z" fill="currentColor"/></svg>'
+    // 結束通話：同一個話筒轉 135 度（和 iPhone 一樣）
+    end: '<svg viewBox="0 0 24 24" style="transform:rotate(135deg)"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" fill="currentColor" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>'
   };
 
   function S() { return window.SOSHO; }
