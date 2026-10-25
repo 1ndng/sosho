@@ -243,6 +243,7 @@ window.SITE_DATA = {
           { image: "images/3_story_20251126-4.jpg", time: "2025年11月26日", note: "2025/7/15" },
           { image: "images/3_story_20251230.jpg", time: "2025年12月30日" },
           { image: "images/3_story_20251231.jpg", time: "2025年12月31日" },
+          { image: "images/3_story_20260122.jpg", time: "1月22日" },
           { image: "images/3_story_20260206.jpg", time: "2月6日" },
           { image: "images/3_story_20260206-2.jpg", time: "2月6日" },
           { image: "images/3_story_20260305.jpg", time: "3月5日", note: "來接機的小狗^^" },
@@ -596,7 +597,6 @@ window.SITE_DATA = {
               { image: "images/2_story_20260305.jpg", time: "3月5日", note: "你出國？", noteBy: "bin032" },
               { image: "images/2_story_20260312.jpg", time: "3月12日" },
               { image: "images/2_story_20260410.jpg", time: "4月10日", note: "舞室的哥~" },
-              { image: "images/2_story2_20260410-2.jpg", time: "4月10日", closeFriends: true },
               { image: "images/2_story_20260427.jpg", time: "4月27日" },
               { image: "images/2_story2_20260427-2.jpg", time: "4月27日", closeFriends: true },
               { image: "images/2_story_20260606.mp4", time: "6月6日", likedBy: ["shotaroo0"] },
@@ -613,7 +613,9 @@ window.SITE_DATA = {
         archive: {
           stories: [
             { image: "images/2_savedstory_20251124.jpg", time: "2025年11月24日" },
+            { image: "images/2_story2_20260101.mp4", time: "1月1日", closeFriends: true },
             { image: "images/2_savedstory_20260305.jpg", time: "3月5日" },
+            { image: "images/2_story2_20260410-2.jpg", time: "4月10日", closeFriends: true },
             { image: "images/2_story2_20260604.jpg", time: "6月4日", closeFriends: true }   // 摯友限動，沒放精選
           ],
           posts: [
@@ -928,6 +930,7 @@ window.SITE_DATA = {
           { from: "them", text: "羨慕~~", time: "下午 7:41" },
           { from: "me", call: "video", duration: "4:12:55", time: "下午 7:43" },
           { date: "2025年12月14日" },
+          { from: "them", image: "images/2_msg_20251214.jpg", time: "下午 9:04" },
           { from: "them", text: "在幹嘛", time: "下午 9:05" },
           { from: "me", text: "在想你ㅎㅎ", time: "下午 9:06" },
           { from: "them", text: "...", time: "下午 9:06" },
