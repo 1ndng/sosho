@@ -57,12 +57,25 @@
 
   // 撥號畫面：一般號碼 3 秒後顯示「無人接聽」；有 script 的號碼會接通、跑字幕對話
   function startCall(name, entry) {
+    var p = P();
+    var ov = callOverlay(name, p.callingText);
+    clearTimeout(callTimer);
+    if (entry && entry.script) {
+      callTimer = setTimeout(function () { connect(ov, name, entry.script); }, entry.ringMs || 2200);
+    } else {
+      callTimer = setTimeout(function () {
+        var st = document.getElementById('ph-status');
+        if (st) st.textContent = p.noAnswerText;
+      }, 3000);
+    }
+  }
+  function callOverlay(name, status) {
     var p = P(), esc = S().esc;
     var btns = p.callButtons || [];
     var ov = document.createElement('div');
     ov.className = 'ph-calling';
     ov.innerHTML =
-      '<div class="ph-calling-status" id="ph-status">' + esc(p.callingText) + '</div>' +
+      '<div class="ph-calling-status" id="ph-status">' + esc(status) + '</div>' +
       '<div class="ph-calling-name">' + esc(name) + '</div>' +
       '<div class="ph-calling-grid">' + btns.map(function (b) {
         return '<button data-na><span></span>' + esc(b) + '</button>';
@@ -73,15 +86,71 @@
       '<div class="ph-end-label">' + esc(p.endLabel) + '</div>';
     S().$('#phone-overlay').appendChild(ov);
     S().setDarkStatus(true);
-    clearTimeout(callTimer);
-    if (entry && entry.script) {
-      callTimer = setTimeout(function () { connect(ov, name, entry.script); }, entry.ringMs || 2200);
-    } else {
-      callTimer = setTimeout(function () {
-        var st = document.getElementById('ph-status');
-        if (st) st.textContent = p.noAnswerText;
-      }, 3000);
-    }
+    return ov;
+  }
+
+  /* ---- 來電（data.js 的 phone.incoming）：達成旗標 when 後過 delay 毫秒，對方打來 ----
+     接聽：branch 依玩家有沒有在那個 Kakao 聊天室回過話，選不同的開頭段落
+     拒接或沒接：記錄 declineFlag */
+  var PKEY = 'sosho-phone', incoming = null;   // incoming = { cfg, prev, timer }
+  function pstate() { var s = S().load(PKEY, null) || {}; s.fired = s.fired || {}; s.since = s.since || {}; return s; }
+  function incomingTick() {
+    if (!S() || incoming || talk) return;
+    var list = P().incoming || [], st = pstate(), now = Date.now();
+    list.some(function (c) {
+      if (st.fired[c.id] || !S().hasFlag(c.when)) return false;
+      if (!st.since[c.id]) { st.since[c.id] = now; S().save(PKEY, st); }
+      if (now - st.since[c.id] < (c.delay || 0)) return false;
+      if (document.getElementById('lock')) return false;   // 手機還鎖著就等解鎖
+      st.fired[c.id] = 1; S().save(PKEY, st);
+      ring(c);
+      return true;
+    });
+  }
+  setInterval(incomingTick, 1000);
+
+  function ring(c) {
+    var esc = S().esc, prev = location.hash;
+    incoming = { cfg: c, prev: prev && prev.indexOf('#/phone') !== 0 ? prev : '#/home' };
+    location.hash = '#/phone';
+    setTimeout(function () {
+      var ov = document.createElement('div');
+      ov.className = 'ph-calling ph-incoming';
+      ov.id = 'ph-incoming';
+      ov.innerHTML =
+        '<div class="ph-calling-status">' + esc(c.label || '') + '</div>' +
+        '<div class="ph-calling-name">' + esc(c.name) + '</div>' +
+        (c.avatar ? '<img class="ph-in-av" src="' + esc(c.avatar) + '" alt="">' : '') +
+        '<div class="ph-in-btns">' +
+          '<div><button class="ph-end" data-in-decline>' + ICON.end + '</button><span>' + esc(P().declineLabel || '拒絕') + '</span></div>' +
+          '<div><button class="ph-accept" data-in-accept>' + ICON.call + '</button><span>' + esc(P().acceptLabel || '接聽') + '</span></div>' +
+        '</div>';
+      S().$('#phone-overlay').innerHTML = '';
+      S().$('#phone-overlay').appendChild(ov);
+      S().setDarkStatus(true);
+      // 一直不接 → 當作沒接
+      incoming.timer = setTimeout(function () { if (document.getElementById('ph-incoming')) decline(); }, c.ringFor || 30000);
+    }, 350);
+  }
+  function decline() {
+    if (!incoming) return;
+    clearTimeout(incoming.timer);
+    S().setFlag(incoming.cfg.declineFlag);
+    var prev = incoming.prev;
+    incoming = null;
+    S().setDarkStatus(false);
+    S().replaceHash(prev);
+  }
+  function accept() {
+    if (!incoming) return;
+    clearTimeout(incoming.timer);
+    var c = incoming.cfg, b = c.branch || {};
+    S().$('#phone-overlay').innerHTML = '';
+    var ov = callOverlay(c.name, '');
+    var replied = b.room && window.SOSHO_KAKAO && window.SOSHO_KAKAO.replied(b.room);
+    var script = { start: replied ? b.replied : b.notReplied, nodes: c.nodes };
+    incoming.inCall = true;
+    connect(ov, c.name, script);
   }
 
   /* ---- 接通後的字幕對話 ---- */
@@ -137,8 +206,8 @@
       box.scrollTop = box.scrollHeight;   // 選項出現後字幕區變矮，捲到最後一句
       return;
     }
-    // 沒有選項 = 對話結束，稍等一下自動掛斷
-    talk.timer = setTimeout(hangUp, 1600);
+    // 沒有選項 = 對話結束，稍等一下自動掛斷（waitMs 可以改等多久；endFlag = 掛斷時記錄的旗標）
+    talk.timer = setTimeout(function () { if (node.endFlag) S().setFlag(node.endFlag); hangUp(); }, node.waitMs || 1600);
   }
   function choose(i) {
     if (!talk) return;
@@ -167,12 +236,15 @@
     clearTimeout(callTimer);
     stopTalk();
     S().setDarkStatus(false);
+    // 來電講完 → 回到原本在用的畫面
+    if (incoming && incoming.inCall) { var prev = incoming.prev; incoming = null; S().replaceHash(prev); return; }
     route(current);
   }
 
   var current = [];
   function route(parts) {
     current = parts;
+    if (incoming && !incoming.inCall && document.getElementById('ph-incoming')) return;   // 正在響的來電不要被蓋掉
     clearTimeout(callTimer);
     stopTalk();
     renderKeypad();
@@ -188,6 +260,8 @@
     if (e.target.closest('[data-dial]')) { if (dialed) startCall(labelForNumber(dialed), dialEntry(dialed)); return; }
     if ((el = e.target.closest('[data-choice]'))) { choose(+el.dataset.choice); return; }
     if (e.target.closest('.ph-cap') && talk && !(talk.node.choices && talk.line >= (talk.node.lines || []).length)) { nextLine(); return; }
+    if (e.target.closest('[data-in-accept]')) { accept(); return; }
+    if (e.target.closest('[data-in-decline]')) { decline(); return; }
     if (e.target.closest('[data-end]')) { endCall(); return; }
     if (e.target.closest('[data-na]')) S().toast();
   });

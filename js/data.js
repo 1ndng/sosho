@@ -755,6 +755,67 @@ window.SITE_DATA = {
         }
       }
     ],
+    // 來電：達成 when 的旗標後過 delay 毫秒打來；branch 依玩家有沒有在 room 這個 Kakao 聊天室回過話，選開頭段落
+    //   拒接或 30 秒沒接 → 記錄 declineFlag；段落寫 endFlag → 講完掛斷時記錄；waitMs = 講完後等多久才掛斷
+    incoming: [
+      {
+        id: "heecall", when: "login_fauiogl94", delay: 10000,
+        name: "소희", avatar: "images/2_avatar.jpg", label: "KakaoTalk 語音通話",
+        declineFlag: "hee_call_declined",
+        branch: { room: "f1", replied: "r1", notReplied: "n1" },
+        nodes: {
+          // 玩家先前在소희聊天室回過話
+          r1: {
+            lines: [{ who: "them", text: "你覺得呢？" }],
+            choices: [
+              { label: "...", next: "rDots" },
+              { label: "呃不好意思...", next: "rSorry" }
+            ]
+          },
+          rDots: {
+            lines: [
+              { who: "them", text: "......" },
+              { who: "them", text: "等等再談吧，記得打給我" },
+              { who: "me", text: "......" },
+              { who: "them", text: "總之，公不公開對我來說無所謂，反正我知道你很喜歡我離不開我~" },
+              { who: "them", text: "照你的心意走吧。" }
+            ]
+          },
+          rSorry: {
+            lines: [
+              { who: "them", text: "......？你是誰" },
+              { who: "me", text: "我是撿到這支手機的人......抱歉擅自回了訊息還接了電話......" },
+              { who: "them", text: "沒事，等一下哦" }
+            ],
+            waitMs: 4000, endFlag: "hee_knows"
+          },
+          // 玩家沒回過話
+          n1: {
+            lines: [{ who: "them", text: "你有看到我的訊息嗎？" }],
+            choices: [
+              { label: "...", next: "nDots" },
+              { label: "有", next: "nYes" }
+            ]
+          },
+          nDots: {
+            lines: [
+              { who: "them", text: "......" },
+              { who: "them", text: "等等記得看訊息，晚點再談吧" }
+            ]
+          },
+          nYes: {
+            lines: [
+              { who: "them", text: "......？你是誰" },
+              { who: "me", text: "我是撿到這支手機的人......抱歉擅自讀了訊息還接了電話......" },
+              { who: "them", text: "......等一下哦" }
+            ],
+            waitMs: 4000, endFlag: "hee_knows"
+          }
+        }
+      }
+    ],
+    acceptLabel: "接聽",
+    declineLabel: "拒絕",
     endedText: "通話結束",
     callingText: "正在撥號⋯",
     noAnswerText: "無人接聽",
@@ -791,8 +852,14 @@ window.SITE_DATA = {
       { id: "pub2", when: "public_fauiogl94", delay: 25000, room: "g1", from: "f4", text: "哥居然一直瞞著我" },
       { id: "pub3", when: "public_fauiogl94", delay: 50000, room: "g1", from: "f4", text: "@은석 你該不會早就知道了吧？" },
       // 登入소희的 IG 之後
-      { id: "hee1", when: "login_252525252_", delay: 6000,  room: "f1", text: "我帳號被其他裝置登入了" },
-      { id: "hee2", when: "login_252525252_", delay: 14000, room: "f1", text: "是你嗎？" },
+      { id: "hee1", when: "login_252525252_", delay: 6000,  room: "f1", text: "我帳號被其他裝置登入了", unless: "hee_knows" },
+      { id: "hee2", when: "login_252525252_", delay: 14000, room: "f1", text: "是你嗎？", unless: "hee_knows" },
+      // 소희已經知道手機被撿到（電話裡承認了）之後才登入她的 IG
+      { id: "hee3", when: ["login_252525252_", "hee_knows"], delay: 6000, room: "f1", text: "不好意思，請問是您登入了我的Instagram帳號嗎？", unlessSent: "hee1" },
+      // 소희的來電：拒接／沒接
+      { id: "heeNo", when: "hee_call_declined", delay: 5000, room: "f1", text: "？" },
+      // 電話裡發現是撿到手機的人
+      { id: "heeShop", when: "hee_knows", delay: 3000, room: "f1", text: "方便今晚到○○舞室嗎？或是您直接告知櫃台人員就好，他們會幫忙歸還手機，謝謝。" },
       // 第一次打開群組後沒回話
       { id: "seen1", when: "chat_g1", delay: 30000, room: "g1", from: "f4", text: "@Shotaro 是你已讀嗎", unlessReplied: true }
     ],

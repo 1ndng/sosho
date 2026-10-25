@@ -192,3 +192,11 @@
 .kk-banner-txt b { padding-right: 40px; }
 .kk-banner-txt b { font-size: 15px; font-weight: 700; }
 .kk-banner-txt span { font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ---------- 來電畫面 ---------- */
+.ph-in-av { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; margin-top: 28px; }
+.ph-in-btns { margin-top: auto; margin-bottom: 70px; display: flex; justify-content: space-between; align-self: stretch; padding: 0 48px; }
+.ph-in-btns > div { display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 13px; }
+.ph-in-btns .ph-end { margin-top: 0; }
+.ph-accept { width: 72px; height: 72px; border-radius: 50%; background: #34c759; color: #fff; display: inline-flex; align-items: center; justify-content: center; }
+.ph-accept svg { width: 36px; height: 36px; }

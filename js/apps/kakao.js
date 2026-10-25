@@ -289,12 +289,18 @@
     var st = state(), now = Date.now(), changed = false;
     st.fired = st.fired || {}; st.since = st.since || {};
     evs.forEach(function (ev) {
-      if (st.fired[ev.id] || !S().hasFlag(ev.when)) return;
-      if (!st.since[ev.when]) { st.since[ev.when] = now; changed = true; }
-      if (now - st.since[ev.when] < (ev.delay || 0)) return;
+      // when 可以寫一個旗標，或好幾個（全部達成才算）；unless = 有這個旗標就不傳
+      var need = [].concat(ev.when), key = need.join('+');
+      if (st.fired[ev.id] || !need.every(S().hasFlag)) return;
+      if (!st.since[key]) { st.since[key] = now; changed = true; }
+      if (now - st.since[key] < (ev.delay || 0)) return;
       st.fired[ev.id] = 1; changed = true;
       var replied = (st.msgs[ev.room] || []).some(function (m) { return m.from === 'me'; });
       if (ev.unlessReplied && replied) return;
+      if (ev.unless && S().hasFlag(ev.unless)) return;
+      st.sent = st.sent || {};
+      if (ev.unlessSent && st.sent[ev.unlessSent]) return;   // 某則即時訊息已經傳過就不傳
+      st.sent[ev.id] = 1;
       var msg = { from: ev.from || 'them', time: nowTime() };
       ['text', 'link', 'linkTitle', 'linkSite', 'image'].forEach(function (k) { if (ev[k]) msg[k] = ev[k]; });
       (st.msgs[ev.room] = st.msgs[ev.room] || []).push(msg);
@@ -311,6 +317,8 @@
     if (changed) S().save(KEY, st);
   }
   setInterval(liveTick, 1000);
+  // 給電話用：玩家有沒有在這個聊天室回過話
+  window.SOSHO_KAKAO = { replied: function (id) { return (state().msgs[id] || []).some(function (m) { return m.from === 'me'; }); } };
 
   // 通知橫幅（和 iPhone 一樣從上面滑下來）：頭貼（群組用群組頭像）＋傳訊息的人＋內容；點了打開聊天室
   var bannerTimer = null;
