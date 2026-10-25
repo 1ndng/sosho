@@ -470,6 +470,7 @@ window.SITE_DATA = {
             // 依日期排序；story2 是摯友限時（closeFriends: true，只有摯友名單裡的人看得到）
             stories: [
               { image: "images/1_story_20240820.jpg", time: "2024年8月20日" },
+              { image: "images/1_story_20250319.mp4", time: "2025年3月19日" },
               { image: "images/1_story_250520.jpg", time: "2025年5月20日",
                 note: "不是今天～ㅎㅎ",        // 左下角 Shotaro 自己的留言
                 likedBy: ["252525252_"] },    // 預設按讚的人（只有登入這個帳號看時愛心是紅的）
@@ -481,7 +482,9 @@ window.SITE_DATA = {
               { image: "images/1_story_20260102.jpg", time: "1月2日" },   // 和소희聊天室 1/2 的照片同一張
               { image: "images/1_story_20260401.jpg", time: "4月1日" },
               { image: "images/1_story_20260410.jpg", time: "4月10日" },
-              { image: "images/1_story2_20261007.jpg", time: "10月7日", closeFriends: true, pos: "20% 50%" }   // pos = 照片裁切位置（左右%、上下%），50% 50% 是置中
+              { image: "images/1_story_20260602.mp4", time: "6月2日" },
+              { image: "images/1_story2_20261007.jpg", time: "10月7日", closeFriends: true, pos: "20% 50%" },   // pos = 照片裁切位置（左右%、上下%），50% 50% 是置中
+              { image: "images/1_story_20261011.jpg", time: "10月11日" }   // 三人一起出去玩
             ] }
         ],
         posts: [
@@ -604,6 +607,7 @@ window.SITE_DATA = {
               { image: "images/2_story2_20260427-2.jpg", time: "4月27日", closeFriends: true },
               { image: "images/2_story_20260606.mp4", time: "6月6日", likedBy: ["shotaroo0"] },
               { image: "images/2_story_20260709.jpg", time: "7月9日" },
+              { image: "images/2_story2_20260811.mp4", time: "8月11日", closeFriends: true },
               { image: "images/2_story_20260830.jpg", time: "8月30日", note: "怎麼不帶我去？", noteBy: "sungchan913" },
               { image: "images/2_story_20261011.jpg", time: "10月11日" }   // 三人一起出去玩
             ] }
