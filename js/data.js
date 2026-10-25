@@ -794,8 +794,7 @@ window.SITE_DATA = {
       { id: "hee1", when: "login_252525252_", delay: 6000,  room: "f1", text: "我帳號被其他裝置登入了" },
       { id: "hee2", when: "login_252525252_", delay: 14000, room: "f1", text: "是你嗎？" },
       // 第一次打開群組後沒回話
-      { id: "seen1", when: "chat_g1", delay: 30000, room: "g1", from: "f4", text: "@Shotaro 是你已讀嗎", unlessReplied: true },
-      { id: "seen2", when: "chat_g1", delay: 34000, room: "g1", from: "f4", text: "@은석 你知道是真的還假的嗎", unlessReplied: true }
+      { id: "seen1", when: "chat_g1", delay: 30000, room: "g1", from: "f4", text: "@Shotaro 是你已讀嗎", unlessReplied: true }
     ],      // 遊戲裡的「今天」（聊天列表顯示「昨天」、日期用）
     passcode: "0318",              // 進入 KakaoTalk 要輸入的密碼（打完電話才會知道）；留空 "" = 不用密碼
     friends: [
