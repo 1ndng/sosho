@@ -46,9 +46,6 @@
 .kakao-app .app-scroll { background: #fff; color: #191919; padding-bottom: 34px; }
 .kk-head { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px 6px 18px; }
 .kk-head h1 { font-size: 22px; margin: 0; font-weight: 700; }
-.kk-head-icons { display: flex; gap: 6px; }
-.kk-head-icons button { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; }
-.kk-head-icons svg { width: 24px; height: 24px; }
 .kk-chatrow:active { background: #f5f5f5; }
 .kk-chatrow { display: flex; align-items: center; gap: 12px; padding: 9px 18px; }
 .kk-chatrow img { width: 48px; height: 48px; border-radius: 19px; object-fit: cover; flex: none; }

@@ -347,13 +347,8 @@ window.SITE_DATA = {
       commentPlaceholder: "為 {user} 新增留言……",
       postButton: "發佈",
       reply: "回覆",
-      viewAllComments: "查看全部 {n} 則留言",
       noComments: "還沒有留言",
       justNow: "剛剛",
-      shareTitle: "分享",
-      sendButton: "傳送",
-      sent: "已傳送",
-      copyLink: "複製連結",
       linkCopied: "已複製連結",
       reposted: "已轉發到你的個人檔案",
       unreposted: "已取消轉發",
@@ -383,13 +378,8 @@ window.SITE_DATA = {
     likedBySuffix: "說讚",         // 「說讚」
     storyMessagePlaceholder: "傳送訊息……",  // 限時動態下方「傳送訊息……」
 
-    // 下方功能列的搜尋頁
-    // 不能登入、只會出現在粉絲／追蹤名單裡可以點進去的帳號（格式和 otherAccounts 一樣，不用寫 password）
-    searchOnlyAccounts: [],
-
-    // 從搜尋點進別人的頁面時，取代「編輯／分享個人檔案」的兩個按鈕
+    // 別人的頁面：取代「編輯／分享個人檔案」的按鈕
     followLabel: "追蹤",
-    messageLabel: "發訊息",
     followingButtonLabel: "追蹤中",   // 按了追蹤之後按鈕變成的文字
 
     // 右上角三條線 → 設定頁：已儲存、典藏、帳號隱私設定（公開／不公開開關）、摯友都可以點進去

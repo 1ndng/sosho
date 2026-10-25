@@ -321,10 +321,8 @@
     pause: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path d="M9.5 8v8M14.5 8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
     play: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path d="M10 8l6 4-6 4z" fill="currentColor"/></svg>',
     grid: '<svg viewBox="0 0 24 24"><g fill="currentColor"><rect x="2" y="2" width="5.5" height="5.5" rx="1.3"/><rect x="9.25" y="2" width="5.5" height="5.5" rx="1.3"/><rect x="16.5" y="2" width="5.5" height="5.5" rx="1.3"/><rect x="2" y="9.25" width="5.5" height="5.5" rx="1.3"/><rect x="9.25" y="9.25" width="5.5" height="5.5" rx="1.3"/><rect x="16.5" y="9.25" width="5.5" height="5.5" rx="1.3"/><rect x="2" y="16.5" width="5.5" height="5.5" rx="1.3"/><rect x="9.25" y="16.5" width="5.5" height="5.5" rx="1.3"/><rect x="16.5" y="16.5" width="5.5" height="5.5" rx="1.3"/></g></svg>',
-    repost: '<svg viewBox="0 0 24 24"><path d="M19 9.5V8a3 3 0 0 0-3-3H5m0 0 3-3M5 5l3 3M5 14.5V16a3 3 0 0 0 3 3h11m0 0-3-3m3 3-3 3" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     heart: '<svg viewBox="0 0 24 24"><path d="M12 20.5s-8-4.9-8-11A4.6 4.6 0 0 1 12 6.6a4.6 4.6 0 0 1 8 2.9c0 6.1-8 11-8 11z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>',
     comment: '<svg viewBox="0 0 24 24"><g transform="translate(12 12.6) scale(.8) translate(-12 -12)"><path d="M20.66 17A9.99 9.99 0 1 0 17.07 20.62L22 22z" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linejoin="round"/></g></svg>',
-    send: '<svg viewBox="0 0 24 24"><path d="M21.5 3 2.5 9.5l7.2 3.1L13 21.5zM9.7 12.6 21.5 3" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>',
     bookmark: '<svg viewBox="0 0 24 24"><path d="M5.5 3h13v18L12 14.8 5.5 21z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>',
     saved: '<svg viewBox="0 0 24 24"><path d="M5.5 3h13v18L12 14.8 5.5 21z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>',
     archive: '<svg viewBox="0 0 24 24"><path d="M5.9 7.4A8.3 8.3 0 1 1 4.2 10.3" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M2.9 7.1 7.6 4.4l.3 5.3z" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/><path d="M12.6 8.2v4.6l-2.6 2.4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
@@ -336,18 +334,10 @@
     multi: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="14.5" height="14.5" rx="3" fill="#fff"/><path d="M21 7.5v10.5a3 3 0 0 1-3 3H7.5" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>',
     close: '<svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
     more: '<svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="19" cy="12" r="1.6" fill="currentColor"/></svg>',
-    home: '<svg viewBox="0 0 24 24"><path d="M3.5 10.5 12 3l8.5 7.5V21h-5.5v-6h-6v6H3.5z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>',
-    add: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 7.5v9M7.5 12h9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
-    reels: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2" fill="none"/><path d="M3 8.5h18M8.5 3l3 5.5M14 3l3 5.5" stroke="currentColor" stroke-width="2" fill="none"/><path d="M10 11.5v6l5-3z" fill="currentColor"/></svg>',
-    addUser: '<svg viewBox="0 0 24 24"><circle cx="14" cy="8" r="4" stroke="currentColor" stroke-width="2" fill="none"/><path d="M6.5 21c.6-4 3.6-6.3 7.5-6.3s6.9 2.3 7.5 6.3M5 6v6M2 9h6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>',
     soundOn: '<svg viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>',
     soundOff: '<svg viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M15.5 9.5l5 5M20.5 9.5l-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
     heartFill: '<svg viewBox="0 0 24 24"><path d="M12 20.5s-8-4.9-8-11A4.6 4.6 0 0 1 12 6.6a4.6 4.6 0 0 1 8 2.9c0 6.1-8 11-8 11z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
-    bookmarkFill: '<svg viewBox="0 0 24 24"><path d="M5.5 3h13v18L12 14.8 5.5 21z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
-    plusCircle: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 7.5v9M7.5 12h9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
-    link: '<svg viewBox="0 0 24 24"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3.2-3.2a4.5 4.5 0 0 0-6.4-6.4L12 5.6M14 10a4.5 4.5 0 0 0-6.4 0l-3.2 3.2a4.5 4.5 0 0 0 6.4 6.4l1.2-1.2" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>',
-    dots: '<svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.8" fill="currentColor"/><circle cx="12" cy="12" r="1.8" fill="currentColor"/><circle cx="19" cy="12" r="1.8" fill="currentColor"/></svg>',
-    tagged: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" fill="none"/><path d="M6.5 20.5c1-3 3-4.3 5.5-4.3s4.5 1.3 5.5 4.3" stroke="currentColor" stroke-width="2" fill="none"/></svg>'
+    bookmarkFill: '<svg viewBox="0 0 24 24"><path d="M5.5 3h13v18L12 14.8 5.5 21z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>'
   };
 
   // 簡介裡的 @帳號：bioLinks 有寫 → 開外部網址；遊戲裡有這個帳號 → 進它的頁面；其他 → 尚未更新
@@ -626,8 +616,8 @@
   var T_DEFAULT = {
     storyCommentsTitle: '為你推薦', storyCommentAuthor: '作者',
     commentsTitle: '留言', commentPlaceholder: '為 {user} 新增留言……', postButton: '發佈', reply: '回覆',
-    viewAllComments: '查看全部 {n} 則留言', noComments: '還沒有留言', justNow: '剛剛',
-    shareTitle: '分享', sendButton: '傳送', sent: '已傳送', copyLink: '複製連結', linkCopied: '已複製連結',
+    noComments: '還沒有留言', justNow: '剛剛',
+    linkCopied: '已複製連結',
     reposted: '已轉發到你的個人檔案', unreposted: '已取消轉發',
     savedTitle: '已儲存', noSaved: '還沒有儲存任何貼文', noReposts: '還沒有轉發任何貼文', noTagged: '還沒有被標註的相片',
     storyMessageSent: '訊息已傳送',
