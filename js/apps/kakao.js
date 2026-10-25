@@ -324,6 +324,7 @@
     el.id = 'kk-banner'; el.className = 'kk-banner';
     el.href = '#/kakao/chat/' + encodeURIComponent(f.id);
     el.innerHTML = roomAvatar(f, 'kk-banner-av') +
+      '<small class="kk-banner-now">' + esc(TX().now || '現在') + '</small>' +
       '<span class="kk-banner-txt"><b>' + esc(who) + '</b><span>' + esc(ev.text || (ev.link ? linkInfo(ev).title : ev.image ? TX().photoLabel || '照片' : '')) + '</span></span>';
     phone.appendChild(el);
     void el.offsetWidth; el.classList.add('show');

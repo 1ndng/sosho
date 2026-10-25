@@ -1213,6 +1213,7 @@ window.SITE_DATA = {
       expiredText: "照片已過期",     // 過期的照片（expired: true）
       expiredVideoText: "影片已過期", // 過期的影片（expired: "video"）
       yesterday: "昨天",
+      now: "現在",                  // 即時訊息通知右上角的字
       meTag: "我"                   // 自己的聊天室名字旁的小標
     }
   }
