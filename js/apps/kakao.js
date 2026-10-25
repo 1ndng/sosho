@@ -318,7 +318,18 @@
   }
   setInterval(liveTick, 1000);
   // 給電話用：玩家有沒有在這個聊天室回過話
-  window.SOSHO_KAKAO = { replied: function (id) { return (state().msgs[id] || []).some(function (m) { return m.from === 'me'; }); } };
+  window.SOSHO_KAKAO = {
+    replied: function (id) { return (state().msgs[id] || []).some(function (m) { return m.from === 'me'; }); },
+    // 電話打完 → 聊天室多一則通話紀錄（只是紀錄，不能點）；沒接的算未讀
+    addCall: function (id, msg) {
+      var st = state();
+      msg.time = nowTime();
+      (st.msgs[id] = st.msgs[id] || []).push(msg);
+      if (!msg.duration) st.unread[id] = (st.unread[id] != null ? st.unread[id] : ((friend(id) || {}).unread || 0)) + 1;
+      S().save(KEY, st);
+      if (location.hash.indexOf('#/kakao') === 0) route(current);
+    }
+  };
 
   // 通知橫幅（和 iPhone 一樣從上面滑下來）：頭貼（群組用群組頭像）＋傳訊息的人＋內容；點了打開聊天室
   var bannerTimer = null;

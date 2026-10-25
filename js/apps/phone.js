@@ -132,9 +132,18 @@
       incoming.timer = setTimeout(function () { if (document.getElementById('ph-incoming')) decline(); }, c.ringFor || 30000);
     }, 350);
   }
+  // 來電結束後在 Kakao 聊天室留一則通話紀錄（room = branch.room；沒接 = 未接）
+  function logCall(c, secs) {
+    var room = (c.branch || {}).room;
+    if (!room || !window.SOSHO_KAKAO) return;
+    var msg = { from: 'them', call: c.callType || 'voice' };
+    if (secs != null) msg.duration = Math.floor(secs / 60) + ':' + String(secs % 60).padStart(2, '0');
+    window.SOSHO_KAKAO.addCall(room, msg);
+  }
   function decline() {
     if (!incoming) return;
     clearTimeout(incoming.timer);
+    logCall(incoming.cfg);
     S().setFlag(incoming.cfg.declineFlag);
     var prev = incoming.prev;
     incoming = null;
@@ -226,6 +235,7 @@
   }
   function hangUp() {
     var name = talk ? talk.name : '';
+    if (incoming && incoming.inCall && talk) incoming.secs = talk.secs;
     stopTalk();
     var st = document.getElementById('ph-status');
     if (st) st.textContent = P().endedText || '通話結束';
@@ -234,10 +244,14 @@
 
   function endCall() {
     clearTimeout(callTimer);
+    if (incoming && incoming.inCall && talk) incoming.secs = talk.secs;   // 玩家自己按結束
     stopTalk();
     S().setDarkStatus(false);
     // 來電講完 → 回到原本在用的畫面
-    if (incoming && incoming.inCall) { var prev = incoming.prev; incoming = null; S().replaceHash(prev); return; }
+    if (incoming && incoming.inCall) {
+      logCall(incoming.cfg, incoming.secs || 0);
+      var prev = incoming.prev; incoming = null; S().replaceHash(prev); return;
+    }
     route(current);
   }
 
