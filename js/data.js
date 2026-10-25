@@ -787,6 +787,9 @@ window.SITE_DATA = {
       { id: "pub1", when: "public_fauiogl94", delay: 5000,  room: "g1", from: "f4", text: "와 대박.." },
       { id: "pub2", when: "public_fauiogl94", delay: 25000, room: "g1", from: "f4", text: "哥居然一直瞞著我" },
       { id: "pub3", when: "public_fauiogl94", delay: 50000, room: "g1", from: "f4", text: "@은석 你該不會早就知道了吧？" },
+      // 登入소희的 IG 之後
+      { id: "hee1", when: "login_252525252_", delay: 6000,  room: "f1", text: "我帳號被其他裝置登入了" },
+      { id: "hee2", when: "login_252525252_", delay: 14000, room: "f1", text: "是你嗎？" },
       // 第一次打開群組後沒回話
       { id: "seen1", when: "chat_g1", delay: 30000, room: "g1", from: "f4", text: "@Shotaro 是你已讀嗎", unlessReplied: true },
       { id: "seen2", when: "chat_g1", delay: 34000, room: "g1", from: "f4", text: "@은석 你知道是真的還假的嗎", unlessReplied: true }
