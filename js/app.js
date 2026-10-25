@@ -1080,7 +1080,7 @@
       if (list.length > 1) noteTimer = setInterval(function () {
         if (!document.body.contains(note)) { clearInterval(noteTimer); return; }
         k = (k + 1) % list.length; put();
-      }, 2500);
+      }, 1600);   // 幾毫秒換下一則留言
     }
     function openNotes() {
       var list = notesOf(items[i]);
