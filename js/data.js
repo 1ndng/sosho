@@ -613,7 +613,7 @@ window.SITE_DATA = {
             ] }
         ],
         // 摯友名單：寫在這裡的帳號才看得到 closeFriends: true（story2）的限時動態
-        closeFriendsList: ["shotaroo0", "seokkkk", "sungchan913", "bin032", "antonnie"],
+        closeFriendsList: ["shotaroo0", "bin032", "antonnie"],
         // 已儲存：預先放好的已儲存貼文（"帳號/圖片檔名"）
         saved: ["shotaroo0/1_post_20250318.jpg"],
         // 典藏（登入這個帳號後：設定 → 典藏）
