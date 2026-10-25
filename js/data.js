@@ -123,7 +123,9 @@ window.SITE_DATA = {
             video: "images/forum_1_c3.mp4" },
           // replyTo = 回覆哪個帳號代碼（往右縮排、文字前面自動顯示 @代碼）
           { name: "sho_pabo", replyTo: "452_.rq", text: "拜託這一看就是小孩啊，你會叫你對象あにき？別造謠他跟他來路不明的侄子了好吧不如造謠我跟他。" },
-          { name: "452_.rq", replyTo: "sho_pabo", text: "👌🏻" }
+          { name: "452_.rq", replyTo: "sho_pabo", text: "👌🏻" },
+          { name: "xxx4552", text: "這是我8/30拍到的⋯⋯其實當時拍下來只是覺得sho好可愛啊但看到這篇突然就想到這個了⋯⋯讓sho越來越繽紛的存在嗎⋯⋯",
+            image: "images/forum_1_c4.jpg" }
         ]
       },
       {
@@ -592,6 +594,7 @@ window.SITE_DATA = {
               { image: "images/2_story2_20250526-3.jpg", time: "2025年5月26日", closeFriends: true },
               { image: "images/2_story_20250715.jpg", time: "2025年7月15日" },
               { image: "images/2_story_20250722.jpg", time: "2025年7月22日" },
+              { image: "images/2_story_20250829.jpg", time: "2025年8月29日" },
               { image: "images/2_story_20251125.jpg", time: "2025年11月25日" },
               { image: "images/2_story_20260117.jpg", time: "1月17日" },
               { image: "images/2_story_20260305.jpg", time: "3月5日", note: "你出國？", noteBy: "bin032" },
@@ -612,6 +615,7 @@ window.SITE_DATA = {
         // 典藏（登入這個帳號後：設定 → 典藏）
         archive: {
           stories: [
+            { image: "images/2_story2_20251121.mp4", time: "2025年11月21日", closeFriends: true },
             { image: "images/2_savedstory_20251124.jpg", time: "2025年11月24日" },
             { image: "images/2_story2_20260101.mp4", time: "1月1日", closeFriends: true },
             { image: "images/2_savedstory_20260305.jpg", time: "3月5日" },
@@ -919,6 +923,7 @@ window.SITE_DATA = {
           { from: "them", text: "?", time: "下午 7:46" },
           { from: "them", call: "video", duration: "3:08:41", time: "下午 7:47" },
           { date: "2025年12月3日" },
+          { from: "me", video: "images/1_msg_20251203.mp4", time: "下午 10:12" },   // 影片訊息：video 換成影片路徑
           { from: "me", text: "今天行程好晚才結束ㅜㅜ", time: "下午 10:14" },
           { from: "me", text: "還醒著嗎", time: "下午 10:15" },
           { from: "them", text: "剛洗完澡", time: "下午 10:31" },
@@ -977,6 +982,9 @@ window.SITE_DATA = {
           { from: "me", text: "真期待~", time: "下午 1:04" },
           { from: "them", text: "謝謝你", time: "下午 1:05" },
           { from: "me", text: "我也謝謝你😊", time: "下午 1:06" },
+          { date: "2026年3月12日" },
+          { from: "me", call: "video", duration: "1:30:23", time: "下午 8:01" },
+          { from: "them", image: "images/2_msg_20260312.jpg", time: "下午 9:32" },
           { date: "2026年3月24日" },
           { from: "them", text: "摸魚中~", time: "下午 2:03" },
           { from: "them", image: "images/2_msg_20260324.jpg", time: "下午 2:05" },

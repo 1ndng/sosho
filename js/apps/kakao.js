@@ -90,10 +90,10 @@
       '<div class="kk-head"><h1>' + esc(TX().chatsTitle) + '</h1>' +
         '</div>' +
       list.map(function (f) {
-        var msgs = messagesOf(f).filter(function (m) { return m.text || m.image || m.expired || m.call || m.link || m.recalled; }), last = msgs[msgs.length - 1] || {}, n = unreadOf(f);
+        var msgs = messagesOf(f).filter(function (m) { return m.text || m.image || m.video || m.expired || m.call || m.link || m.recalled; }), last = msgs[msgs.length - 1] || {}, n = unreadOf(f);
         return '<a class="kk-chatrow" href="#/kakao/chat/' + encodeURIComponent(f.id) + '">' +
           roomAvatar(f, 'kk-chatrow-av') +
-          '<span class="kk-chatrow-mid"><b>' + esc(f.name) + (f.group ? '<em class="kk-count">' + (f.members.length + 1) + '</em>' : '') + (f.self ? '<i class="kk-me-tag">' + esc(TX().meTag || '我') + '</i>' : '') + '</b><small>' + esc(last.text || (last.recalled ? TX().recalledText || '已收回訊息' : '') || (last.link ? linkInfo(last).title : '') || (last.expired === 'video' ? TX().videoLabel || '影片' : (last.image || last.expired) ? TX().photoLabel || '照片' : last.call ? (last.call === 'voice' ? TX().voiceCall || '語音通話' : TX().videoCall || '視訊通話') : '')) + '</small></span>' +
+          '<span class="kk-chatrow-mid"><b>' + esc(f.name) + (f.group ? '<em class="kk-count">' + (f.members.length + 1) + '</em>' : '') + (f.self ? '<i class="kk-me-tag">' + esc(TX().meTag || '我') + '</i>' : '') + '</b><small>' + esc(last.text || (last.recalled ? TX().recalledText || '已收回訊息' : '') || (last.link ? linkInfo(last).title : '') || ((last.video || last.expired === 'video') ? TX().videoLabel || '影片' : (last.image || last.expired) ? TX().photoLabel || '照片' : last.call ? (last.call === 'voice' ? TX().voiceCall || '語音通話' : TX().videoCall || '視訊通話') : '')) + '</small></span>' +
           '<span class="kk-chatrow-r"><small>' + esc(last.time || '') + '</small>' + (n ? '<i class="kk-badge">' + n + '</i>' : '') + '</span>' +
         '</a>';
       }).join('');
@@ -129,6 +129,13 @@
     if (m.expired) return m.expired === 'video'
       ? '<div class="kk-expired">' + ICON.video + '<span>' + esc(TX().expiredVideoText || '影片已過期') + '</span></div>'
       : '<div class="kk-expired">' + ICON.photo + '<span>' + esc(TX().expiredText || '照片已過期') + '</span></div>';
+    // 影片訊息：{ from, video: "images/xxx.mp4" }（點開全螢幕播放）
+    if (m.video) {
+      var vp = String(m.video).replace(/\.\w+$/, '') + '_poster.jpg', hasP = (window.SITE_MEDIA || []).indexOf(vp) >= 0;
+      return '<button class="kk-photo kk-video" data-video="' + esc(m.video) + '">' +
+        '<video src="' + esc(m.video) + '"' + (hasP ? ' poster="' + esc(vp) + '"' : '') + ' muted playsinline preload="metadata"></video>' +
+        '<i class="kk-play"></i></button>';
+    }
     if (m.image) return '<button class="kk-photo" data-photo="' + esc(m.image) + '"><img src="' + esc(m.image) + '" alt=""></button>';
     return '<div class="kk-bubble' + (first ? ' tail' : '') + '">' + S().multiline(m.text) + '</div>';
   }
@@ -310,6 +317,17 @@
       // 聊天室的返回：回到聊天列表
       e.preventDefault();
       S().goBack('#/kakao');
+      return;
+    }
+    var vd = e.target.closest('[data-video]');
+    if (vd) {
+      // 點影片 → 全螢幕播放（有聲音），點一下關閉
+      var w = document.createElement('div');
+      w.className = 'kk-viewer';
+      w.innerHTML = '<video src="' + esc(vd.dataset.video) + '" playsinline autoplay controls></video>';
+      w.onclick = function (ev) { if (ev.target.nodeName !== 'VIDEO') { w.remove(); S().setDarkStatus(false); } };
+      S().$('#kakao-overlay').appendChild(w);
+      S().setDarkStatus(true);
       return;
     }
     var ph = e.target.closest('[data-photo]');

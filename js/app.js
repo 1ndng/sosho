@@ -264,8 +264,9 @@
           // 影片放在文字底下，左邊和留言文字對齊
           (c.video ? '<span class="pd-cvid-row"><video class="pd-cvid" src="' + esc(c.video) + '"' + (poster ? ' poster="' + esc(poster) + '"' : '') +
             ' controls playsinline webkit-playsinline preload="metadata" disablepictureinpicture></video></span>' : '') +
+          // 圖片也放在文字底下，和影片一樣跟留言文字對齊
+          (c.image ? '<span class="pd-cvid-row"><img class="pd-cimg" src="' + esc(c.image) + '" alt="" data-fimg></span>' : '') +
         '</span>' +
-        (c.image ? '<img class="pd-cimg" src="' + esc(c.image) + '" alt="" data-fimg>' : '') +
         '</div>';
     }).join('');
 
