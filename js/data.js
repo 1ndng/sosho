@@ -774,6 +774,7 @@ window.SITE_DATA = {
         { from: "me", text: "慢跑 3分鐘\n開合跳 ×30\n頸部繞環 左右各×8\n肩膀繞環 前後各×10\n手臂畫圈 前後各×10\n胸椎旋轉 左右各×10\n髖關節繞環 左右各×10\n弓箭步轉體 左右各×8\n深蹲 ×15\n側弓步 左右各×10\n踢腿 前後側各×10\n腳踝繞環 左右各×10\n提踵 ×20\n平板支撐 30秒×2\nIsolation 頭、肩、胸、腰 各×8拍\n律動 Bounce／Rock 各×32拍\n腿後側伸展 左右各30秒\n股四頭肌伸展 左右各30秒", time: "下午 10:15" },
       ]
     },
+    today: "2026年10月23日",      // 遊戲裡的「今天」（聊天列表顯示「昨天」、日期用）
     passcode: "0318",              // 進入 KakaoTalk 要輸入的密碼（打完電話才會知道）；留空 "" = 不用密碼
     friends: [
       {
@@ -1192,6 +1193,7 @@ window.SITE_DATA = {
       recalledText: "已收回訊息",    // 收回的訊息
       expiredText: "照片已過期",     // 過期的照片（expired: true）
       expiredVideoText: "影片已過期", // 過期的影片（expired: "video"）
+      yesterday: "昨天",
       meTag: "我"                   // 自己的聊天室名字旁的小標
     }
   }

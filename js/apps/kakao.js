@@ -68,6 +68,22 @@
     });
     return day + mins * 60000;
   }
+  // 聊天列表右邊的時間（和 KakaoTalk 一樣）：今天 → 時間（h:mm）；昨天 →「昨天」；更早 → 日期
+  function listTime(f, last) {
+    var tm = /(\d{1,2}:\d{2})/.exec(last.time || ''), hm = tm ? tm[1] : '';
+    if ((state().msgs[f.id] || []).length) return hm;   // 玩家剛傳的訊息 = 今天
+    var day = null;
+    (f.messages || []).forEach(function (m) {
+      var d = m.date && /(\d{4})\s*[年년]\s*(\d+)\s*[月월]\s*(\d+)/.exec(m.date);
+      if (d) day = [+d[1], +d[2], +d[3]];
+    });
+    var t = /(\d{4})\D+(\d+)\D+(\d+)/.exec(K().today || '');
+    if (!day || !t) return hm;
+    var diff = Math.round((Date.UTC(+t[1], t[2] - 1, +t[3]) - Date.UTC(day[0], day[1] - 1, day[2])) / 864e5);
+    if (diff <= 0) return hm;
+    if (diff === 1) return TX().yesterday || '昨天';
+    return day[0] === +t[1] ? day[1] + '月' + day[2] + '日' : day[0] + '/' + day[1] + '/' + day[2];
+  }
   function messagesOf(f) { return (f.messages || []).concat(state().msgs[f.id] || []); }
   function unreadOf(f) {
     if (f.self) return 0;
@@ -94,7 +110,7 @@
         return '<a class="kk-chatrow" href="#/kakao/chat/' + encodeURIComponent(f.id) + '">' +
           roomAvatar(f, 'kk-chatrow-av') +
           '<span class="kk-chatrow-mid"><b>' + esc(f.name) + (f.group ? '<em class="kk-count">' + (f.members.length + 1) + '</em>' : '') + (f.self ? '<i class="kk-me-tag">' + esc(TX().meTag || '我') + '</i>' : '') + '</b><small>' + esc(last.text || (last.recalled ? TX().recalledText || '已收回訊息' : '') || (last.link ? linkInfo(last).title : '') || ((last.video || last.expired === 'video') ? TX().videoLabel || '影片' : (last.image || last.expired) ? TX().photoLabel || '照片' : last.call ? (last.call === 'voice' ? TX().voiceCall || '語音通話' : TX().videoCall || '視訊通話') : '')) + '</small></span>' +
-          '<span class="kk-chatrow-r"><small>' + esc(last.time || '') + '</small>' + (n ? '<i class="kk-badge">' + n + '</i>' : '') + '</span>' +
+          '<span class="kk-chatrow-r"><small>' + esc(listTime(f, last)) + '</small>' + (n ? '<i class="kk-badge">' + n + '</i>' : '') + '</span>' +
         '</a>';
       }).join('');
     S().$('#kakao-overlay').innerHTML = '';
