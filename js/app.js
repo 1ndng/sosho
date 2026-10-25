@@ -84,12 +84,19 @@
         '</label>' +
         '<span class="home-widget-name">' + esc(memo.label || '備忘錄') + '</span>' +
       '</div>' : '') +
+      // 右上角的時鐘小工具（翻頁鐘）：時、分是現在的時間；日期固定（data.js 的 home.clock.date）
+      (h.clock ? '<div class="home-widget home-widget-r">' +
+        '<div class="clock-widget"><div class="clock-tiles"><b id="clock-h"></b><b id="clock-m"></b></div>' +
+          '<span>' + esc(h.clock.date || '') + '</span></div>' +
+        '<span class="home-widget-name">' + esc(h.clock.label || '時鐘') + '</span>' +
+      '</div>' : '') +
       '<div class="home-dock">' +
       h.apps.map(function (a) {
         return '<a class="app-icon" href="#/' + esc(a.id) + '" aria-label="' + esc(a.label) + '">' +
           '<img src="' + esc(a.icon) + '" alt=""></a>';
       }).join('') +
       '</div>';
+    tickClock();
     var ta = $('#memo-text');
     if (ta) {
       try { ta.value = localStorage.getItem(MEMO_KEY) || ''; } catch (e) {}
@@ -99,6 +106,14 @@
     }
   }
   var MEMO_KEY = 'sosho-memo';
+  function tickClock() {
+    var hh = $('#clock-h'), mm = $('#clock-m');
+    if (!hh) return;
+    var d = new Date();
+    hh.textContent = ('0' + d.getHours()).slice(-2);
+    mm.textContent = ('0' + d.getMinutes()).slice(-2);
+  }
+  setInterval(tickClock, 5000);
   var ICON_MEMO = '<svg viewBox="0 0 24 24"><rect x="3" y="2.5" width="18" height="19" rx="4" fill="#fff" stroke="#d6d6d6"/><path d="M3 7.5V6.5a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v1z" fill="#f7c600"/><path d="M7 11.5h10M7 14.5h10M7 17.5h6" stroke="#c9c9c9" stroke-width="1.2" stroke-linecap="round"/></svg>';
 
   /* ---------------- 進度旗標：公告依條件解鎖用 ---------------- */

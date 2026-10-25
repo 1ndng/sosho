@@ -23,6 +23,8 @@ window.SITE_DATA = {
     wallpaper: "images/wallpaper.jpg",
     // 左上角的備忘錄小工具（玩家可以直接打字記資訊；不要的話整段刪掉）
     memo: { label: "備忘錄" },
+    // 右上角的時鐘小工具：時間跟著現實走，日期固定是撿到手機的那天
+    clock: { date: "10月23日 週五" },
     // 這些 App 放在桌布下方的 Dock（和 iPhone 一樣最多 4 個、不顯示名稱）
     apps: [
       { id: "forum", label: "ANNMS Talk", icon: "images/icon_forum.png?v=2" },
@@ -79,7 +81,7 @@ window.SITE_DATA = {
         { stage: 2, title: "[提示]那個fauiogl94是誰......？", content: `聰明的你一定有預感：那個沒有頭貼的帳號裡肯定藏著點什麼。既然如此就登入他！
 請多留意Kakao的訊息。` },
         { stage: 3, title: "[提示]如果你想做點壞事。", content: `其實呢故事到這裡基本上就結束了，熙醬談戀愛的證據已罪證確鑿。但如果呢到現在都還沒滿足你的窺探欲，要不要試著登入李炤熙的帳號呀(嘿嘿)
-沒什麼困難的，就跟將太郎手機和他們倆屬羊遊戲的帳號一樣好登入。嗯相信你很快就能登入了。` },
+沒什麼困難的，就跟將太郎手機和他們倆數羊遊戲的帳號一樣好登入。嗯相信你很快就能登入了。` },
         { stage: 4, title: "故事線整理", content: `提供給對故事時間線有興趣，但玩完後依舊一頭霧水的人觀看！
 (有些細節的部分沒有完整填坑成功TT...)
 2021/9/1-2022/1/4：將太郎在韓國留學，認識宋恩奭和鄭成燦。
@@ -216,7 +218,7 @@ window.SITE_DATA = {
     postsLabel: "貼文",
     followersLabel: "位粉絲",
     followingLabel: "追蹤中",
-    bio: [],                       // 每一項 = 一行；@開頭的字會自動變藍色
+    bio: ["D+332"],                // 每一項 = 一行；@開頭的字會自動變藍色（交往天數：2025/11/26 = D+1，撿到手機的 2026/10/23 = D+332）
     music: { title: "Nostalgic", artist: "No Guindce" },   // 個人頁的音樂列（音檔 audio/3_music.mp3）
     // 小帳預先儲存的貼文：Shotaro 和 소희 2025/3/18 發的貼文（"帳號/圖片檔名"）
     saved: ["shotaroo0/1_post_20250318.jpg", "252525252_/2_post_20250318.jpg"],
