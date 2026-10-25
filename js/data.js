@@ -125,7 +125,12 @@ window.SITE_DATA = {
           { name: "sho_pabo", replyTo: "452_.rq", text: "拜託這一看就是小孩啊，你會叫你對象あにき？而且看髮型很明顯不是最近的事。別造謠他跟他來路不明的侄子了好吧不如造謠我跟他。" },
           { name: "452_.rq", replyTo: "sho_pabo", text: "👌🏻" },
           { name: "xxx4552", text: "這是我8/30拍到的⋯⋯其實當時拍下來只是覺得sho好可愛啊但看到這篇突然就想到這個了⋯⋯讓sho越來越繽紛的存在嗎⋯⋯",
-            video: "images/forum_1_c4.mp4" }
+            video: "images/forum_1_c4.mp4" },
+          // ↓ 玩家把小帳設成公開後才出現（flag: "public_fauiogl94"），文章會變回未讀
+          { name: "452_.rq", text: "你們快看這個", link: "#/ig/u/fauiogl94", linkText: "instagram.com/fauiogl94", flag: "public_fauiogl94" },
+          { name: "username000", text: "？", flag: "public_fauiogl94" },
+          { name: "xxx4552", text: "？", flag: "public_fauiogl94" },
+          { name: "taromilkteaaaa", text: "？", flag: "public_fauiogl94" }
         ]
       },
       {
@@ -774,7 +779,18 @@ window.SITE_DATA = {
         { from: "me", text: "慢跑 3分鐘\n開合跳 ×30\n頸部繞環 左右各×8\n肩膀繞環 前後各×10\n手臂畫圈 前後各×10\n胸椎旋轉 左右各×10\n髖關節繞環 左右各×10\n弓箭步轉體 左右各×8\n深蹲 ×15\n側弓步 左右各×10\n踢腿 前後側各×10\n腳踝繞環 左右各×10\n提踵 ×20\n平板支撐 30秒×2\nIsolation 頭、肩、胸、腰 各×8拍\n律動 Bounce／Rock 各×32拍\n腿後側伸展 左右各30秒\n股四頭肌伸展 左右各30秒", time: "下午 10:15" },
       ]
     },
-    today: "2026年10月23日",      // 遊戲裡的「今天」（聊天列表顯示「昨天」、日期用）
+    today: "2026年10月23日",
+    // 即時訊息：達成 when 的旗標後，過 delay 毫秒對方自己傳來（時間顯示當下）
+    //   unlessReplied: true = 玩家在那個聊天室回過話就不傳
+    live: [
+      // 小帳被設成公開
+      { id: "pub1", when: "public_fauiogl94", delay: 5000,  room: "g1", from: "f4", text: "와 대박.." },
+      { id: "pub2", when: "public_fauiogl94", delay: 25000, room: "g1", from: "f4", text: "哥居然一直瞞著我" },
+      { id: "pub3", when: "public_fauiogl94", delay: 50000, room: "g1", from: "f4", text: "@은석 你該不會早就知道了吧？" },
+      // 第一次打開群組後沒回話
+      { id: "seen1", when: "chat_g1", delay: 30000, room: "g1", from: "f4", text: "@Shotaro 是你已讀嗎", unlessReplied: true },
+      { id: "seen2", when: "chat_g1", delay: 34000, room: "g1", from: "f4", text: "@은석 你知道是真的還假的嗎", unlessReplied: true }
+    ],      // 遊戲裡的「今天」（聊天列表顯示「昨天」、日期用）
     passcode: "0318",              // 進入 KakaoTalk 要輸入的密碼（打完電話才會知道）；留空 "" = 不用密碼
     friends: [
       {

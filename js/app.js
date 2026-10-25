@@ -127,6 +127,13 @@
     if (!name || flags[name]) return;
     flags[name] = 1;
     try { localStorage.setItem(FLAG_KEY, JSON.stringify(flags)); } catch (e) {}
+    // 有留言是這個旗標才出現的文章 → 變回未讀（❗）
+    (D.forum.posts || []).forEach(function (p) {
+      if ((p.comments || []).some(function (c) { return c.flag === name; })) {
+        delete readPosts[p.id];
+        try { localStorage.setItem(READ_KEY, JSON.stringify(readPosts)); } catch (e) {}
+      }
+    });
   }
   function hasFlag(name) { return !name || !!flags[name]; }
 
@@ -253,7 +260,8 @@
     if (!p) { renderForumList(); return; }
     markRead(p.id);
 
-    var cs = p.comments || [];
+    // flag: "旗標" 的留言要等那個旗標達成才出現（例如小帳設成公開 → public_fauiogl94）
+    var cs = (p.comments || []).filter(function (c) { return hasFlag(c.flag); });
     // 留言者 = 文章作者 → 名字旁顯示「樓主」；留言可以附圖片
     // 留言可以附 image（圖片）或 video（影片，點了播放）；replyTo 寫帳號代碼 = 回覆那個人（縮排、文字前面顯示 @代碼）
     var comments = cs.map(function (c) {
@@ -266,6 +274,8 @@
             ' controls playsinline webkit-playsinline preload="metadata" disablepictureinpicture></video></span>' : '') +
           // 圖片也放在文字底下，和影片一樣跟留言文字對齊
           (c.image ? '<span class="pd-cvid-row"><img class="pd-cimg" src="' + esc(c.image) + '" alt="" data-fimg></span>' : '') +
+          // 連結：link = 網址（#/ig/u/帳號 = 遊戲裡的 IG 頁），linkText = 顯示的字
+          (c.link ? '<span class="pd-cvid-row"><a class="pd-clink" href="' + esc(c.link) + '"' + (c.link.charAt(0) === '#' ? '' : ' target="_blank" rel="noopener"') + '>' + esc(c.linkText || c.link) + '</a></span>' : '') +
         '</span>' +
         '</div>';
     }).join('');
@@ -1432,6 +1442,7 @@
     if (e.target.closest('[data-privacy]')) {
       var me = currentAccount();
       store.privacy[me.username] = !isPrivate(me); saveStore(); renderIGPrivacy();
+      if (!isPrivate(me)) setFlag('public_' + me.username);   // 設成公開過（觸發論壇留言、Kakao 訊息用）
       return;
     }
     var mu = e.target.closest('[data-music]');

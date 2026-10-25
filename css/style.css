@@ -471,6 +471,7 @@ div.ig-frow-main { cursor: default; }
 .pd-comment { flex-wrap: wrap; }
 .pd-cimg { display: block; flex-basis: 100%; max-width: 100%; max-height: 220px; object-fit: contain; object-position: left; border-radius: 8px; margin-top: 4px; cursor: zoom-in; }
 .pd-cvid-row { display: block; margin-top: 8px; }
+.pd-clink { color: #3b6fb6; text-decoration: underline; word-break: break-all; }
 .pd-cvid { display: block; width: min(180px, 100%); height: auto; border-radius: 8px; background: #000; }
 /* 回覆別人的留言：往右縮排、左邊有箭頭 */
 .pd-reply { margin-left: 22px; }

@@ -84,7 +84,14 @@
     if (diff === 1) return TX().yesterday || '昨天';
     return day[0] === +t[1] ? day[1] + '月' + day[2] + '日' : day[0] + '/' + day[1] + '/' + day[2];
   }
-  function messagesOf(f) { return (f.messages || []).concat(state().msgs[f.id] || []); }
+  // 玩家傳的訊息、即時訊息都是「今天」：前面補一條今天的日期線
+  function messagesOf(f) {
+    var base = f.messages || [], extra = state().msgs[f.id] || [];
+    if (!extra.length) return base;
+    var lastDate = ''; base.forEach(function (m) { if (m.date) lastDate = m.date; });
+    var today = K().today;
+    return base.concat(today && lastDate !== today ? [{ date: today }] : [], extra);
+  }
   function unreadOf(f) {
     if (f.self) return 0;
     var st = state();
@@ -272,6 +279,33 @@
       }, 1500 + i * 900);
     });
   }
+
+  /* ---- 即時訊息（data.js 的 kakao.live）：達成某個旗標後，過幾秒對方自己傳訊息來 ----
+     { id, when: "旗標", delay: 毫秒, room: "聊天室 id", from: "誰傳", text: "…", unlessReplied: true }
+     unlessReplied = 玩家在那個聊天室回過話就不傳 */
+  function liveTick() {
+    var evs = K().live || [];
+    if (!evs.length || !S()) return;
+    var st = state(), now = Date.now(), changed = false;
+    st.fired = st.fired || {}; st.since = st.since || {};
+    evs.forEach(function (ev) {
+      if (st.fired[ev.id] || !S().hasFlag(ev.when)) return;
+      if (!st.since[ev.when]) { st.since[ev.when] = now; changed = true; }
+      if (now - st.since[ev.when] < (ev.delay || 0)) return;
+      st.fired[ev.id] = 1; changed = true;
+      var replied = (st.msgs[ev.room] || []).some(function (m) { return m.from === 'me'; });
+      if (ev.unlessReplied && replied) return;
+      (st.msgs[ev.room] = st.msgs[ev.room] || []).push({ from: ev.from || 'them', text: ev.text, time: nowTime() });
+      var viewing = openChatId === ev.room && location.hash.indexOf('#/kakao/chat/') === 0;
+      if (!viewing) st.unread[ev.room] = (st.unread[ev.room] != null ? st.unread[ev.room] : ((friend(ev.room) || {}).unread || 0)) + 1;
+      S().save(KEY, st);
+      if (viewing) paintChat();
+      else if (location.hash.indexOf('#/kakao') === 0 && !openChatId) route(current);
+      changed = false;
+    });
+    if (changed) S().save(KEY, st);
+  }
+  setInterval(liveTick, 1000);
 
   /* ---- 進入 KakaoTalk 前要輸入密碼（data.js 的 kakao.passcode；解開一次就記住，重新開始會清掉） ---- */
   var typed = '';
