@@ -254,25 +254,20 @@ window.SITE_DATA = {
           { image: "images/3_story_20260416.jpg", time: "4月16日" },
           { image: "images/3_story_20260419.jpg", time: "4月19日" },
           { image: "images/3_story_20260422.jpg", time: "4月22日" },
+          { image: "images/3_story_20260509.jpg", time: "5月9日" },
           { image: "images/3_story_20260601.jpg", time: "6月1日", note: "ㅋㅋ辛苦了" },
           { image: "images/3_story_20260614.jpg", time: "6月14日" },
           { image: "images/3_story_20260614-2.jpg", time: "6月14日" },
           { image: "images/3_story_20260614-3.jpg", time: "6月14日", note: "我可愛的男友❤️" },
           { image: "images/3_story_20260710.jpg", time: "7月10日" },
           { image: "images/3_story_20260711.jpg", time: "7月11日", note: "希望以後不會再吵架了。" },
-          { image: "images/3_story_20260816.jpg", time: "8月16日" },
-          { image: "images/3_story_20261011.jpg", time: "10月11日" }
+          { image: "images/3_story_20260816.jpg", time: "8月16日" }
         ] }
     ],
     // 貼文：images 可放多張（左右滑動）；格子上顯示第一張
     // 小帳的貼文沒有人按讚（沒有 likes / likedBy）
     // 需要時可以加：comments: [{ user: "帳號", text: "留言", time: "1天" }]、tagged: ["被標註的帳號"]
     posts: [
-      {
-        images: ["images/3_post_20261011.jpg"],
-        caption: "",
-        time: "10月11日"
-      },
       {
         images: ["images/3_post_20260827.jpg"],
         caption: "",
@@ -282,6 +277,11 @@ window.SITE_DATA = {
         images: ["images/3_post_20260812.jpg"],
         caption: "",
         time: "8月12日"
+      },
+      {
+        images: ["images/3_post_20260725.jpg"],
+        caption: "",
+        time: "7月25日"
       },
       {
         images: ["images/3_post_20260705.jpg", "images/3_post_20260705-2.jpg"],
@@ -1057,9 +1057,9 @@ window.SITE_DATA = {
           { from: "them", recalled: true, time: "下午 3:27" },   // 收回了一張照片
           { from: "me", text: "ㅋㅋㅋㅋㅋㅋㅋㅋ儲存了", time: "下午 3:28" },
           { from: "them", text: "李燦榮你完蛋了。", time: "下午 3:29" },
-          { date: "2026年10月12日" },   // 10/11 三人一起出去，燦榮半夜傳兩人的合照給將太郎
-          { from: "them", image: "images/at_msg_20261012.jpg", time: "上午 2:58" },
-          { from: "them", image: "images/at_msg_20261012-2.jpg", time: "上午 2:58" },
+          { date: "2026年9月6日" },   // 9/5 三人一起出去，燦榮半夜傳兩人的合照給將太郎
+          { from: "them", image: "images/at_msg_20260906.jpg", time: "上午 2:58" },
+          { from: "them", image: "images/at_msg_20260906-2.jpg", time: "上午 2:58" },
           { from: "me", text: "感謝😊但是不要再熬夜了", time: "上午 9:01", read: true }
         ],
         // 關鍵字自動回覆：玩家傳的訊息「包含」任一個 keywords 就回 reply（可多句，依序送出）
