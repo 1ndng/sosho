@@ -1107,7 +1107,7 @@ window.SITE_DATA = {
         //   read: true = 馬上已讀；typing: [毫秒…] = 「輸入中」輪流顯示／消失的時間，之後才回 reply
         replies: [
           // 電話裡被發現是撿到手機的人、소희傳了舞室訊息之後
-          { flag: "hee_knows", keywords: ["好", "OK", "ok", "Ok", "可以", "收到", "了解", "知道了", "方便"],
+          { flag: "hee_knows", keywords: ["好", "OK", "ok", "Ok", "可以", "收到", "了解", "知道了", "方便", "沒問題"],
             exclude: ["不好", "不OK", "不ok", "不可以", "不方便", "不知道"],
             read: true, typing: [2000], reply: ["謝謝！"] },
           { flag: "hee_knows", keywords: [], read: true, typing: [2500, 2500, 2500] }   // 其他回覆：輸入中→停→輸入中，最後沒有訊息
