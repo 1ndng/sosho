@@ -97,7 +97,7 @@ window.SITE_DATA = {
 2026/7/11：兩人在舞室明顯鬧僵，朴元彬忍不住傳訊息關心。
 2026/10/11：李燦榮、李炤熙和將太郎三人一起出去玩，李燦榮拍了不少他們的合照。
 2026/10/21：網友在論壇懷疑將太郎談戀愛。
-2026/10/22：鄭成燦把論壇文章傳給將太郎，詢問是不是真的。` }
+2026/10/23：鄭成燦把論壇文章傳給將太郎，詢問是不是真的。` }
       ] }
     ],
     listTitle: "文章",          // 文章列表框的標題
@@ -785,7 +785,7 @@ window.SITE_DATA = {
     live: [
       // 解鎖手機後：성찬把論壇文章傳到群組、問是不是真的
       { id: "sc1", when: "phone_unlocked", delay: 6000, room: "g1", from: "f4", link: "#/forum/1" },
-      { id: "sc2", when: "phone_unlocked", delay: 8000, room: "g1", from: "f4", text: "這是真的嗎？" },
+      { id: "sc2", when: "phone_unlocked", delay: 16000, room: "g1", from: "f4", text: "這是真的嗎？" },
       // 小帳被設成公開
       { id: "pub1", when: "public_fauiogl94", delay: 5000,  room: "g1", from: "f4", text: "와 대박.." },
       { id: "pub2", when: "public_fauiogl94", delay: 25000, room: "g1", from: "f4", text: "哥居然一直瞞著我" },
