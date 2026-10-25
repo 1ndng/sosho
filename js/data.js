@@ -597,7 +597,7 @@ window.SITE_DATA = {
               { image: "images/2_story2_20250526-3.jpg", time: "2025年5月26日", closeFriends: true },
               { image: "images/2_story_20250715.jpg", time: "2025年7月15日" },
               { image: "images/2_story_20250722.jpg", time: "2025年7月22日" },
-              { image: "images/2_story_20250829.jpg", time: "2025年8月29日" },
+              { image: "images/2_story_20250829-1.jpg", time: "2025年8月29日" },
               { image: "images/2_story_20251125.jpg", time: "2025年11月25日" },
               { image: "images/2_story_20260117.jpg", time: "1月17日" },
               { image: "images/2_story_20260305.jpg", time: "3月5日", note: "你出國？", noteBy: "bin032" },
@@ -619,7 +619,7 @@ window.SITE_DATA = {
         // 典藏（登入這個帳號後：設定 → 典藏）
         archive: {
           stories: [
-            { image: "images/2_story2_20251121.jpg", time: "2025年11月21日", closeFriends: true },
+            { image: "images/2_story2_20251121-1.jpg", time: "2025年11月21日", closeFriends: true },
             { image: "images/2_savedstory_20251124.jpg", time: "2025年11月24日" },
             { image: "images/2_story2_20260101.mp4", time: "1月1日", closeFriends: true },
             { image: "images/2_savedstory_20260305.jpg", time: "3月5日" },
@@ -988,7 +988,7 @@ window.SITE_DATA = {
           { from: "me", text: "我也謝謝你😊", time: "下午 1:06" },
           { date: "2026年3月12日" },
           { from: "me", call: "video", duration: "1:30:23", time: "下午 8:01" },
-          { from: "them", image: "images/2_msg_20260312.jpg", time: "下午 9:32" },
+          { from: "them", image: "images/2_msg_20260312-1.jpg", time: "下午 9:32" },
           { date: "2026年3月24日" },
           { from: "them", text: "摸魚中~", time: "下午 2:03" },
           { from: "them", image: "images/2_msg_20260324.jpg", time: "下午 2:05" },
