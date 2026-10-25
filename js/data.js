@@ -272,11 +272,6 @@ window.SITE_DATA = {
     // 需要時可以加：comments: [{ user: "帳號", text: "留言", time: "1天" }]、tagged: ["被標註的帳號"]
     posts: [
       {
-        images: ["images/3_post_20260827.jpg"],
-        caption: "",
-        time: "8月27日"
-      },
-      {
         images: ["images/3_post_20260812.jpg"],
         caption: "",
         time: "8月12日"
@@ -290,6 +285,11 @@ window.SITE_DATA = {
         images: ["images/3_post_20260718.jpg"],
         caption: "",
         time: "7月18日"
+      },
+      {
+        images: ["images/3_post_20260705-3.jpg"],
+        caption: "",
+        time: "7月5日"
       },
       {
         images: ["images/3_post_20260705.jpg", "images/3_post_20260705-2.jpg"],
