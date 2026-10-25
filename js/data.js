@@ -1102,7 +1102,14 @@ window.SITE_DATA = {
           { from: "them", text: "要公開嗎？", time: "下午 11:30" }
         ],
         // 關鍵字自動回覆：玩家傳的訊息「包含」任一個 keywords 就回 reply（可多句，依序送出）
+        //   flag = 達成這個旗標後才有效；exclude = 包含這些字就不算；keywords 留空 = 任何訊息都算
+        //   read: true = 馬上已讀；typing: [毫秒…] = 「輸入中」輪流顯示／消失的時間，之後才回 reply
         replies: [
+          // 電話裡被發現是撿到手機的人、소희傳了舞室訊息之後
+          { flag: "hee_knows", keywords: ["好", "OK", "ok", "Ok", "可以", "收到", "了解", "知道了", "方便"],
+            exclude: ["不好", "不OK", "不ok", "不可以", "不方便", "不知道"],
+            read: true, typing: [2000], reply: ["謝謝！"] },
+          { flag: "hee_knows", keywords: [], read: true, typing: [2500, 2500, 2500] }   // 其他回覆：輸入中→停→輸入中，最後沒有訊息
         ],
         defaultReply: []                  // 沒有符合任何關鍵字時的回覆；空的 = 不回
       },

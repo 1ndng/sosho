@@ -132,6 +132,8 @@
     return { title: m.linkTitle || (post ? post.title : m.link), site: m.linkSite || (post ? (TX().forumSite || 'ANNMS Talk') : '') };
   }
   function contentHTML(m, first) {
+    // 對方正在輸入（三個點）
+    if (m.typing) return '<div class="kk-bubble kk-typing' + (first ? ' tail' : '') + '"><i></i><i></i><i></i></div>';
     // 收回的訊息：{ from, recalled: true }（灰色泡泡「已收回訊息」）
     if (m.recalled) {
       return '<div class="kk-bubble kk-recalled' + (first ? ' tail' : '') + '">' + ICON.info + esc(TX().recalledText || '已收回訊息') + '</div>';
@@ -167,6 +169,8 @@
 
   function bubblesHTML(f) {
     var msgs = messagesOf(f), out = '';
+    // 對方正在輸入 → 最後面多一個「⋯」泡泡
+    if (typing[f.id]) msgs = msgs.concat([{ from: f.group ? (f.members[0] || {}).id : 'them', typing: true }]);
     msgs.forEach(function (m, i) {
       if (m.date) { out += '<div class="kk-date"><span>' + esc(m.date) + '</span></div>'; return; }
       var prev = msgs[i - 1], next = msgs[i + 1];
@@ -256,14 +260,43 @@
   }
 
   // 關鍵字自動回覆：訊息包含任一個 keyword → 依序送出 reply
+  var typing = {};   // 正在顯示「輸入中」的聊天室
+  function setTyping(id, on) {
+    typing[id] = on;
+    if (openChatId === id) paintChat();
+  }
   function scheduleReply(f, text) {
-    var lower = text.toLowerCase(), lines = null;
+    var lower = text.toLowerCase(), lines = null, rule = null;
     (f.replies || []).some(function (r) {
-      var hit = (r.keywords || []).some(function (k) { return k && lower.indexOf(String(k).toLowerCase()) >= 0; });
-      if (hit) lines = [].concat(r.reply || []);
+      if (r.flag && !S().hasFlag(r.flag)) return false;
+      var kws = r.keywords || [];
+      var hit = !kws.length || kws.some(function (k) { return k && lower.indexOf(String(k).toLowerCase()) >= 0; });
+      if (hit && (r.exclude || []).some(function (k) { return lower.indexOf(String(k).toLowerCase()) >= 0; })) hit = false;
+      if (hit) { rule = r; lines = [].concat(r.reply || []); }
       return hit;
     });
     if (!lines) lines = [].concat(f.defaultReply || []);
+    var wait = 1500;
+    if (rule && rule.read) {
+      // 秒讀：玩家剛傳的訊息旁的「1」消失
+      setTimeout(function () {
+        var st = state(), mine = (st.msgs[f.id] || []).filter(function (m) { return m.from === 'me'; });
+        if (mine.length) { mine[mine.length - 1].read = true; S().save(KEY, st); }
+        if (openChatId === f.id) paintChat();
+      }, 400);
+      wait = 900;
+    }
+    if (rule && rule.typing) {
+      // 輸入中：照 typing 的時間輪流顯示／消失
+      var t = wait;
+      rule.typing.forEach(function (ms, k) {
+        var on = k % 2 === 0;
+        setTimeout(function () { setTyping(f.id, on); }, t);
+        t += ms;
+      });
+      setTimeout(function () { setTyping(f.id, false); }, t);
+      wait = t;
+    }
     lines.forEach(function (line, i) {
       setTimeout(function () {
         // 回覆可以寫字串，或 { from: "好友id", text: "..." }（群組用來指定誰回）
@@ -276,7 +309,7 @@
           var st = state(); st.unread[f.id] = unreadOf(f) + 1; S().save(KEY, st);
           if (location.hash.indexOf('#/kakao') === 0) route(current);
         }
-      }, 1500 + i * 900);
+      }, wait + i * 900);
     });
   }
 
