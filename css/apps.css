@@ -28,11 +28,12 @@
 .ph-calling {
   position: absolute; inset: 0; z-index: 3; color: #fff; text-align: center;
   background: linear-gradient(160deg, #3f4a5c, #1d222c 60%, #12151b);
-  padding-top: 110px;
+  padding-top: clamp(60px, 13vh, 110px);
 }
 .ph-calling-status { font-size: 17px; opacity: .8; }
 .ph-calling-name { font-size: 34px; margin-top: 6px; padding: 0 20px; }
-.ph-calling-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px 0; margin: 150px 34px 0; }
+/* 六個按鈕放在名字和「結束」中間（螢幕矮的時候也不會壓到結束鍵） */
+.ph-calling-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px 0; margin: auto 34px 0; align-self: stretch; padding-bottom: 24px; }
 .ph-calling-grid button { display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 13px; color: #fff; }
 .ph-calling-grid span { width: 72px; height: 72px; border-radius: 50%; background: rgba(255,255,255,.18); }
 .ph-end { width: 72px; height: 72px; border-radius: 50%; background: #ff3b30; color: #fff; margin-top: 46px; display: inline-flex; align-items: center; justify-content: center; }
