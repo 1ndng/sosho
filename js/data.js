@@ -48,9 +48,9 @@ window.SITE_DATA = {
     stages: [
       [],
       ["left_forum", "kakao_lock_seen"],                      // 1 → 提示1
-      ["kakao_unlocked", "locked_fauiogl94"],                 // 2 → 提示2
+      ["kakao_unlocked"],                                     // 2 → 提示2（解開 KakaoTalk 就換，不用先點開小帳）
       ["login_fauiogl94"],                                    // 3 → 提示3
-      ["left_forum", "kakao_lock_seen", "kakao_unlocked", "locked_fauiogl94",
+      ["left_forum", "kakao_lock_seen", "kakao_unlocked",
        "login_fauiogl94", "login_252525252_"]                 // 4 → 感謝遊玩＋故事線整理
     ],
 
