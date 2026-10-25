@@ -69,7 +69,7 @@
       }, 3000);
     }
   }
-  function callOverlay(name, status) {
+  function callOverlay(name, status, avatar) {
     var p = P(), esc = S().esc;
     var btns = p.callButtons || [];
     var ov = document.createElement('div');
@@ -77,6 +77,7 @@
     ov.innerHTML =
       '<div class="ph-calling-status" id="ph-status">' + esc(status) + '</div>' +
       '<div class="ph-calling-name">' + esc(name) + '</div>' +
+      (avatar ? '<img class="ph-in-av ph-call-av" src="' + esc(avatar) + '" alt="">' : '') +   // Kakao 通話：顯示對方頭貼
       '<div class="ph-calling-grid">' + btns.map(function (b) {
         return '<button data-na><span></span>' + esc(b) + '</button>';
       }).join('') + '</div>' +
@@ -155,7 +156,7 @@
     clearTimeout(incoming.timer);
     var c = incoming.cfg, b = c.branch || {};
     S().$('#phone-overlay').innerHTML = '';
-    var ov = callOverlay(c.name, '');
+    var ov = callOverlay(c.name, '', c.avatar);
     var replied = b.room && window.SOSHO_KAKAO && window.SOSHO_KAKAO.replied(b.room);
     var script = { start: replied ? b.replied : b.notReplied, nodes: c.nodes };
     incoming.inCall = true;

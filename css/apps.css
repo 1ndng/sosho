@@ -200,3 +200,4 @@
 .ph-in-btns .ph-end { margin-top: 0; }
 .ph-accept { width: 72px; height: 72px; border-radius: 50%; background: #34c759; color: #fff; display: inline-flex; align-items: center; justify-content: center; }
 .ph-accept svg { width: 36px; height: 36px; }
+.ph-call-av { width: 72px; height: 72px; margin-top: 18px; flex: none; }
