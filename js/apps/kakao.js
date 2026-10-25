@@ -115,7 +115,9 @@
     }
     if (m.link) {
       var li = linkInfo(m);
-      return '<a class="kk-bubble kk-link' + (first ? ' tail' : '') + '" href="' + esc(m.link) + '">' +
+      // 外部網址另開分頁，不會離開遊戲
+      return '<a class="kk-bubble kk-link' + (first ? ' tail' : '') + '" href="' + esc(m.link) + '"' +
+        (m.link.charAt(0) === '#' ? '' : ' target="_blank" rel="noopener"') + '>' +
         '<small>' + esc(li.site) + '</small><b>' + esc(li.title) + '</b>' +
         '<span>' + esc(m.link.charAt(0) === '#' ? (TX().forumUrl || 'annms.talk') + m.link.slice(1) : m.link) + '</span></a>';
     }

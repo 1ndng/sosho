@@ -991,6 +991,11 @@ window.SITE_DATA = {
           { from: "me", text: "錯過了你的摸魚ㅋㅋ", time: "下午 7:23" },
           { from: "me", call: "video", duration: "0:16:57", time: "下午 7:24" },
           { from: "me", text: "等等見~", time: "下午 7:45" },
+          { date: "2026年4月4日" },   // 소희 IG 密碼的線索
+          { from: "me", link: "https://riizeofficial.com/", linkTitle: "RIIZE", linkSite: "riizeofficial.com", time: "下午 11:12" },
+          { from: "me", text: "你密碼是什麼", time: "下午 11:13" },
+          { from: "them", text: "生日6碼", time: "下午 11:31" },
+          { from: "me", text: "ㅇㅋ", time: "下午 11:33" },
           { date: "2026年6月26日" },
           { from: "them", image: "images/2_msg_20260626.jpg", time: "上午 7:37" },
           { from: "me", text: "ㅋㅋㅋㅋㅋㅋㅋ可愛", time: "上午 9:24" },
