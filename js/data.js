@@ -264,6 +264,7 @@ window.SITE_DATA = {
           { image: "images/3_story_20260614-3.jpg", time: "6月14日", note: "我可愛的男友❤️" },
           { image: "images/3_story_20260710.jpg", time: "7月10日" },
           { image: "images/3_story_20260711.jpg", time: "7月11日", note: "希望以後不會再吵架了。" },
+          { image: "images/3_story_20260718.jpg", time: "7月18日" },
           { image: "images/3_story_20260816.jpg", time: "8月16日" }
         ] }
     ],
