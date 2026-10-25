@@ -127,7 +127,7 @@ img { display: block; max-width: 100%; }
 }
 .home-indicator { width: 134px; height: 5px; border-radius: 3px; background: #111; }
 .phone.on-home .home-gesture { pointer-events: none; }
-.phone.on-home .home-indicator { background: #fff; }
+.phone.on-home .home-indicator { visibility: hidden; }   /* 主畫面沒有橫條，打開 App 才有 */
 
 /* ============ 提示框 ============ */
 .toast {
