@@ -300,12 +300,43 @@
       if (!viewing) st.unread[ev.room] = (st.unread[ev.room] != null ? st.unread[ev.room] : ((friend(ev.room) || {}).unread || 0)) + 1;
       S().save(KEY, st);
       if (viewing) paintChat();
-      else if (location.hash.indexOf('#/kakao') === 0 && !openChatId) route(current);
+      else {
+        if (location.hash.indexOf('#/kakao') === 0 && !openChatId) route(current);
+        banner(friend(ev.room), ev);
+      }
       changed = false;
     });
     if (changed) S().save(KEY, st);
   }
   setInterval(liveTick, 1000);
+
+  // 通知橫幅（和 iPhone 一樣從上面滑下來）：頭貼（群組用群組頭像）＋傳訊息的人＋內容；點了打開聊天室
+  var bannerTimer = null;
+  function banner(f, ev) {
+    if (!f) return;
+    var phone = document.getElementById('phone'), old = document.getElementById('kk-banner');
+    if (!phone) return;
+    if (old) old.remove();
+    var who = f.group ? (findFriend(ev.from) || {}).name || f.name : f.name;
+    var el = document.createElement('a');
+    el.id = 'kk-banner'; el.className = 'kk-banner';
+    el.href = '#/kakao/chat/' + encodeURIComponent(f.id);
+    el.innerHTML = roomAvatar(f, 'kk-banner-av') +
+      '<span class="kk-banner-txt"><b>' + esc(who) + '</b><span>' + esc(ev.text || '') + '</span></span>';
+    phone.appendChild(el);
+    void el.offsetWidth; el.classList.add('show');
+    function hide() {
+      el.classList.remove('show');
+      setTimeout(function () { el.remove(); }, 400);
+    }
+    el.addEventListener('click', function () { clearTimeout(bannerTimer); hide(); });
+    // 往上滑也能收起來
+    var y0 = null;
+    el.addEventListener('touchstart', function (e) { y0 = e.touches[0].clientY; }, { passive: true });
+    el.addEventListener('touchmove', function (e) { if (y0 !== null && e.touches[0].clientY - y0 < -15) { y0 = null; clearTimeout(bannerTimer); hide(); } }, { passive: true });
+    clearTimeout(bannerTimer);
+    bannerTimer = setTimeout(hide, 4500);
+  }
 
   /* ---- 進入 KakaoTalk 前要輸入密碼（data.js 的 kakao.passcode；解開一次就記住，重新開始會清掉） ---- */
   var typed = '';

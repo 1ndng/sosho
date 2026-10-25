@@ -180,3 +180,13 @@
 
 /* 自己的聊天室：名字旁的「我」 */
 .kk-me-tag { display: inline-flex; align-items: center; justify-content: center; min-width: 17px; height: 17px; padding: 0 4px; margin-left: 5px; border-radius: 50%; background: #5f6b7a; color: #fff; font-size: 10.5px; font-style: normal; font-weight: 700; vertical-align: 2px; }
+
+/* ---------- 即時訊息的通知橫幅 ---------- */
+.kk-banner { position: absolute; left: 8px; right: 8px; top: 8px; z-index: 95; display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 22px;
+  background: rgba(245,245,247,.88); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); box-shadow: 0 8px 28px rgba(0,0,0,.18); color: #111;
+  transform: translateY(-130%); transition: transform .35s cubic-bezier(.2,.8,.2,1); text-decoration: none; }
+.kk-banner.show { transform: none; }
+.kk-banner-av { width: 42px; height: 42px; border-radius: 12px; object-fit: cover; flex: none; }
+.kk-banner-txt { display: flex; flex-direction: column; min-width: 0; }
+.kk-banner-txt b { font-size: 15px; font-weight: 700; }
+.kk-banner-txt span { font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
