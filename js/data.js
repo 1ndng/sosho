@@ -125,7 +125,7 @@ window.SITE_DATA = {
           { name: "sho_pabo", replyTo: "452_.rq", text: "拜託這一看就是小孩啊，你會叫你對象あにき？別造謠他跟他來路不明的侄子了好吧不如造謠我跟他。" },
           { name: "452_.rq", replyTo: "sho_pabo", text: "👌🏻" },
           { name: "xxx4552", text: "這是我8/30拍到的⋯⋯其實當時拍下來只是覺得sho好可愛啊但看到這篇突然就想到這個了⋯⋯讓sho越來越繽紛的存在嗎⋯⋯",
-            image: "images/forum_1_c4.jpg" }
+            video: "images/forum_1_c4.mp4" }
         ]
       },
       {
@@ -619,7 +619,7 @@ window.SITE_DATA = {
         // 典藏（登入這個帳號後：設定 → 典藏）
         archive: {
           stories: [
-            { image: "images/2_story2_20251121.mp4", time: "2025年11月21日", closeFriends: true },
+            { image: "images/2_story2_20251121.jpg", time: "2025年11月21日", closeFriends: true },
             { image: "images/2_savedstory_20251124.jpg", time: "2025年11月24日" },
             { image: "images/2_story2_20260101.mp4", time: "1月1日", closeFriends: true },
             { image: "images/2_savedstory_20260305.jpg", time: "3月5日" },
