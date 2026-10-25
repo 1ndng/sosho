@@ -33,6 +33,9 @@ img { display: block; max-width: 100%; }
     width: 100vw; height: 100vh; height: 100dvh; max-height: none;
     border: 0; border-radius: 0; box-shadow: none;
   }
+  /* 加到主畫面（全螢幕 App）時：手機畫面底部讓出 iPhone 自己的橫條，
+     遊戲裡的「上滑回首頁」才不會被系統手勢搶走 */
+  html.standalone .phone { height: calc(100dvh - env(safe-area-inset-bottom)); }
 }
 
 .screens { position: absolute; inset: 0; }

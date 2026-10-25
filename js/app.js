@@ -1593,34 +1593,66 @@
   (function swipeHome() {
     var zone = $('#home-gesture');
     var startY = null, dy = 0, appEl = null;
+    // 加到主畫面時（全螢幕 App）
+    if (window.navigator.standalone || (window.matchMedia && matchMedia('(display-mode: standalone)').matches)) {
+      document.documentElement.classList.add('standalone');
+    }
 
+    function drag(y) {
+      dy = Math.min(0, y - startY);
+      var s = Math.max(0.6, 1 + dy / 900);
+      appEl.style.transform = 'translateY(' + dy * 0.6 + 'px) scale(' + s + ')';
+      appEl.style.borderRadius = Math.min(40, -dy / 3) + 'px';
+    }
+    // 手指：從畫面最下面 80px 內往上滑就算（比橫條本身寬鬆），滑超過 45px 放開就回首頁
+    var EDGE = 80, touchId = null;
+    document.addEventListener('touchstart', function (e) {
+      if (!currentApp || e.touches.length !== 1) return;
+      var t = e.touches[0], r = $('#phone').getBoundingClientRect();
+      if (t.clientY < r.bottom - EDGE) return;
+      touchId = t.identifier; startY = t.clientY; dy = 0;
+      appEl = $('#app-' + currentApp);
+    }, { passive: true });
+    document.addEventListener('touchmove', function (e) {
+      if (touchId === null) return;
+      var t = [].filter.call(e.changedTouches, function (x) { return x.identifier === touchId; })[0];
+      if (!t) return;
+      if (t.clientY - startY < -10) { appEl.classList.add('dragging'); drag(t.clientY); }
+    }, { passive: true });
+    function touchEnd() {
+      if (touchId === null) return;
+      touchId = null;
+      if (dy < -45) { appEl.style.transform = ''; appEl.style.borderRadius = ''; appEl.classList.remove('dragging'); startY = null; appEl = null; location.hash = '#/home'; return; }
+      end();
+    }
+    document.addEventListener('touchend', touchEnd);
+    document.addEventListener('touchcancel', touchEnd);
+
+    // 滑鼠（電腦）：拖橫條
     zone.addEventListener('pointerdown', function (e) {
-      if (!currentApp) return;
+      if (!currentApp || e.pointerType === 'touch') return;
       startY = e.clientY; dy = 0;
       appEl = $('#app-' + currentApp);
       appEl.classList.add('dragging');
       zone.setPointerCapture(e.pointerId);
     });
     zone.addEventListener('pointermove', function (e) {
-      if (startY === null) return;
-      dy = Math.min(0, e.clientY - startY);
-      var s = Math.max(0.6, 1 + dy / 900);
-      appEl.style.transform = 'translateY(' + dy * 0.6 + 'px) scale(' + s + ')';
-      appEl.style.borderRadius = Math.min(40, -dy / 3) + 'px';
+      if (startY === null || touchId !== null) return;
+      drag(e.clientY);
     });
     function end() {
       if (startY === null) return;
       appEl.classList.remove('dragging');
       appEl.style.borderRadius = '';
-      if (dy < -60) {
+      if (dy < -45) {
         location.hash = '#/home';
       } else {
         appEl.style.transform = '';
       }
       startY = null; appEl = null;
     }
-    zone.addEventListener('pointerup', end);
-    zone.addEventListener('pointercancel', end);
+    zone.addEventListener('pointerup', function () { if (touchId === null) end(); });
+    zone.addEventListener('pointercancel', function () { if (touchId === null) end(); });
   })();
 
   /* ---------------- 啟動 ---------------- */
