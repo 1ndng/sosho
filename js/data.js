@@ -24,7 +24,7 @@ window.SITE_DATA = {
     // 左上角的備忘錄小工具（玩家可以直接打字記資訊；不要的話整段刪掉）
     memo: { label: "備忘錄" },
     // 右上角的時鐘小工具：時間跟著現實走，日期固定是撿到手機的那天
-    clock: { date: "10月23日 週五" },
+    clock: { date: "10月23日" },
     // 這些 App 放在桌布下方的 Dock（和 iPhone 一樣最多 4 個、不顯示名稱）
     apps: [
       { id: "forum", label: "ANNMS Talk", icon: "images/icon_forum.png?v=2" },
