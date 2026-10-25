@@ -1078,9 +1078,9 @@ window.SITE_DATA = {
           { from: "them", recalled: true, time: "下午 3:27" },   // 收回了一張照片
           { from: "me", text: "ㅋㅋㅋㅋㅋㅋㅋㅋ儲存了", time: "下午 3:28" },
           { from: "them", text: "李燦榮你完蛋了。", time: "下午 3:29" },
-          { date: "2026年9月6日" },   // 9/5 三人一起出去，燦榮半夜傳兩人的合照給將太郎
-          { from: "them", image: "images/at_msg_20260906.jpg", time: "上午 2:58" },
-          { from: "them", image: "images/at_msg_20260906-2.jpg", time: "上午 2:58" },
+          { date: "2026年10月5日" },   // 10/4 三人一起出去，燦榮半夜傳兩人的合照給將太郎
+          { from: "them", image: "images/at_msg_20261005.jpg", time: "上午 2:58" },
+          { from: "them", image: "images/at_msg_20261005-2.jpg", time: "上午 2:58" },
           { from: "me", text: "感謝😊但是不要再熬夜了", time: "上午 9:01", read: true }
         ],
         // 關鍵字自動回覆：玩家傳的訊息「包含」任一個 keywords 就回 reply（可多句，依序送出）
