@@ -629,7 +629,8 @@ window.SITE_DATA = {
             { image: "images/2_story2_20260101.mp4", time: "1月1日", closeFriends: true },
             { image: "images/2_savedstory_20260305.jpg", time: "3月5日" },
             { image: "images/2_story2_20260410-2.jpg", time: "4月10日", closeFriends: true },
-            { image: "images/2_story2_20260604.jpg", time: "6月4日", closeFriends: true }   // 摯友限動，沒放精選
+            { image: "images/2_story2_20260604.jpg", time: "6月4日", closeFriends: true },   // 摯友限動，沒放精選
+            { image: "images/2_story2_20261015.jpg", time: "10月15日", closeFriends: true }
           ],
           posts: [
       {
