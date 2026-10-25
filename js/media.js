@@ -174,7 +174,6 @@ window.SITE_MEDIA = [
 "images/3_story_20260416.jpg",
 "images/3_story_20260422.jpg",
 "images/3_story_20260509.jpg",
-"images/3_story_20260514.jpg",
 "images/3_story_20260527.jpg",
 "images/3_story_20260601.jpg",
 "images/3_story_20260610.jpg",
