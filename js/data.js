@@ -783,6 +783,9 @@ window.SITE_DATA = {
     // 即時訊息：達成 when 的旗標後，過 delay 毫秒對方自己傳來（時間顯示當下）
     //   unlessReplied: true = 玩家在那個聊天室回過話就不傳
     live: [
+      // 解鎖手機後：성찬把論壇文章傳到群組、問是不是真的
+      { id: "sc1", when: "phone_unlocked", delay: 6000, room: "g1", from: "f4", link: "#/forum/1" },
+      { id: "sc2", when: "phone_unlocked", delay: 8000, room: "g1", from: "f4", text: "這是真的嗎？" },
       // 小帳被設成公開
       { id: "pub1", when: "public_fauiogl94", delay: 5000,  room: "g1", from: "f4", text: "와 대박.." },
       { id: "pub2", when: "public_fauiogl94", delay: 25000, room: "g1", from: "f4", text: "哥居然一直瞞著我" },
@@ -1152,7 +1155,7 @@ window.SITE_DATA = {
         id: "g1",
         name: "",
         members: ["f4", "f5"],          // 성찬、은석（留學時認識的朋友）
-        unread: 2,
+        unread: 0,                       // 성찬的論壇連結改成進入遊戲後即時傳來（kakao.live 的 sc1、sc2）
         messages: [
           { date: "2022年1月3日" },   // 將太郎留學結束回日本前一天，終於創了群組（無關主線）
           { from: "f4", text: "明天幾點的飛機？", time: "下午 10:07" },
@@ -1191,10 +1194,7 @@ window.SITE_DATA = {
           { from: "f4", text: "明晚吃飯嗎？老地方？", time: "下午 7:43" },
           { from: "f5", text: "OK", time: "下午 7:44" },
           { from: "me", text: "OK", time: "下午 11:19" },
-          { from: "f4", text: "預約好了", time: "下午 11:30" },
-          { date: "2026年10月22日" },   // 昨天：성찬傳論壇文章給將太郎、逼問是不是真的（未讀 2）
-          { from: "f4", link: "#/forum/1", time: "下午 11:07" },   // 連結訊息：點了打開論壇第 1 篇
-          { from: "f4", text: "這是真的嗎？", time: "下午 11:07" }
+          { from: "f4", text: "預約好了", time: "下午 11:30" }
         ],
         replies: [],
         defaultReply: []

@@ -1702,6 +1702,7 @@
             // 解鎖：往上滑走
             setTimeout(function () {
               lock.classList.add('unlocked');
+              setFlag('phone_unlocked');   // 解鎖手機（即時訊息從這裡開始算時間）
               $('#phone').classList.remove('locked');
               setTimeout(function () { lock.remove(); }, 450);
             }, 120);

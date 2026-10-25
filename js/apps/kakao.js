@@ -295,7 +295,9 @@
       st.fired[ev.id] = 1; changed = true;
       var replied = (st.msgs[ev.room] || []).some(function (m) { return m.from === 'me'; });
       if (ev.unlessReplied && replied) return;
-      (st.msgs[ev.room] = st.msgs[ev.room] || []).push({ from: ev.from || 'them', text: ev.text, time: nowTime() });
+      var msg = { from: ev.from || 'them', time: nowTime() };
+      ['text', 'link', 'linkTitle', 'linkSite', 'image'].forEach(function (k) { if (ev[k]) msg[k] = ev[k]; });
+      (st.msgs[ev.room] = st.msgs[ev.room] || []).push(msg);
       var viewing = openChatId === ev.room && location.hash.indexOf('#/kakao/chat/') === 0;
       if (!viewing) st.unread[ev.room] = (st.unread[ev.room] != null ? st.unread[ev.room] : ((friend(ev.room) || {}).unread || 0)) + 1;
       S().save(KEY, st);
@@ -322,7 +324,7 @@
     el.id = 'kk-banner'; el.className = 'kk-banner';
     el.href = '#/kakao/chat/' + encodeURIComponent(f.id);
     el.innerHTML = roomAvatar(f, 'kk-banner-av') +
-      '<span class="kk-banner-txt"><b>' + esc(who) + '</b><span>' + esc(ev.text || '') + '</span></span>';
+      '<span class="kk-banner-txt"><b>' + esc(who) + '</b><span>' + esc(ev.text || (ev.link ? linkInfo(ev).title : ev.image ? TX().photoLabel || '照片' : '')) + '</span></span>';
     phone.appendChild(el);
     void el.offsetWidth; el.classList.add('show');
     function hide() {
