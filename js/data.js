@@ -859,7 +859,7 @@ window.SITE_DATA = {
       // 소희的來電：拒接／沒接
       { id: "heeNo", when: "hee_call_declined", delay: 5000, room: "f1", text: "？" },
       // 電話裡發現是撿到手機的人
-      { id: "heeShop", when: "hee_knows", delay: 3000, room: "f1", text: "方便今晚到○○舞室嗎？或是您直接告知櫃台人員就好，他們會幫忙歸還手機，謝謝。" },
+      { id: "heeShop", when: "hee_knows", delay: 3000, room: "f1", text: "方便今晚到拉完子舞室嗎？或是您直接告知櫃台人員就好，他們會幫忙歸還手機，謝謝。" },
       // 第一次打開群組後沒回話
       { id: "seen1", when: "chat_g1", delay: 30000, room: "g1", from: "f4", text: "@Shotaro 是你已讀嗎", unlessReplied: true }
     ],
